@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<center><a class="btn btn-success" href="/create">Create Blog</a></center>
+<br>
+<ol>
+{% for object in article %}
+<li class="alert alert-info">{{ object.title }} 
+    <a class="btn" style="background-color:#E74C3C;" href="{% url 'delete_article' pk=object.pk %}">Delete</a>
+<a class="btn" style="background-color:#F7DC6F;" href="{% url 'updateview' pk=object.pk %}">Update</a>
+</li>
+{% endfor %}
+
+{% endblock content %}

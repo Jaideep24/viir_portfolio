@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://bootswatch.com/5/simplex/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<title>Django Blog</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+		.darkmode{
+			background-color: black;
+			color: white;
+		}
+		section {
+  position: absolute;
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+section::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent,#0f0,transparent);
+  animation: animate 5s linear infinite;
+}
+@keyframes animate {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.green {
+  position: relative;
+  display: block;
+  width: calc(6.25vw - 2px);
+  height: calc(6.25vw - 2px);
+  background: #181818;
+  z-index: 2;
+  transition: 1.5s;
+}
+
+.green:hover {
+  background: #0f0;
+  transition: 0s;
+  
+}
+.blue {
+  position: relative;
+  display: block;
+  width: calc(6.25vw - 2px);
+  height: calc(6.25vw - 2px);
+  background: #ECF0F1 ;
+  z-index: 2;
+  transition: 1.5s;
+}
+
+.blue:hover {
+  background: #0f0;
+  transition: 0s;
+  
+}
+section .signin {
+  position: absolute;
+  width: 400px;
+  background: #222;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+  color: white;
+}
+
+section .signin .content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+section .signin .content h2 {
+  font-size: 2em;
+  color: #0f0;
+  text-transform: uppercase;
+}
+
+section .signin .content .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+section .signin .content .form .inputBox {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+}
+
+section .signin .content .form .inputBox input[type="text"], 
+section .signin .content .form .inputBox input[type="password"] {
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+section .signin .content .form .inputBox i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+  pointer-events: none;
+  font-size: 16px;
+}
+
+section .signin .content .form .inputBox i.active {
+  display: none;
+}
+
+section .signin .content .form .inputBox .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 16px;
+  background: transparent; /* Ensure background is transparent */
+  padding-right: 10px; /* Adjust this value to move the icon more to the right */
+  padding-top: 20px;
+}
+
+.signin .content .form .links {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signin .content .form .links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.signin .content .form .links a:nth-child(2) {
+  color: #0f0;
+  font-weight: 600;
+}
+
+.signin .content .form .inputBox input[type="submit"] {
+  padding: 10px;
+  background: #0f0;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+  display: block;
+  margin: 0 auto; /* Center the submit button */
+}
+
+section .signin .content .form .inputBox .toggle-password {
+  position: absolute;
+  left: 270px; /* Adjusted from 10px to 30px */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 16px;
+  background: transparent;
+  padding-right: 10px;
+  z-index: 2;
+  width: 40px;
+  height: 100%;
+}
+
+input[type="submit"]:active {
+  opacity: 0.6;
+}
+
+input[type="submit"]:hover {
+  background: #0056b3;
+}
+
+input[type="submit"].enabled {
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (max-width: 900px) {
+  section span {
+    width: calc(10vw - 2px);
+    height: calc(10vw - 2px);
+  }
+}
+
+@media (max-width: 600px) {
+  section span {
+    width: calc(20vw - 2px);
+    height: calc(20vw - 2px);
+  }
+
+  .signin {
+    padding: 10px;
+  }
+
+  .inputBox i, .inputBox .toggle-password {
+    font-size: 14px;
+  }
+}
+	</style>
+</head>
+<body >
+	{% include 'blog/nav.html' %}
+	{% block content %}
+	{% endblock content %}
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script>
+		const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+// Apply dark mode if preference is true
+if (isDarkMode) {
+    document.body.classList.add('darkmode');
+    document.querySelectorAll('.navbar-brand, .nav-link').forEach(element => {
+        element.style.color = 'white';
+    });
+    document.querySelectorAll('p').forEach(element => {
+        element.style.color="#FFC107";
+    });
+	document.querySelectorAll('span').forEach(element => {
+        element.style.color="#FFC107";
+    });
+    document.querySelectorAll('.card-body').forEach(element => {
+        element.classList.add('darkmode');
+    });
+    document.getElementById("toggle").checked=true;
+}
+else{
+  document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
+      document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
+
+}
+		function something(x)
+		{
+			if(x.style.color=="black")
+			{
+				x.style.color="white";
+			}
+			else
+			{
+				x.style.color="black";
+			}
+		}
+		function some(y)
+		{
+			y.classList.toggle("text-muted");
+			if(y.style.color=="#FFC107")
+			{
+				y.style.color="";
+			}
+			else
+			{
+				y.style.color="#FFC107";
+			}
+		}
+		function darktheme()
+		{
+			document.body.classList.toggle("darkmode");
+			document.querySelectorAll(".navbar-brand").forEach(something);
+			document.querySelectorAll(".nav-link").forEach(something);
+			document.querySelectorAll("p").forEach(some);
+			document.querySelectorAll("span").forEach(some);
+			document.querySelectorAll(".card-body").forEach(x => x.classList.toggle('darkmode'));
+      document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
+      document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
+      			const currentMode = document.body.classList.contains('darkmode');
+		    localStorage.setItem('darkMode', currentMode);
+
+		}
+		function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+  document.getElementById('something').classList.toggle('fa-eye');
+    document.getElementById('something').classList.toggle('fa-eye-slash');
+}
+	</script>
+	<script>
+		document.querySelectorAll('.inputBox input').forEach(input => {
+			input.addEventListener('focus', function () {
+				this.nextElementSibling.classList.add('active');
+			});
+		
+			input.addEventListener('blur', function () {
+				if (this.value === '') {
+					this.nextElementSibling.classList.remove('active');
+				}
+			});
+		
+			input.addEventListener('input', function () {
+				if (this.value !== '') {
+					this.nextElementSibling.classList.add('active');
+				} else {
+					this.nextElementSibling.classList.remove('active');
+				}
+				toggleSubmitButton();
+			});
+		});
+		
+		document.getElementById('togglePassword').addEventListener('click', function () {
+			const password = document.getElementById('password');
+			const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+			password.setAttribute('type', type);
+			this.querySelector('i').classList.toggle('fa-eye');
+			this.querySelector('i').classList.toggle('fa-eye-slash');
+		});
+		
+		function toggleSubmitButton() {
+			const username = document.querySelector('input[type="text"]');
+			const password = document.getElementById('password');
+			const submitButton = document.querySelector('input[type="submit"]');
+			if (username.value !== '' && password.value !== '') {
+				submitButton.classList.add('enabled');
+			} else {
+				submitButton.classList.remove('enabled');
+			}
+		}
+		
+		document.querySelector('input[type="submit"]').addEventListener('click', function(event) {
+			const username = document.querySelector('input[type="text"]');
+			const password = document.getElementById('password');
+			if (username.value === '' || password.value === '') {
+				alert('Please fill in both fields.');
+				event.preventDefault(); // Prevent form submission
+			}
+		});
+			</script>
+</body>
+</html>
