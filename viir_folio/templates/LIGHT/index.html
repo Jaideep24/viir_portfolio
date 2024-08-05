@@ -238,7 +238,9 @@
                         </h1>
                         <p class="br-hero-detail">Lorem Ipsum is simply
                             dummy text of the printing industry. Lorem Ipsum has been the industry's.</p>
-                        <a href="D:\Portfolio\CV.pdf" class="br-learn-more-right">
+                            {% for object in cv %}
+                        <a href="media/{{ object.pdf }}" class="br-learn-more-right">
+                            {% endfor %}
                             <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">Download CV</span>
                         </a>
                     </div>
@@ -274,7 +276,7 @@
                         <div class="br-card" data-tilt="" style="will-change: transform; transform: perspective(1400px) rotateX(0deg) rotateY(0deg);">
                             
                             {% load static %}
-                            <img src="media/{{ object.image }}" alt="vasantbhai" style="border-radius: 10%; width: 90vw; max-width: 400px;">
+                            <img src="media/{{ object.image }}" alt="vasantbhai" style="border-radius: 10%; width: 90vw; max-width: 450px;">
                         <div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); width: 700px; height: 700px; transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0;"></div></div></div>
                     </div>
                     </div>
@@ -399,11 +401,11 @@
     <div class="section-title">
         <h2>My <span>Skills</span></h2>
     </div>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <div class="row">
     {% for object in language %}
-    <div class="col-md-12 col-sm-12" style="flex: 1 1 200px; padding: 20px; box-sizing: border-box;">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" >
     <h4>{{ object.language }}</h4>
-    <div style="" class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar" style="width: {{ object.percentage }}%; background-color: #8c6fff;"></div>
       </div>
     </div>
@@ -489,7 +491,7 @@
         <span class="ligh-title">Blogs</span>
     </div>
     <div class="row">
-        {% for object in object_list|slice:":3" %}
+        {% for object in article|slice:":3" %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
             <div class="card">
                 {% if object.image %}
@@ -703,6 +705,15 @@ if (isDarkMode) {
             element.style.borderColor="#353250";
             element.style.color="#EEEEEE"
         });
+        Array.from(document.getElementsByClassName("card")).forEach(function(element){
+            element.style.backgroundColor="#202337";
+        });
+        Array.from(document.getElementsByClassName("my-3")).forEach(function(element){
+            element.style.color="#FFFFFF";
+        });
+        Array.from(document.getElementsByClassName("card-title")).forEach(function(element){
+            element.style.color="#FFFFFF";
+        });
         document.getElementById("toggle").checked=true;
     }
     
@@ -735,6 +746,9 @@ if (isDarkMode) {
         { selector: '.form-control', property: 'backgroundColor', value: "#202337" },
         { selector: '.form-control', property: 'borderColor', value: "#353250" },
         { selector: '.form-control', property: 'color', value: "#EEEEEE" },
+        { selector: '.card',property:'backgroundColor', value: '#202337'},
+        { selector: '.my-3',property:'color', value: '#FFFFFF'},
+        { selector: '.card-title',property:'color', value: '#FFFFFF'},
     ]
 };
 

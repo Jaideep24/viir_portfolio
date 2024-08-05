@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-$vycnqyngip*y&l-@*pf5qz^=iovnn8g2g=0v8a4ch503j!zb#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['viirportfolio.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'viir_folio',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [

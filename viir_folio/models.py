@@ -70,6 +70,9 @@ class Languages(models.Model):
     def __str__(self):
         return self.language
 
+class cv(models.Model):
+    pdf=models.FileField()
+
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
