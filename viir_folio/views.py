@@ -38,7 +38,10 @@ def index(request):
             # Send email
             send_mail(subject, message, from_email, [recipient_email])
             
-            return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(), "success":True})
+            hash_id = 'contact'  # Replace this with the actual ID you want to use as a hashtag
+
+            # Redirect to the same page with the hashtag
+            return redirect(f'{request.path}#{hash_id}')
             
 
         else:

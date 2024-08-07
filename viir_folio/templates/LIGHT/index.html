@@ -28,6 +28,166 @@
         transition: right 1s ease;
     }
 </style>
+<style>
+    
+
+    #content-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 1;
+        padding-top: 10vh;
+    }
+
+    .body-part-2 {
+        position: relative;
+        min-height: 700px;
+    }
+
+    .background-circle {
+        background: #28292d;
+        border-radius: 60%;
+        width: 50vw;
+        height: 50vw;
+        max-width: 600px;
+        max-height: 600px;
+        z-index: 1;
+        box-shadow: 0 0 20px #00000080;
+    }
+
+    .hoodie-guy {
+        position: absolute;
+        background: url("{% static 'assets/Hoodie-guy.png' %}");
+        top: 10%;
+        height: 50vw;
+        width: 50vw;
+        max-width: 600px;
+        max-height: 600px;
+        background-size: cover;
+        z-index: 0;
+    }
+
+    .circle {
+        position: absolute;
+        top: calc(50% + 145px);
+        left: 40%;
+        transform: translateX(-50%);
+        width: 30vw;
+        height: 30vw;
+        max-width: 110px;
+        max-height: 110px;
+        transform-style: preserve-3d;
+        animation: animateCircle 40s linear infinite;
+        z-index: 2;
+    }
+
+    @keyframes animateCircle {
+        0% {
+            transform: perspective(1000px) rotateY(0deg) rotateX(15deg) translateY(-30px);
+        }
+        100% {
+            transform: perspective(1000px) rotateY(360deg) rotateX(15deg) translateY(-30px);
+        }
+    }
+
+    .circle span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 110%;
+        height: 110%;
+        background-color: #2d2e32;
+        box-shadow: 0px 0px 5px #00000080;
+        border-radius: 50%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
+    }
+
+    .circle span img {
+        position: relative;
+        top: 15%;
+        left: 15%;
+        object-fit: cover;
+        height: 70%;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .circle span {
+            transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(35vw);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        #content-body {
+            padding-top: 15vh;
+        }
+
+        .body-part-2 {
+            min-height: 500px;
+        }
+
+        .background-circle,
+        .hoodie-guy {
+            width: 70vw;
+            height: 70vw;
+            max-width: 350px;
+            max-height: 350px;
+        }
+
+        .hoodie-guy {
+            background-size: contain;
+            background-position: center;
+            top: 20%;
+        }
+
+        .circle {
+            top: calc(65% + 30px);
+            left: 40%;
+            transform: translateX(-50%);
+            width: 10vw;
+            height: 10vw;
+        }
+
+        .circle span img {
+            height: 50%;
+            top: 2.5vw;
+            left: 2.5vw;
+        }
+    }
+
+    @media screen and (max-width: 426px) {
+        .circle span img {
+            top: 1.3vw;
+            left: 2.6vw;
+        }
+        .body-part-2 {
+            min-height: 400px;
+        }
+    }
+    @media screen and (max-width: 376px) {
+        .circle span img {
+            top: 1.3vw;
+            left: 2.6vw;
+        }
+        .body-part-2 {
+            min-height: 350px;
+        }
+    }
+    @media screen and (max-width: 326px) {
+        .circle span img {
+            top: 1.3vw;
+            left: 2.6vw;
+        }
+        .body-part-2 {
+            min-height: 300px;
+        }
+    }
+    
+
+   
+</style>
 </head>
 
 <body class="" style="background-color: white;">
@@ -208,6 +368,9 @@
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#service" onclick="design(event)">Service</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link br-nav" href="#skills" onclick="design(event)">Skills</a>
+                </li>
                 <li class="nav-item ">
                     <a class="nav-link br-nav" href="#portfolio" onclick="design(event)">Portfolio</a>
                 </li>
@@ -223,37 +386,81 @@
     <!-- Sidebar End -->
 
     <!-- Hero Start -->
-    <section id="home" class="br-hero margin-b-50">
-        <div class="br-text-1">PROFESSIONAL</div>
-        <div class="br-text-2">RESUME</div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-item static">
-                   
-                    <div class="br-hero-img">
-                        <div class="br-card" data-tilt="" style="will-change: transform; transform: perspective(1400px) rotateX(0deg) rotateY(0deg);">
-                            
-                            
-                            <img src="{% static 'image.png' %}" alt="vasantbhai">
-                        <div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); width: 700px; height: 700px; transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0;"></div></div></div>
-                    </div>
-                    <div class="br-hero-name">
-                        <h3>I am a <br><span>Engineer</span></h3>
-                    </div>
-                </div>
-                <div class="art"></div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero End -->
+    
 
-    <!-- About section -->
+
+    
+        <section id="home" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; flex: 1; padding-top: 10vh;">
+            <div class="body-part-2">
+                <div class="hoodie-guy-animation-class">
+                    <div class="background-circle"></div>
+                    <div class="circle">
+                        <span style="--i:1;"><img src="{% static 'assets/SVGIcons/flutter.svg' %}" height="75px"></span>
+                        <span style="--i:2;"><img src="{% static 'assets/SVGIcons/python.svg' %}" height="75px"></span>
+                        <span style="--i:3;"><img src="{% static 'assets/SVGIcons/adobe-photoshop.svg' %}" height="75px"></span>
+                        <span style="--i:4;"><img src="{% static 'assets/SVGIcons/django.svg' %}" height="75px"></span>
+                        <span style="--i:5;"><img src="{% static 'assets/SVGIcons/adobe-premiere-pro.svg' %}" height="75px"></span>
+                        <span style="--i:6;"><img src="{% static 'assets/SVGIcons/html-5.svg' %}" height="70px"></span>
+                        <span style="--i:7;"><img src="{% static 'assets/SVGIcons/figma.svg' %}" height="75px"></span>
+                        <span style="--i:8;"><img src="{% static 'assets/SVGIcons/css3.svg' %}" height="70px"></span>
+                        <span style="--i:9;"><img src="{% static 'assets/SVGIcons/javascript.svg' %}" height="75px"></span>
+                        <span style="--i:10;"><img src="{% static 'assets/SVGIcons/adobe-illustrator.svg' %}" height="75px"></span>
+                        <span style="--i:11;"><img src="{% static 'assets/SVGIcons/dart.svg' %}" height="75px"></span>
+                        <span style="--i:12;"><img src="{% static 'assets/SVGIcons/PostgreSQL-Dark.svg' %}" height="75px"></span>
+                        <span style="--i:13;"><img src="{% static 'assets/SVGIcons/MySQL-Dark.svg' %}" height="75px"></span>
+                        <span style="--i:14;"><img src="{% static 'assets/SVGIcons/Firebase-Dark.svg' %}" height="75px"></span>
+                        <span style="--i:15;"><img src="{% static 'assets/SVGIcons/Github-Dark.svg' %}" height="75px"></span>
+                    </div>
+                    <div class="hoodie-guy"></div>
+                </div>
+            </div>
+        </section>
+    <center>
+    <div class="footer-text">
+        <h4>Hello I'm Viir Phuria</h4>
+        <h4 id="typed-text" class="typed-text-output d-inline-block" style="color: black;"></h4>
+    </div>
     {% for object in cv %}
-                        <a style="position: absolute; left: 50vw; transform: translate(-50, 0%);" href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right" >
+                        <a href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right" >
                             {% endfor %}
                             <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View CV</span>
                         </a>
-                            </ul>
+</center>
+    <script>
+        const typedTexts = ["a Web Designer", "a Web Developer", "a Front End Developer", "an App Designer", "an App Developer"];
+        let index = 0;
+        let letterIndex = 0;
+        let textElement = document.getElementById('typed-text');
+
+        function typeWriter() {
+            if (letterIndex < typedTexts[index].length) {
+                textElement.textContent += typedTexts[index].charAt(letterIndex);
+                letterIndex++;
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(erase, 1000);
+            }
+        }
+
+        function erase() {
+            if (letterIndex >= 0) {
+                const currentText = textElement.textContent.slice(0, -1);
+                textElement.textContent = currentText;
+                letterIndex--;
+                setTimeout(erase, 50);
+            } else {
+                index = (index + 1) % typedTexts.length;
+                setTimeout(typeWriter, 1000);
+            }
+        }
+
+        typeWriter();
+    </script>
+    <!-- Hero End -->
+
+    <!-- About section -->
+    
+                            
     <section id="about" class="br-about padding-tb-80 sec-bg">
         
         <div class="container">
@@ -284,9 +491,9 @@
                                 <li><span class="title">Full Name<b>:</b></span>{{ object.name }}</li>
                                 <li><span class="title">Age<b>:</b></span>{{ object.age }} Years</li>
                                 <li><span class="title">Language<b>:</b></span>{{ object.language }}</li>
-                                <li><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</li>
-                                <li><span class="title">Email<b>:</b></span>{{ object.email }}</li>
-                                <li><span class="title">Address<b>:</b></span><span>{{ object.address }}</span></li>
+                                <li><a href="tel://9819185865/"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
+                                <li><a href="mailto:{{ object.email }}"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
+                                <li><a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span><span>{{ object.address }}</span></a></li>
                                 <br>
                                 <br>
                                 <br>
@@ -452,7 +659,7 @@
                                                     <a href="index.html">{{ object.topic }}</a> |
                                                     
                                                 </div>
-                                                <p>{{ object.content }}<a href="index.html">Read more</a>
+                                                <p>{{ object.content }}
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
@@ -466,7 +673,7 @@
                                                             <li>Client : {{ object.client }}</li>
                                                             <li>Tech : {{ object.tech }}</li>
                                                             <li>Type : {{ object.tech }}</li>
-                                                            <li>URL : <a href="{{ object.url }}">www.your-project-url.com</a></li>
+                                                            <li>URL : <a href="{{ object.url }}">{{ object.url }}</a></li>
                                                         </ul>
 
                                                     </div>
@@ -525,6 +732,7 @@
 
     <!-- Start Contact Section -->
     <section id="contact" class="br-contact padding-tb-80 sec-bg">
+        {% for object in about %}
         <div class="container d-block">
             <div class="section-title">
                 <h2>Get in <span>Touch</span></h2>
@@ -538,10 +746,7 @@
                             <div class="info">
                                 <h3 class="title">Mail &amp; Website</h3>
                                 <p>
-                                    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp; mail.example@gmail.com
-                                </p>
-                                <p>
-                                    <i class="fa fa-globe" aria-hidden="true"></i> &nbsp; www.yourdomain.com
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ object.email }}">{{ object.email }}</a>
                                 </p>
                             </div>
                         </div>
@@ -553,10 +758,7 @@
                             <div class="info">
                                 <h3 class="title">Contact</h3>
                                 <p>
-                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp; (+91)-9876XXXXX
-                                </p>
-                                <p>
-                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp; (+91)-987654XXXX
+                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;<a href="tel://9819185865/"> {{ object.phone_no }}</a>
                                 </p>
                             </div>
                         </div>
@@ -568,8 +770,7 @@
                             <div class="info">
                                 <h3 class="title">Address</h3>
                                 <p>
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; Ruami Mello Moraes Filho,
-                                    987 - Salvador - MA, 40352, Brazil.
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"> {{ object.address }}</a>
                                 </p>
                             </div>
                         </div>
@@ -577,6 +778,7 @@
                     </div>
                     <!-- /Boxes de Acoes -->
                 </div>
+                {% endfor %}
                 <div class="col-lg-7 col-md-12">
                     <form method="post">
                         {% csrf_token %}
@@ -649,8 +851,6 @@
 // Apply dark mode if preference is true
 if (isDarkMode) {
         document.getElementsByTagName("body")[0].style.backgroundColor="rgba(12, 14, 34, 0.95)";
-        document.getElementsByClassName("br-text-1")[0].style.color="#1b1d30";
-        document.getElementsByClassName("br-text-2")[0].style.color="#1b1d30";
         document.getElementById("myself").style.color="#EEEEEE";
         Array.from(document.getElementsByTagName("h3")).forEach(function(element){
             element.style.color="#EEEEEE";
@@ -723,8 +923,6 @@ if (isDarkMode) {
     backgroundColor: "rgba(12, 14, 34, 0.95)",
     elements: [
         { selector: 'body', property: 'backgroundColor', value: "rgba(12, 14, 34, 0.95)" },
-        { selector: '.br-text-1', property: 'color', value: "#1b1d30" },
-        { selector: '.br-text-2', property: 'color', value: "#1b1d30" },
         { selector: '#myself', property: 'color', value: "#EEEEEE" },
         { selector: 'h3', property: 'color', value: "#EEEEEE" },
         { selector: 'p', property: 'color', value: "#EEEEEE" },
@@ -856,6 +1054,7 @@ document.addEventListener('scroll', function() {
                 if (scrollPosition >= sectionTop - 50 && scrollPosition < sectionTop + sectionHeight - 50) {
                     const id = section.getAttribute('id');
                     document.querySelector(`a[href="#${id}"]`).parentNode.classList.add('active');
+                    window.location.hash = id;
                 } else {
                     const id = section.getAttribute('id');
                     document.querySelector(`a[href="#${id}"]`).parentNode.classList.remove('active');

@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['viirportfolio.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
-
+CRISPY_TEMPLATE_PACK='bootstrap4'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
