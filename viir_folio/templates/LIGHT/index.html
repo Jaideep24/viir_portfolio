@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -6,8 +7,8 @@
     <title>VIIR PHURIA</title>
 
     <!-- site Favicon -->
-    <link rel="icon" href="viir logo.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="viir logo.png">
+    <link rel="icon" href="{% static 'viir logo.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'viir logo.png' %}">
     <meta name="msapplication-TileImage" content="viir logo.png">
 
     <!-- css All Plugins Files -->
@@ -18,13 +19,6 @@
     {% include 'LIGHT/style.css' %}
     {% include 'LIGHT/responsive.css' %}
     </style>
-    <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="jquery.fancybox.min.css">
-    <link rel="stylesheet" href="slick.min.css">
-
-    <!-- Main Style -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
 <style>
     html{
         scroll-behavior: smooth;
@@ -212,7 +206,7 @@
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#service" onclick="design(event)">Service</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link br-nav" href="#portfolio" onclick="design(event)">Portfolio</a>
                 </li>
                 <li class="nav-item">
@@ -247,7 +241,7 @@
                     <div class="br-hero-img">
                         <div class="br-card" data-tilt="" style="will-change: transform; transform: perspective(1400px) rotateX(0deg) rotateY(0deg);">
                             
-                            {% load static %}
+                            
                             <img src="{% static 'image.png' %}" alt="vasantbhai">
                         <div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); width: 700px; height: 700px; transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0;"></div></div></div>
                     </div>
@@ -779,9 +773,7 @@ function design(event) {
 
     // Hide all project boxes
 
-    storedelement.forEach(item => {
-        item.remove();
-    });
+    
 
     // Add the active class to the clicked item
     const clickedItem = event.target; // Use event.target to get the clicked item
@@ -792,7 +784,11 @@ function design(event) {
         if (clickedItem.getAttribute("data-filter") === ".design") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
+        item.remove();
+    });
+            storedelement.forEach(item => {
                 if(item.classList.contains("Design")){
+                   
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
             });
@@ -800,15 +796,20 @@ function design(event) {
         else if (clickedItem.getAttribute("data-filter") === "all") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
-                if(item.classList.contains("graphics")){
+        item.remove();
+    });
+            storedelement.forEach(item => {
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
-                }
-            });
+                });
         }
         else if (clickedItem.getAttribute("data-filter") === ".development") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
+        item.remove();
+    });
+            storedelement.forEach(item => {
                 if(item.classList.contains("Development")){
+                    
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
             });
@@ -816,7 +817,11 @@ function design(event) {
         else if (clickedItem.getAttribute("data-filter") === ".graphics") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
+        item.remove();
+    });
+            storedelement.forEach(item => {
                 if(item.classList.contains("Graphics")){
+                    
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
             });
@@ -854,12 +859,11 @@ document.addEventListener('scroll', function() {
 
     <!-- Scroll button animation for mouse hover Js -->
     {% include 'LIGHT/tweenmax.min.js.download' %}
-    <script src="tweenmax.min.js.download"></script>
+    
 
     <!-- Site Main Js -->
     {% include 'LIGHT/script.js.download' %}
-    <script src="script.js.download"></script>
-
+   
         
 
-<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
+</span></body></html>
