@@ -7,9 +7,9 @@
     <title>VIIR PHURIA</title>
 
     <!-- site Favicon -->
-    <link rel="icon" href="{% static 'viir logo.png' %}" sizes="32x32">
-    <link rel="apple-touch-icon" href="{% static 'viir logo.png' %}">
-    <meta name="msapplication-TileImage" content="viir logo.png">
+    <link rel="icon" href="{% static 'viir_logo.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'viir_logo.png' %}">
+    <meta name="msapplication-TileImage" content="{% static 'viir_logo.png' %}">
 
     <!-- css All Plugins Files -->
     <style>
@@ -31,6 +31,8 @@
 </head>
 
 <body class="" style="background-color: white;">
+    <h1 class="br-hero-title title-right-overflow"><span id="myself"> <span class="name"></span></span>
+    </h1>
     <!-- Site loader  -->
     <div class="br-loader" style="display: none;">
         <div class="br-ellipsis">
@@ -227,17 +229,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-item static">
-                    <div class="br-hero-detail">
-                        <h1 class="br-hero-title title-right-overflow"><span id="myself">My Self,<br> <span class="name">&nbsp; Rob Oliver</span></span>
-                        </h1>
-                        <p class="br-hero-detail">Lorem Ipsum is simply
-                            dummy text of the printing industry. Lorem Ipsum has been the industry's.</p>
-                            {% for object in cv %}
-                        <a href="media/{{ object.pdf }}" class="br-learn-more-right">
-                            {% endfor %}
-                            <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">Download CV</span>
-                        </a>
-                    </div>
+                   
                     <div class="br-hero-img">
                         <div class="br-card" data-tilt="" style="will-change: transform; transform: perspective(1400px) rotateX(0deg) rotateY(0deg);">
                             
@@ -256,7 +248,14 @@
     <!-- Hero End -->
 
     <!-- About section -->
+    {% for object in cv %}
+                        <a style="position: absolute; left: 50vw; transform: translate(-50, 0%);" href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right" >
+                            {% endfor %}
+                            <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View CV</span>
+                        </a>
+                            </ul>
     <section id="about" class="br-about padding-tb-80 sec-bg">
+        
         <div class="container">
             <div class="row">
                 {% for object in about %}
@@ -288,7 +287,16 @@
                                 <li><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</li>
                                 <li><span class="title">Email<b>:</b></span>{{ object.email }}</li>
                                 <li><span class="title">Address<b>:</b></span><span>{{ object.address }}</span></li>
+                                <br>
+                                <br>
+                                <br>
+                                {% for object in cv %}
+                        <a style="margin-left: 30%;" href="media/{{ object.pdf }}" class="br-learn-more-right" download>
+                            {% endfor %}
+                            <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">Download CV</span>
+                        </a>
                             </ul>
+                            
                         </div>
                         
                     </div>
