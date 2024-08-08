@@ -27,6 +27,16 @@
        right: 250px !important;
         transition: right 1s ease;
     }
+    .padding-tb-80 {
+            margin-top: 0;
+            opacity: 1; /* Initial state */
+            transition: all 0.5s ease;
+        }
+
+        .padding-tb-80.vanish {
+            margin-top: 5%;
+            opacity: 0 !important; /* Transition to this state */
+        }
 </style>
 <style>
     
@@ -112,10 +122,18 @@
         object-fit: cover;
         height: 70%;
     }
+    @media screen and (max-width: 1440px){
+        #mytoggle{
+            margin-left: 85vw;
+        }
+    }
    
     @media screen and (max-width: 1024px) {
         .circle span {
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(35vw);
+        }
+        #mytoggle{
+            margin-left: 80vw;
         }
     }
 
@@ -155,6 +173,9 @@
             top: 2.5vw;
             left: 2.5vw;
         }
+        #mytoggle{
+            margin-left: 75vw;
+        }
     }
 
     @media screen and (max-width: 426px) {
@@ -165,6 +186,14 @@
         .body-part-2 {
             min-height: 400px;
         }
+        #mytoggle{
+            margin-left: 70vw;
+        }
+        .circle span img {
+            height: 50%;
+            top: 3vw;
+            left: 3vw;
+        }
     }
     @media screen and (max-width: 376px) {
         .circle span img {
@@ -173,6 +202,14 @@
         }
         .body-part-2 {
             min-height: 350px;
+        }
+        #mytoggle{
+            margin-left: 65vw;
+        }
+        .circle span img {
+            height: 50%;
+            top: 2.6vw;
+            left: 2.6vw;
         }
     }
     @media screen and (max-width: 326px) {
@@ -204,12 +241,12 @@
     </div>
 
     <!-- Header Start -->
-    <header>
-        <nav style="; background-color: #000000; height: 8vw;">
-            <div style="position: fixed; margin-left: 83vw;">
+    
+        <nav style="z-index: 1000; position: sticky; position: -webkit-sticky; top: 0px; background-color: #000000; height: 8vw; width: 100vw;">
+            <div id="mytoggle" style="position: absolute;">
                 <label id="theme-toggle-button">
                     <input type="checkbox" id="toggle" >
-                    <svg style="width: 20vw; max-width: 110px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <svg style="width: 12vw; max-width: 110px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                       <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
                         
                         
@@ -336,18 +373,19 @@
                 opacity: 1;
               }
                   </style>
-            </div>
-            <button class="br-sidebar-toggle" style="position: absolute; margin-top: -30px; margin-left: 90vw;" fdprocessedid="ji9wpg">
+            </div><header>
+            <button class="br-sidebar-toggle" style="position: absolute; margin-top: 2px; margin-left: 80vw; width: 7vw; height: 7vw; max-width: 60px; max-height: 60px;" fdprocessedid="ji9wpg">
                 
-                <svg onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
+                <svg style="max-width: 50px; max-height: 50px;" onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="6vw" height="6vw" viewBox="0 0 24 24" fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
 <path d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z" stroke="#8c6fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M6.46001 8.30989C7.81863 8.30989 8.92 7.20851 8.92 5.84989C8.92 4.49127 7.81863 3.38989 6.46001 3.38989C5.10139 3.38989 4 4.49127 4 5.84989C4 7.20851 5.10139 8.30989 6.46001 8.30989Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M17.5399 20.6099C18.8986 20.6099 20 19.5086 20 18.1499C20 16.7913 18.8986 15.6899 17.5399 15.6899C16.1813 15.6899 15.08 16.7913 15.08 18.1499C15.08 19.5086 16.1813 20.6099 17.5399 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M6.46001 20.6099C7.81863 20.6099 8.92 19.5086 8.92 18.1499C8.92 16.7913 7.81863 15.6899 6.46001 15.6899C5.10139 15.6899 4 16.7913 4 18.1499C4 19.5086 5.10139 20.6099 6.46001 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
-            </button>
+            </button></header>
+            <h4 style="font-size: 24px; font-family: Arial, sans-serif; font-weight: 900;">VIIR PHURIA</h4>
         </nav>
-    </header>
+    
     <!-- Header End -->
 
     <!-- Sidebar Start -->
@@ -416,14 +454,14 @@
             </div>
         </section>
     <center>
-    <div class="footer-text">
-        <h4>Hello I'm Viir Phuria</h4>
+    <div class="footer-text" style="display: flex; justify-content: center;">
+        <h4>Hello I'm Viir Phuria &nbsp;</h4>
         <h4 id="typed-text" class="typed-text-output d-inline-block" style="color: black;"></h4>
     </div>
     {% for object in cv %}
                         <a href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right" >
                             {% endfor %}
-                            <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View CV</span>
+                            <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View CV</span>
                         </a>
 </center>
     <script>
@@ -461,7 +499,7 @@
     <!-- About section -->
     
                             
-    <section id="about" class="br-about padding-tb-80 sec-bg">
+    <section id="about"  class="br-about padding-tb-80 sec-bg vanish">
         
         <div class="container">
             <div class="row">
@@ -524,7 +562,7 @@
     <!-- About section End -->
 
     <!-- Start Experience & Education section -->
-    <section id="experience" class="br-experience padding-tb-80">
+    <section id="experience" class="br-experience padding-tb-80 vanish">
         <div class="container">
             <div class="row">
                 <div class="section-title">
@@ -578,7 +616,7 @@
     <!-- End Experience & Education Section -->
 
     <!-- Start service section -->
-    <section id="service" class="br-service padding-tb-80 sec-bg">
+    <section id="service" class="br-service padding-tb-80 sec-bg vanish">
         <div class="container">
             <div class="section-title d-none">
                 <h2>My<span> service</span></h2>
@@ -614,7 +652,7 @@
         </div>
     </section>
     <!-- End service section -->
-    <section id="skills" class="padding-tb-80">
+    <section id="skills" class="padding-tb-80 vanish">
 <div class="container">
     <div class="section-title">
         <h2>My <span>Skills</span></h2>
@@ -635,7 +673,7 @@
 </div>
     </section>
     <!-- Start Portfolio Section -->
-    <section id="portfolio" class="br-portfolio padding-tb-80">
+    <section id="portfolio" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
             <div class="section-title">
                 <h2>My <span>Projects</span></h2>
@@ -702,7 +740,7 @@
         </div>
     </section>
     <!-- End Portfolio Section -->
-<section id="news" class="padding-tb-80">
+<section id="news" class="padding-tb-80 vanish">
     <div class="container">
     <div class="section-title">
         <h2>My <span>Blogs</span></h2>
@@ -740,7 +778,7 @@
 </section>
 
     <!-- Start Contact Section -->
-    <section id="contact" class="br-contact padding-tb-80 sec-bg">
+    <section id="contact" class="br-contact padding-tb-80 sec-bg vanish">
         {% for object in about %}
         <div class="container d-block">
             <div class="section-title">
@@ -879,10 +917,14 @@
                   </div>
                 <div class="br-social">
                     <ul>
-                        <li><a  href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="https://linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a  href="https://www.facebook.com/techno.graphix.vir/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.instagram.com/techno_graphix" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="https://linkedin.com/company/technographix" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="https://wa.me//9819185865" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                        <li><a href="tel:9819185865" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                        <li><a href="https://github.com/Viir-Phuria" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                        <li><a href="viir.technographix@gmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                        <li><a href="https://g.page/r/CQNFRIPNOr4AEBM" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -1107,24 +1149,26 @@ function design(event) {
 function menu(){
     document.querySelector(".br-sidebar").classList.toggle("dissappear");
 }
-/*document.addEventListener('scroll', function() {
+document.addEventListener('scroll', function() {
             let scrollPosition = window.scrollY || window.pageYOffset;
 
             document.querySelectorAll('section').forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
 
-                if (scrollPosition >= sectionTop - 50 && scrollPosition < sectionTop + sectionHeight - 50) {
+                if (scrollPosition >= sectionTop - 250 && scrollPosition < sectionTop + sectionHeight - 250) {
                     const id = section.getAttribute('id');
                     document.querySelector(`a[href="#${id}"]`).parentNode.classList.add('active');
-                    window.location.hash = id;
+                    if(section.classList.contains('vanish')){
+                        section.classList.toggle('vanish');
+                    }
                 } else {
                     const id = section.getAttribute('id');
                     document.querySelector(`a[href="#${id}"]`).parentNode.classList.remove('active');
                 }
             });
         });
-        */
+        
     </script>
     <style media="all" id="fa-v4-font-face">
 

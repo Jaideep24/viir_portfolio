@@ -380,15 +380,13 @@ header {
   position: relative;
   z-index: 5;
 }
-header nav {
-  position: relative;
-}
-header nav a, header nav button {
+
+header a, header button {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  padding: 10px;
+  padding: 0.2vw;
   position: fixed;
-  top: 36px;
+ 
   right: 36px;
   background: #07091c;
   border-radius: 50%;
@@ -398,13 +396,13 @@ header nav a, header nav button {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-header nav a .svg_img, header nav button .svg_img {
+header a .svg_img, header button .svg_img {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  width: 30px;
-  height: 30px;
+  width: 5vw;
+  height: 5vw;
 }
-header nav a:hover, header nav button:hover {
+header a:hover, header button:hover {
   opacity: 1;
 }
 
@@ -784,6 +782,7 @@ header nav a:hover, header nav button:hover {
 }
 
 .br-about .br-box {
+  opacity: 1;
   margin-bottom: 30px;
   padding: 30px;
   display: -webkit-box;

@@ -28,4 +28,5 @@ urlpatterns = [
     path('edit/', view, name='login'),
     path('<int:pk>/update',UpdateBlogView.as_view(),name='updateview'),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
