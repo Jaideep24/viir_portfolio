@@ -42,7 +42,7 @@
 
     .body-part-2 {
         position: relative;
-        min-height: 700px;
+        min-height: 750px;
     }
 
     .background-circle {
@@ -102,7 +102,7 @@
         border-radius: 50%;
         transform-origin: center;
         transform-style: preserve-3d;
-        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
+        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(25vw);
     }
 
     .circle span img {
@@ -112,7 +112,7 @@
         object-fit: cover;
         height: 70%;
     }
-
+   
     @media screen and (max-width: 1024px) {
         .circle span {
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(35vw);
@@ -476,7 +476,7 @@
                         <div class="br-card" data-tilt="" style="will-change: transform; transform: perspective(1400px) rotateX(0deg) rotateY(0deg);">
                             
                             {% load static %}
-                            <img src="media/{{ object.image }}" alt="vasantbhai" style="border-radius: 10%; width: 90vw; max-width: 450px;">
+                            <img src="media/{{ object.image }}" alt="viir" style="border-radius: 10%; width: 90vw; max-width: 450px;">
                         <div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); width: 700px; height: 700px; transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0;"></div></div></div>
                     </div>
                     </div>
@@ -493,7 +493,7 @@
                                 <li><span class="title">Language<b>:</b></span>{{ object.language }}</li>
                                 <li><a href="tel://9819185865/"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
                                 <li><a href="mailto:{{ object.email }}"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
-                                <li><a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span><span>{{ object.address }}</span></a></li>
+                                <li><a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span>{{ object.address }}</a></li>
                                 <br>
                                 <br>
                                 <br>

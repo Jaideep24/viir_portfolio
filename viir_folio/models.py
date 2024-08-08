@@ -87,6 +87,9 @@ class Comment(models.Model):
     name=models.TextField(blank=False,default=" ")
     comment=models.TextField()
     article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
 class Logger(models.Model):
     user_name=models.CharField(max_length=25)
     password=models.CharField(max_length=100)
