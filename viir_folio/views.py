@@ -17,12 +17,13 @@ import random
 import string
 from io import BytesIO
 import datetime
-
+success=False
 # Create your views here.
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
 def index(request):
+    global success
     if request.method=='POST':
         form=ContactForm(request.POST)
         
@@ -41,6 +42,7 @@ def index(request):
             hash_id = 'contact'  # Replace this with the actual ID you want to use as a hashtag
 
             # Redirect to the same page with the hashtag
+            success=True
             return redirect(f'{request.path}#{hash_id}')
             
 
@@ -56,7 +58,8 @@ def index(request):
         
     else:
         print("no")
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(), "success":False})
+        
+        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(), "success":success})
     
 
 def view(request):

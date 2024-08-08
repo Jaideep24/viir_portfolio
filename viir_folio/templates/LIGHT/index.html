@@ -21,7 +21,7 @@
     </style>
 <style>
     html{
-        scroll-behavior: smooth;
+        scroll-behavior: auto;
     }
     .dissappear{
        right: 250px !important;
@@ -205,8 +205,8 @@
 
     <!-- Header Start -->
     <header>
-        <nav>
-            <div style="position: fixed;">
+        <nav style="; background-color: #000000; height: 8vw;">
+            <div style="position: fixed; margin-left: 83vw;">
                 <label id="theme-toggle-button">
                     <input type="checkbox" id="toggle" >
                     <svg style="width: 20vw; max-width: 110px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -337,7 +337,7 @@
               }
                   </style>
             </div>
-            <button class="br-sidebar-toggle" fdprocessedid="ji9wpg">
+            <button class="br-sidebar-toggle" style="position: absolute; margin-top: -30px; margin-left: 90vw;" fdprocessedid="ji9wpg">
                 
                 <svg onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
 <path d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z" stroke="#8c6fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -491,9 +491,18 @@
                                 <li><span class="title">Full Name<b>:</b></span>{{ object.name }}</li>
                                 <li><span class="title">Age<b>:</b></span>{{ object.age }} Years</li>
                                 <li><span class="title">Language<b>:</b></span>{{ object.language }}</li>
-                                <li><a href="tel://9819185865/"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
-                                <li><a href="mailto:{{ object.email }}"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
-                                <li><a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span>{{ object.address }}</a></li>
+                                <li><a style="text-decoration: none; /* Remove underline */
+                                color: inherit;
+                                    font-weight: normal; /* Set font weight to normal */
+                                    font-style: normal;" href="tel://9819185865/"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
+                                <li><a style="text-decoration: none; /* Remove underline */
+                                    color: inherit;
+                                        font-weight: normal; /* Set font weight to normal */
+                                        font-style: normal;" href="mailto:{{ object.email }}"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
+                                <li><a style="text-decoration: none; /* Remove underline */
+                                    color: inherit;
+                                        font-weight: normal; /* Set font weight to normal */
+                                        font-style: normal;" href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span>{{ object.address }}</a></li>
                                 <br>
                                 <br>
                                 <br>
@@ -746,7 +755,10 @@
                             <div class="info">
                                 <h3 class="title">Mail &amp; Website</h3>
                                 <p>
-                                    <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ object.email }}">{{ object.email }}</a>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> <a style="text-decoration: none; /* Remove underline */
+                                    color: inherit;
+                                        font-weight: normal; /* Set font weight to normal */
+                                        font-style: normal;" href="mailto:{{ object.email }}">{{ object.email }}</a>
                                 </p>
                             </div>
                         </div>
@@ -758,7 +770,10 @@
                             <div class="info">
                                 <h3 class="title">Contact</h3>
                                 <p>
-                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;<a href="tel://9819185865/"> {{ object.phone_no }}</a>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;<a style="text-decoration: none; /* Remove underline */
+                                    color: inherit;
+                                        font-weight: normal; /* Set font weight to normal */
+                                        font-style: normal;" href="tel://9819185865/"> {{ object.phone_no }}</a>
                                 </p>
                             </div>
                         </div>
@@ -770,7 +785,10 @@
                             <div class="info">
                                 <h3 class="title">Address</h3>
                                 <p>
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"> {{ object.address }}</a>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a style="text-decoration: none; /* Remove underline */
+                                    color: inherit;
+                                        font-weight: normal; /* Set font weight to normal */
+                                        font-style: normal;" href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"> {{ object.address }}</a>
                                 </p>
                             </div>
                         </div>
@@ -813,11 +831,55 @@
         <div class="container">
             <div class="br-footer-detail">
                 <div class="br-copy">
-                    Copyright © <a class="site-name" href="index.html">Brog</a> all rights reserved. Powered by Brog.
+                    Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/">Techno Graphix</a>.
                 </div>
+                <div class="u-social-icons u-spacing-10 u-social-icons-1" style="display: flex;">
+                    <a class="u-social-url" target="_blank" data-type="Phone" title="Phone" href="tel:9819185865"><span class="u-icon u-social-icon u-social-phone u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-0d7e"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-0d7e"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M82.7,66c-3.9,0-7.7-0.6-11.3-1.8c-1.8-0.6-4,0-5,1.1l-7.1,5.4c-8.3-4.4-13.4-9.5-17.7-17.7l5.2-7
+              c1.4-1.4,1.8-3.3,1.3-5.2c-1.2-3.6-1.8-7.5-1.8-11.3c0-2.8-2.3-5.1-5.1-5.1H29.5c-2.8,0-5.1,2.3-5.1,5.1c0,32.2,26.2,58.4,58.4,58.4
+              c2.8,0,5.1-2.3,5.1-5.1V71.1C87.8,68.3,85.6,66,82.7,66z"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" target="_blank" data-type="Whatsapp" title="Whatsapp" href="https://wa.me//9819185865"><span class="u-icon u-social-icon u-social-whatsapp u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7a0e"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-7a0e"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M83.8,28.3C77.2,21.7,68.4,18,59,18c-19.3,0-35.1,15.7-35.1,35.1c0,6.2,1.6,12.2,4.7,17.5l-5,18.2L42.2,84
+              c5.1,2.8,10.9,4.3,16.8,4.3h0l0,0c19.3,0,35.1-15.7,35.1-35.1C94.1,43.8,90.5,35,83.8,28.3 M59,82.3L59,82.3
+              c-5.2,0-10.4-1.4-14.9-4.1l-1.1-0.6l-11,2.9L35,69.8l-0.7-1.1c-2.9-4.6-4.5-10-4.5-15.5C29.8,37,42.9,24,59,24
+              c7.8,0,15.1,3,20.6,8.6c5.5,5.5,8.5,12.8,8.5,20.6C88.2,69.2,75.1,82.3,59,82.3 M75,60.5c-0.9-0.4-5.2-2.6-6-2.9
+              c-0.8-0.3-1.4-0.4-2,0.4s-2.3,2.9-2.8,3.4c-0.5,0.6-1,0.7-1.9,0.2c-0.9-0.4-3.7-1.4-7.1-4.4c-2.6-2.3-4.4-5.2-4.9-6.1
+              c-0.5-0.9-0.1-1.4,0.4-1.8c0.4-0.4,0.9-1,1.3-1.5c0.4-0.5,0.6-0.9,0.9-1.5c0.3-0.6,0.1-1.1-0.1-1.5c-0.2-0.4-2-4.8-2.7-6.5
+              c-0.7-1.7-1.4-1.5-2-1.5c-0.5,0-1.1,0-1.7,0c-0.6,0-1.5,0.2-2.3,1.1c-0.8,0.9-3.1,3-3.1,7.3c0,4.3,3.1,8.5,3.6,9.1
+              c0.4,0.6,6.2,9.4,15,13.2c2.1,0.9,3.7,1.4,5,1.8c2.1,0.7,4,0.6,5.5,0.3c1.7-0.3,5.2-2.1,5.9-4.2c0.7-2,0.7-3.8,0.5-4.2
+              C76.5,61.1,75.9,60.9,75,60.5"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" target="_blank" data-type="Email" title="viir.technographix@gmail.com" href="mailto:viir.technographix@gmail.com"><span class="u-icon u-social-email u-social-icon u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-3b86"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-3b86"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path id="path3864" fill="#FFFFFF" d="M27.2,28h57.6c4,0,7.2,3.2,7.2,7.2l0,0v42.7c0,3.9-3.2,7.2-7.2,7.2l0,0H27.2
+              c-4,0-7.2-3.2-7.2-7.2V35.2C20,31.1,23.2,28,27.2,28 M56,52.9l28.8-17.8H27.2L56,52.9 M27.2,77.7h57.6V43.5L56,61.3L27.2,43.5V77.7z
+              "></path></svg></span>
+                    </a>
+                    <a class="u-social-url" target="_blank" data-type="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/company/technographix"><span class="u-icon u-social-icon u-social-linkedin u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1e60"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-1e60"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M41.3,83.7H27.9V43.4h13.4V83.7z M34.6,37.9L34.6,37.9c-4.6,0-7.5-3.1-7.5-7c0-4,3-7,7.6-7s7.4,3,7.5,7
+                  C42.2,34.8,39.2,37.9,34.6,37.9z M89.6,83.7H76.2V62.2c0-5.4-1.9-9.1-6.8-9.1c-3.7,0-5.9,2.5-6.9,4.9c-0.4,0.9-0.4,2.1-0.4,3.3v22.5
+                  H48.7c0,0,0.2-36.5,0-40.3h13.4v5.7c1.8-2.7,5-6.7,12.1-6.7c8.8,0,15.4,5.8,15.4,18.1V83.7z"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" target="_blank" data-type="Github" title="Github" href="https://github.com/Viir-Phuria"><span class="u-icon u-social-github u-social-icon u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-33cd"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-33cd"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M88,51.3c0-5.5-1.9-10.2-5.3-13.7c0.6-1.3,2.3-6.5-0.5-13.5c0,0-4.2-1.4-14,5.3c-4.1-1.1-8.4-1.7-12.7-1.8
+              c-4.3,0-8.7,0.6-12.7,1.8c-9.7-6.6-14-5.3-14-5.3c-2.8,7-1,12.2-0.5,13.5C25,41.2,23,45.7,23,51.3c0,19.6,11.9,23.9,23.3,25.2
+              c-1.5,1.3-2.8,3.5-3.2,6.8c-3,1.3-10.2,3.6-14.9-4.3c0,0-2.7-4.9-7.8-5.3c0,0-5-0.1-0.4,3.1c0,0,3.3,1.6,5.6,7.5c0,0,3,9.1,17.2,6
+              c0,4.3,0.1,8.3,0.1,9.5h25.2c0-1.7,0.1-7.2,0.1-14c0-4.7-1.7-7.9-3.4-9.4C76,75.2,88,70.9,88,51.3z"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" title="instagram" target="_blank" href="https://www.instagram.com/techno_graphix"><span class="u-icon u-social-icon u-social-instagram u-icon-6"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5a90"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-5a90"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M55.9,38.2c-9.9,0-17.9,8-17.9,17.9C38,66,46,74,55.9,74c9.9,0,17.9-8,17.9-17.9C73.8,46.2,65.8,38.2,55.9,38.2
+                  z M55.9,66.4c-5.7,0-10.3-4.6-10.3-10.3c-0.1-5.7,4.6-10.3,10.3-10.3c5.7,0,10.3,4.6,10.3,10.3C66.2,61.8,61.6,66.4,55.9,66.4z"></path><path fill="#FFFFFF" d="M74.3,33.5c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S76.6,33.5,74.3,33.5z"></path><path fill="#FFFFFF" d="M73.1,21.3H38.6c-9.7,0-17.5,7.9-17.5,17.5v34.5c0,9.7,7.9,17.6,17.5,17.6h34.5c9.7,0,17.5-7.9,17.5-17.5V38.8
+                  C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5
+                  c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" title="facebook" target="_blank" href="https://www.facebook.com/techno.graphix.vir/"><span class="u-icon u-social-facebook u-social-icon u-icon-7"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-42a2"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-42a2"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2
+                  c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path></svg></span>
+                    </a>
+                    <a class="u-social-url" target="_blank" data-type="Google Plus" title="Google Plus" href="https://g.page/r/CQNFRIPNOr4AEBM"><span class="plus u-icon u-social-google u-social-icon u-icon-8"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5f62"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-5f62"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M60.8,76.3c-6.6,8.6-19,11.1-29,7.7c-10.6-3.5-18.4-14.2-18.2-25.5C13,44.6,25.3,31.8,39.1,31.6
+              c7.1-0.6,14,2.1,19.3,6.6c-2.2,2.4-4.4,4.8-6.9,7.1c-4.8-2.9-10.4-5-15.9-3.1c-8.8,2.6-14.3,13-10.9,21.8
+              c2.7,9.1,13.7,14.1,22.5,10.2c4.5-1.6,7.5-5.7,8.7-10.2c-5.1-0.1-10.2,0-15.5-0.2c0-3,0-6.1,0-9.2c8.6,0,17.1,0,25.7,0
+              C66.7,62.3,65.5,70.4,60.8,76.3z M98.3,62.5c-2.6,0-5.1,0-7.7,0c0,2.6,0,5.1,0,7.7c-2.6,0-5.1,0-7.7,0c0-2.6,0-5.1,0-7.7
+              c-2.6,0-5.1,0-7.7,0c0-2.6,0-5.1,0-7.7c2.6,0,5.1,0,7.7,0c0-2.6,0-5.1,0.1-7.7c2.6,0,5.1,0,7.7,0c0,2.6,0,5.1,0,7.7
+              c2.6,0,5.1,0,7.7,0C98.3,57.3,98.3,59.9,98.3,62.5z"></path></svg></span>
+                    </a>
+                  </div>
                 <div class="br-social">
                     <ul>
-                        <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a  href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                         <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                         <li><a href="https://linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
@@ -1037,6 +1099,7 @@ function design(event) {
         document.querySelectorAll(".br-nav").forEach(item => {
             item.parentNode.classList.remove("active");
             clickedItem.parentNode.classList.add("active");
+            
         });
     }
 }
@@ -1044,7 +1107,7 @@ function design(event) {
 function menu(){
     document.querySelector(".br-sidebar").classList.toggle("dissappear");
 }
-document.addEventListener('scroll', function() {
+/*document.addEventListener('scroll', function() {
             let scrollPosition = window.scrollY || window.pageYOffset;
 
             document.querySelectorAll('section').forEach(section => {
@@ -1061,6 +1124,7 @@ document.addEventListener('scroll', function() {
                 }
             });
         });
+        */
     </script>
     <style media="all" id="fa-v4-font-face">
 
