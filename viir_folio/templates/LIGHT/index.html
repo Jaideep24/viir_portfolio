@@ -409,6 +409,9 @@
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#skills" onclick="design(event)">Skills</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link br-nav" href="#certificate" onclick="design(event)">Certificate</a>
+                </li>
                 <li class="nav-item ">
                     <a class="nav-link br-nav" href="#portfolio" onclick="design(event)">Portfolio</a>
                 </li>
@@ -662,7 +665,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4" >
     <h4>{{ object.language }}</h4>
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" style="width: {{ object.percentage }}%; background-color: #8c6fff;"></div>
+        <div class="progress-bar" style="width: {{ object.percentage }}%; background-color: #8c6fff;">{{ object.percentage }}%</div>
       </div>
     </div>
     {% endfor %}
@@ -672,6 +675,21 @@
       
 </div>
     </section>
+
+    <section id="certificate" class="padding-tb-80 vanish">
+        <div class="container">
+            <div class="section-title">
+        <ul>
+    {% for object in certificate %}
+    
+    <div class="timeline-info">
+        <span>{{ object.title }}</span>
+    </div>
+    {% endfor %}
+</ul>
+</div>
+</div>
+</section>
     <!-- Start Portfolio Section -->
     <section id="portfolio" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
@@ -710,7 +728,7 @@
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
-                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}" style="background-image: url('media/{{ object.image }}') " >
+                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}" target="_blank" style="background-image: url('media/{{ object.image }}') " >
                                                             
                                                         </a>
                                                     </div>

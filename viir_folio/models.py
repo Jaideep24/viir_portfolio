@@ -73,6 +73,16 @@ class Languages(models.Model):
 class cv(models.Model):
     pdf=models.FileField()
 
+class certificate(models.Model):
+    title=models.CharField(max_length=100)
+    url=models.URLField()
+    date=models.DateField(auto_now_add=True)
+    platorm=models.CharField(max_length=100)
+    criteria=models.CharField(max_length=100)
+    show=models.BooleanField(default=False)
+    def __str__(self):
+        return self.title
+    
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
