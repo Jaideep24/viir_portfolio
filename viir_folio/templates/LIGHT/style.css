@@ -1869,6 +1869,7 @@ footer .br-footer-detail .br-social ul li {
 footer .br-footer-detail .br-social ul li a {
   width: 30px;
   height: 30px;
+  margin-left: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

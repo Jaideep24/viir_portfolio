@@ -52,16 +52,16 @@
 
     .body-part-2 {
         position: relative;
-        min-height: 750px;
+        min-height: 550px;
     }
 
     .background-circle {
         background: #28292d;
-        border-radius: 60%;
+        border-radius: 70%;
         width: 50vw;
         height: 50vw;
-        max-width: 600px;
-        max-height: 600px;
+        max-width: 500px;
+        max-height: 500px;
         z-index: 1;
         box-shadow: 0 0 20px #00000080;
     }
@@ -69,18 +69,18 @@
     .hoodie-guy {
         position: absolute;
         background: url("{% static 'assets/Hoodie-guy.png' %}");
-        top: 10%;
+        top: 5%;
         height: 50vw;
         width: 50vw;
-        max-width: 600px;
-        max-height: 600px;
+        max-width: 500px;
+        max-height: 500px;
         background-size: cover;
         z-index: 0;
     }
 
     .circle {
         position: absolute;
-        top: calc(50% + 145px);
+        top: calc(30% + 145px);
         left: 40%;
         transform: translateX(-50%);
         width: 30vw;
@@ -242,11 +242,11 @@
 
     <!-- Header Start -->
     
-        <nav style="z-index: 1000; position: sticky; position: -webkit-sticky; top: 0px; background-color: #000000; height: 8vw; width: 100vw;">
+        <nav style="z-index: 1000; position: fixed; background-color: #000000; height: 8vw; max-height: 51.6px; width: 100vw; margin-top: -10px;">
             <div id="mytoggle" style="position: absolute;">
                 <label id="theme-toggle-button">
                     <input type="checkbox" id="toggle" >
-                    <svg style="width: 12vw; max-width: 110px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <svg style="width: 12vw; max-width: 90px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                       <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
                         
                         
@@ -374,16 +374,16 @@
               }
                   </style>
             </div><header>
-            <button class="br-sidebar-toggle" style="position: absolute; margin-top: 2px; margin-left: 80vw; width: 7vw; height: 7vw; max-width: 60px; max-height: 60px;" fdprocessedid="ji9wpg">
+            <button class="br-sidebar-toggle" style="position: absolute; margin-top: 2px; margin-left: 80vw; width: 7vw; height: 7vw; max-width: 50px; max-height: 50px;" fdprocessedid="ji9wpg">
                 
-                <svg style="max-width: 50px; max-height: 50px;" onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="6vw" height="6vw" viewBox="0 0 24 24" fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
+                <svg style="max-width: 40px; max-height: 40px;" onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="6vw" height="6vw" viewBox="0 0 24 24" fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
 <path d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z" stroke="#8c6fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M6.46001 8.30989C7.81863 8.30989 8.92 7.20851 8.92 5.84989C8.92 4.49127 7.81863 3.38989 6.46001 3.38989C5.10139 3.38989 4 4.49127 4 5.84989C4 7.20851 5.10139 8.30989 6.46001 8.30989Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M17.5399 20.6099C18.8986 20.6099 20 19.5086 20 18.1499C20 16.7913 18.8986 15.6899 17.5399 15.6899C16.1813 15.6899 15.08 16.7913 15.08 18.1499C15.08 19.5086 16.1813 20.6099 17.5399 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M6.46001 20.6099C7.81863 20.6099 8.92 19.5086 8.92 18.1499C8.92 16.7913 7.81863 15.6899 6.46001 15.6899C5.10139 15.6899 4 16.7913 4 18.1499C4 19.5086 5.10139 20.6099 6.46001 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
             </button></header>
-            <h4 style="font-size: 24px; font-family: Arial, sans-serif; font-weight: 900;">VIIR PHURIA</h4>
+            <h4 style="font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA</h4>
         </nav>
     
     <!-- Header End -->
@@ -428,7 +428,7 @@
 
 
     
-        <section id="home" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; flex: 1; padding-top: 10vh;">
+        <section id="home" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; flex: 1; padding-top: 8.5vh;">
             <div class="body-part-2">
                 <div class="hoodie-guy-animation-class">
                     <div class="background-circle"></div>
@@ -454,9 +454,9 @@
             </div>
         </section>
     <center>
-    <div class="footer-text" style="display: flex; justify-content: center;">
-        <h4>Hello I'm Viir Phuria &nbsp;</h4>
-        <h4 id="typed-text" class="typed-text-output d-inline-block" style="color: black;"></h4>
+    <div class="footer-text" style="text-align: center;">
+        <h4 style="display: inline;">Hello I'm Viir Phuria</h4>
+        <h4 style="display: inline; margin-left: 2px;" id="typed-text" class="typed-text-output d-inline-block" style="color: black;"></h4>
     </div>
     {% for object in cv %}
                         <a href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right" >
@@ -703,14 +703,14 @@
                                             <div class="br-project-box ">
                                                 <h3>{{ object.title }}</h3>
                                                 <div class="links">
-                                                    <a href="index.html">{{ object.topic }}</a> |
+                                                    {{ object.topic }} |
                                                     
                                                 </div>
                                                 <p>{{ object.content }}
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
-                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}" style="background-image: url('media/{{ object.image }}') ">
+                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}" style="background-image: url('media/{{ object.image }}') " >
                                                             
                                                         </a>
                                                     </div>
@@ -917,7 +917,7 @@
                   </div>
                 <div class="br-social">
                     <ul>
-                        <li><a  href="https://www.facebook.com/techno.graphix.vir/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a  href="https://www.facebook.com/techno.graphix.vir/" target="_blank"><i class="fa fa-facebook"  aria-hidden="true"></i></a></li>
                         <li><a href="https://www.instagram.com/techno_graphix" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                         <li><a href="https://linkedin.com/company/technographix" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                         <li><a href="https://wa.me//9819185865" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
@@ -1156,7 +1156,7 @@ document.addEventListener('scroll', function() {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
 
-                if (scrollPosition >= sectionTop - 250 && scrollPosition < sectionTop + sectionHeight - 250) {
+                if (scrollPosition >= sectionTop - 450 && scrollPosition < sectionTop + sectionHeight - 450) {
                     const id = section.getAttribute('id');
                     document.querySelector(`a[href="#${id}"]`).parentNode.classList.add('active');
                     if(section.classList.contains('vanish')){
