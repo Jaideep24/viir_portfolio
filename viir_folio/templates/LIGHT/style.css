@@ -1205,12 +1205,11 @@ header a:hover, header button:hover {
 }
 
 .br-experience .timeline {
-  width: 100%;
-  margin: 0;
   padding: 0;
-  line-height: 1.5em;
-  list-style: none;
-  position: relative;
+    margin: 0;
+    list-style: none;
+  
+  
 }
 .br-experience .timeline .timeline-item {
   position: relative;

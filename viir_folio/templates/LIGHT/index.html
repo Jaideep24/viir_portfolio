@@ -122,9 +122,22 @@
         object-fit: cover;
         height: 70%;
     }
-    @media screen and (max-width: 1440px){
+    @media screen and (max-width: 2860px){
+        #mytoggle{
+            margin-left: 90vw;
+        }
+        .circle span{
+            transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
+        }
+    }
+
+
+    @media screen and (max-width: 1441px){
         #mytoggle{
             margin-left: 85vw;
+        }
+        .circle span{
+            transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(25vw);
         }
     }
    
@@ -413,10 +426,10 @@
                     <a class="nav-link br-nav" href="#certificate" onclick="design(event)">Certificate</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link br-nav" href="#portfolio" onclick="design(event)">Portfolio</a>
+                    <a class="nav-link br-nav" href="#project" onclick="design(event)">Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link br-nav" href="#news" onclick="design(event)">News</a>
+                    <a class="nav-link br-nav" href="#blog" onclick="design(event)">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#contact" onclick="design(event)">Contacts</a>
@@ -535,12 +548,12 @@
                                 <li><a style="text-decoration: none; /* Remove underline */
                                 color: inherit;
                                     font-weight: normal; /* Set font weight to normal */
-                                    font-style: normal;" href="tel://9819185865/"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
+                                    font-style: normal;" href="tel://9819185865/" target="_blank"><span class="title">Phone No<b>:</b></span>{{ object.phone_no }}</a></li>
                                 <li><a style="text-decoration: none; /* Remove underline */
                                     color: inherit;
                                         font-weight: normal; /* Set font weight to normal */
-                                        font-style: normal;" href="mailto:{{ object.email }}"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
-                                <li><a style="text-decoration: none; /* Remove underline */
+                                        font-style: normal;" href="mailto:{{ object.email }}" target="_blank"><span class="title">Email<b>:</b></span>{{ object.email }}</a></li>
+                                <li><a target="_blank" style="text-decoration: none; /* Remove underline */
                                     color: inherit;
                                         font-weight: normal; /* Set font weight to normal */
                                         font-style: normal;" href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"><span class="title">Address<b>:</b></span>{{ object.address }}</a></li>
@@ -621,7 +634,7 @@
     <!-- Start service section -->
     <section id="service" class="br-service padding-tb-80 sec-bg vanish">
         <div class="container">
-            <div class="section-title d-none">
+            <div class="section-title">
                 <h2>My<span> service</span></h2>
                 <span class="ligh-title">service</span>
             </div>
@@ -659,13 +672,14 @@
 <div class="container">
     <div class="section-title">
         <h2>My <span>Skills</span></h2>
+        <span class="ligh-title">Skills</span>
     </div>
     <div class="row">
     {% for object in language %}
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" >
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-4" >
     <h4>{{ object.language }}</h4>
     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" style="width: {{ object.percentage }}%; background-color: #8c6fff;">{{ object.percentage }}%</div>
+        <div class="progress-bar" style="width: {{ object.percentage }}%; background-color: #8c6fff;"> <b> {{ object.percentage }}%</b></div>
       </div>
     </div>
     {% endfor %}
@@ -676,26 +690,46 @@
 </div>
     </section>
 
-    <section id="certificate" class="padding-tb-80 vanish">
+    <section id="certificate" class="br-experience padding-tb-80 vanish">
         <div class="container">
-            <div class="section-title">
-        <ul>
-    {% for object in certificate %}
-    
-    <div class="timeline-info">
-        <span>{{ object.title }}</span>
-    </div>
-    {% endfor %}
-</ul>
-</div>
-</div>
+            <div class="row">
+                <div class="section-title">
+                    <h2>My <span>Certificate</span></h2>
+                    <span class="ligh-title">Certificates</span>
+                </div>
+                
+                        <ul class="timeline" >
+                            {% for object in certificate %}
+                            {% if object.show %}
+                            <li style="display: flex; flex-direction: column; padding: 15px;" class="timeline-item col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                                <div class="timeline-info">
+                                    <span>{{ object.date }}</span>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.criteria }}
+                                            </span></h5>
+                                    <p>{{ object.platorm }}</p>
+                                </div>
+                            </li>
+                        {% endif %}
+                            {% endfor %}
+                            
+                            </li>
+                        </ul>
+
+                    
+                
+                
+            </div>
+
+        </div>
 </section>
     <!-- Start Portfolio Section -->
-    <section id="portfolio" class="br-portfolio padding-tb-80 vanish">
+    <section id="project" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
             <div class="section-title">
                 <h2>My <span>Projects</span></h2>
-                <span class="ligh-title">Portfolio</span>
+                <span class="ligh-title">Projects</span>
             </div>
             <div class="row m-b-minus-24px">
                 <div class="portfolio-content" id="MixItUp11665E">
@@ -721,14 +755,14 @@
                                             <div class="br-project-box ">
                                                 <h3>{{ object.title }}</h3>
                                                 <div class="links">
-                                                    {{ object.topic }} |
+                                                    {{ object.category }} |
                                                     
                                                 </div>
                                                 <p>{{ object.content }}
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
-                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}" target="_blank" style="background-image: url('media/{{ object.image }}') " >
+                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}"  style="background-image: url('media/{{ object.image }}') " >
                                                             
                                                         </a>
                                                     </div>
@@ -738,7 +772,7 @@
                                                             <li>Client : {{ object.client }}</li>
                                                             <li>Tech : {{ object.tech }}</li>
                                                             <li>Type : {{ object.tech }}</li>
-                                                            <li>URL : <a href="{{ object.url }}">{{ object.url }}</a></li>
+                                                            <li>URL : <a href="{{ object.url }}" target="_blank">{{ object.url }}</a></li>
                                                         </ul>
 
                                                     </div>
@@ -758,7 +792,7 @@
         </div>
     </section>
     <!-- End Portfolio Section -->
-<section id="news" class="padding-tb-80 vanish">
+<section id="blog" class="padding-tb-80 vanish">
     <div class="container">
     <div class="section-title">
         <h2>My <span>Blogs</span></h2>
@@ -814,7 +848,7 @@
                                     <i class="fa fa-envelope" aria-hidden="true"></i> <a style="text-decoration: none; /* Remove underline */
                                     color: inherit;
                                         font-weight: normal; /* Set font weight to normal */
-                                        font-style: normal;" href="mailto:{{ object.email }}">{{ object.email }}</a>
+                                        font-style: normal;" href="mailto:{{ object.email }}" target="_blank">{{ object.email }}</a>
                                 </p>
                             </div>
                         </div>
@@ -829,7 +863,7 @@
                                     <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;<a style="text-decoration: none; /* Remove underline */
                                     color: inherit;
                                         font-weight: normal; /* Set font weight to normal */
-                                        font-style: normal;" href="tel://9819185865/"> {{ object.phone_no }}</a>
+                                        font-style: normal;" href="tel://9819185865/" target="_blank"> {{ object.phone_no }}</a>
                                 </p>
                             </div>
                         </div>
@@ -844,7 +878,7 @@
                                     <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<a style="text-decoration: none; /* Remove underline */
                                     color: inherit;
                                         font-weight: normal; /* Set font weight to normal */
-                                        font-style: normal;" href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"> {{ object.address }}</a>
+                                        font-style: normal;" href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu" target="_blank"> {{ object.address }}</a>
                                 </p>
                             </div>
                         </div>
@@ -887,7 +921,7 @@
         <div class="container">
             <div class="br-footer-detail">
                 <div class="br-copy">
-                    Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/">Techno Graphix</a>.
+                    Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/" target="_blank">Techno Graphix</a>.
                 </div>
                 <div class="u-social-icons u-spacing-10 u-social-icons-1" style="display: flex;">
                     <a class="u-social-url" target="_blank" data-type="Phone" title="Phone" href="tel:9819185865"><span class="u-icon u-social-icon u-social-phone u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-0d7e"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-0d7e"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M82.7,66c-3.9,0-7.7-0.6-11.3-1.8c-1.8-0.6-4,0-5,1.1l-7.1,5.4c-8.3-4.4-13.4-9.5-17.7-17.7l5.2-7
