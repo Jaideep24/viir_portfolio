@@ -1,0 +1,61 @@
+{% extends 'LIGHT/index.html' %}
+{% load static %}
+{% block content %}
+<section class="br-experience padding-tb-80">
+<div class="container">
+    <div class="row">
+        <div class="section-title">
+            <h2>My <span>Certificates</span></h2>
+            <span class="ligh-title">Certificates</span>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="education br-ex-box m-b-991">
+                <ul class="timeline">
+                    {% for object in certificate %}
+                    {% if object.id|divisibleby:2 != True %}
+                    <li class="timeline-item" style="height: 150px;" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                        <div class="timeline-info">
+                            <span>{{ object.date }}</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.criteria }}
+                                    </span></h5>
+                            <p>{{ object.platorm }} &nbsp <a href="{{ object.url }}" target="_blank" class="br-learn-more-right" >
+                                <span  class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View Certificate</span>
+                            </a></p>
+                        </div>
+                    </li>
+                {% endif %}
+                    {% endfor %}
+                    
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="experiense br-ex-box">
+                <ul class="timeline">
+                    {% for object in certificate %}
+                    {% if object.id|divisibleby:2 %}
+                    <li class="timeline-item" style="height: 150px;">
+                        <div class="timeline-info">
+                            <span>{{ object.date }}</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.criteria }}</span></h5>
+                            <p>{{ object.platorm }} &nbsp<a href="{{ object.url }}" target="_blank" class="br-learn-more-right" >
+                                <span  class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View Certificate</span>
+                            </a></p>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+</section>
+{% endblock %}

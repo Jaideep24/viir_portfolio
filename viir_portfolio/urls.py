@@ -26,6 +26,7 @@ urlpatterns = [
     path('<int:pk>/delete', DeleteArticleView.as_view(), name='delete_article'),
     path('create/', CreateBlogView.as_view(), name='create_blog'),
     path('edit/', view, name='login'),
+    path('certificate/',certificat),
     path('<int:pk>/update',UpdateBlogView.as_view(),name='updateview'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -24,6 +24,7 @@ def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
 def index(request):
+    active_item = certificate.objects.all().filter(show=True).first()
     global success
     global check
     if request.method=='POST':
@@ -52,11 +53,11 @@ def index(request):
             pattern=r"^(?:\+91|91)?[789]\d{9}$"
             emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all()})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
             elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all()})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
             else:
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all()})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
         
     else:
         print("no")
@@ -65,8 +66,10 @@ def index(request):
             check=False
         else:
             success=False
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(), "success":success})
+        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item, "success":success})
     
+def certificat(request):
+    return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all(),'certi':True})
 
 def view(request):
     userlist=Logger.objects.all().values()

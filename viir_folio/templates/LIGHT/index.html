@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_filters %}
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -207,6 +208,9 @@
             top: 3vw;
             left: 3vw;
         }
+        iframe{
+            height: 100vh !important;
+        }
     }
     @media screen and (max-width: 376px) {
         .circle span img {
@@ -396,7 +400,10 @@
 <path d="M6.46001 20.6099C7.81863 20.6099 8.92 19.5086 8.92 18.1499C8.92 16.7913 7.81863 15.6899 6.46001 15.6899C5.10139 15.6899 4 16.7913 4 18.1499C4 19.5086 5.10139 20.6099 6.46001 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
             </button></header>
-            <h4 style="font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA</h4>
+            <h4 style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA</h4>
+            {% if certi %}
+            <a href="/#certificate"><h4 style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 200px; transform: translate(0,-50%);">Home</h4></a>
+            {% endif %}
         </nav>
     
     <!-- Header End -->
@@ -438,7 +445,7 @@
         </div>
     </div>
     <!-- Sidebar End -->
-
+{% block content %}
     <!-- Hero Start -->
     
 
@@ -579,6 +586,84 @@
 
     <!-- Start Experience & Education section -->
     <section id="experience" class="br-experience padding-tb-80 vanish">
+        <style>@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
+            .design-section {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              background-color: #1f1f1f;
+              min-height: 100vh;
+              padding: 100px 0;
+              font-family: Jost;
+            }
+            
+            .design {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            
+            .timeline {
+              width: 80%;
+              height: auto;
+              max-width: 800px;
+              margin: 0 auto;
+              display: flex;
+              flex-direction: column;
+            }
+            
+            .timeline-content {
+              padding: 20px;
+              background: #1f1f1f;
+              -webkit-box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
+                      box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
+              border-radius: 5px;
+              color: white;
+              padding: 1.75rem;
+              transition: 0.4s ease;
+              overflow-wrap: break-word !important;
+              margin: 1rem;
+              margin-bottom: 20px;
+              border-radius: 6px;
+            }
+            
+            .timeline-component {
+              margin: 0px 20px 20px 20px;
+            }
+            .timeline-content h3{
+                color: white !important;
+            }
+            
+            @media screen and (min-width: 768px) {
+              .timeline {
+                display: grid;
+                grid-template-columns: 1fr 3px 1fr;
+              }
+              .timeline-middle {
+                position: relative;
+                background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+                width: 3px;
+                height: 100%;
+              }
+              .main-middle {
+                opacity: 0;
+              }
+              .timeline-circle {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+                -webkit-transform: translateX(-50%);
+                        transform: translateX(-50%);
+              }
+            }</style>
+            <!--This is the main container that contains the whole timeline.-->
+            
         <div class="container">
             <div class="row">
                 <div class="section-title">
@@ -588,41 +673,66 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="education br-ex-box m-b-991">
                         <h4>Education</h4>
-                        <ul class="timeline">
-                            {% for object in education %}
-                            <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                                <div class="timeline-info">
-                                    <span>{{ object.date }}</span>
-                                </div>
-                                <div class="timeline-content">
-                                    <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.rank }}
-                                            </span></h5>
-                                    <p>{{ object.subject }}</p>
-                                </div>
-                            </li>
-                            {% endfor %}
+                        
+                            <div class="timeline">
                             
-                            </li>
-                        </ul>
+                                      <!--Well, The reason for this div is to fill space. 
+                            This space is technically used for keeping dates, 
+                            but I didn't find the need for dates. However, I'll provide 
+                            you the styling for dates, so that you can use it if you 
+                            wanted to.-->
+                            {% for object in education %}
+                                              <div class="timeline-component">
+                                               <h3 style="margin-left: 50%;"> {{ object.date }}</h3>
+                                              </div>
+                            
+                                           <div class="timeline-middle">
+                                               <div class="timeline-circle"></div>
+                                           </div>
+                                           <div class="timeline-component timeline-content">
+                                            <h3>{{ object.title }}</h3>
+                                            <span class="sub">{{ object.rank }}</span>
+                                            <h5 style="color: white;">{{ object.subject }}</h5>
+                                       </div>
+                                       {% endfor %}
+                                            
+                            
+                                   </div>
+                                 
+                            
 
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="experiense br-ex-box">
                         <h4>Experience</h4>
-                        <ul class="timeline">
+                        
+                            <div class="timeline">
+                            
+                                      <!--Well, The reason for this div is to fill space. 
+                            This space is technically used for keeping dates, 
+                            but I didn't find the need for dates. However, I'll provide 
+                            you the styling for dates, so that you can use it if you 
+                            wanted to.-->
                             {% for object in experience %}
-                            <li class="timeline-item">
-                                <div class="timeline-info">
-                                    <span>{{ object.date }}</span>
-                                </div>
-                                <div class="timeline-content">
-                                    <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.rank }}</span></h5>
-                                    <p>{{ object.subject }}</p>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                                              <div class="timeline-component">
+                                               <h3 style="margin-left: 50%; color: white;"> {{ object.date }}</h3>
+                                              </div>
+                            
+                                           <div class="timeline-middle">
+                                               <div class="timeline-circle"></div>
+                                           </div>
+                                           <div class="timeline-component timeline-content">
+                                            <h3 style="color: white !important;">{{ object.title }}</h3>
+                                            <span class="sub">{{ object.rank }}</span>
+                                            <h5 style="color: white;">{{ object.subject }}</h5>
+                                       </div>
+                                       {% endfor %}
+                                            
+                            
+                                   </div>
+                                 
+                            
                     </div>
                 </div>
             </div>
@@ -692,33 +802,39 @@
 
     <section id="certificate" class="br-experience padding-tb-80 vanish">
         <div class="container">
+            
             <div class="row">
                 <div class="section-title">
                     <h2>My <span>Certificate</span></h2>
                     <span class="ligh-title">Certificates</span>
                 </div>
                 
-                        <ul class="timeline" >
-                            {% for object in certificate %}
-                            {% if object.show %}
-                            <li style="display: flex; flex-direction: column; padding: 15px;" class="timeline-item col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                                <div class="timeline-info">
-                                    <span>{{ object.date }}</span>
-                                </div>
-                                <div class="timeline-content">
-                                    <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.criteria }}
-                                            </span></h5>
-                                    <p>{{ object.platorm }}</p>
-                                </div>
-                            </li>
-                        {% endif %}
-                            {% endfor %}
-                            
-                            </li>
-                        </ul>
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for object in certificate %}
+                                {% if object.show %}
+                      <div class="carousel-item {% if object.id == active_item.id %}active{% endif %}">
+                        <center><h3>{{ object.title }}</h3></center>
+                        <iframe src="{{ object.url|google_drive_url }}" class="d-block w-100" height="800vw" ></iframe>
+                      </div>
+                      {% endif %}
+                                {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
 
+                    <br>
+                <center><a href="/certificate"  class="br-learn-more-right" >
                     
-                
+                    <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View More</span>
+                </a></center>
                 
             </div>
 
@@ -824,7 +940,10 @@
             </div>
         </div>
         {% endfor %}
-        <a href="/blogspot" class="btn btn-primary">More Blogs</a>
+        <center><a href="/blogspot"  class="br-learn-more-right" >
+                    
+            <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View More</span>
+        </a></center>
     </div>
 </div>
 </section>
@@ -915,7 +1034,7 @@
         </div>
     </section>
     <!-- End Contact Section -->
-
+{% endblock %}
     <!-- Start Footer -->
     <footer class="margin-t-80">
         <div class="container">
