@@ -125,7 +125,7 @@
     }
     @media screen and (max-width: 2860px){
         #mytoggle{
-            margin-left: 90vw;
+            margin-left: 88vw;
         }
         .circle span{
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
@@ -630,16 +630,17 @@
             }
             
             .timeline-component {
-              margin: 0px 20px 20px 20px;
+              margin: 0px 20px 20px 20px; 
+              width: 27vw;
             }
             .timeline-content h3{
                 color: white !important;
             }
             
-            @media screen and (min-width: 768px) {
+
               .timeline {
                 display: grid;
-                grid-template-columns: 1fr 3px 1fr;
+                grid-template-columns: 2fr 3px 2fr;
               }
               .timeline-middle {
                 position: relative;
@@ -661,7 +662,21 @@
                 -webkit-transform: translateX(-50%);
                         transform: translateX(-50%);
               }
-            }</style>
+              @media screen and (max-width: 768px){
+                .timeline-component{
+                    width: 40vw;
+                }
+                .timeline-component #date{
+                    
+                    width: 20vw !important;
+                }
+              }
+              @media screen and (max-width: 425px){
+                .timeline-component{
+                    width: 50vw;
+                }
+              }
+            </style>
             <!--This is the main container that contains the whole timeline.-->
             
         <div class="container">
@@ -682,8 +697,8 @@
                             you the styling for dates, so that you can use it if you 
                             wanted to.-->
                             {% for object in education %}
-                                              <div class="timeline-component">
-                                               <h3 style="margin-left: 50%;"> {{ object.date }}</h3>
+                                              <div class="timeline-component" style="width: 10vw;">
+                                               <h5 id="date" style="margin-left: 2%; color: white;"> {{ object.date }}</h5>
                                               </div>
                             
                                            <div class="timeline-middle">
@@ -715,8 +730,8 @@
                             you the styling for dates, so that you can use it if you 
                             wanted to.-->
                             {% for object in experience %}
-                                              <div class="timeline-component">
-                                               <h3 style="margin-left: 50%; color: white;"> {{ object.date }}</h3>
+                                              <div class="timeline-component" style="width: 10vw;">
+                                               <h5 id="date" style="margin-left: 0%; color: white;"> {{ object.date }}</h5>
                                               </div>
                             
                                            <div class="timeline-middle">
