@@ -271,9 +271,13 @@ if (isDarkMode) {
     document.querySelectorAll('.card-body').forEach(element => {
         element.classList.add('darkmode');
     });
+    document.getElementById("menuthing").classList.add("navbar-dark");
+    document.getElementById("menuthing").classList.remove("navbar-light");
     document.getElementById("toggle").checked=true;
 }
 else{
+  document.getElementById("menuthing").classList.add("navbar-light");
+    document.getElementById("menuthing").classList.remove("navbar-dark");
   document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
       document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
 
@@ -311,6 +315,8 @@ else{
 			document.querySelectorAll(".card-body").forEach(x => x.classList.toggle('darkmode'));
       document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
       document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
+      document.getElementById("menuthing").classList.toggle("navbar-light");
+      document.getElementById("menuthing").classList.toggle("navbar-dark");
       			const currentMode = document.body.classList.contains('darkmode');
 		    localStorage.setItem('darkMode', currentMode);
 

@@ -123,6 +123,9 @@
         object-fit: cover;
         height: 70%;
     }
+    #headish,#headno{
+        color: white !important;
+    }
     @media screen and (max-width: 2860px){
         #mytoggle{
             margin-left: 88vw;
@@ -211,6 +214,9 @@
         iframe{
             height: 100vh !important;
         }
+        .br-experience .timeline li {
+            padding: 30px;
+        }
     }
     @media screen and (max-width: 376px) {
         .circle span img {
@@ -228,6 +234,16 @@
             top: 2.6vw;
             left: 2.6vw;
         }
+        .br-experience .timeline li {
+            padding: 20px;
+        }
+        #headish{
+            font-size: 18px !important;
+        }
+        #headno{
+            font-size: 15px !important;
+            left: 150px !important;
+        }
     }
     @media screen and (max-width: 326px) {
         .circle span img {
@@ -236,6 +252,9 @@
         }
         .body-part-2 {
             min-height: 300px;
+        }
+        .br-experience .timeline li {
+            padding: 0px;
         }
     }
     
@@ -400,9 +419,14 @@
 <path d="M6.46001 20.6099C7.81863 20.6099 8.92 19.5086 8.92 18.1499C8.92 16.7913 7.81863 15.6899 6.46001 15.6899C5.10139 15.6899 4 16.7913 4 18.1499C4 19.5086 5.10139 20.6099 6.46001 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>
             </button></header>
-            <h4 style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA</h4>
+            <h4 id="headish" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA</h4>
             {% if certi %}
-            <a href="/#certificate"><h4 style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 200px; transform: translate(0,-50%);">Home</h4></a>
+            <style>
+                .br-sidebar-toggle{
+                    opacity: 0;
+                }
+            </style>
+            <a href="/#certificate"><h4 id="headno" style="color: white; font-size: 22px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 200px; transform: translate(0,-50%);">Home</h4></a>
             {% endif %}
         </nav>
     
@@ -429,11 +453,11 @@
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#skills" onclick="design(event)">Skills</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link br-nav" href="#certificate" onclick="design(event)">Certificate</a>
-                </li>
                 <li class="nav-item ">
                     <a class="nav-link br-nav" href="#project" onclick="design(event)">Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link br-nav" href="#certificate" onclick="design(event)">Certificate</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#blog" onclick="design(event)">Blog</a>
@@ -631,7 +655,7 @@
             
             .timeline-component {
               margin: 0px 20px 20px 20px; 
-              width: 27vw;
+              width: 26vw;
             }
             .timeline-content h3{
                 color: white !important;
@@ -662,6 +686,20 @@
                 -webkit-transform: translateX(-50%);
                         transform: translateX(-50%);
               }
+              @media screen and (max-width: 2562px) and (min-width: 1500px)
+              {
+                .timeline-component{
+                    width: 333px;
+                }
+                #date-container{
+                    width: 10vw !important;
+                }
+              }
+              @media screen and (max-width: 1024px){
+                .timeline-component{
+                    width: 30vw;
+                }
+              }
               @media screen and (max-width: 768px){
                 .timeline-component{
                     width: 40vw;
@@ -674,6 +712,12 @@
               @media screen and (max-width: 425px){
                 .timeline-component{
                     width: 50vw;
+                }
+                #content{
+                    margin-left: 50px;
+                }
+                #circle{
+                    margin-left: 40px;
                 }
               }
             </style>
@@ -697,14 +741,14 @@
                             you the styling for dates, so that you can use it if you 
                             wanted to.-->
                             {% for object in education %}
-                                              <div class="timeline-component" style="width: 10vw;">
+                                              <div id="date-container" class="timeline-component" style="width: 10.5vw;">
                                                <h5 id="date" style="margin-left: 2%; color: white;"> {{ object.date }}</h5>
                                               </div>
                             
-                                           <div class="timeline-middle">
+                                           <div id="circle" class="timeline-middle">
                                                <div class="timeline-circle"></div>
                                            </div>
-                                           <div class="timeline-component timeline-content">
+                                           <div id="content" class="timeline-component timeline-content">
                                             <h3>{{ object.title }}</h3>
                                             <span class="sub">{{ object.rank }}</span>
                                             <h5 style="color: white;">{{ object.subject }}</h5>
@@ -734,10 +778,10 @@
                                                <h5 id="date" style="margin-left: 0%; color: white;"> {{ object.date }}</h5>
                                               </div>
                             
-                                           <div class="timeline-middle">
+                                           <div id="circle" class="timeline-middle">
                                                <div class="timeline-circle"></div>
                                            </div>
-                                           <div class="timeline-component timeline-content">
+                                           <div id="content" class="timeline-component timeline-content">
                                             <h3 style="color: white !important;">{{ object.title }}</h3>
                                             <span class="sub">{{ object.rank }}</span>
                                             <h5 style="color: white;">{{ object.subject }}</h5>
@@ -815,46 +859,7 @@
 </div>
     </section>
 
-    <section id="certificate" class="br-experience padding-tb-80 vanish">
-        <div class="container">
-            
-            <div class="row">
-                <div class="section-title">
-                    <h2>My <span>Certificate</span></h2>
-                    <span class="ligh-title">Certificates</span>
-                </div>
-                
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for object in certificate %}
-                                {% if object.show %}
-                      <div class="carousel-item {% if object.id == active_item.id %}active{% endif %}">
-                        <center><h3>{{ object.title }}</h3></center>
-                        <iframe src="{{ object.url|google_drive_url }}" class="d-block w-100" height="800vw" ></iframe>
-                      </div>
-                      {% endif %}
-                                {% endfor %}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-
-                    <br>
-                <center><a href="/certificate"  class="br-learn-more-right" >
-                    
-                    <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View More</span>
-                </a></center>
-                
-            </div>
-
-        </div>
-</section>
+    
     <!-- Start Portfolio Section -->
     <section id="project" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
@@ -923,6 +928,46 @@
         </div>
     </section>
     <!-- End Portfolio Section -->
+    <section id="certificate" class="br-experience padding-tb-80 vanish">
+        <div class="container">
+            
+            <div class="row">
+                <div class="section-title">
+                    <h2>My <span>Certificate</span></h2>
+                    <span class="ligh-title">Certificates</span>
+                </div>
+                
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for object in maincertificate %}
+                                
+                      <div class="carousel-item {% if object.id == 1 %}active{% endif %}">
+                        <center><h3>{{ object.title }}</h3></center>
+                        <img src="media/{{ object.image }}" class="d-block w-100" >
+                      </div>
+                      
+                                {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                      <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+
+                    <br>
+                <center><a href="/certificate"  class="br-learn-more-right" >
+                    
+                    <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View More</span>
+                </a></center>
+                
+            </div>
+
+        </div>
+</section>
 <section id="blog" class="padding-tb-80 vanish">
     <div class="container">
     <div class="section-title">

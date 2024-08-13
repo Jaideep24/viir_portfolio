@@ -82,7 +82,17 @@ class certificate(models.Model):
     show=models.BooleanField(default=False)
     def __str__(self):
         return self.title
-    
+
+class maincertificate(models.Model):
+    title=models.CharField(max_length=100)
+    image=models.ImageField(default="image.png")    
+    def __str__(self):
+        return self.title
+
+class subscriber(models.Model):
+    email=models.EmailField()
+    def __str__(self):
+        return self.email
 
 class Article(models.Model):
     title = models.CharField(max_length=255)

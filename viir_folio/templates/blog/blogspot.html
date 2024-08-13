@@ -4,11 +4,24 @@
 	<center>
 		<div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
 			<h1 class="fw-bolder">Blog Spot</h1>
-			<h5>Viir Phuria's blogs</h5>
+			
+			{% if submitted %}
+			<div class="btn btn-success">Subscribed</div>
+			{% else %}
+			<form action="" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs" fdprocessedid="zy2osp">
+				</div>
+				<br>
+				<button name="button" value="{{ success }}" type="submit" class="btn btn-info" fdprocessedid="cqz8h">Submit</button>
+			</form>
+			{% endif %}
 				</div>
 	</center>
 {% load static %}
 <div class="row">
+
 	{% for object in object_list %}
 	<div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
 		<div class="card">

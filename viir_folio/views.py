@@ -53,11 +53,11 @@ def index(request):
             pattern=r"^(?:\+91|91)?[789]\d{9}$"
             emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
             elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
             else:
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
         
     else:
         print("no")
@@ -66,7 +66,7 @@ def index(request):
             check=False
         else:
             success=False
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'active_item':active_item, "success":success})
+        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item, "success":success})
     
 def certificat(request):
     return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all(),'certi':True})
@@ -90,12 +90,51 @@ class Index(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'articles'
     ordering = ['-date']
-
+submission=False
+confirmation=False
 class Blogspot(ListView):
     model = Article
     template_name = 'blog/blogspot.html'
     context_object_name = 'articles'
     ordering = ['-date']
+    def get_context_data(self, **kwargs):
+        global confirmation
+        global submission
+        
+        if confirmation:
+            submission=True
+            confirmation=False
+        else:
+            submission=False
+        context = super(Blogspot,self).get_context_data(**kwargs)
+        context['submitted']=submission
+        return context
+    def post(self,  request, **kwargs):
+        global confirmation
+        email=request.POST.get('email')
+        if not email:
+            # Handle error: missing data
+            context = {'error': 'Title and issued date are required.'}
+            return render(request, self.template_name, context)
+
+        # Create and save model instance
+        try:
+            certificate = subscriber(email=email)
+            certificate.save()
+            values_list=[email]
+            subject = 'New Subscription'
+            message = f"Thank you for subscribing to our blogs! 🎉\nWe’re thrilled to have you join our community of readers. You’ve just taken the first step toward receiving insightful articles, exciting updates, and exclusive content right to your inbox. \nRegards,\nViir Phuria"
+            from_email = 'virvphuria@gmail.com'  # Replace with your email address
+
+            # Send email
+            send_mail(subject, message, from_email, values_list)
+            confirmation=True
+            return HttpResponseRedirect(request.path_info)
+        except ValueError as e:
+            # Handle date parsing error or other validation issues
+            context = {'error': f'Invalid date format: {e}'}
+            return render(request, self.template_name, context)
+
 class DetailArticleView(DetailView):
     model = Article
     template_name = 'blog/blog_post.html'
@@ -157,6 +196,14 @@ class CreateBlogView(View):
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            entries = subscriber.objects.all()
+            values_list = [entry.email for entry in entries]
+            subject = 'New Blog'
+            message = f"Hey there, a new blog is waiting for you!\nTitle: {form.cleaned_data['title']}\nRegards,\nViir Phuria"
+            from_email = 'virvphuria@gmail.com'  # Replace with your email address
+
+            # Send email
+            send_mail(subject, message, from_email, values_list)
             return redirect('blogspot')
         return render(request, self.template_name, {'form': form})
 class UpdateBlogView(UpdateView):
