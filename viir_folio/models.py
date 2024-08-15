@@ -76,7 +76,7 @@ class cv(models.Model):
 class certificate(models.Model):
     title=models.CharField(max_length=100)
     url=models.URLField()
-    date=models.DateField(auto_now_add=True)
+    date=models.DateField()
     platorm=models.CharField(max_length=100)
     criteria=models.CharField(max_length=100)
     show=models.BooleanField(default=False)
@@ -97,7 +97,7 @@ class subscriber(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     content = HTMLField()
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     image=models.ImageField( default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
     likes=models.IntegerField(blank=True, null=True, default=0)
 

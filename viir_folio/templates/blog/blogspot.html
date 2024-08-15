@@ -10,12 +10,15 @@
 			{% else %}
 			<form action="" method="post">
 				{% csrf_token %}
-				<div class="form-group">
-					<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs" fdprocessedid="zy2osp">
-				</div>
-				<br>
-				<button name="button" value="{{ success }}" type="submit" class="btn btn-info" fdprocessedid="cqz8h">Submit</button>
-			</form>
+				<div class="form-group" style="display: flex; align-items: center;">
+					<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs"
+						   style="flex: 1; margin-right: 10px; padding: 5px; box-sizing: border-box;">
+					<button name="button" value="{{ success }}" type="submit" 
+							class="btn btn-info"
+							style="padding: 5px 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer;">
+					  Submit
+					</button>
+				  </div>			</form>
 			{% endif %}
 				</div>
 	</center>

@@ -280,7 +280,7 @@
     
         <nav style="z-index: 1000; position: fixed; background-color: #000000; height: 8vw; max-height: 51.6px; width: 100vw; margin-top: -10px;">
             <div id="mytoggle" style="position: absolute;">
-                <label id="theme-toggle-button">
+                <label id="theme-toggle-button"  style="height: 0px;">
                     <input type="checkbox" id="toggle" >
                     <svg style="width: 12vw; max-width: 90px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                       <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
@@ -424,6 +424,9 @@
             <style>
                 .br-sidebar-toggle{
                     opacity: 0;
+                    z-index: -232424;
+                    
+                    visibility: hidden;
                 }
             </style>
             <a href="/#certificate"><h4 id="headno" style="color: white; font-size: 22px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 200px; transform: translate(0,-50%);">Home</h4></a>
@@ -948,10 +951,12 @@
                       
                                 {% endfor %}
                     </div>
+                    <br>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                       <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Previous</span>
                     </button>
+                    <br>
                     <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
                       <span style="background-color: #000000; opacity: 0.8; border-radius: 50%;" class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
