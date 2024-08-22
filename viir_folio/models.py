@@ -97,7 +97,7 @@ class subscriber(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     content = HTMLField()
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     image=models.ImageField( default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
     likes=models.IntegerField(blank=True, null=True, default=0)
 
