@@ -263,7 +263,7 @@
 </style>
 </head>
 
-<body class="" style="background-color: white;">
+<body class="" style="background-color: #F0FFFF;">
     <h1 class="br-hero-title title-right-overflow"><span id="myself"> <span class="name"></span></span>
     </h1>
     <!-- Site loader  -->
@@ -1261,6 +1261,7 @@ if (isDarkMode) {
     
         const styles = {
     backgroundColor: "rgba(12, 14, 34, 0.95)",
+    backgroundlight:"#F0FFFF",
     elements: [
         { selector: 'body', property: 'backgroundColor', value: "rgba(12, 14, 34, 0.95)" },
         { selector: '#myself', property: 'color', value: "#EEEEEE" },
@@ -1306,7 +1307,7 @@ function toggleStyles() {
     });
 
     // Special handling for body backgroundColor
-    body.style.backgroundColor = isCurrentStyleApplied ? "" : styles.backgroundColor;
+    body.style.backgroundColor = isCurrentStyleApplied ? styles.backgroundlight : styles.backgroundColor;
     const currentMode = document.body.style.backgroundColor === "rgba(12, 14, 34, 0.95)";
 		    localStorage.setItem('darkMode', currentMode);
 }

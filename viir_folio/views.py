@@ -69,7 +69,7 @@ def index(request):
         return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"skills":Skills.objects.all(),"projects":Projects.objects.all(),"about":About.objects.all(),"language":Languages.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item, "success":success})
     
 def certificat(request):
-    return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all(),'certi':True})
+    return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all().order_by('-date'),'certi':True})
 
 def view(request):
     userlist=Logger.objects.all().values()
