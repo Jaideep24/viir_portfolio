@@ -745,7 +745,7 @@
                             wanted to.-->
                             {% for object in education %}
                                               <div id="date-container" class="timeline-component" style="width: 10.5vw;">
-                                               <h5 id="date" style="margin-left: 2%; color: white;"> {{ object.date }}</h5>
+                                               <h5 id="date" style="margin-left: 2%; color: black;"> {{ object.date }}</h5>
                                               </div>
                             
                                            <div id="circle" class="timeline-middle">
@@ -778,7 +778,7 @@
                             wanted to.-->
                             {% for object in experience %}
                                               <div class="timeline-component" style="width: 10vw;">
-                                               <h5 id="date" style="margin-left: 0%; color: white;"> {{ object.date }}</h5>
+                                               <h5 id="date" style="margin-left: 0%; color: black;"> {{ object.date }}</h5>
                                               </div>
                             
                                            <div id="circle" class="timeline-middle">
@@ -1178,13 +1178,7 @@
     {% include 'LIGHT/slick.min.js.download' %}
     {% include 'LIGHT/fontawesome.js.download' %}
     </script>
-    <script src="jquery-3.7.1.min.js.download"></script>
-    <script src="bootstrap.bundle.min.js.download"></script>
-    <script src="tilt.jquery.js.download"></script>
-    <script src="mixitup.min.js.download"></script>
-    <script src="jquery.fancybox.min.js.download"></script>
-    <script src="slick.min.js.download"></script>
-    <script src="fontawesome.js.download"></script>
+    
     <script>
         const isDarkMode = localStorage.getItem('darkMode') === 'true';
 
@@ -1256,6 +1250,9 @@ if (isDarkMode) {
         Array.from(document.getElementsByClassName("card-title")).forEach(function(element){
             element.style.color="#FFFFFF";
         });
+        document.querySelectorAll("#date").forEach(function(element){
+            element.style.color="#EEEEEE";
+        })
         document.getElementById("toggle").checked=true;
     }
     
@@ -1276,6 +1273,7 @@ if (isDarkMode) {
         { selector: '.br-box', property: 'backgroundColor', value: "#202337" },
         { selector: '.br-box', property: 'borderColor', value: "#1b1d30" },
         { selector: 'h4', property: 'color', value: "#EEEEEE" },
+        { selector: '#date', property: 'color', value: "#EEEEEE" },
         { selector: '.track', property: 'stroke', value: "#333754" }, // Note: !important not handled here
         { selector: '.margin-t-80', property: 'backgroundColor', value: "#202337" },
         { selector: '.timeline-item', property: 'backgroundColor', value: "#202337" },
