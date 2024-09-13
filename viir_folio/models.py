@@ -38,7 +38,7 @@ class Projects(models.Model):
     tech=models.CharField(max_length=100)
     type=models.CharField(max_length=100)
     url=models.URLField()
-    category=models.CharField(max_length=100)
+    category=models.CharField(max_length=100, choices=(("webdev","webdev"),("appdev", "appdev"), ("graphic","graphic"),("mlai","mlai"),("iot","iot")), default="webdev")
     content=models.CharField(max_length=100)
     image=models.ImageField(default="image.png")
     def __str__(self):

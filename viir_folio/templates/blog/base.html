@@ -7,16 +7,36 @@
 	<link rel="stylesheet" href="https://bootswatch.com/5/simplex/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<title>Django Blog</title>
+  <style>
+	.row{
+		width:100% !important;
+	}
+</style>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+
+html{
+      overflow-x:visible;
+    }
+@media screen and (min-width:768px){
+  .col-md-6{
+    width:49%;
+  }
+  
+}
+@media screen and (min-width:992px){
+  .col-lg-4{
+    width:32.33%;
+  }
+}
 
 		.darkmode{
 			background-color: black;
 			color: white;
 		}
-    html{
-      overflow-x:hidden;
-    }
+    
 		section {
   position: absolute;
   width: 100vw;

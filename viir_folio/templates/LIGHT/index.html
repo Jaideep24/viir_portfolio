@@ -878,10 +878,11 @@
                                 <div class="portfolio-tabs">
                                     <ul>
                                         <li class="filter mixitup-control-active" data-filter="all" onclick="design(event)">ALL</li>
-<li class="filter" data-filter=".design" onclick="design(event)">DESIGN</li>
-<li class="filter" data-filter=".development" onclick="design(event)">DEVELOPMENT</li>
+<li class="filter" data-filter=".webdev" onclick="design(event)">WEB DEV</li>
+<li class="filter" data-filter=".appdev" onclick="design(event)">APP DEV</li>
 <li class="filter" data-filter=".graphics" onclick="design(event)">GRAPHICS</li>
-<li class="filter" data-filter=".templates" onclick="design(event)">TEMPLATES</li>
+<li class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
+<li class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
 
                                     </ul>
                                 </div>
@@ -1326,13 +1327,13 @@ function design(event) {
         clickedItem.classList.add("mixitup-control-active");
 
         // Check if the clicked item has the data-filter value of '.design'
-        if (clickedItem.getAttribute("data-filter") === ".design") {
+        if (clickedItem.getAttribute("data-filter") === ".webdev") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
         item.remove();
     });
             storedelement.forEach(item => {
-                if(item.classList.contains("Design")){
+                if(item.classList.contains("webdev")){
                    
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
@@ -1347,13 +1348,13 @@ function design(event) {
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 });
         }
-        else if (clickedItem.getAttribute("data-filter") === ".development") {
+        else if (clickedItem.getAttribute("data-filter") === ".appdev") {
             // Use a class selector if you have multiple elements to show
             storedelement.forEach(item => {
         item.remove();
     });
             storedelement.forEach(item => {
-                if(item.classList.contains("Development")){
+                if(item.classList.contains("appdev")){
                     
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
@@ -1365,7 +1366,31 @@ function design(event) {
         item.remove();
     });
             storedelement.forEach(item => {
-                if(item.classList.contains("Graphics")){
+                if(item.classList.contains("graphic")){
+                    
+                    document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
+                }
+            });
+        }
+        else if (clickedItem.getAttribute("data-filter") === ".mlai") {
+            // Use a class selector if you have multiple elements to show
+            storedelement.forEach(item => {
+        item.remove();
+    });
+            storedelement.forEach(item => {
+                if(item.classList.contains("mlai")){
+                    
+                    document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
+                }
+            });
+        }
+        else if (clickedItem.getAttribute("data-filter") === ".iot") {
+            // Use a class selector if you have multiple elements to show
+            storedelement.forEach(item => {
+        item.remove();
+    });
+            storedelement.forEach(item => {
+                if(item.classList.contains("iot")){
                     
                     document.getElementsByClassName("m-b-minus-30px")[0].appendChild(item);
                 }
