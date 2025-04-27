@@ -807,8 +807,8 @@
     <section id="service" class="br-service padding-tb-80 sec-bg vanish">
         <div class="container">
             <div class="section-title">
-                <h2>My<span> service</span></h2>
-                <span class="ligh-title">service</span>
+                <h2>My<span> Service</span></h2>
+                <span class="ligh-title">Service</span>
             </div>
             <div class="row service-box m-tb-minus-15px">
                 {% for object in skills %}
@@ -902,16 +902,14 @@
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
-                                                        <a class="" data-fancybox="gallery" href="media/{{ object.image }}"  style="background-image: url('media/{{ object.image }}') " >
-                                                            
-                                                        </a>
+                                                    <img src="media/{{ object.image }}">
+                                                        
                                                     </div>
                                                     <div class="br-detail">
                                                         <ul>
                                                             <li>Date : {{ object.date }}</li>
                                                             <li>Client : {{ object.client }}</li>
                                                             <li>Tech : {{ object.tech }}</li>
-                                                            <li>Type : {{ object.tech }}</li>
                                                             <li>URL : <a href="{{ object.url }}" target="_blank">{{ object.url }}</a></li>
                                                         </ul>
 

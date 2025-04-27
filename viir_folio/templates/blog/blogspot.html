@@ -1,8 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-	<center>
-		<div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
+		<div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
 			<h1 class="fw-bolder">Blog Spot</h1>
 			
 			{% if submitted %}
@@ -10,18 +9,17 @@
 			{% else %}
 			<form action="" method="post">
 				{% csrf_token %}
-				<div class="form-group" style="display: flex; align-items: center;">
-					<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs"
-						   style="flex: 1; margin-right: 10px; padding: 5px; box-sizing: border-box;">
-					<button name="button" value="{{ success }}" type="submit" 
-							class="btn btn-info"
-							style="padding: 5px 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer;">
-					  Submit
-					</button>
-				  </div>			</form>
+				<div class="form-group" style="display: flex; width: 100%; max-width: 500px; margin: 0 auto; padding: 10px; box-sizing: border-box;">
+    <input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs"
+           style="width: 100%; margin-right: 10px; padding: 10px; box-sizing: border-box;">
+    <button name="button" value="{{ success }}" type="submit" 
+            class="btn btn-info"
+            style="padding: 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer; width:auto; align-self:center;">
+      Submit
+    </button>
+</div>			</form>
 			{% endif %}
 				</div>
-	</center>
 {% load static %}
 <div class="row">
 
