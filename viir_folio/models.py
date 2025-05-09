@@ -22,7 +22,7 @@ class Experience(models.Model):
     def __str__(self):
         return self.title
 
-class Skills(models.Model):
+class Service(models.Model):
     title=models.CharField(max_length=100)
     front_content=models.CharField(max_length=100)
     back_content=models.CharField(max_length=100)
@@ -30,14 +30,14 @@ class Skills(models.Model):
     def __str__(self):
         return self.title
 
-class Projects(models.Model):
+class Project(models.Model):
     title=models.CharField(max_length=100)
     topic=models.CharField(max_length=100)
     date=models.DateField()
     client=models.CharField(max_length=100)
     tech=models.CharField(max_length=100)
     url=models.URLField()
-    category=models.CharField(max_length=100, choices=(("webdev","webdev"),("appdev", "appdev"), ("graphic","graphic"),("mlai","mlai"),("iot","iot")), default="webdev")
+    category=models.CharField(max_length=100, choices=(("webdev","WebDev"),("appdev", "AppDev"), ("graphic","Graphic"),("mlai","ML/AI"),("iot","IoT")), default="webdev")
     content=models.CharField(max_length=100)
     image=models.ImageField(default="image.png")
     def __str__(self):
@@ -63,7 +63,7 @@ class contact(models.Model):
     def __str__(self):
         return self.name
 
-class Languages(models.Model):
+class Skill(models.Model):
     language=models.CharField(max_length=100)
     percentage=models.PositiveIntegerField()
     def __str__(self):

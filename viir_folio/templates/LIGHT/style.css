@@ -1327,22 +1327,6 @@ li.mixitup-control-active {
   color: #fff;
   opacity: 0;
 }
-.br-project-box:hover .portfolio-img {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-.br-project-box:hover .portfolio-img img {
-  -webkit-transform: rotate(-5deg) scale(1.2);
-          transform: rotate(-5deg) scale(1.2);
-}
-.br-project-box:hover .portfolio-img .overlay {
-  opacity: 1;
-}
-.br-project-box:hover a.info {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
 .br-project-box a.info {
   width: 40px;
   height: 40px;
@@ -1781,8 +1765,8 @@ footer .br-footer-detail .br-social ul li {
   margin-left: 5px;
 }
 footer .br-footer-detail .br-social ul li a {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   margin-left: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
