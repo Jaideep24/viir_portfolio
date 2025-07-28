@@ -17,10 +17,16 @@
             }
             .timeline-item{
                 width:97%;
+                height:140px;
             }
             .container{
                 margin-left:0px !important;
                 margin-right:0px !important;
+            }
+            @media screen and (max-width:480px){
+                .timeline-item{
+                height: 170px;
+                }
             }
         </style>
         <div class="col-lg-6 col-md-12 col-sm-12" style="margin-top:20px; padding-left:7px;">
@@ -28,7 +34,7 @@
                 <ul class="timeline" style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; width:98vw;">
                     {% for object in certificate %}
                     
-                    <li class="timeline-item" style="height: 150px; " data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                    <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
                         <div class="timeline-info">
                             <span>{{ object.date }}</span>
                         </div>

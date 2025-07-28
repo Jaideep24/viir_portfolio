@@ -11,7 +11,7 @@
     <link rel="icon" href="{% static 'viir_logo.png' %}" sizes="32x32">
     <link rel="apple-touch-icon" href="{% static 'viir_logo.png' %}">
     <meta name="msapplication-TileImage" content="{% static 'viir_logo.png' %}">
-
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <!-- css All Plugins Files -->
     <style>
     {% include 'LIGHT/bootstrap.css' %}
@@ -259,11 +259,21 @@
     }
     
 
-   
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* keep particles behind content */
+}
+
 </style>
 </head>
 
 <body class="" style="background-color: #F0FFFF;">
+<div id="particles-js"></div>
+
     <h1 class="br-hero-title title-right-overflow"><span id="myself"> <span class="name"></span></span>
     </h1>
     <!-- Site loader  -->
@@ -451,7 +461,7 @@
                     <a class="nav-link br-nav" href="#experience" onclick="design(event)">Experience</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link br-nav" href="#service" onclick="design(event)">Service</a>
+                    <a class="nav-link br-nav" href="#expertise" onclick="design(event)">Expertise</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link br-nav" href="#skills" onclick="design(event)">Skills</a>
@@ -803,12 +813,12 @@
     </section>
     <!-- End Experience & Education Section -->
 
-    <!-- Start service section -->
-    <section id="service" class="br-service padding-tb-80 sec-bg vanish">
+    <!-- Start expertise section -->
+    <section id="expertise" class="br-service padding-tb-80 sec-bg vanish">
         <div class="container">
             <div class="section-title">
-                <h2>My<span> Service</span></h2>
-                <span class="ligh-title">Service</span>
+                <h2>My<span> Expertise</span></h2>
+                <span class="ligh-title">Expertise</span>
             </div>
             <div class="row service-box m-tb-minus-15px">
                 {% for object in services %}
@@ -891,11 +901,11 @@
                                 <div class="portfolio-content-items">
                                     <div class="row m-b-minus-30px">
                                         {% for object in projects %}
-                                        <div  class="col-lg-6 mix graphics templates {{ object.category }}" >
+                                        <div  class="col-lg-6 mix graphics templates {{ object.category|join:' ' }}" >
                                             <div class="br-project-box ">
                                                 <h3>{{ object.title }}</h3>
                                                 <div class="links">
-                                                    {{ object.get_category_display }} |
+                                                    {{ object.get_category_display|replace_commas:" | " }} |
                                                     
                                                 </div>
                                                 <p>{{ object.content }}
@@ -935,7 +945,7 @@
             
             <div class="row">
                 <div class="section-title">
-                    <h2>My <span>Certificate</span></h2>
+                    <h2>My <span>Certificates</span></h2>
                     <span class="ligh-title">Certificates</span>
                 </div>
                 
@@ -1439,4 +1449,12 @@ document.addEventListener('scroll', function() {
    
         
 
-</span></body></html>
+</span>
+
+
+<script>
+// Particles.js
+particlesJS('particles-js', {
+  particles: { number:{ value:70 }, color:{ value:['#00f7ff','#a020f0','#39ff14'] }, shape:{ type:'circle' }, opacity:{ value:1 }, size:{ value:10, random:true }, move:{ speed:2 } }
+});
+</script></body></html>

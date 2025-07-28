@@ -17,9 +17,26 @@ import random
 import string
 from io import BytesIO
 import datetime
+import csv
+from datetime import datetime
 success=False
 check=False
 # Create your views here.
+def load_certificates_from_csv(request):
+    csv_path = "viir_folio\ACHIEVEMENTS.xlsx - Sheet1.csv"  # adjust path if needed
+    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        next(reader)  # skip the first row with NaNs
+        for row in reader:
+            certificate.objects.create(
+                title=row['ACHIEVEMENT'],
+                url=row['LINK'],
+                date=datetime.strptime(row['DATE'], '%d-%m-%Y').date(),
+                platorm=row['PLATFORM'],
+                criteria=row['CRITERIA'],
+                show=True  # default value
+            )
+    return HttpResponse("Certificates loaded successfully")
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
@@ -53,11 +70,11 @@ def index(request):
             pattern=r"^(?:\+91|91)?[789]\d{9}$"
             emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Service.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
             elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Service.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
             else:
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Service.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
         
     else:
         print("no")
@@ -66,7 +83,7 @@ def index(request):
             check=False
         else:
             success=False
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Service.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item, "success":success})
+        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item, "success":success})
     
 def certificat(request):
     return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all().order_by('-date'),'certi':True})

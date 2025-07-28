@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 from phonenumber_field.modelfields import PhoneNumberField
 from tinymce.models import HTMLField
 
@@ -22,13 +23,17 @@ class Experience(models.Model):
     def __str__(self):
         return self.title
 
-class Service(models.Model):
+class Expertise(models.Model):
     title=models.CharField(max_length=100)
     front_content=models.CharField(max_length=100)
     back_content=models.CharField(max_length=100)
     icon=models.CharField(max_length=1000000)
     def __str__(self):
         return self.title
+    
+    class Meta:
+        # Keep the old table name so Django recognizes it's the same model
+        db_table = 'viir_folio_service'  # replace `yourappname` with your app's name
 
 class Project(models.Model):
     title=models.CharField(max_length=100)
@@ -37,11 +42,17 @@ class Project(models.Model):
     client=models.CharField(max_length=100)
     tech=models.CharField(max_length=100)
     url=models.URLField()
-    category=models.CharField(max_length=100, choices=(("webdev","WebDev"),("appdev", "AppDev"), ("graphic","Graphic"),("mlai","ML/AI"),("iot","IoT")), default="webdev")
+    category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("graphic","Graphics"),("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
     content=models.CharField(max_length=100)
     image=models.ImageField(default="image.png")
     def __str__(self):
         return self.title
+    
+    @property
+    def categories_list(self):
+        if isinstance(self.categories, (list, tuple)):
+            return self.categories
+        return [self.categories] if self.categories else []
 
 class About(models.Model):
     content=models.TextField()
