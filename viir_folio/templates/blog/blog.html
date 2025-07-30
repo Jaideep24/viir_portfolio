@@ -1,0 +1,135 @@
+{% extends 'blog/index (2).html' %} {% block content %}
+    <main class="main-content">
+        <article class="blog-post" id="blogPost">
+            <div class="container">
+                <div class="blog-header">
+                    <div class="blog-meta">
+                        <span class="category" id="blogCategory">Technology</span>
+                        <span class="date" id="blogDate">December 15, 2024</span>
+                    </div>
+                    <h1 class="blog-title" id="blogTitle">{{ article.title }}</h1>
+                    <div class="author-info">
+                        <img src="https://via.placeholder.com/40" alt="Author" class="author-avatar" id="authorAvatar">
+                        <div class="author-details">
+                            <span class="author-name" id="authorName">Loading...</span>
+                            <span class="read-time" id="readTime">{{ article.date }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-image">
+                    <img id="blogImage" src="/media/{{ article.image }}" alt="Blog Image">
+                </div>
+
+                <div class="blog-content" id="blogContent">
+                    <p>{{ article.content|safe }}</p>
+                </div>
+
+                <div class="blog-actions">
+                    <div class="action-buttons">
+                        <span id="likes-display">{{ article.likes }} people liked your blog</span><button class="btn " style=" color: red;" id="btn" onclick="like_change()" data-action="like" data-model-id="{{ article.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg></button>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+                        <button class="action-btn comment-btn" onclick="scrollToComments()">
+                            <i class="far fa-comment"></i>
+                            <span class="count" id="commentCount">0</span>
+                        </button>
+                        <button class="action-btn share-btn" onclick="shareBlog()">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  function like_change() {
+  var btn = document.getElementById("btn");
+  var model_id = btn.getAttribute("data-model-id");
+  var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var action = btn.getAttribute("data-action");
+  $.ajax({
+    url: "{% url 'detail_blog' object.id %}", // URL of your Django view
+    type: 'POST',
+    headers: { 'X-CSRFToken': csrftoken },
+    data: {
+      'model_id': model_id,
+      "action":action
+    },
+    success: function(response) {
+      var likesCount = response.likes;
+      var likesDisplay = document.getElementById("likes-display");
+      likesDisplay.innerHTML =  likesCount+" people liked your blog";
+      if (action == "like") {
+
+        btn.setAttribute("data-action", "unlike");
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>';
+        
+    } else {
+        btn.setAttribute("data-action", "like");
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg>';
+        
+        }
+    }
+  });
+}
+</script>
+        <section class="comments-section" id="commentsSection">
+            <div class="container">
+                <h3>Comments</h3>
+                
+                <div class="comment-form">
+                    {% if error_data == "error" %}
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong>Please fill out the required field
+                    </div>
+                    {% endif %}
+                    
+                    <p>{{ comment_form.errors }}</p>
+                    <form method="POST" >
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    {{ comment_form.article.as_hidden}}
+                    <button class="btn btn-success" type="submit">Comment <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                    </svg></button>
+                    </form>
+                </div>
+
+                <div class="comments-list" id="commentsList">
+                    {% for i in comment %}
+                    <div class="comment">
+                        <div class="user-avatar">
+                            <img src="https://via.placeholder.com/40" alt="Alice Smith">
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-author">{{ i.name }}</div>
+                            <div class="comment-date">11 December 2024</div>
+                            <div class="comment-text">{{ i.comment }}</div>
+                            <div class="comment-actions-inline">
+                                <button class="comment-action" onclick="likeComment(1)">
+                                    <i class="far fa-heart"></i> Like
+                                </button>
+                                <button class="comment-action" onclick="replyToComment(1)">
+                                    <i class="far fa-reply"></i> Reply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BlogSpace. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="blog.js"></script>
+</body>
+</html>
+{% endblock content %}

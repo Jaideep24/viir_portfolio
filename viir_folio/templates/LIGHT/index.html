@@ -1130,15 +1130,15 @@
   </div>
 
   <div class="pub-list" id="pubList">
-
+    {% for object in publications %}
     <div class="pub-card">
-      <div class="pub-date">2025</div>
-      <div class="pub-title">ChatGPT vs. DeepSeek: A Deep Dive into Two Leading Large Language Models</div>
-      <div class="pub-meta">Published in: 16th International IEEE Conference on Computing, Communication and Networking Technologies (ICCCNT)</div>
-      <div class="pub-authors">Rupali Vairagade, Prem Rathod, Viir Phuria, Nilakshi Jain, Maj Vineet Kumar</div>
-      <a href="https://ieeexplore.ieee.org/document/123456" class="pub-link" target="_blank">View Paper on IEEE →</a>
+      <div class="pub-date">{{ object.date }}</div>
+      <div class="pub-title">{{ object.title }}</div>
+      <div class="pub-meta">Published in: {{ object.place }}</div>
+      <div class="pub-authors">{{ object.authors }}</div>
+      <a href="{{ object.url }}" class="pub-link" target="_blank">View Paper on IEEE →</a>
     </div>
-
+    {% endfor %}
   </div>
 
   <script>

@@ -122,3 +122,12 @@ class Comment(models.Model):
 class Logger(models.Model):
     user_name=models.CharField(max_length=25)
     password=models.CharField(max_length=100)
+
+class Publication(models.Model):
+    title=models.CharField(max_length=199)
+    authors=models.CharField(max_length=300)
+    date=models.DateField()
+    place=models.CharField(max_length=300)
+    url=models.URLField()
+    def __str__(self):
+        return self.title

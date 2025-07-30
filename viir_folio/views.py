@@ -70,11 +70,11 @@ def index(request):
             pattern=r"^(?:\+91|91)?[789]\d{9}$"
             emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
             elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
             else:
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
         
     else:
         print("no")
@@ -83,7 +83,7 @@ def index(request):
             check=False
         else:
             success=False
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'active_item':active_item, "success":success})
+        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item, "success":success})
     
 def certificat(request):
     return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all().order_by('-date'),'certi':True})
@@ -104,14 +104,14 @@ def view(request):
 
 class Index(ListView):
     model = Article
-    template_name = 'blog/index.html'
+    template_name = 'blog/index(2).html'
     context_object_name = 'articles'
     ordering = ['-date']
 submission=False
 confirmation=False
 class Blogspot(ListView):
     model = Article
-    template_name = 'blog/blogspot.html'
+    template_name = 'blog/index (2).html'
     context_object_name = 'articles'
     ordering = ['-date']
     def get_context_data(self, **kwargs):
@@ -154,7 +154,7 @@ class Blogspot(ListView):
 
 class DetailArticleView(DetailView):
     model = Article
-    template_name = 'blog/blog_post.html'
+    template_name = 'blog/blog.html'
     context_object_name = 'article'
         
 

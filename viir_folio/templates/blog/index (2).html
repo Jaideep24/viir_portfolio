@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+    {% include 'blog/styles.css' %}
+    </style>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-blog"></i>
+                    <span>BlogSpace</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blogspot" class="nav-link">Blog Place</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/edit" class="nav-link">Write</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% block content %}
+    <main class="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome to BlogSpace</h1>
+                <p>Discover amazing stories and share your own</p>
+                <a href="/edit" class="cta-button">Start Writing</a>
+            </div>
+        </section>
+
+        <section class="blogs-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Latest Blogs</h2>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="technology">Technology</button>
+                        <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                        <button class="filter-btn" data-filter="travel">Travel</button>
+                    </div>
+                </div>
+                
+                <div class="blogs-grid" id="blogsGrid">
+                    {% for object in object_list %}
+                    <div class="blog-card fade-in-up">
+                        <div class="blog-card-image" style="background-image:url('/media/{{ object.image }}')">
+                            <span class="blog-category">technology</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>{{ object.title }}</h3>
+                            <p class="blog-excerpt">{{ object.content|truncatewords_html:20|safe}}</p>
+                            <div class="blog-meta">
+                                <div class="author-info">
+                                    <a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
+                                    {% if object.likes.count == 1 %}
+                                    <span>{{ object.likes }} person likes this post</span>
+                                    {% else %}
+                                    <span>{{ object.likes }} people like this post</span>
+                                    {% endif %}
+                                </div>
+                                <span>{{ object.date }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="load-more">
+                    <button class="load-more-btn" id="loadMoreBtn">Load More</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BlogSpace. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+{% endblock %}

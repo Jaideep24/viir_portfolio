@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace - Write Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-blog"></i>
+                    <span>BlogSpace</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="editor.html" class="nav-link active">Write Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="editor-container">
+            <div class="container">
+                <div class="editor-header">
+                    <h1 id="editorTitle">Write New Blog</h1>
+                    <div class="editor-actions">
+                        <button class="btn btn-secondary" onclick="saveDraft()">
+                            <i class="fas fa-save"></i>
+                            Save Draft
+                        </button>
+                        <button class="btn btn-primary" onclick="publishBlog()">
+                            <i class="fas fa-paper-plane"></i>
+                            Publish
+                        </button>
+                    </div>
+                </div>
+
+                <form class="blog-form" id="blogForm">
+                    <div class="form-group">
+                        <label for="blogTitleInput">Title</label>
+                        <input 
+                            type="text" 
+                            id="blogTitleInput" 
+                            placeholder="Enter an engaging title..."
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="categorySelect">Category</label>
+                            <select id="categorySelect" required>
+                                <option value="">Select a category</option>
+                                <option value="technology">Technology</option>
+                                <option value="lifestyle">Lifestyle</option>
+                                <option value="travel">Travel</option>
+                                <option value="food">Food</option>
+                                <option value="health">Health</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="authorInput">Author</label>
+                            <input 
+                                type="text" 
+                                id="authorInput" 
+                                placeholder="Your name"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="excerptInput">Excerpt</label>
+                        <textarea 
+                            id="excerptInput" 
+                            placeholder="Write a brief description..."
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageUrlInput">Featured Image URL</label>
+                        <input 
+                            type="url" 
+                            id="imageUrlInput" 
+                            placeholder="https://example.com/image.jpg"
+                        >
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentEditor">Content</label>
+                        <div class="editor-toolbar">
+                            <button type="button" class="toolbar-btn" onclick="formatText('bold')">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" onclick="formatText('italic')">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" onclick="formatText('underline')">
+                                <i class="fas fa-underline"></i>
+                            </button>
+                            <span class="toolbar-separator"></span>
+                            <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
+                                <i class="fas fa-list-ul"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
+                                <i class="fas fa-list-ol"></i>
+                            </button>
+                            <span class="toolbar-separator"></span>
+                            <button type="button" class="toolbar-btn" onclick="insertLink()">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" onclick="insertImage()">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        </div>
+                        <div 
+                            class="content-editor" 
+                            id="contentEditor" 
+                            contenteditable="true"
+                            data-placeholder="Start writing your blog content here..."
+                        ></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tagsInput">Tags</label>
+                        <input 
+                            type="text" 
+                            id="tagsInput" 
+                            placeholder="Add tags separated by commas (e.g., web development, javascript, tutorial)"
+                        >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BlogSpace. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="editor.js"></script>
+</body>
+</html>
