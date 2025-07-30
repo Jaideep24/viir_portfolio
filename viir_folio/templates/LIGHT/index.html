@@ -473,6 +473,9 @@
                     <a class="nav-link br-nav" href="#certificate" onclick="design(event)">Certificate</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link br-nav" href="#publications" onclick="design(event)">Publications</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link br-nav" href="#blog" onclick="design(event)">Blog</a>
                 </li>
                 <li class="nav-item">
@@ -908,7 +911,7 @@
                                                     {{ object.get_category_display|replace_commas:" | " }} |
                                                     
                                                 </div>
-                                                <p>{{ object.content }}
+                                                <p>{{ object.topic }}
                                                 </p>
                                                 <div class="br-info">
                                                     <div class="portfolio-img">
@@ -982,6 +985,181 @@
 
         </div>
 </section>
+<style>
+    :root {
+      --text: #e0e0e0;
+      --card-bg: #1e1e2f;
+      --title: #a48fff;
+      --border: #333;
+      --link: #7aa9ff;
+      --badge: #9f78ff;
+      --button-bg: transparent;
+      --button-border: #aaa;
+      --button-text: #fff;
+      --hover-bg: #2b2b3c;
+    }
+
+    body.light {
+      --text: #222;
+      --card-bg: #fff;
+      --border: #ccc;
+      --link: #0047ab;
+      --button-bg: #fff;
+      --button-border: #4a2fb7;
+      --button-text: #4a2fb7;
+      --hover-bg: #eee;
+    }
+
+    .theme-toggle {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .theme-toggle button {
+      padding: 10px 20px;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-text);
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .search-bar {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .search-bar input {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    .pub-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pub-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .pub-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pub-date {
+      position: absolute;
+      top: -14px;
+      left: 20px;
+      background: var(--badge);
+      color: #fff;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .pub-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--title);
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    .pub-meta {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .pub-authors {
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+
+    .pub-link {
+      display: inline-block;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      color: var(--button-text);
+      border: 1px solid var(--button-border);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .pub-link:hover {
+      background: var(--button-border);
+      color: var(--bg);
+    }
+
+    @media (max-width: 500px) {
+      .pub-title {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <section id="publications" class="br-experience padding-tb-80 vanish">
+        <div class="container">
+                <div class="section-title">
+                    <h2>My <span>Publications</span></h2>
+                    <span class="ligh-title">Publications</span>
+                </div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
+  </div>
+
+  <div class="pub-list" id="pubList">
+
+    <div class="pub-card">
+      <div class="pub-date">2025</div>
+      <div class="pub-title">ChatGPT vs. DeepSeek: A Deep Dive into Two Leading Large Language Models</div>
+      <div class="pub-meta">Published in: 16th International IEEE Conference on Computing, Communication and Networking Technologies (ICCCNT)</div>
+      <div class="pub-authors">Rupali Vairagade, Prem Rathod, Viir Phuria, Nilakshi Jain, Maj Vineet Kumar</div>
+      <a href="https://ieeexplore.ieee.org/document/123456" class="pub-link" target="_blank">View Paper on IEEE →</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Live search
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const cards = document.querySelectorAll('.pub-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+
+    // Theme toggle
+    function toggleTheme() {
+        console.log(document.body.classlist)
+      document.body.classList.toggle('light');
+      document.body.classList.toggle('dark');
+    }
+  </script>
+  </section>
 <section id="blog" class="padding-tb-80 vanish">
     <div class="container">
     <div class="section-title">
@@ -1189,135 +1367,75 @@
     </script>
     
     <script>
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+document.addEventListener("DOMContentLoaded", () => {
+    // Apply theme on load based on localStorage
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle("light", !isDarkMode);
+    document.body.classList.toggle("dark", isDarkMode);
 
-// Apply dark mode if preference is true
-if (isDarkMode) {
-        document.getElementsByTagName("body")[0].style.backgroundColor="rgba(12, 14, 34, 0.95)";
-        document.getElementById("myself").style.color="#EEEEEE";
-        Array.from(document.getElementsByTagName("h3")).forEach(function(element){
-            element.style.color="#EEEEEE";
-        });
-        Array.from(document.getElementsByTagName("p")).forEach(function(element){
-            element.style.color="#EEEEEE";
-        });
-        Array.from(document.getElementsByClassName("br-learn-more-right")).forEach(function(element){element.style.color="#EEEEEE";});
-        Array.from(document.getElementsByClassName("br-learn-more-right")).forEach(function(element){element.style.borderColor="#EEEEEE";});
-        Array.from(document.getElementsByTagName("h2")).forEach(function(element){
-            element.style.color="#EEEEEE";
-        });
-        Array.from(document.getElementsByClassName("ligh-title")).forEach(function(element){
-            element.style.color="#202337";
-        });
-        Array.from(document.getElementsByTagName("li")).forEach(function(element){
-            element.style.color="#a5a3b3";
-        });
-        Array.from(document.getElementsByClassName("title")).forEach(function(element){
-            element.style.color="#EEEEEE";
-        });
-        Array.from(document.getElementsByClassName("br-box")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            
-        });
-        Array.from(document.getElementsByClassName("br-box")).forEach(function(element){
-            element.style.borderColor="#1b1d30";
-        });
-        Array.from(document.getElementsByTagName("h4")).forEach(function(element){
-            element.style.color="#EEEEEE";
-        });
-        Array.from(document.getElementsByClassName("track")).forEach(function(element){
-            element.style.stroke="#333754 !important";
-        });
-        document.getElementsByClassName("margin-t-80")[0].style.backgroundColor="#202337";
-        Array.from(document.getElementsByClassName("timeline-item")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            element.style.borderColor="#353250"
-        });
-        Array.from(document.getElementsByClassName("timeline-item")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            element.style.borderColor="#353250"
-        });
-        Array.from(document.getElementsByClassName("box-front")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            element.style.borderColor="#353250"
-        });
-        Array.from(document.getElementsByClassName("br-project-box")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            element.style.borderColor="#353250"
-        });
-        Array.from(document.getElementsByClassName("form-control")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-            element.style.borderColor="#353250";
-            element.style.color="#EEEEEE"
-        });
-        Array.from(document.getElementsByClassName("card")).forEach(function(element){
-            element.style.backgroundColor="#202337";
-        });
-        Array.from(document.getElementsByClassName("my-3")).forEach(function(element){
-            element.style.color="#FFFFFF";
-        });
-        Array.from(document.getElementsByClassName("card-title")).forEach(function(element){
-            element.style.color="#FFFFFF";
-        });
-        document.querySelectorAll("#date").forEach(function(element){
-            element.style.color="#EEEEEE";
-        })
-        document.getElementById("toggle").checked=true;
-    }
-    
-        const styles = {
-    backgroundColor: "rgba(12, 14, 34, 0.95)",
-    backgroundlight:"#F0FFFF",
-    elements: [
-        { selector: 'body', property: 'backgroundColor', value: "rgba(12, 14, 34, 0.95)" },
-        { selector: '#myself', property: 'color', value: "#EEEEEE" },
-        { selector: 'h3', property: 'color', value: "#EEEEEE" },
-        { selector: 'p', property: 'color', value: "#EEEEEE" },
-        { selector: '.br-learn-more-right', property: 'color', value: "#EEEEEE" },
-        { selector: '.br-learn-more-right', property: 'borderColor', value: "#EEEEEE" },
-        { selector: 'h2', property: 'color', value: "#EEEEEE" },
-        { selector: '.ligh-title', property: 'color', value: "#202337" },
-        { selector: 'li', property: 'color', value: "#a5a3b3" },
-        { selector: '.title', property: 'color', value: "#EEEEEE" },
-        { selector: '.br-box', property: 'backgroundColor', value: "#202337" },
-        { selector: '.br-box', property: 'borderColor', value: "#1b1d30" },
-        { selector: 'h4', property: 'color', value: "#EEEEEE" },
-        { selector: '#date', property: 'color', value: "#EEEEEE" },
-        { selector: '.track', property: 'stroke', value: "#333754" }, // Note: !important not handled here
-        { selector: '.margin-t-80', property: 'backgroundColor', value: "#202337" },
-        { selector: '.timeline-item', property: 'backgroundColor', value: "#202337" },
-        { selector: '.timeline-item', property: 'borderColor', value: "#353250" },
-        { selector: '.box-front', property: 'backgroundColor', value: "#202337" },
-        { selector: '.box-front', property: 'borderColor', value: "#353250" },
-        { selector: '.br-project-box', property: 'backgroundColor', value: "#202337" },
-        { selector: '.br-project-box', property: 'borderColor', value: "#353250" },
-        { selector: '.form-control', property: 'backgroundColor', value: "#202337" },
-        { selector: '.form-control', property: 'borderColor', value: "#353250" },
-        { selector: '.form-control', property: 'color', value: "#EEEEEE" },
-        { selector: '.card',property:'backgroundColor', value: '#202337'},
-        { selector: '.my-3',property:'color', value: '#FFFFFF'},
-        { selector: '.card-title',property:'color', value: '#FFFFFF'},
-    ]
-};
+    const toggleCheckbox = document.getElementById("toggle");
+    if (toggleCheckbox) toggleCheckbox.checked = isDarkMode;
 
-// Function to toggle styles
+    applyDarkModeStyles(isDarkMode);  // Update inline styles for legacy parts
+});
+
 function toggleStyles() {
-    const body = document.getElementsByTagName("body")[0];
-    const currentColor = body.style.backgroundColor;
+    const isDark = document.body.classList.contains("dark");
+    const newMode = !isDark;
 
-    const isCurrentStyleApplied = currentColor === styles.backgroundColor;
+    document.body.classList.toggle("dark", newMode);
+    document.body.classList.toggle("light", !newMode);
+    localStorage.setItem("darkMode", newMode);
 
-    styles.elements.forEach(({ selector, property, value }) => {
-        document.querySelectorAll(selector).forEach(element => {
-            element.style[property] = isCurrentStyleApplied ? "" : value;
+    const toggleCheckbox = document.getElementById("toggle");
+    if (toggleCheckbox) toggleCheckbox.checked = !newMode;
+
+    applyDarkModeStyles(newMode);
+}
+
+// Apply inline styles for legacy elements not using CSS variables
+function applyDarkModeStyles(isDarkMode) {
+    const body = document.body;
+    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.95)" : "#F0FFFF";
+
+    const styles = [
+        { selector: "#myself", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: "h3", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: "p", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".br-learn-more-right", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".br-learn-more-right", property: "borderColor", dark: "#EEEEEE", light: "#000000" },
+        { selector: "h2", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".ligh-title", property: "color", dark: "#202337", light: "#EEEEEE" },
+        { selector: ".ligh-title", property: "opacity", dark: "0.12", light: "0.05" },
+        { selector: "li", property: "color", dark: "#a5a3b3", light: "#000000" },
+        { selector: ".title", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".br-box", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".br-box", property: "borderColor", dark: "#1b1d30", light: "#ccc" },
+        { selector: "h4", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".track", property: "stroke", dark: "#333754", light: "#ccc" },
+        { selector: ".margin-t-80", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".timeline-item", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".timeline-item", property: "borderColor", dark: "#353250", light: "#ccc" },
+        { selector: ".box-front", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".box-front", property: "borderColor", dark: "#353250", light: "#ccc" },
+        { selector: ".br-project-box", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".br-project-box", property: "borderColor", dark: "#353250", light: "#ccc" },
+        { selector: ".form-control", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".form-control", property: "borderColor", dark: "#353250", light: "#ccc" },
+        { selector: ".form-control", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".my-3", property: "color", dark: "#FFFFFF", light: "#000000" },
+        { selector: ".card-title", property: "color", dark: "#FFFFFF", light: "#000000" },
+        { selector: "#date", property: "color", dark: "#EEEEEE", light: "#000000" }
+    ];
+
+    styles.forEach(({ selector, property, dark, light }) => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style[property] = isDarkMode ? dark : light;
         });
     });
-
-    // Special handling for body backgroundColor
-    body.style.backgroundColor = isCurrentStyleApplied ? styles.backgroundlight : styles.backgroundColor;
-    const currentMode = document.body.style.backgroundColor === "rgba(12, 14, 34, 0.95)";
-		    localStorage.setItem('darkMode', currentMode);
 }
+
 let storedelement=document.querySelectorAll(".graphics");
 function design(event) {
     // Remove the active class from all filter items
