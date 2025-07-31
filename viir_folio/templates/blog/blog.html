@@ -4,17 +4,9 @@
             <div class="container">
                 <div class="blog-header">
                     <div class="blog-meta">
-                        <span class="category" id="blogCategory">Technology</span>
                         <span class="date" id="blogDate">December 15, 2024</span>
                     </div>
                     <h1 class="blog-title" id="blogTitle">{{ article.title }}</h1>
-                    <div class="author-info">
-                        <img src="https://via.placeholder.com/40" alt="Author" class="author-avatar" id="authorAvatar">
-                        <div class="author-details">
-                            <span class="author-name" id="authorName">Loading...</span>
-                            <span class="read-time" id="readTime">{{ article.date }}</span>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="blog-image">
@@ -32,7 +24,6 @@
 
                         <button class="action-btn comment-btn" onclick="scrollToComments()">
                             <i class="far fa-comment"></i>
-                            <span class="count" id="commentCount">0</span>
                         </button>
                         <button class="action-btn share-btn" onclick="shareBlog()">
                             <i class="fas fa-share"></i>
@@ -74,6 +65,38 @@
     }
   });
 }
+
+// Scroll to comments section
+function scrollToComments() {
+    document.getElementById('commentsSection').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
+
+// Share blog
+function shareBlog() {
+    if (navigator.share) {
+        navigator.share({
+            title: "{{ article.title}}",
+            text: '{{ article.content|truncatewords_html:20|escapejs }}',
+            url: window.location.href
+        });
+    } else {
+        // Fallback: copy URL to clipboard
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            showNotification('Blog URL copied to clipboard!');
+        }).catch(() => {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = window.location.href;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showNotification('Blog URL copied to clipboard!');
+        });
+    }
+}
 </script>
         <section class="comments-section" id="commentsSection">
             <div class="container">
@@ -100,21 +123,10 @@
                 <div class="comments-list" id="commentsList">
                     {% for i in comment %}
                     <div class="comment">
-                        <div class="user-avatar">
-                            <img src="https://via.placeholder.com/40" alt="Alice Smith">
-                        </div>
                         <div class="comment-content">
                             <div class="comment-author">{{ i.name }}</div>
                             <div class="comment-date">11 December 2024</div>
                             <div class="comment-text">{{ i.comment }}</div>
-                            <div class="comment-actions-inline">
-                                <button class="comment-action" onclick="likeComment(1)">
-                                    <i class="far fa-heart"></i> Like
-                                </button>
-                                <button class="comment-action" onclick="replyToComment(1)">
-                                    <i class="far fa-reply"></i> Reply
-                                </button>
-                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -122,14 +134,4 @@
             </div>
         </section>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 BlogSpace. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="blog.js"></script>
-</body>
-</html>
 {% endblock content %}
