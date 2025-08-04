@@ -8,11 +8,11 @@
                     </div>
                     <h1 class="blog-title" id="blogTitle">{{ article.title }}</h1>
                 </div>
-
+                <center>
                 <div class="blog-image">
-                    <img id="blogImage" src="/media/{{ article.image }}" alt="Blog Image">
+                    <img style="aspect-ratio:1/1; max-width:450px" id="blogImage" src="/media/{{ article.image }}" alt="Blog Image">
                 </div>
-
+                </center>
                 <div class="blog-content" id="blogContent">
                     <p>{{ article.content|safe }}</p>
                 </div>
@@ -124,8 +124,7 @@ function shareBlog() {
                     {% for i in comment %}
                     <div class="comment">
                         <div class="comment-content">
-                            <div class="comment-author">{{ i.name }}</div>
-                            <div class="comment-date">11 December 2024</div>
+                            <div class="comment-author">{{ i.name }}  <span class="comment-date"> {{ i.date }} </span></div>
                             <div class="comment-text">{{ i.comment }}</div>
                         </div>
                     </div>

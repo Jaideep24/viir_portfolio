@@ -115,6 +115,7 @@ class Article(models.Model):
 class Comment(models.Model):
     name=models.TextField(blank=False,default=" ")
     comment=models.TextField()
+    date=models.DateField(auto_now_add=True)
     article=models.ForeignKey(Article,on_delete=models.CASCADE)
     def __str__(self):
         return self.name

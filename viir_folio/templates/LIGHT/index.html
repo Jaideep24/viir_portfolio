@@ -1134,8 +1134,8 @@
     <div class="pub-card">
       <div class="pub-date">{{ object.date }}</div>
       <div class="pub-title">{{ object.title }}</div>
+      <div style="font-family:'Georgia',serif; font-style:italic;" class="pub-authors">{{ object.authors }}</div>
       <div class="pub-meta">Published in: {{ object.place }}</div>
-      <div class="pub-authors">{{ object.authors }}</div>
       <a href="{{ object.url }}" class="pub-link" target="_blank">View Paper →</a>
     </div>
     {% endfor %}
@@ -1166,32 +1166,118 @@
         <h2>My <span>Blogs</span></h2>
         <span class="ligh-title">Blogs</span>
     </div>
-    <div class="row">
-        {% for object in article|slice:":3" %}
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
-            <div class="card">
-                {% if object.image %}
-                <img src="/media/{{ object.image }}" class="card-img-top">
-                {% else %}
-                <img src="/media/default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png" class="card-img-top">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ object.title }}</h5>
-                    <p>{{ object.date }}</p>
-                    
-                    {% if object.likes.count == 1 %}
-                    <p>{{ object.likes }} person likes this post</p>
-                    {% else %}
-                    <p>{{ object.likes }} people like this post</p>
-                    {% endif %}
-                    <div class="my-3">
-                    {{ object.content|truncatewords_html:20|safe}}
+    <style>
+    .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.blog-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.blog-card-image {
+     aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.blog-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #4f46e5;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.blog-card-content {
+    padding: 1.5rem;
+}
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    line-height: 1.4;
+}
+
+.blog-excerpt {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+    </style>
+     <div class="container">
+                <div class="blogs-grid" id="blogsGrid">
+        {% for object in article|slice:"-3:" %}
+        <a style="text-decoration:none;" href="{% url 'detail_blog' object.id %}">
+                    <div class="blog-card fade-in-up">
+                        <div class="blog-card-image" style="background-image:url('/media/{{ object.image }}')">
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>{{ object.title }}</h3>
+                            <p class="blog-excerpt">{{ object.content|truncatewords_html:20|safe}}</p>
+                            <div class="blog-meta">
+                                <div class="author-info">
+                                    
+                                    {% if object.likes.count == 1 %}
+                                    <span>{{ object.likes }} person likes this post</span>
+                                    {% else %}
+                                    <span>{{ object.likes }} people like this post</span>
+                                    {% endif %}
+                                </div>
+                                <span>{{ object.date }}</span>
+                            </div>
+                        </div>
                     </div>
-                    <a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
-                </div>
-            </div>
-        </div>
+                    </a>
         {% endfor %}
+            </div>
+            </div>
+
         <center><a href="/blogspot"  class="br-learn-more-right" >
                     
             <span style="font-size: x-large;" class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View More</span>
@@ -1214,7 +1300,7 @@
                         <div class="detail">
                             <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                             <div class="info">
-                                <h3 class="title">Mail &amp; Website</h3>
+                                <h3 class="title">Mail</h3>
                                 <p>
                                     <i class="fa fa-envelope" aria-hidden="true"></i> <a style="text-decoration: none; /* Remove underline */
                                     color: inherit;
