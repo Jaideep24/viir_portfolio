@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlogSpace - Write Blog</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <i class="fas fa-blog"></i>
-                    <span>BlogSpace</span>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="editor.html" class="nav-link active">Write Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
-
+{% extends 'blog/index (2).html' %}{% block content %}
     <main class="main-content">
         <div class="editor-container">
             <div class="container">
@@ -52,35 +16,24 @@
                     </div>
                 </div>
 
-                <form class="blog-form" id="blogForm">
+                <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
+                {% csrf_token %}
                     <div class="form-group">
-                        <label for="blogTitleInput">Title</label>
+                        <label for="id_title">Title</label>
                         <input 
                             type="text" 
-                            id="blogTitleInput" 
+                            id="id_title" 
                             placeholder="Enter an engaging title..."
                             required
+                            fdprocessedid="gs6g3h"
                         >
-                    </div>
-                    <div class="form-group">
-                        <label for="excerptInput">Excerpt</label>
-                        <textarea 
-                            id="excerptInput" 
-                            placeholder="Write a brief description..."
-                            rows="3"
-                        ></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="imageUrlInput">Featured Image URL</label>
-                        <input 
-                            type="url" 
-                            id="imageUrlInput" 
-                            placeholder="https://example.com/image.jpg"
-                        >
-                        <div class="image-preview" id="imagePreview"></div>
+                        <input type="file" name="image" accept="image/*" class="clearablefileinput form-control-file" id="imageUrlInput">
                     </div>
-
+                    {{ form.content }}
                     <div class="form-group">
                         <label for="contentEditor">Content</label>
                         <div class="editor-toolbar">
@@ -115,15 +68,7 @@
                             data-placeholder="Start writing your blog content here..."
                         ></div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="tagsInput">Tags</label>
-                        <input 
-                            type="text" 
-                            id="tagsInput" 
-                            placeholder="Add tags separated by commas (e.g., web development, javascript, tutorial)"
-                        >
-                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
@@ -134,7 +79,9 @@
             <p>&copy; 2024 BlogSpace. All rights reserved.</p>
         </div>
     </footer>
-
+    <script>
+    {% include 'blog/editor.js' %}
+    </script>
     <script src="editor.js"></script>
-</body>
-</html>
+
+{% endblock content %}

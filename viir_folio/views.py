@@ -203,7 +203,7 @@ class DeleteArticleView(DeleteView):
     success_url = reverse_lazy('login')
 
 class CreateBlogView(View):
-    template_name = 'blog/create_blog.html'
+    template_name = 'blog/editor.html'
 
     def get(self, request):
         form = ArticleForm()
@@ -212,7 +212,9 @@ class CreateBlogView(View):
     def post(self, request):
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            blog = form.save(commit=False)
+            blog.date = timezone.now()  # Override any form value
+            blog.save()
             entries = subscriber.objects.all()
             values_list = [entry.email for entry in entries]
             subject = 'New Blog'

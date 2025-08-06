@@ -448,3 +448,7 @@ function resetForm() {
     imagePreview.style.display = 'none';
     clearDraft();
 }
+document.getElementById('blogForm').addEventListener('submit', function () {
+    const editorContent = document.getElementById('contentEditor').innerHTML;
+    document.getElementById('id_content').value = editorContent;
+});

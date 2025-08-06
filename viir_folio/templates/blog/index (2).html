@@ -93,6 +93,7 @@ footer .br-footer-detail .br-social ul li a:hover {
     }
     #headish{
         opacity:0;
+        width:200px
     }
 }
 .form-control{
@@ -175,7 +176,24 @@ footer .br-footer-detail .br-social ul li a:hover {
                 <h1>Welcome to BlogSpace</h1>
             </div>
         </section>
-
+        <div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
+			
+			{% if submitted %}
+      <center>
+			<div class="btn btn-success">Subscribed</div>
+      </center>
+			{% else %}
+			<form action="" method="post">
+				{% csrf_token %}
+				<div class="form-group" style="display: flex; width: 100%; max-width: 500px; margin: 0 auto; padding: 10px; box-sizing: border-box;">
+    				<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs" style="width: 100%; margin-right: 10px; padding: 10px; box-sizing: border-box;">
+    				<button name="button" value="{{ success }}" type="submit" class="btn btn-info" style="padding: 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer; width:auto; align-self:center;">
+      					Submit
+    				</button>
+				</div>			
+			</form>
+			{% endif %}
+		</div>
         <section class="blogs-section">
             <div class="container">
                 <div class="blogs-grid" id="blogsGrid">

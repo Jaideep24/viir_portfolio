@@ -265,10 +265,53 @@ input[type="submit"].enabled {
     font-size: 14px;
   }
 }
+.logo{
+    opacity:0;
+}
+
+@media (max-width:500px){
+    .logo{
+        opacity:1;
+    }
+    #headish{
+        opacity:0;
+        width:200px
+    }
+}
 	</style>
 </head>
 <body >
-	{% include 'blog/nav.html' %}
+	<style>
+    {% include 'blog/styles.css' %}
+    </style>
+    <header class="header" style="position: relative; z-index: 1001;">
+        <nav class="navba" style="height:50px; padding:0.5rem 0; position: relative; z-index: 1002;">
+            <div class="nav-container" >
+                <div class="logo" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900;">
+                    <span style="color: white !important;">BlogSpace</span>
+                </div>
+                <h4 id="headish" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA &nbsp &nbsp BlogSpace</h4>
+                <div class="nav-menu-wrapper">
+                <ul class="nav-menu" style="background-color:black; z-index:1002">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blogspot" class="nav-link">BlogSpace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/edit" class="nav-link">Write</a>
+                    </li>
+                </ul>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
 	{% block content %}
 	{% endblock content %}
 
@@ -284,12 +327,6 @@ if (isDarkMode) {
     document.body.classList.add('darkmode');
     document.querySelectorAll('.navbar-brand, .nav-link').forEach(element => {
         element.style.color = 'white';
-    });
-    document.querySelectorAll('p').forEach(element => {
-        element.style.color="#FFC107";
-    });
-	document.querySelectorAll('span').forEach(element => {
-        element.style.color="#FFC107";
     });
     document.querySelectorAll('.card-body').forEach(element => {
         element.classList.add('darkmode');
@@ -404,6 +441,23 @@ else{
 				event.preventDefault(); // Prevent form submission
 			}
 		});
-			</script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+      // Mobile navigation
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+    
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>

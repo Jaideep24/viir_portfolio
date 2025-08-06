@@ -16,6 +16,11 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['title', 'content','image']
+        widgets = {
+            'title': forms.TextInput(attrs={'id': 'blogTitleInput'}),
+            'content': forms.Select(attrs={'id': 'categorySelect','type':'hidden'}),
+            'image': forms.URLInput(attrs={'id': 'imageUrlInput'}),
+        }
 class CommentForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'true','style': 'max-width: 100%; width: auto;'}))
     comment = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 100%; width: auto;'}))
