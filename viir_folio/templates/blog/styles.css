@@ -394,7 +394,9 @@ ul{
 .blog-content ol {
     margin: 1rem 0 1rem 2rem;
 }
-
+.blog-content ul{
+    list-style-type: disc;
+}
 .blog-content li {
     margin-bottom: 0.5rem;
 }

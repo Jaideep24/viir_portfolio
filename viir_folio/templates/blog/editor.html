@@ -1,28 +1,28 @@
 {% extends 'blog/index (2).html' %}{% block content %}
+<style>
+#contentEditor ul {
+    list-style-type: disc;   /* visible bullet */
+    list-style-position: outside;
+    margin-left: 1.5rem;     /* indentation */
+    color: inherit;          /* keep same text color */
+}
+
+</style>
     <main class="main-content">
         <div class="editor-container">
             <div class="container">
                 <div class="editor-header">
                     <h1 id="editorTitle">Write New Blog</h1>
-                    <div class="editor-actions">
-                        <button class="btn btn-secondary" onclick="saveDraft()">
-                            <i class="fas fa-save"></i>
-                            Save Draft
-                        </button>
-                        <button class="btn btn-primary" onclick="publishBlog()">
-                            <i class="fas fa-paper-plane"></i>
-                            Publish
-                        </button>
-                    </div>
                 </div>
 
                 <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
                 {% csrf_token %}
                     <div class="form-group">
-                        <label for="id_title">Title</label>
+                        <label for="blogTitleInput">Title</label>
                         <input 
                             type="text" 
-                            id="id_title" 
+                            id="blogTitleInput" 
+                            name="title"
                             placeholder="Enter an engaging title..."
                             required
                             fdprocessedid="gs6g3h"
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label for="imageUrlInput">Featured Image URL</label>
-                        <input type="file" name="image" accept="image/*" class="clearablefileinput form-control-file" id="imageUrlInput">
+                        {{ form.image }}
                     </div>
                     {{ form.content }}
                     <div class="form-group">
@@ -68,7 +68,7 @@
                             data-placeholder="Start writing your blog content here..."
                         ></div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>
                 </form>
             </div>
         </div>

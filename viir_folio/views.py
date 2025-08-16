@@ -211,6 +211,7 @@ class CreateBlogView(View):
 
     def post(self, request):
         form = ArticleForm(request.POST, request.FILES)
+        print(request.POST)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.date = timezone.now()  # Override any form value
@@ -224,6 +225,8 @@ class CreateBlogView(View):
             # Send email
             send_mail(subject, message, from_email, values_list)
             return redirect('blogspot')
+        else:
+            print("Form is invalid")
         return render(request, self.template_name, {'form': form})
 class UpdateBlogView(UpdateView):
     model=Article

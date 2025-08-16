@@ -18,8 +18,7 @@ class ArticleForm(forms.ModelForm):
         fields = ['title', 'content','image']
         widgets = {
             'title': forms.TextInput(attrs={'id': 'blogTitleInput'}),
-            'content': forms.Select(attrs={'id': 'categorySelect','type':'hidden'}),
-            'image': forms.URLInput(attrs={'id': 'imageUrlInput'}),
+            'content': forms.HiddenInput(),
         }
 class CommentForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'true','style': 'max-width: 100%; width: auto;'}))
