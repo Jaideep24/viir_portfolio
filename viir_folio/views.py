@@ -211,7 +211,6 @@ class CreateBlogView(View):
 
     def post(self, request):
         form = ArticleForm(request.POST, request.FILES)
-        print(request.POST)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.date = timezone.now()  # Override any form value
