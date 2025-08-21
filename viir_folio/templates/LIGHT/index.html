@@ -1118,6 +1118,11 @@
         font-size: 1rem;
       }
     }
+    @media (max-width: 400px) {
+      .pub-card {
+        width: 90vw;
+      }
+    }
   </style>
   <section id="publications" class="br-experience padding-tb-80 vanish">
         <div class="container">
@@ -1248,13 +1253,17 @@
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
 }
-
+@media (max-width: 400px) {
+    .blog-card{
+        width: 80vw;
+    }
+}
     </style>
      <div class="container">
                 <div class="blogs-grid" id="blogsGrid">
         {% for object in article|slice:"-3:" %}
         <a style="text-decoration:none;" href="{% url 'detail_blog' object.id %}">
-                    <div class="blog-card fade-in-up">
+                    <div class="blog-card fade-in-up" style="opacity:0.8;">
                         <div class="blog-card-image" style="background-image:url('/media/{{ object.image }}')">
                         </div>
                         <div class="blog-card-content">
@@ -1486,7 +1495,7 @@ function toggleStyles() {
 // Apply inline styles for legacy elements not using CSS variables
 function applyDarkModeStyles(isDarkMode) {
     const body = document.body;
-    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.95)" : "#F0FFFF";
+    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.93)" : "#F0FFFF";
     if(isDarkMode){
         particlesJS('particles-js',
   
@@ -1540,7 +1549,7 @@ function applyDarkModeStyles(isDarkMode) {
       "line_linked": {
         "enable": true,
         "distance": 150,
-        "color": "#d801ff",
+        "color": "#ffffff",
         "opacity": 0.4,
         "width": 1
       },
@@ -1621,7 +1630,7 @@ function applyDarkModeStyles(isDarkMode) {
         }
       },
       "color": {
-        "value": ["#ff00ff", "#00f7ff", "#a020f0", "#39ff14"]
+        "value": "#0e0c22"
       },
       "shape": {
         "type": "circle",
@@ -1661,7 +1670,7 @@ function applyDarkModeStyles(isDarkMode) {
       "line_linked": {
         "enable": true,
         "distance": 150,
-        "color": "#df5f4f",
+        "color": "#0e0c22",
         "opacity": 0.4,
         "width": 1
       },
