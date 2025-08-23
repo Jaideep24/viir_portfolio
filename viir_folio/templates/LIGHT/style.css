@@ -1882,7 +1882,7 @@ footer .br-footer-detail .br-social ul li a:hover {
 .br-sidebar ul li a {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  height: 60px;
+  height: 50px;
   padding-left: 30px !important;
   display: -webkit-box;
   display: -ms-flexbox;
