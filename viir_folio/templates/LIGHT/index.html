@@ -25,7 +25,7 @@
         scroll-behavior: auto;
     }
     .dissappear{
-       right: 250px !important;
+       right: 200px !important;
         transition: right 1s ease;
     }
     .padding-tb-80 {
@@ -1176,6 +1176,7 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 .blog-card {
+  background: var(--card-bg);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1262,7 +1263,7 @@
                 <div class="blogs-grid" id="blogsGrid">
         {% for object in article|slice:"-3:" %}
         <a style="text-decoration:none;" href="{% url 'detail_blog' object.id %}">
-                    <div class="blog-card fade-in-up" style="opacity:0.8;">
+                    <div class="blog-card fade-in-up" style="opacity:1;">
                         <div class="blog-card-image" style="background-image:url('/media/{{ object.image }}')">
                         </div>
                         <div class="blog-card-content">
@@ -1875,6 +1876,18 @@ function design(event) {
 function menu(){
     document.querySelector(".br-sidebar").classList.toggle("dissappear");
 }
+document.addEventListener("click", function (event) {
+    const targetDiv = document.querySelector(".br-sidebar");  // replace with your div’s ID
+    const isClickInside = targetDiv.contains(event.target);
+    const targetBtn = document.querySelector(".br-sidebar-toggle");  // replace with your div’s ID
+    const isClickButton = targetBtn.contains(event.target);
+
+    if (!isClickInside && !isClickButton) {
+        // Clicked outside
+        document.querySelector(".br-sidebar").classList.toggle("dissappear");
+    }
+});
+
 document.addEventListener('scroll', function() {
             let scrollPosition = window.scrollY || window.pageYOffset;
 

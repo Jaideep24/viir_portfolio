@@ -483,14 +483,18 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".certificate-card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".project-card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".publication-card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
-        { selector: "#likes-display", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".btn", property: "backgroundColor", dark: "#333333", light: "#f2f2f2" },
         { selector: "#btn", property: "color", dark: "red", light: "red" }, // heart button always red
         { selector: ".action-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".action-btn", property: "backgroundColor", dark: "#333333", light: "#f2f2f2" },
         { selector: ".action-btn", property: "borderColor", dark: "#555555", light: "#cccccc" },
+        { selector: ".btn", property: "borderColor", dark: "#555555", light: "#cccccc" },
         { selector: ".comment-btn i", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".share-btn i", property: "color", dark: "#EEEEEE", light: "#000000" },
-
+        { selector: ".comment-author", property: "color", dark: "#e2e8f0", light: "#1e293b" },
+        { selector: "#likes-display", property: "color", dark: "#e2e8f0", light: "#1e293b" },
+        { selector: ".comment-date", property: "color", dark: "#94a3b8", light: "#64748b" },
+        { selector: ".comment-text", property: "color", dark: "#cbd5e1", light: "#000000" }
     ];
 
     styles.forEach(({ selector, property, dark, light }) => {
