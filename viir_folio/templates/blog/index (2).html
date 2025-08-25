@@ -149,13 +149,13 @@ footer .br-footer-detail .br-social ul li a:hover {
     </style>
     <header class="header">
         <nav class="navbar" style="height:50px">
-            <div class="nav-container">
+            <div class="container-fluid nav-container" style="width:100% !important;">
                 <div class="logo" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900;">
                     <span>BlogSpace</span>
                 </div>
                 <h4 id="headish" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA &nbsp &nbsp BlogSpace</h4>
-                <div id="mytoggle" style"height:50px !important; margin-left: auto !important; align-items:center; display:flex; justify-self: end; ">
-                <label id="theme-toggle-button"  style="height: 0px;">
+                <div id="mytoggle" style="height:50px !important; align-items:center; margin-left:auto; display:flex; padding-bottom:15px;">
+                <label id="theme-toggle-button"  style="height: 0px; display:flex; align-items:center; cursor:pointer;" title="Toggle Dark/Light Mode">
                     <input type="checkbox" id="toggle" >
                     <svg style="width: 12vw; max-width: 90px;" onclick="toggleStyles()" viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                       <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
@@ -288,7 +288,7 @@ footer .br-footer-detail .br-social ul li a:hover {
               }
                   </style>
             </div>
-                <ul class="nav-menu" style="background-color:black;">
+                <ul class="nav-menu" style="background-color:black; margin-bottom:20px;">
                     <li class="nav-item">
                         <a href="/#blog" class="nav-link">Home</a>
                     </li>
@@ -308,6 +308,42 @@ footer .br-footer-detail .br-social ul li a:hover {
         </nav>
     </header>
 {% block content %}
+<style>
+      .btn-info{
+        border-radius: 5px;
+      }
+      .btn-success{
+        padding: 10px; 
+        background-color: #28a745; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        width:auto; 
+        align-self:center;
+        border-radius: 5px;
+      }
+      .subscription-success {
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  color: #065f46;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.subscription-error {
+  background: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+      </style>
     <main class="main-content">
         <section class="hero" style=" ">
             <div class="container">
@@ -317,20 +353,26 @@ footer .br-footer-detail .br-social ul li a:hover {
         <div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
 			
 			{% if submitted %}
-      <center>
-			<div class="btn btn-success">Subscribed</div>
-      </center>
+      <div class="subscription-success">
+  🎉 Thank you for subscribing! You’ll start receiving our updates soon.
+</div>
 			{% else %}
 			<form action="" method="post">
 				{% csrf_token %}
 				<div class="form-group" style="display: flex; width: 100%; max-width: 500px; margin: 0 auto; padding: 10px; box-sizing: border-box;">
     				<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs" style="width: 100%; margin-right: 10px; padding: 10px; box-sizing: border-box;">
-    				<button name="button" value="{{ success }}" type="submit" class="btn btn-info" style="padding: 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer; width:auto; align-self:center;">
+    				<button name="button" value="{{ success }}" type="submit" class=" btn-info" style="padding: 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer; width:auto; align-self:center;">
       					Submit
     				</button>
 				</div>			
 			</form>
+      
 			{% endif %}
+      {% if error %}
+<div class="subscription-error">
+  ⚠️ {{ error }}
+</div>
+{% endif %}
 		</div>
         <section class="blogs-section">
             <div class="container">

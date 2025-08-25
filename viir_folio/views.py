@@ -107,6 +107,8 @@ class Index(ListView):
     template_name = 'blog/index(2).html'
     context_object_name = 'articles'
     ordering = ['-date']
+
+
 submission=False
 confirmation=False
 class Blogspot(ListView):
@@ -129,9 +131,11 @@ class Blogspot(ListView):
     def post(self,  request, **kwargs):
         global confirmation
         email=request.POST.get('email')
+        self.object_list = self.get_queryset()
         if not email:
             # Handle error: missing data
-            context = {'error': 'Title and issued date are required.'}
+            context = self.get_context_data()
+            context['error'] = 'Email is required.'
             return render(request, self.template_name, context)
 
         # Create and save model instance
@@ -149,7 +153,8 @@ class Blogspot(ListView):
             return HttpResponseRedirect(request.path_info)
         except ValueError as e:
             # Handle date parsing error or other validation issues
-            context = {'error': f'Invalid date format: {e}'}
+            context = self.get_context_data()
+            context['error'] = f'Invalid input: {e}'
             return render(request, self.template_name, context)
 
 class DetailArticleView(DetailView):

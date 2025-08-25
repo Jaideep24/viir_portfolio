@@ -128,7 +128,7 @@
     }
     @media screen and (max-width: 2860px){
         #mytoggle{
-            margin-left: 88vw;
+            margin-left: 85vw;
         }
         .circle span{
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
@@ -138,7 +138,7 @@
 
     @media screen and (max-width: 1441px){
         #mytoggle{
-            margin-left: 85vw;
+            margin-left: 80vw;
         }
         .circle span{
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(25vw);
@@ -150,7 +150,7 @@
             transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(35vw);
         }
         #mytoggle{
-            margin-left: 80vw;
+            margin-left: 75vw;
         }
     }
 
@@ -191,7 +191,7 @@
             left: 2.5vw;
         }
         #mytoggle{
-            margin-left: 75vw;
+            margin-left: 70vw;
         }
     }
 
@@ -202,9 +202,6 @@
         }
         .body-part-2 {
             min-height: 400px;
-        }
-        #mytoggle{
-            margin-left: 70vw;
         }
         .circle span img {
             height: 50%;
@@ -816,10 +813,10 @@
     <!-- End Experience & Education Section -->
 
     <!-- Start expertise section -->
-    <section id="expertise" class="br-service padding-tb-80 sec-bg vanish">
+    <section id="expertise" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
             <div class="section-title">
-                <h2>My<span> Expertise</span></h2>
+                <h2>My <span>Expertise</span></h2>
                 <span class="ligh-title">Expertise</span>
             </div>
             <div class="row service-box m-tb-minus-15px">
@@ -852,12 +849,12 @@
         </div>
     </section>
     <!-- End service section -->
-    <section id="skills" class="padding-tb-80 vanish">
-<div class="container">
-    <div class="section-title">
-        <h2>My <span>Skills</span></h2>
-        <span class="ligh-title">Skills</span>
-    </div>
+    <section id="skills" class="br-portfolio padding-tb-80 vanish">
+        <div class="container">
+            <div class="section-title">
+                <h2>My <span>Skills</span></h2>
+                <span class="ligh-title">Skills</span>
+            </div>
     <div class="row">
     {% for object in skill %}
     <div class="col-lg-3 col-md-6 col-sm-12 mb-4" >
@@ -1123,12 +1120,12 @@
       }
     }
   </style>
-  <section id="publications" class="br-experience padding-tb-80 vanish">
+  <section id="publications" class="br-portfolio padding-tb-80 vanish">
         <div class="container">
-                <div class="section-title">
-                    <h2>My <span>Publications</span></h2>
-                    <span class="ligh-title">Publications</span>
-                </div>
+            <div class="section-title">
+                <h2>My <span>Publications</span></h2>
+                <span class="ligh-title">Publications</span>
+            </div>
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
   </div>
@@ -1164,12 +1161,12 @@
     }
   </script>
   </section>
-<section id="blog" class="padding-tb-80 vanish">
-    <div class="container">
-    <div class="section-title">
-        <h2>My <span>Blogs</span></h2>
-        <span class="ligh-title">Blogs</span>
-    </div>
+<section id="blog" class="br-portfolio padding-tb-80 vanish">
+        <div class="container">
+            <div class="section-title">
+                <h2>My <span>Blogs</span></h2>
+                <span class="ligh-title">Blogs</span>
+            </div>
     <style>
     .blog-card:hover {
     transform: translateY(-5px);
@@ -1884,7 +1881,7 @@ document.addEventListener("click", function (event) {
 
     if (!isClickInside && !isClickButton) {
         // Clicked outside
-        document.querySelector(".br-sidebar").classList.toggle("dissappear");
+        document.querySelector(".br-sidebar").classList.remove("dissappear");
     }
 });
 
