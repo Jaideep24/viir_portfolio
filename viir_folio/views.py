@@ -111,7 +111,7 @@ class Index(ListView):
 
 submission=False
 confirmation=False
-class Blogspot(ListView):
+class Blogspace(ListView):
     model = Article
     template_name = 'blog/index (2).html'
     context_object_name = 'articles'
@@ -125,7 +125,7 @@ class Blogspot(ListView):
             confirmation=False
         else:
             submission=False
-        context = super(Blogspot,self).get_context_data(**kwargs)
+        context = super(Blogspace,self).get_context_data(**kwargs)
         context['submitted']=submission
         return context
     def post(self,  request, **kwargs):
@@ -228,7 +228,7 @@ class CreateBlogView(View):
 
             # Send email
             send_mail(subject, message, from_email, values_list)
-            return redirect('blogspot')
+            return redirect('blogspace')
         else:
             print("Form is invalid")
         return render(request, self.template_name, {'form': form})
