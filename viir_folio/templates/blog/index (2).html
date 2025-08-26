@@ -148,12 +148,12 @@ footer .br-footer-detail .br-social ul li a:hover {
     {% include 'blog/styles.css' %}
     </style>
     <header class="header">
-        <nav class="navbar" style="height:50px">
+        <nav class="navbar" style="height:50px; background-color:#0B132B;">
             <div class="container-fluid nav-container" style="width:100% !important;">
-                <div class="logo" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900;">
+                <div class="logo" style="color: white; font-size: 24px; font-family: 'Playfair Display', serif; font-weight: 500;">
                     <span>BlogSpace</span>
                 </div>
-                <h4 id="headish" style="color: white; font-size: 24px; font-family: Arial, sans-serif; font-weight: 900; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">VIIR PHURIA &nbsp &nbsp BlogSpace</h4>
+                <h4 id="headish" style="color: white; font-size: 24px; font-family: 'Playfair Display', serif; font-weight: 500; position: absolute; top: 50%; left: 8px; transform: translate(0,-50%);">Viir Phuria &nbsp &nbsp BlogSpace</h4>
                 <div id="mytoggle" style="height:50px !important; align-items:center; margin-left:auto; display:flex; padding-bottom:15px;">
                 <label id="theme-toggle-button"  style="height: 0px; display:flex; align-items:center; cursor:pointer;" title="Toggle Dark/Light Mode">
                     <input type="checkbox" id="toggle" >
@@ -288,7 +288,7 @@ footer .br-footer-detail .br-social ul li a:hover {
               }
                   </style>
             </div>
-                <ul class="nav-menu" style="background-color:black; margin-bottom:20px;">
+                <ul class="nav-menu" style="background-color:#0B132B; margin-bottom:20px;">
                     <li class="nav-item">
                         <a href="/#blog" class="nav-link">Home</a>
                     </li>
@@ -480,7 +480,7 @@ function toggleStyles() {
 // Apply inline styles for legacy elements not using CSS variables
 function applyDarkModeStyles(isDarkMode) {
     const body = document.body;
-    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.95)" : "#F0FFFF";
+    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.95)" : "#E6F4FF";
     
     const styles = [
         { selector: "#myself", property: "color", dark: "#EEEEEE", light: "#000000" },
