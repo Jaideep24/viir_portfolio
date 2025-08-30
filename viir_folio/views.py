@@ -37,7 +37,6 @@ def load_certificates_from_csv(request):
                 show=True  # default value
             )
     return HttpResponse("Certificates loaded successfully")
-load_certificates_from_csv(request)
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
