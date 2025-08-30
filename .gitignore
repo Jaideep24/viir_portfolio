@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Django
+*.sqlite3
+*.log
+media/
+static/
+
+# VS Code
+.vscode/
+
+# Jupyter
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Excel/CSV
+*.xlsx
+*.csv
+
+# Environment
+.env
+
+# Migrations
+viir_folio/migrations/__pycache__/
+viir_folio/migrations/*.pyc
+
+# Other
+*.bak
+*.swp
+*.swo
+
+# Ignore compiled files
+viir_folio/__pycache__/
+viir_portfolio/__pycache__/
+
+# Ignore temp files
+~$*
