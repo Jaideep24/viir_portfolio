@@ -621,7 +621,6 @@ header a:hover, header button:hover {
 
 /*===== About css =====*/
 .br-about-detail h4 {
-  margin-bottom: 30px;
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
@@ -638,7 +637,6 @@ header a:hover, header button:hover {
 }
 
 .br-about-info {
-  padding-top: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
