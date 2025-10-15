@@ -494,6 +494,7 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".ligh-title", property: "opacity", dark: "0.12", light: "0.05" },
         { selector: "li", property: "color", dark: "#a5a3b3", light: "#000000" },
         { selector: ".title", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: "#editorTitle", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".br-box", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".br-box", property: "borderColor", dark: "#1b1d30", light: "#ccc" },
         { selector: ".track", property: "stroke", dark: "#333754", light: "#ccc" },
@@ -526,6 +527,7 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".project-card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".publication-card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".btn", property: "backgroundColor", dark: "#333333", light: "#f2f2f2" },
+        { selector: ".comment-button", property: "backgroundColor", dark: "#333333", light: "#94a3b8" },
         { selector: "#btn", property: "color", dark: "red", light: "red" }, // heart button always red
         { selector: ".action-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".action-btn", property: "backgroundColor", dark: "#333333", light: "#f2f2f2" },
@@ -536,7 +538,11 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".comment-author", property: "color", dark: "#e2e8f0", light: "#1e293b" },
         { selector: "#likes-display", property: "color", dark: "#e2e8f0", light: "#1e293b" },
         { selector: ".comment-date", property: "color", dark: "#94a3b8", light: "#64748b" },
-        { selector: ".comment-text", property: "color", dark: "#cbd5e1", light: "#000000" }
+        { selector: ".comment-text", property: "color", dark: "#cbd5e1", light: "#000000" },
+        // Admin panel specific selectors
+        { selector: ".blog-item", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
+        { selector: ".blog-item", property: "borderColor", dark: "#353250", light: "#f0f0f0" },
+        { selector: ".blog-item-body", property: "backgroundColor", dark: "#202337", light: "#ffffff" }
     ];
 
     styles.forEach(({ selector, property, dark, light }) => {

@@ -1,6 +1,7 @@
 Django>=3.2
 requests
 Pillow
-phonenumber_field
-tinymce
-multiselectfield
+django-phonenumber-field
+django-tinymce
+django-multiselectfield
+phonenumbers

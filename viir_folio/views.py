@@ -19,9 +19,50 @@ from io import BytesIO
 import datetime
 import csv
 from datetime import datetime
+from django.core.mail import EmailMessage
 success=False
 check=False
 # Create your views here.
+def parse_date_ran(date_range_str):
+    """
+    Convert 'August - September, 2023' or 'June, 2022' → datetime object for sorting
+    """
+    # Normalize spacing
+    text = date_range_str.strip()
+
+    # Case 1: 'August - September, 2023'
+    match_range = re.match(r'([A-Za-z]+)\s*-\s*([A-Za-z]+),\s*(\d{4})', text)
+    if match_range:
+        start_month_str, end_month_str, year = match_range.groups()
+        try:
+            start_month = datetime.strptime(start_month_str, "%B").month
+        except ValueError:
+            start_month = 1
+        return datetime(int(year), start_month, 1)
+
+    # Case 2: 'June, 2022'
+    match_single = re.match(r'([A-Za-z]+),\s*(\d{4})', text)
+    if match_single:
+        month_str, year = match_single.groups()
+        try:
+            month = datetime.strptime(month_str, "%B").month
+        except ValueError:
+            month = 1
+        return datetime(int(year), month, 1)
+
+    # Fallback
+    return datetime.min
+def parse_date_range(date_range_str):
+    """Converts 'June, 2024 - 2027' → datetime(2024, 6, 1) for sorting"""
+    match = re.match(r'([A-Za-z]+),?\s*(\d{4})', date_range_str)
+    if match:
+        month_str, year = match.groups()
+        try:
+            month = datetime.strptime(month_str, "%B").month
+        except ValueError:
+            month = 1  # default fallback
+        return datetime(int(year), month, 1)
+    return datetime.min  # fallback if parsing fails
 def load_certificates_from_csv(request):
     csv_path = "viir_folio\ACHIEVEMENTS.xlsx - Sheet1.csv"  # adjust path if needed
     with open(csv_path, newline='', encoding='utf-8') as csvfile:
@@ -44,6 +85,12 @@ def index(request):
     active_item = certificate.objects.all().filter(show=True).first()
     global success
     global check
+    experiences = list(Experience.objects.all())
+    experiences.sort(key=lambda exp: parse_date_ran(exp.date), reverse=True)
+    education = list(Education.objects.all())
+
+    # Sort manually based on parsed date
+    education.sort(key=lambda exp: parse_date_range(exp.date), reverse=True)
     if request.method=='POST':
         form=ContactForm(request.POST)
         
@@ -57,7 +104,7 @@ def index(request):
             from_email = form.cleaned_data['email']  # Replace with your email address
 
             # Send email
-            send_mail(subject, message, from_email, [recipient_email])
+            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=[recipient_email]).send()
             
             hash_id = 'contact'  # Replace this with the actual ID you want to use as a hashtag
 
@@ -70,11 +117,11 @@ def index(request):
             pattern=r"^(?:\+91|91)?[789]\d{9}$"
             emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
             elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
             else:
-                return render(request,'LIGHT/index.html',{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
+                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
         
     else:
         print("no")
@@ -83,7 +130,7 @@ def index(request):
             check=False
         else:
             success=False
-        return render(request,"LIGHT/index.html",{"education":Education.objects.all(),"experience":Experience.objects.all(),"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item, "success":success})
+        return render(request,"LIGHT/index.html",{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item, "success":success})
     
 def certificat(request):
     return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all().order_by('-date'),'certi':True})
@@ -148,7 +195,7 @@ class Blogspace(ListView):
             from_email = 'virvphuria@gmail.com'  # Replace with your email address
 
             # Send email
-            send_mail(subject, message, from_email, values_list)
+            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=values_list).send()
             confirmation=True
             return HttpResponseRedirect(request.path_info)
         except ValueError as e:
@@ -227,7 +274,7 @@ class CreateBlogView(View):
             from_email = 'virvphuria@gmail.com'  # Replace with your email address
 
             # Send email
-            send_mail(subject, message, from_email, values_list)
+            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=values_list).send()
             return redirect('blogspace')
         else:
             print("Form is invalid")
