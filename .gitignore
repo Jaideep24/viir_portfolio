@@ -12,12 +12,7 @@ __pycache__/
 db.sqlite3
 *.log
 logs/
-
-# Collected static files (output of collectstatic)
-# NOTE: Do NOT ignore viir_folio/static/ — those are source files!
 staticfiles/
-
-# User-uploaded media
 media/
 
 # ============================================================
