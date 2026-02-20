@@ -191,8 +191,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'viir_folio/static'),
 ]
 
-# Simplified static file serving for production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Static file serving for production (CompressedStaticFilesStorage won't crash on missing files)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files
 MEDIA_URL = "/media/"
