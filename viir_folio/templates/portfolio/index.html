@@ -611,7 +611,7 @@
             </div>
             <div class="container">
                 <div class="blogs-grid" id="blogsGrid">
-                    {% for object in article|slice:"-3:" %}
+                    {% for object in article %}
                     <a class="blog-link" href="{% url 'detail_blog' object.id %}">
                         <div class="blog-card fade-in-up blog-card-visible">
                             <div class="blog-card-image" data-bg="/media/{{ object.image }}"></div>
