@@ -509,8 +509,8 @@
                                                             <li>Date : {{ object.date }}</li>
                                                             <li>Client : {{ object.client }}</li>
                                                             <li>Tech : {{ object.tech }}</li>
-                                                            <li>URL : <a href="{{ object.url }}" target="_blank">{{
-                                                                    object.url }}</a></li>
+                                                            <li>URL : <a href="{{ object.url }}" target="_blank"
+                                                                    class="project-link">View Project →</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -620,7 +620,7 @@
                                 <p class="blog-excerpt">{{ object.content|truncatewords_html:20|safe }}</p>
                                 <div class="blog-meta">
                                     <div class="author-info">
-                                        {% if object.likes.count == 1 %}
+                                        {% if object.likes == 1 %}
                                         <span>{{ object.likes }} person likes this post</span>
                                         {% else %}
                                         <span>{{ object.likes }} people like this post</span>

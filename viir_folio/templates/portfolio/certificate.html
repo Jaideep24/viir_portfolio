@@ -1,47 +1,107 @@
 {% extends 'portfolio/index.html' %}
 {% load static %}
 {% block content %}
+<style>
+    .nav-link {
+        text-decoration: none;
+        color: #fff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+    }
 
-<!-- Certificate Page CSS -->
-<link rel="stylesheet" href="{% static 'css/certificate.css' %}">
+    .nav-link:hover,
+    .nav-link.active {
+        color: #4f46e5;
+    }
 
+    @media (max-width: 700px) {
+        #headish {
+            opacity: 0;
+        }
+
+        #headno {
+            left: 8px !important;
+        }
+
+        #head {
+            left: 85vw !important;
+            top: 0.4rem !important;
+        }
+    }
+
+    @media (max-width: 400px) {
+        #head {
+            top: 0.2rem !important;
+        }
+    }
+</style>
 <section class="br-experience padding-tb-80">
-    <div class="container certificate-container">
-        <div class="row certificate-row">
+    <div class="container">
+        <div class="row" style="width:99vw;">
             <center>
                 <div class="section-title">
                     <h2>My <span>Certificates</span></h2>
                     <span class="ligh-title">Certificates</span>
                 </div>
             </center>
+            <style>
+                @media screen and (min-width:500px) {
+                    .timeline-item {
+                        min-width: 453px !important;
+                        width: 40% !important;
+                    }
+                }
 
-            <div class="col-lg-6 col-md-12 col-sm-12 certificate-column">
+                .timeline-item {
+                    width: 97%;
+                    height: 140px;
+                }
+
+                .container {
+                    margin-left: 0px !important;
+                    margin-right: 0px !important;
+                }
+
+                @media screen and (max-width:480px) {
+                    .timeline-item {
+                        height: 170px;
+                    }
+                }
+            </style>
+            <div class="col-lg-6 col-md-12 col-sm-12" style="margin-top:20px; padding-left:7px;">
                 <div class="education br-ex-box m-b-991">
-                    <ul class="timeline certificate-list">
+                    <ul class="timeline"
+                        style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; width:98vw;">
                         {% for object in certificate %}
+
                         <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
                             <div class="timeline-info">
                                 <span>{{ object.date }}</span>
                             </div>
                             <div class="timeline-content">
-                                <h5 class="timeline-title">
-                                    {{ object.title }}
-                                    <span class="sub">- {{ object.criteria }}</span>
-                                </h5>
-                                <p>
-                                    {{ object.platorm }} &nbsp
-                                    <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
-                                        <span class="text">View Certificate</span>
-                                    </a>
-                                </p>
+                                <h5 class="timeline-title">{{ object.title }}<span class="sub">- {{ object.criteria }}
+                                    </span></h5>
+                                <p>{{ object.platorm }} &nbsp <a href="{{ object.url }}" target="_blank"
+                                        class="br-learn-more-right">
+                                        <span class="text" style="transform: matrix(1, 0, 0, 1, 0, 0);">View
+                                            Certificate</span>
+                                    </a></p>
                             </div>
                         </li>
+
                         {% endfor %}
+
+                        </li>
                     </ul>
+
                 </div>
             </div>
+
         </div>
+
     </div>
 </section>
-
 {% endblock %}

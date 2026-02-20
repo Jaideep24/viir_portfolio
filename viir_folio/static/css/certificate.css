@@ -1,6 +1,5 @@
 /* ==========================================================================
    VIIR PORTFOLIO — Certificate Page Stylesheet
-   Extracted from certificate.html inline styles.
    ========================================================================== */
 
 .nav-link {
@@ -40,19 +39,25 @@
     padding-left: 7px;
 }
 
+/* Default: 1 per row (phone) */
 .timeline-item {
     width: 97%;
     height: 140px;
 }
 
-/* --------------------------------------------------------------------------
-   RESPONSIVE
-   -------------------------------------------------------------------------- */
+/* Tablet (portrait): 1 per row */
+@media screen and (min-width: 500px) and (max-width: 1023px) {
+    .timeline-item {
+        min-width: 90% !important;
+        width: 95% !important;
+    }
+}
 
-@media screen and (min-width: 500px) {
+/* Laptop & Desktop: 2 per row */
+@media screen and (min-width: 1024px) {
     .timeline-item {
         min-width: 453px !important;
-        width: 40% !important;
+        width: 47% !important;
     }
 }
 

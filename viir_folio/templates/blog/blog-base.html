@@ -176,7 +176,7 @@
                 <div class="blog-meta">
                   <div class="author-info">
 
-                    {% if object.likes.count == 1 %}
+                    {% if object.likes == 1 %}
                     <span>{{ object.likes }} person likes this post</span>
                     {% else %}
                     <span>{{ object.likes }} people like this post</span>

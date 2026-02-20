@@ -34,7 +34,7 @@
 				<h5 class="card-title">{{ object.title }}</h5>
 				<p>{{ object.date }}</p>
 
-				{% if object.likes.count == 1 %}
+				{% if object.likes == 1 %}
 				<p>{{ object.likes }} person likes this post</p>
 				{% else %}
 				<p>{{ object.likes }} people like this post</p>

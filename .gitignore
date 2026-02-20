@@ -13,14 +13,14 @@ db.sqlite3
 *.log
 logs/
 staticfiles/
-media/
+
 
 # ============================================================
 # Environment & Secrets
 # ============================================================
 .env
 .env.local
-.env.*
+
 
 secrets/
 *.pem
