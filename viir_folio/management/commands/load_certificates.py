@@ -12,7 +12,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('Certificates already exist in the database. Skipping import.'))
             return
 
-        csv_path = "viir_folio/ACHIEVEMENTS.xlsx - Sheet1.csv"  # adjust path if needed
+        csv_path = "viir_folio/achievements.csv"  # adjust path if needed
         try:
             with open(csv_path, newline='', encoding='utf-8') as csvfile:
                 reader = csv.DictReader(csvfile)

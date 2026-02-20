@@ -1,15 +1,15 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-	<center>
-		<div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
-			
-				</div>
-	</center>
+<center>
+	<div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
+
+	</div>
+</center>
 {% load static %}
 
 
-<div class="row" style="display: grid; place-items: center;">
+<div class="row blog-grid-center">
 	{% for object in object_list|slice:":3" %}
 	<div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
 		<div class="card">
@@ -21,14 +21,14 @@
 			<div class="card-body">
 				<h5 class="card-title">{{ object.title }}</h5>
 				<p>{{ object.date }}</p>
-				
+
 				{% if object.likes.count == 1 %}
 				<p>{{ object.likes }} person likes this post</p>
 				{% else %}
 				<p>{{ object.likes }} people like this post</p>
 				{% endif %}
 				<div class="my-3">
-				{{ object.content|truncatewords_html:20|safe}}
+					{{ object.content|truncatewords_html:20|safe}}
 				</div>
 				<a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
 			</div>
@@ -37,5 +37,5 @@
 	{% endfor %}
 	<a href="/blogspace" class="btn btn-primary">More Blogs</a>
 </div>
-	
+
 {% endblock content %}

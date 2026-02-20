@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils import timezone
+from datetime import date
 from multiselectfield import MultiSelectField
 from phonenumber_field.modelfields import PhoneNumberField
 from tinymce.models import HTMLField
@@ -56,12 +57,19 @@ class Project(models.Model):
 class About(models.Model):
     content=models.TextField()
     name=models.CharField(max_length=100)
-    age=models.PositiveIntegerField()
+    birthdate=models.DateField(default='2005-08-27')  # 27/08/2005
     language=models.CharField(max_length=100)
     phone_no=PhoneNumberField(blank=True,null=True, region='IN')
     email=models.EmailField()
     address=models.CharField(max_length=100)
     image=models.ImageField(default="image.png")
+    
+    @property
+    def age(self):
+        """Calculate age from birthdate"""
+        today = date.today()
+        return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
+    
     def __str__(self):
         return "About me"
 
@@ -70,6 +78,7 @@ class contact(models.Model):
     email=models.EmailField()
     number=PhoneNumberField(blank=True,null=True, region='IN')
     message=models.TextField()
+    submitted_date=models.DateField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.name
 

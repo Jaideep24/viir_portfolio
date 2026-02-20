@@ -1,4 +1,7 @@
-{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}">
+
 <div class="row">
   <div class="col-11 col-md-4 mx-auto mt-5">
     <h1>Create a New Blog Post</h1>
@@ -10,5 +13,6 @@
     </form>
     <div class="pt-3"></div>
   </div>
-  {% endblock content %}
 </div>
+
+{% endblock content %}

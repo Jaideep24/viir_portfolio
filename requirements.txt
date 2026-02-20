@@ -1,7 +1,30 @@
-Django>=3.2
-requests
-Pillow
-django-phonenumber-field
-django-tinymce
-django-multiselectfield
-phonenumbers
+# Django Framework
+Django>=3.2,<4.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Image Processing
+Pillow>=10.0.0
+
+# Phone Number Validation
+django-phonenumber-field>=7.1.0
+phonenumbers>=8.13.0
+
+# Rich Text Editor
+django-tinymce>=3.6.0
+
+# Multi-Select Field Support
+django-multiselectfield>=0.1.12
+
+# Form Rendering and Styling
+django-crispy-forms>=2.0
+crispy-bootstrap4>=2.0.0
+crispy-bootstrap5>=0.7
+
+# Production Server (optional - for deployment)
+gunicorn>=21.2.0
+whitenoise>=6.5.0

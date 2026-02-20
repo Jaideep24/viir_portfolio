@@ -20,8 +20,7 @@ import datetime
 import csv
 from datetime import datetime
 from django.core.mail import EmailMessage
-success=False
-check=False
+
 # Create your views here.
 def parse_date_ran(date_range_str):
     """
@@ -64,7 +63,7 @@ def parse_date_range(date_range_str):
         return datetime(int(year), month, 1)
     return datetime.min  # fallback if parsing fails
 def load_certificates_from_csv(request):
-    csv_path = "viir_folio\ACHIEVEMENTS.xlsx - Sheet1.csv"  # adjust path if needed
+    csv_path = r"viir_folio\achievements.csv"  # Raw string to handle backslashes
     with open(csv_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         next(reader)  # skip the first row with NaNs
@@ -82,103 +81,93 @@ def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
 def index(request):
-    active_item = certificate.objects.all().filter(show=True).first()
-    global success
-    global check
+    active_item = certificate.objects.filter(show=True).first()
     experiences = list(Experience.objects.all())
     experiences.sort(key=lambda exp: parse_date_ran(exp.date), reverse=True)
     education = list(Education.objects.all())
-
-    # Sort manually based on parsed date
     education.sort(key=lambda exp: parse_date_range(exp.date), reverse=True)
-    if request.method=='POST':
-        form=ContactForm(request.POST)
+    
+    context = {
+        "education": education,
+        "experience": experiences,
+        "services": Expertise.objects.all(),
+        "projects": Project.objects.all(),
+        "about": About.objects.all(),
+        "skill": Skill.objects.all(),
+        'article': Article.objects.all().order_by('-date')[:3],
+        'cv': cv.objects.all(),
+        'certificate': certificate.objects.all(),
+        'maincertificate': maincertificate.objects.all(),
+        'publications': Publication.objects.all(),
+        'active_item': active_item,
+        'success': request.session.pop('contact_success', False)
+    }
+    
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
         
-        print("ysy")
         if form.is_valid():
-            
             form.save()
             recipient_email = 'virvphuria@gmail.com'
             subject = 'Portfolio contact'
-            message = f"Name: {form.cleaned_data['name']}\nEmail: {form.cleaned_data['email']}\nMessage: {form.cleaned_data['message']}\nNumber: {form.cleaned_data['number']}"
-            from_email = form.cleaned_data['email']  # Replace with your email address
+            submission_date = form.instance.submitted_date.strftime('%d/%m/%Y') if form.instance.submitted_date else datetime.now().strftime('%d/%m/%Y')
+            message = f"Name: {form.cleaned_data['name']}\nEmail: {form.cleaned_data['email']}\nMessage: {form.cleaned_data['message']}\nNumber: {form.cleaned_data['number']}\nDate: {submission_date}"
+            from_email = form.cleaned_data['email']
 
             # Send email
-            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=[recipient_email]).send()
+            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"], bcc=[recipient_email]).send()
             
-            hash_id = 'contact'  # Replace this with the actual ID you want to use as a hashtag
-
-            # Redirect to the same page with the hashtag
-            check=True
-            return redirect(f'{request.path}#{hash_id}')
-            
-
+            # Set success message in session
+            request.session['contact_success'] = True
+            return redirect(f'{request.path}#contact')
         else:
-            pattern=r"^(?:\+91|91)?[789]\d{9}$"
-            emailpattern=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-            if(re.match(pattern,request.POST['number'])==None):
-                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
-            elif(re.match(emailpattern,request.POST['email'])==None):
-                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
-            else:
-                return render(request,'LIGHT/index.html',{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'cv':cv.objects.all(),'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item})
-        
-    else:
-        print("no")
-        if check:
-            success=True
-            check=False
-        else:
-            success=False
-        return render(request,"LIGHT/index.html",{"education":education,"experience":experiences,"services":Expertise.objects.all(),"projects":Project.objects.all(),"about":About.objects.all(),"skill":Skill.objects.all(),'cv':cv.objects.all(),'article':Article.objects.all().order_by('-date')[:3],'certificate':certificate.objects.all(),'maincertificate':maincertificate.objects.all(),'publications':Publication.objects.all(),'active_item':active_item, "success":success})
+            # Form validation failed - return with context
+            return render(request, 'portfolio/index.html', context)
+    
+    return render(request, "portfolio/index.html", context)
     
 def certificat(request):
-    return render(request,'LIGHT/certificate.html',{'certificate':certificate.objects.all().order_by('-date'),'certi':True})
+    return render(request, 'portfolio/certificate.html', {'certificate': certificate.objects.all().order_by('-date'), 'certi': True})
 
 def view(request):
-    userlist=Logger.objects.all().values()
-    if request.method=="POST":
-        print('done')
+    userlist = Logger.objects.all().values()
+    if request.method == "POST":
         if "username" in request.POST:
-            print("its working till here")
+            # Check if credentials match any user
             for i in userlist:
-                if i["user_name"]==request.POST["username"] and i["password"]==request.POST["password"]:
-                    return render(request,'blog/view_blog.html',{"article":Article.objects.all()})
-                else:
-                    return render(request, 'blog/login.html',{"warning":"error"}) 
-    elif request.method=="GET":
-        return(render(request,'blog/login.html'))
+                if i["user_name"] == request.POST["username"] and i["password"] == request.POST["password"]:
+                    return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+            # If no match found after checking all users
+            return render(request, 'blog/login.html', {"warning": "error"})
+        else:
+            return render(request, 'blog/login.html', {"warning": "error"})
+    elif request.method == "GET":
+        return render(request, 'blog/login.html')
+    else:
+        return render(request, 'blog/login.html')
 
 class Index(ListView):
     model = Article
-    template_name = 'blog/index(2).html'
+    template_name = 'blog/blog-base.html'
     context_object_name = 'articles'
     ordering = ['-date']
 
 
-submission=False
-confirmation=False
 class Blogspace(ListView):
     model = Article
-    template_name = 'blog/index (2).html'
+    template_name = 'blog/blog-base.html'
     context_object_name = 'articles'
     ordering = ['-date']
+    
     def get_context_data(self, **kwargs):
-        global confirmation
-        global submission
-        
-        if confirmation:
-            submission=True
-            confirmation=False
-        else:
-            submission=False
-        context = super(Blogspace,self).get_context_data(**kwargs)
-        context['submitted']=submission
+        context = super(Blogspace, self).get_context_data(**kwargs)
+        context['submitted'] = self.request.session.pop('subscription_success', False)
         return context
-    def post(self,  request, **kwargs):
-        global confirmation
-        email=request.POST.get('email')
+    
+    def post(self, request, **kwargs):
+        email = request.POST.get('email')
         self.object_list = self.get_queryset()
+        
         if not email:
             # Handle error: missing data
             context = self.get_context_data()
@@ -211,30 +200,21 @@ class DetailArticleView(DetailView):
         
 
     def get_context_data(self, **kwargs):
-        context = super(DetailArticleView,self).get_context_data(**kwargs)
-        context['comment_form']=CommentForm(initial={'article':self.object})
-        context['comment']=Comment.objects.filter(article=self.object)
-        return(context)
+        context = super(DetailArticleView, self).get_context_data(**kwargs)
+        context['comment_form'] = CommentForm(initial={'article': self.object})
+        context['comment'] = Comment.objects.filter(article=self.object)
+        return context
+    
     def post(self, request, **kwargs):
         self.object = self.get_object()
-        form = CommentForm(request.POST)
-        print(request.POST)
-        print("hi")
-        if form.is_valid():
-            form.save(commit=False)
-            form.article=self.object
-            form.save()
-            return HttpResponseRedirect(self.request.path_info)
-            
-        elif is_ajax(request):
-            model_id = self.kwargs['pk']  # Assuming your model uses pk as the primary key
-            model = self.get_object()
-            print("ajax")
+        
+        # Check if AJAX request for likes
+        if is_ajax(request):
             action = request.POST.get('action')
-            # Logic to update the likes of the model
-            # Example:
+            model = self.get_object()
+            
+            # Update likes
             if action == 'like':
-                print("yo")
                 if model.likes is not None:
                     model.likes += 1
                 else:
@@ -242,10 +222,18 @@ class DetailArticleView(DetailView):
             elif action == 'unlike':
                 if model.likes is not None and model.likes > 0:
                     model.likes -= 1
+            
             model.save()
-            return JsonResponse({'success': True,'likes': model.likes})
+            return JsonResponse({'success': True, 'likes': model.likes})
+        
+        # Handle comment form submission
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.article = self.object
+            comment.save()
+            return HttpResponseRedirect(self.request.path_info)
         else:
-            print("error is therr",form.errors)
             return self.render_to_response(self.get_context_data(form=form, error_data="error"))
     
 
@@ -267,20 +255,22 @@ class CreateBlogView(View):
             blog = form.save(commit=False)
             blog.date = timezone.now()  # Override any form value
             blog.save()
+            blog.save()
+            
             entries = subscriber.objects.all()
             values_list = [entry.email for entry in entries]
             subject = 'New Blog'
             message = f"Hey there, a new blog is waiting for you!\nTitle: {form.cleaned_data['title']}\nRegards,\nViir Phuria"
-            from_email = 'virvphuria@gmail.com'  # Replace with your email address
+            from_email = 'virvphuria@gmail.com'
 
             # Send email
-            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=values_list).send()
+            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"], bcc=values_list).send()
             return redirect('blogspace')
-        else:
-            print("Form is invalid")
+        
         return render(request, self.template_name, {'form': form})
+    
 class UpdateBlogView(UpdateView):
-    model=Article
-    fields=["title","content","image"]
-    template_name='blog/update_blog.html'
-    success_url='/edit'
+    model = Article
+    fields = ["title", "content", "image"]
+    template_name = 'blog/update_blog.html'
+    success_url = '/edit' 

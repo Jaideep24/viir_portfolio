@@ -1,79 +1,65 @@
-{% extends 'blog/index (2).html' %}{% block content %}
-    <main class="main-content">
-        <div class="editor-container">
-            <div class="container">
-                <div class="editor-header">
-                    <h1 id="editorTitle">Write New Blog</h1>
+{% extends 'blog/blog-base.html' %}{% load static %}{% block content %}
+<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}">
+<main class="main-content">
+    <div class="editor-container">
+        <div class="container">
+            <div class="editor-header">
+                <h1 id="editorTitle">Write New Blog</h1>
+            </div>
+
+            <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="blogTitleInput">Title</label>
+                    <input type="text" id="blogTitleInput" name="title"
+                        value="{{ form.instance.title|default_if_none:'' }}" placeholder="Enter an engaging title..."
+                        required fdprocessedid="gs6g3h">
                 </div>
 
-                <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
-                {% csrf_token %}
-                    <div class="form-group">
-                        <label for="blogTitleInput">Title</label>
-                        <input 
-                            type="text" 
-                            id="blogTitleInput" 
-                            name="title"
-                            value="{{ form.instance.title|default_if_none:'' }}"
-                            placeholder="Enter an engaging title..."
-                            required
-                            fdprocessedid="gs6g3h"
-                        >
+                <div class="form-group">
+                    <label for="imageUrlInput">Featured Image URL</label>
+                    {{ form.image }}
+                </div>
+                {{ form.content.as_hidden }}
+                <div class="form-group">
+                    <label for="contentEditor">Content</label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" onclick="formatText('bold')">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('italic')">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('underline')">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
+                            <i class="fas fa-list-ul"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
+                            <i class="fas fa-list-ol"></i>
+                        </button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" class="toolbar-btn" onclick="insertLink()">
+                            <i class="fas fa-link"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="insertImage()">
+                            <i class="fas fa-image"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="imageUrlInput">Featured Image URL</label>
-                        {{ form.image }}
+                    <div class="content-editor" id="contentEditor" contenteditable="true"
+                        data-placeholder="Start writing your blog content here...">{{ form.instance.content|safe }}
                     </div>
-                    {{ form.content.as_hidden }}
-                    <div class="form-group">
-                        <label for="contentEditor">Content</label>
-                        <div class="editor-toolbar">
-                            <button type="button" class="toolbar-btn" onclick="formatText('bold')">
-                                <i class="fas fa-bold"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('italic')">
-                                <i class="fas fa-italic"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('underline')">
-                                <i class="fas fa-underline"></i>
-                            </button>
-                            <span class="toolbar-separator"></span>
-                            <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
-                                <i class="fas fa-list-ul"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
-                                <i class="fas fa-list-ol"></i>
-                            </button>
-                            <span class="toolbar-separator"></span>
-                            <button type="button" class="toolbar-btn" onclick="insertLink()">
-                                <i class="fas fa-link"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="insertImage()">
-                                <i class="fas fa-image"></i>
-                            </button>
-                        </div>
-                        <div 
-                            class="content-editor" 
-                            id="contentEditor" 
-                            contenteditable="true"
-                            data-placeholder="Start writing your blog content here..."
-                        >{{ form.instance.content|safe }}</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 BlogSpace. All rights reserved.</p>
-        </div>
-    </footer>
-    <script>
-    {% include 'blog/editor.js' %}
-    </script>
-    <script src="editor.js"></script>
+
+
+<script src="{% static 'js/blog-editor.js' %}"></script>
 
 {% endblock content %}

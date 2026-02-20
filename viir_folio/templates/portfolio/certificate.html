@@ -1,0 +1,47 @@
+{% extends 'portfolio/index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Certificate Page CSS -->
+<link rel="stylesheet" href="{% static 'css/certificate.css' %}">
+
+<section class="br-experience padding-tb-80">
+    <div class="container certificate-container">
+        <div class="row certificate-row">
+            <center>
+                <div class="section-title">
+                    <h2>My <span>Certificates</span></h2>
+                    <span class="ligh-title">Certificates</span>
+                </div>
+            </center>
+
+            <div class="col-lg-6 col-md-12 col-sm-12 certificate-column">
+                <div class="education br-ex-box m-b-991">
+                    <ul class="timeline certificate-list">
+                        {% for object in certificate %}
+                        <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                            <div class="timeline-info">
+                                <span>{{ object.date }}</span>
+                            </div>
+                            <div class="timeline-content">
+                                <h5 class="timeline-title">
+                                    {{ object.title }}
+                                    <span class="sub">- {{ object.criteria }}</span>
+                                </h5>
+                                <p>
+                                    {{ object.platorm }} &nbsp
+                                    <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
+                                        <span class="text">View Certificate</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

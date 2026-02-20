@@ -1,81 +1,63 @@
-{% extends 'blog/index (2).html' %}{% block content %}
-<style>
-#contentEditor ul {
-    list-style-type: disc;   /* visible bullet */
-    list-style-position: outside;
-    margin-left: 1.5rem;     /* indentation */
-    color: inherit;          /* keep same text color */
-}
+{% extends 'blog/blog-base.html' %}{% load static %}{% block content %}
+<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}">
+<main class="main-content">
+    <div class="editor-container">
+        <div class="container">
+            <div class="editor-header">
+                <h1 id="editorTitle">Write New Blog</h1>
+            </div>
 
-</style>
-    <main class="main-content">
-        <div class="editor-container">
-            <div class="container">
-                <div class="editor-header">
-                    <h1 id="editorTitle">Write New Blog</h1>
+            <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="blogTitleInput">Title</label>
+                    <input type="text" id="blogTitleInput" name="title" placeholder="Enter an engaging title..."
+                        required fdprocessedid="gs6g3h">
                 </div>
 
-                <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
-                {% csrf_token %}
-                    <div class="form-group">
-                        <label for="blogTitleInput">Title</label>
-                        <input 
-                            type="text" 
-                            id="blogTitleInput" 
-                            name="title"
-                            placeholder="Enter an engaging title..."
-                            required
-                            fdprocessedid="gs6g3h"
-                        >
+                <div class="form-group">
+                    <label for="imageUrlInput">Featured Image URL</label>
+                    {{ form.image }}
+                </div>
+                {{ form.content }}
+                <div class="form-group">
+                    <label for="contentEditor">Content</label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" onclick="formatText('bold')">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('italic')">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('underline')">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
+                            <i class="fas fa-list-ul"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
+                            <i class="fas fa-list-ol"></i>
+                        </button>
+                        <span class="toolbar-separator"></span>
+                        <button type="button" class="toolbar-btn" onclick="insertLink()">
+                            <i class="fas fa-link"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="insertImage()">
+                            <i class="fas fa-image"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="imageUrlInput">Featured Image URL</label>
-                        {{ form.image }}
-                    </div>
-                    {{ form.content }}
-                    <div class="form-group">
-                        <label for="contentEditor">Content</label>
-                        <div class="editor-toolbar">
-                            <button type="button" class="toolbar-btn" onclick="formatText('bold')">
-                                <i class="fas fa-bold"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('italic')">
-                                <i class="fas fa-italic"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('underline')">
-                                <i class="fas fa-underline"></i>
-                            </button>
-                            <span class="toolbar-separator"></span>
-                            <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
-                                <i class="fas fa-list-ul"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
-                                <i class="fas fa-list-ol"></i>
-                            </button>
-                            <span class="toolbar-separator"></span>
-                            <button type="button" class="toolbar-btn" onclick="insertLink()">
-                                <i class="fas fa-link"></i>
-                            </button>
-                            <button type="button" class="toolbar-btn" onclick="insertImage()">
-                                <i class="fas fa-image"></i>
-                            </button>
-                        </div>
-                        <div 
-                            class="content-editor" 
-                            id="contentEditor" 
-                            contenteditable="true"
-                            data-placeholder="Start writing your blog content here..."
-                        ></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>
-                </form>
-            </div>
+                    <div class="content-editor" id="contentEditor" contenteditable="true"
+                        data-placeholder="Start writing your blog content here..."></div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>
+            </form>
         </div>
-    </main>
-    <script>
-    {% include 'blog/editor.js' %}
-    </script>
-    <script src="editor.js"></script>
+    </div>
+</main>
+
+
+
+<script src="{% static 'js/blog-editor.js' %}"></script>
 
 {% endblock content %}

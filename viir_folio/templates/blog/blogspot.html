@@ -1,23 +1,24 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-		<div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
-			<h1 class="fw-bolder">Blog Spot</h1>
-			
-			{% if submitted %}
-			<div class="btn btn-success">Subscribed</div>
-			{% else %}
-			<form action="" method="post">
-				{% csrf_token %}
-				<div class="form-group" style="display: flex; width: 100%; max-width: 500px; margin: 0 auto; padding: 10px; box-sizing: border-box;">
-    				<input type="email" class="form-control" id="umail" name="email" placeholder="Subscribe to our blogs" style="width: 100%; margin-right: 10px; padding: 10px; box-sizing: border-box;">
-    				<button name="button" value="{{ success }}" type="submit" class="btn btn-info" style="padding: 10px; background-color: #17a2b8; color: white; border: none; cursor: pointer; width:auto; align-self:center;">
-      					Submit
-    				</button>
-				</div>			
-			</form>
-			{% endif %}
+<div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
+	<h1 class="fw-bolder">Blog Spot</h1>
+
+	{% if submitted %}
+	<div class="btn btn-success">Subscribed</div>
+	{% else %}
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="form-group subscribe-form-group">
+			<input type="email" class="form-control subscribe-input" id="umail" name="email"
+				placeholder="Subscribe to our blogs">
+			<button name="button" value="{{ success }}" type="submit" class="btn btn-info subscribe-btn">
+				Submit
+			</button>
 		</div>
+	</form>
+	{% endif %}
+</div>
 {% load static %}
 <div class="row justify-content-center px-3">
 
@@ -32,14 +33,14 @@
 			<div class="card-body">
 				<h5 class="card-title">{{ object.title }}</h5>
 				<p>{{ object.date }}</p>
-				
+
 				{% if object.likes.count == 1 %}
 				<p>{{ object.likes }} person likes this post</p>
 				{% else %}
 				<p>{{ object.likes }} people like this post</p>
 				{% endif %}
 				<div class="my-3">
-				{{ object.content|truncatewords_html:20|safe}}
+					{{ object.content|truncatewords_html:20|safe}}
 				</div>
 				<a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
 			</div>
@@ -47,5 +48,5 @@
 	</div>
 	{% endfor %}
 </div>
-	
+
 {% endblock content %}

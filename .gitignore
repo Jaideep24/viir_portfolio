@@ -4,42 +4,61 @@ __pycache__/
 *.pyo
 *.pyd
 *.pyc
+*.pyo
 
 # Django
 *.sqlite3
 *.log
+logs/
 media/
+staticfiles/
 static/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
 
 # VS Code
 .vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
 
 # Jupyter
 *.ipynb
+.ipynb_checkpoints/
 
 # OS
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+~$*
 
 # Excel/CSV
 *.xlsx
 *.csv
+viir_folio/ACHIEVEMENTS.xlsx*
 
-# Environment
-.env
+# Migrations (optional - uncomment if you don't want to track migrations)
+# viir_folio/migrations/
 
-# Migrations
-viir_folio/migrations/__pycache__/
-viir_folio/migrations/*.pyc
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
 
-# Other
+# Backup files
 *.bak
-*.swp
-*.swo
+*.backup
 
-# Ignore compiled files
+# Compiled files
 viir_folio/__pycache__/
 viir_portfolio/__pycache__/
 
-# Ignore temp files
-~$*
+# Ignore secret keys and sensitive data
+secrets/
+*.pem
+*.key
