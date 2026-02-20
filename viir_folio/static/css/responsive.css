@@ -1,0 +1,492 @@
+/* Responsive css */
+@media only screen and (max-width: 1399px) {
+  .br-hero .hero-content .br-hero-img {
+    max-width: 300px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 48px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .padding-tb-80 {
+    padding: 50px 0;
+  }
+  .margin-t-80 {
+    margin-top: 50px;
+  }
+  .margin-b-50 {
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .br-hero .hero-content .br-hero-img {
+    max-width: 280px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 45px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 34px;
+    line-height: 40px;
+  }
+  .br-hero .hero-content .art {
+    right: 270px;
+  }
+  .section-title h2 {
+    padding: 33px 0;
+    font-size: 34px;
+  }
+  .section-title .ligh-title {
+    font-size: 90px;
+  }
+  .br-about .br-box:after {
+    right: -53%;
+  }
+  .br-about .br-box:before {
+    top: -40%;
+    right: -24%;
+  }
+  .br-about .br-box:hover:after {
+    right: -52%;
+  }
+  .br-about-detail h4 {
+    font-size: 19px;
+  }
+  .br-about-detail .br-text {
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .br-about-info ul li {
+    padding: 15px 0;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .box-front .content-wrap h3 {
+    font-size: 18px;
+  }
+  .education h4,
+.experiense h4 {
+    font-size: 21px;
+  }
+  .timeline-content .timeline-title {
+    font-size: 16px;
+  }
+  .br-project-box h3 {
+    font-size: 19px;
+  }
+  .br-project-box .portfolio-img {
+    width: 130px;
+  }
+  .achive .count-block h3 {
+    font-size: 40px;
+    line-height: 46px;
+  }
+  .br-news .news-info .detail h3 a {
+    font-size: 15px;
+    line-height: 19px;
+  }
+  .br-contact .br-box:before {
+    top: -84%;
+    right: -10%;
+  }
+  .br-contact .br-box:after {
+    right: -30%;
+  }
+  .br-contact .br-box:hover:after {
+    right: -25%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .m-b-991 {
+    margin-bottom: 50px;
+  }
+  .m-b-991-20 {
+    margin-bottom: 20px;
+  }
+  .section-title h2 {
+    margin-bottom: 30px;
+    font-size: 32px;
+  }
+  .br-hero.margin-b-50 {
+    margin: 0;
+  }
+  .br-hero {
+    height: 100%;
+  }
+  .br-hero .hero-content {
+    margin: 50px 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .br-hero .hero-content .br-hero-img {
+    max-width: 100%;
+    margin: 50px 0 30px 0;
+  }
+  .br-hero .hero-content .br-hero-name {
+    min-width: 100%;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 28px;
+  }
+  .br-hero .hero-content .br-hero-name h3 span {
+    max-width: 100%;
+  }
+  .br-hero .hero-content .hero-item {
+    max-width: 500px;
+    padding: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .br-hero .hero-content .br-hero-detail {
+    max-width: 400px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-detail {
+    text-align: left;
+    font-size: 14px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    margin: 0 0 10px 0;
+    font-size: 33px;
+    line-height: 47px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title span {
+    max-width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title span br {
+    display: none;
+  }
+  .scroll-next {
+    display: none;
+  }
+  .br-about .br-box:after {
+    right: -36%;
+  }
+  .br-about .br-box:hover:after {
+    right: -32%;
+  }
+  .education h4,
+.experiense h4 {
+    font-size: 20px;
+  }
+  .box-front .content-wrap h3 {
+    font-size: 17px;
+  }
+  .br-project-box h3 {
+    font-size: 18px;
+  }
+  .br-project-box .portfolio-img {
+    width: 200px;
+  }
+  .achive .count-block h3 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+  .br-news .news-info .detail h3 {
+    line-height: 16px;
+  }
+  .br-news .news-info .detail h3 a {
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .br-contact .m-b-minus-30px {
+    margin-bottom: 0;
+  }
+  .br-contact .br-box:before {
+    top: -75%;
+    right: -8%;
+  }
+  .br-contact .br-box:after {
+    right: -16%;
+  }
+  .br-contact .br-box:hover:after {
+    right: -15%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .section-title h2 {
+    padding: 0 0 10px 0;
+  }
+  .section-title .ligh-title {
+    display: none;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    margin: 0 0 10px 0;
+    font-size: 30px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 24px;
+  }
+  .br-hero .hero-content .br-hero-name h3:after {
+    height: 4px;
+  }
+  .br-about .br-box:before {
+    right: -13%;
+  }
+  .br-about .br-box:after {
+    right: -22%;
+  }
+  .br-about .br-box:hover:after {
+    right: -20%;
+  }
+  .br-about .br-box h3 {
+    font-size: 19px;
+  }
+  .portfolio-tabs ul li {
+    line-height: 30px;
+  }
+  .achive .count-block:before {
+    right: -6%;
+  }
+  .br-contact .br-box:after {
+    right: -20%;
+  }
+  .br-contact .br-box:hover:after {
+    right: -18%;
+  }
+  .br-contact form .form-group input, .br-contact form .form-group textarea {
+    padding: 10px 15px;
+  }
+  footer .br-footer-detail {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  footer .br-footer-detail .br-copy {
+    margin-bottom: 15px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .section-title h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  header nav a {
+    top: 15px;
+    right: 15px;
+  }
+  header nav a .svg_img {
+    width: 25px;
+    height: 25px;
+  }
+  header nav a:hover .svg_img {
+    width: 30px;
+    height: 30px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 28px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 23px;
+  }
+  .br-hero .hero-content .art {
+    right: 50px;
+  }
+  .br-about-detail h4 {
+    margin-bottom: 15px;
+  }
+  .br-project-box .portfolio-img {
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .br-project-box .portfolio-img {
+    width: 120px;
+  }
+  .br-hero .hero-content .br-hero-img {
+    margin: 50px 15px 30px 15px;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .br-project-box .br-info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .br-project-box .portfolio-img {
+    width: 100%;
+    height: 200px;
+  }
+  .br-project-box .portfolio-img a {
+    background-size: 100%;
+  }
+  .br-project-box .br-detail {
+    padding: 30px 0 0 0;
+  }
+  .br-about .br-box:after {
+    right: -28%;
+  }
+  .br-about .br-box:hover:after {
+    right: -26%;
+  }
+  .br-about .br-box h3 {
+    font-size: 18px;
+  }
+  .br-contact .br-box:after {
+    right: -28%;
+  }
+  .br-contact .br-box:before {
+    top: -47%;
+  }
+  .br-contact .br-box:hover:after {
+    top: -20%;
+    right: -30%;
+  }
+  .br-contact .br-box:hover:before {
+    top: -53%;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 26px;
+  }
+  .br-hero .br-diamond-1 {
+    top: 27%;
+  }
+  .section-title h2 {
+    font-size: 26px;
+  }
+  .br-about-detail h4 {
+    font-size: 18px;
+  }
+  .education h4, .experiense h4 {
+    font-size: 19px;
+  }
+  .timeline-content .timeline-title .sub {
+    width: 100%;
+    margin: 5px 0 0 0;
+    display: block;
+  }
+  .achive .count-block h3 {
+    font-size: 34px;
+  }
+  .br-contact .br-box .info h3 {
+    font-size: 15px;
+  }
+  .portfolio-tabs ul li {
+    font-size: 15px;
+  }
+  .br-contact .br-box .detail {
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .br-contact .br-box .detail .icon {
+    margin-bottom: 15px;
+  }
+  .br-contact .br-box .detail .info {
+    text-align: center;
+  }
+  footer .br-footer-detail {
+    height: 130px;
+  }
+  footer .br-footer-detail .br-copy {
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .br-project-box p a {
+    display: block;
+  }
+}
+@media only screen and (max-width: 360px) {
+  header nav a {
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 15px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 24px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 20px;
+    font-weight: 300;
+  }
+  .br-hero .br-diamond-5 {
+    top: -2%;
+  }
+  .section-title h2 {
+    font-size: 24px;
+  }
+  .br-about-detail h4 {
+    font-size: 17px;
+  }
+  .br-about .br-box h3 {
+    font-size: 17px;
+  }
+  .br-about-info ul li {
+    font-size: 13px;
+  }
+  .br-about-info ul li .title {
+    min-width: 90px;
+  }
+  .education h4, .experiense h4 {
+    font-size: 18px;
+  }
+  .timeline-content .timeline-title {
+    font-size: 14px;
+  }
+  .br-project-box h3 {
+    font-size: 16px;
+  }
+  .achive .count-block h3 {
+    font-size: 32px;
+  }
+  .achive .count-block p {
+    font-size: 16px;
+  }
+  .timeline-info span {
+    font-size: 11px;
+  }
+  .box-back .content-wrap h3 {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .section-title h2 {
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .br-hero .hero-content .br-hero-detail .br-hero-title {
+    font-size: 23px;
+  }
+  .br-hero .hero-content .br-hero-name h3 {
+    font-size: 18px;
+  }
+  .br-about .br-box:after {
+    right: -34%;
+  }
+  .br-about .br-box:hover:after {
+    right: -34%;
+  }
+  .portfolio-tabs ul li {
+    font-size: 14px;
+  }
+  .achive .count-block h3 {
+    font-size: 30px;
+  }
+}
+/*# sourceMappingURL=responsive.css.map */

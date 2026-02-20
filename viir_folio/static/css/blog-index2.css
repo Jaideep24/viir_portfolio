@@ -1,0 +1,354 @@
+/* ==========================================================================
+   VIIR PORTFOLIO — Blog Index (2) Stylesheet
+   Extracted from templates/blog/index (2).html inline styles.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+
+footer {
+    background: #f9f9f9;
+}
+
+footer .br-footer-detail {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #777;
+}
+
+footer .br-footer-detail a {
+    transition: all 0.3s ease-in-out;
+    color: #8c6fff;
+}
+
+footer .br-footer-detail a:hover {
+    color: #ff6f6f;
+}
+
+footer .br-footer-detail .br-social ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+footer .br-footer-detail .br-social ul li {
+    margin-left: 5px;
+}
+
+footer .br-footer-detail .br-social ul li a {
+    width: 45px;
+    height: 45px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #8c6fff;
+    color: #fff;
+    border-radius: 30px;
+}
+
+@media (max-width: 480px) {
+    footer .br-footer-detail .br-social ul li a {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 380px) {
+    footer .br-footer-detail .br-social ul li a {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 330px) {
+    footer .br-footer-detail .br-social ul li a {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+footer .br-footer-detail .br-social ul li a:hover {
+    background: #ff6f6f;
+}
+
+/* --------------------------------------------------------------------------
+   LOGO VISIBILITY
+   -------------------------------------------------------------------------- */
+
+.logo {
+    opacity: 0;
+}
+
+@media (max-width: 500px) {
+    .logo {
+        opacity: 1;
+    }
+
+    #headish {
+        opacity: 0;
+        width: 200px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   FORM CONTROL
+   -------------------------------------------------------------------------- */
+
+.form-control {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   COMMENT FORM
+   -------------------------------------------------------------------------- */
+
+.comment-form form {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 12px 20px;
+    width: 100%;
+    margin: 0;
+}
+
+.comment-form form p:has(label) {
+    display: contents;
+}
+
+.comment-form form button {
+    grid-column: 2;
+    justify-self: end;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #8c6fff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.comment-form form button svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+@media (max-width: 500px) {
+    .blog-card {
+        width: 92vw;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   THEME TOGGLE (sun/moon toggle button)
+   -------------------------------------------------------------------------- */
+
+#theme-toggle-button {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+    margin-right: 0;
+}
+
+#toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.25s;
+}
+
+#toggle:checked+svg #container {
+    fill: #2b4360;
+}
+
+#toggle:checked+svg #button {
+    transform: translate(28px, 2.333px);
+}
+
+#sun {
+    opacity: 1;
+}
+
+#toggle:checked+svg #sun {
+    opacity: 0;
+}
+
+#moon {
+    opacity: 0;
+}
+
+#toggle:checked+svg #moon {
+    opacity: 1;
+}
+
+#cloud {
+    opacity: 1;
+}
+
+#toggle:checked+svg #cloud {
+    opacity: 0;
+}
+
+#stars {
+    opacity: 0;
+}
+
+#toggle:checked+svg #stars {
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   NAVBAR (blog index 2)
+   -------------------------------------------------------------------------- */
+
+.bi2-navbar {
+    height: 50px;
+    background-color: #0B132B;
+}
+
+.bi2-nav-container {
+    width: 100% !important;
+}
+
+.bi2-logo {
+    color: white;
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+}
+
+.bi2-headish {
+    color: white;
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translate(0, -50%);
+}
+
+.bi2-toggle-wrapper {
+    height: 50px !important;
+    align-items: center;
+    margin-left: auto;
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.bi2-toggle-label {
+    height: 0px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bi2-toggle-svg {
+    width: 12vw;
+    max-width: 90px;
+}
+
+.bi2-nav-menu {
+    background-color: #0B132B;
+    margin-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   SUBSCRIPTION & BUTTONS (blog index 2 content block)
+   -------------------------------------------------------------------------- */
+
+.btn-info {
+    border-radius: 5px;
+}
+
+.btn-success {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    align-self: center;
+    border-radius: 5px;
+}
+
+.subscription-success {
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    color: #065f46;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.subscription-error {
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Subscribe form layout */
+.bi2-subscribe-form-group {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.bi2-subscribe-input {
+    width: 100%;
+    margin-right: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.bi2-subscribe-btn {
+    padding: 10px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    align-self: center;
+}
+
+/* Blog card link - no underline */
+.bi2-blog-link {
+    text-decoration: none;
+}

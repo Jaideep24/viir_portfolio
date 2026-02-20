@@ -1,0 +1,84 @@
+/* ==========================================================================
+   VIIR PORTFOLIO — Certificate Page Stylesheet
+   Extracted from certificate.html inline styles.
+   ========================================================================== */
+
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #4f46e5;
+}
+
+.certificate-row {
+    width: 99vw;
+}
+
+.certificate-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 98vw;
+}
+
+.certificate-container {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.certificate-column {
+    margin-top: 20px;
+    padding-left: 7px;
+}
+
+.timeline-item {
+    width: 97%;
+    height: 140px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media screen and (min-width: 500px) {
+    .timeline-item {
+        min-width: 453px !important;
+        width: 40% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .timeline-item {
+        height: 170px;
+    }
+}
+
+@media (max-width: 700px) {
+    #headish {
+        opacity: 0;
+    }
+
+    #headno {
+        left: 8px !important;
+    }
+
+    #head {
+        left: 85vw !important;
+        top: 0.4rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    #head {
+        top: 0.2rem !important;
+    }
+}

@@ -1,0 +1,1033 @@
+/* ==========================================================================
+   VIIR PORTFOLIO — Main Stylesheet
+   All inline styles extracted from index.html and organized by section.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL / BASE STYLES
+   -------------------------------------------------------------------------- */
+
+html {
+    scroll-behavior: auto;
+}
+
+.body-default {
+    background-color: #F0FFFF;
+}
+
+.br-loader-hidden {
+    display: none;
+}
+
+.theme-toggle-svg {
+    width: 12vw;
+    max-width: 90px;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Circle icon positions (replace inline --i custom properties) */
+.circle-icon-1 {
+    --i: 1;
+}
+
+.circle-icon-2 {
+    --i: 2;
+}
+
+.circle-icon-3 {
+    --i: 3;
+}
+
+.circle-icon-4 {
+    --i: 4;
+}
+
+.circle-icon-5 {
+    --i: 5;
+}
+
+.circle-icon-6 {
+    --i: 6;
+}
+
+.circle-icon-7 {
+    --i: 7;
+}
+
+.circle-icon-8 {
+    --i: 8;
+}
+
+.circle-icon-9 {
+    --i: 9;
+}
+
+.circle-icon-10 {
+    --i: 10;
+}
+
+.circle-icon-11 {
+    --i: 11;
+}
+
+.circle-icon-12 {
+    --i: 12;
+}
+
+.circle-icon-13 {
+    --i: 13;
+}
+
+.circle-icon-14 {
+    --i: 14;
+}
+
+.circle-icon-15 {
+    --i: 15;
+}
+
+/* JS Tilt Glare Effect */
+.js-tilt-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.js-tilt-glare-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%);
+    width: 700px;
+    height: 700px;
+    transform: rotate(180deg) translate(-50%, -50%);
+    transform-origin: 0% 0%;
+    opacity: 0;
+}
+
+/* Progress bar for skills */
+.progress-bar-skill {
+    background-color: #8c6fff;
+}
+
+/* Blog card visible state */
+.blog-card-visible {
+    opacity: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. SECTION TRANSITIONS (vanish animation)
+   -------------------------------------------------------------------------- */
+
+.padding-tb-80 {
+    margin-top: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+.padding-tb-80.vanish {
+    margin-top: 5%;
+    opacity: 0 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. SIDEBAR
+   -------------------------------------------------------------------------- */
+
+.dissappear {
+    right: 200px !important;
+    transition: right 1s ease;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. NAVBAR
+   -------------------------------------------------------------------------- */
+
+.navbar-fixed {
+    z-index: 1000;
+    position: fixed;
+    background-color: #0B132B;
+    height: 8vw;
+    max-height: 51.6px;
+    width: 100vw;
+    margin-top: -10px;
+}
+
+.navbar-toggle-wrap {
+    position: absolute;
+}
+
+.navbar-title {
+    color: white;
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translate(0, -50%);
+}
+
+.navbar-certificates-title {
+    color: white;
+    font-size: 22px;
+    font-family: 'Playfair Display', sans-serif;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 200px;
+    transform: translate(0, -50%);
+}
+
+.navbar-home-link {
+    position: absolute;
+    left: 93vw;
+    top: 0.8rem;
+}
+
+.sidebar-toggle-btn {
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 80vw;
+    width: 7vw;
+    height: 7vw;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.sidebar-toggle-btn svg {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+/* Certificate-mode: hide hamburger */
+.certi-mode .br-sidebar-toggle {
+    opacity: 0;
+    z-index: -232424;
+    visibility: hidden;
+}
+
+#headish,
+#headno {
+    color: white !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. THEME TOGGLE (Sun/Moon SVG switch)
+   -------------------------------------------------------------------------- */
+
+#theme-toggle-button {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 7em;
+    cursor: pointer;
+    height: 0px;
+}
+
+#toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.25s;
+}
+
+#toggle:checked+svg #container {
+    fill: #2b4360;
+}
+
+#toggle:checked+svg #button {
+    transform: translate(28px, 2.333px);
+}
+
+#sun {
+    opacity: 1;
+}
+
+#toggle:checked+svg #sun {
+    opacity: 0;
+}
+
+#moon {
+    opacity: 0;
+}
+
+#toggle:checked+svg #moon {
+    opacity: 1;
+}
+
+#cloud {
+    opacity: 1;
+}
+
+#toggle:checked+svg #cloud {
+    opacity: 0;
+}
+
+#stars {
+    opacity: 0;
+}
+
+#toggle:checked+svg #stars {
+    opacity: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION (Home — hoodie guy + orbiting icons)
+   -------------------------------------------------------------------------- */
+
+#content-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    padding-top: 10vh;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    padding-top: 8.5vh;
+}
+
+.body-part-2 {
+    position: relative;
+    min-height: 550px;
+}
+
+.background-circle {
+    background: #28292d;
+    border-radius: 70%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 500px;
+    max-height: 500px;
+    z-index: 1;
+    box-shadow: 0 0 20px #00000080;
+}
+
+.hoodie-guy {
+    position: absolute;
+    top: 5%;
+    height: 50vw;
+    width: 50vw;
+    max-width: 500px;
+    max-height: 500px;
+    background-size: cover;
+    z-index: 0;
+}
+
+.circle {
+    position: absolute;
+    top: calc(30% + 145px);
+    left: 40%;
+    transform: translateX(-50%);
+    width: 30vw;
+    height: 30vw;
+    max-width: 110px;
+    max-height: 110px;
+    transform-style: preserve-3d;
+    animation: animateCircle 40s linear infinite;
+    z-index: 2;
+}
+
+@keyframes animateCircle {
+    0% {
+        transform: perspective(1000px) rotateY(0deg) rotateX(15deg) translateY(-30px);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(360deg) rotateX(15deg) translateY(-30px);
+    }
+}
+
+.circle span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    background-color: #2d2e32;
+    box-shadow: 0px 0px 5px #00000080;
+    border-radius: 50%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(25vw);
+}
+
+.circle span img {
+    position: relative;
+    top: 15%;
+    left: 15%;
+    object-fit: cover;
+    height: 70%;
+}
+
+.footer-text {
+    text-align: center;
+}
+
+.footer-text h4 {
+    display: inline;
+}
+
+.typed-text-output {
+    display: inline;
+    margin-left: 2px;
+}
+
+.view-cv-text {
+    font-size: x-large;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. EXPERTISE SECTION (Flipper cards — SVG icon sizing)
+   -------------------------------------------------------------------------- */
+
+.flipper .content-wrap .icon svg {
+    max-width: 80px !important;
+    max-height: 80px !important;
+    width: 60px !important;
+    height: 60px !important;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+.flipper .content-wrap .icon img {
+    max-width: 60px !important;
+    max-height: 60px !important;
+    width: 60px !important;
+    height: 60px !important;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. TIMELINE SECTION (Experience & Education)
+   -------------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
+
+.design-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f1f1f;
+    min-height: 100vh;
+    padding: 100px 0;
+    font-family: Jost;
+}
+
+.design {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline {
+    width: 80%;
+    height: auto;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-content {
+    padding: 20px;
+    background: #1f1f1f;
+    -webkit-box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
+    box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
+    border-radius: 5px;
+    color: white;
+    padding: 1.75rem;
+    transition: 0.4s ease;
+    overflow-wrap: break-word !important;
+    margin: 1rem;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.timeline-component {
+    margin: 0px 20px 20px 20px;
+    width: 26vw;
+}
+
+.timeline-content h3 {
+    color: white !important;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: 2fr 3px 2fr;
+}
+
+.timeline-middle {
+    position: relative;
+    background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+    width: 3px;
+    height: 100%;
+}
+
+.main-middle {
+    opacity: 0;
+}
+
+.timeline-circle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.timeline-date {
+    margin-left: 2%;
+    color: black;
+}
+
+.timeline-date-career {
+    margin-left: 0%;
+    color: black;
+}
+
+.timeline-date-container {
+    width: 10.5vw;
+}
+
+.timeline-date-container-career {
+    width: 10vw;
+}
+
+.timeline-title-white {
+    color: white !important;
+}
+
+.timeline-subject {
+    color: white;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. ABOUT SECTION
+   -------------------------------------------------------------------------- */
+
+.about-img {
+    border-radius: 10%;
+    width: 90vw;
+    max-width: 450px;
+}
+
+.about-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.download-cv-btn {
+    margin-left: 30%;
+}
+
+
+/* --------------------------------------------------------------------------
+   10. PUBLICATIONS SECTION
+   -------------------------------------------------------------------------- */
+
+:root {
+    --text: #e0e0e0;
+    --card-bg: #1e1e2f;
+    --title: #a48fff;
+    --border: #333;
+    --link: #7aa9ff;
+    --badge: #9f78ff;
+    --button-bg: transparent;
+    --button-border: #aaa;
+    --button-text: #fff;
+    --hover-bg: #2b2b3c;
+}
+
+body.light {
+    --text: #222;
+    --card-bg: #fff;
+    --border: #ccc;
+    --link: #0047ab;
+    --button-bg: #fff;
+    --button-border: #4a2fb7;
+    --button-text: #4a2fb7;
+    --hover-bg: #eee;
+}
+
+.theme-toggle {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.theme-toggle button {
+    padding: 10px 20px;
+    border: 1px solid var(--button-border);
+    background: var(--button-bg);
+    color: var(--button-text);
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-bar {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-bar input {
+    width: 90%;
+    max-width: 500px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+.pub-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pub-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.pub-card:hover {
+    transform: translateY(-4px);
+}
+
+.pub-date {
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    background: var(--badge);
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pub-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--title);
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.pub-meta {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+.pub-authors {
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.8;
+    margin-bottom: 14px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+}
+
+.pub-link {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    color: var(--button-text);
+    border: 1px solid var(--button-border);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.pub-link:hover {
+    background: var(--button-border);
+    color: var(--bg);
+}
+
+
+/* --------------------------------------------------------------------------
+   11. BLOG SECTION
+   -------------------------------------------------------------------------- */
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.blog-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.blog-card-image {
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.blog-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #4f46e5;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.blog-card-content {
+    padding: 1.5rem;
+}
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    line-height: 1.4;
+}
+
+.blog-excerpt {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.blog-link {
+    text-decoration: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   12. CONTACT SECTION
+   -------------------------------------------------------------------------- */
+
+.contact-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. CAROUSEL (Certificates on main page)
+   -------------------------------------------------------------------------- */
+
+.carousel-btn-icon {
+    background-color: #000000;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+.carousel-img {
+    max-width: 85%;
+    max-height: 80vh;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/* --------------------------------------------------------------------------
+   14. RESPONSIVE / MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 2860px) {
+    #mytoggle {
+        margin-left: 85vw;
+    }
+
+    .circle span {
+        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(20vw);
+    }
+}
+
+@media screen and (max-width: 2562px) and (min-width: 1500px) {
+    .timeline-component {
+        width: 333px;
+    }
+
+    #date-container {
+        width: 10vw !important;
+    }
+}
+
+@media screen and (max-width: 1441px) {
+    #mytoggle {
+        margin-left: 80vw;
+    }
+
+    .circle span {
+        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(25vw);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .circle span {
+        transform: rotateY(calc(var(--i) * calc(360deg / 15))) translateZ(35vw);
+    }
+
+    #mytoggle {
+        margin-left: 75vw;
+    }
+
+    .timeline-component {
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #content-body {
+        padding-top: 15vh;
+    }
+
+    .body-part-2 {
+        min-height: 500px;
+    }
+
+    .background-circle,
+    .hoodie-guy {
+        width: 70vw;
+        height: 70vw;
+        max-width: 350px;
+        max-height: 350px;
+    }
+
+    .hoodie-guy {
+        background-size: contain;
+        background-position: center;
+        top: 20%;
+    }
+
+    .circle {
+        top: calc(65% + 30px);
+        left: 40%;
+        transform: translateX(-50%);
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .circle span img {
+        height: 50%;
+        top: 2.5vw;
+        left: 2.5vw;
+    }
+
+    #mytoggle {
+        margin-left: 70vw;
+    }
+
+    .timeline-component {
+        width: 40vw;
+    }
+
+    .timeline-component #date {
+        width: 20vw !important;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .circle span img {
+        top: 1.3vw;
+        left: 2.6vw;
+    }
+
+    .body-part-2 {
+        min-height: 400px;
+    }
+
+    .circle span img {
+        height: 50%;
+        top: 3vw;
+        left: 3vw;
+    }
+
+    iframe {
+        height: 100vh !important;
+    }
+
+    .br-experience .timeline li {
+        padding: 30px;
+    }
+
+    .timeline-component {
+        width: 50vw;
+    }
+
+    #content {
+        margin-left: 50px;
+    }
+
+    #circle {
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .pub-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .pub-card {
+        width: 90vw;
+    }
+
+    .blog-card {
+        width: 80vw;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .circle span img {
+        top: 1.3vw;
+        left: 2.6vw;
+    }
+
+    .body-part-2 {
+        min-height: 350px;
+    }
+
+    #mytoggle {
+        margin-left: 65vw;
+    }
+
+    .circle span img {
+        height: 50%;
+        top: 2.6vw;
+        left: 2.6vw;
+    }
+
+    .br-experience .timeline li {
+        padding: 20px;
+    }
+
+    #headish {
+        font-size: 18px !important;
+    }
+
+    #headno {
+        font-size: 15px !important;
+        left: 150px !important;
+    }
+}
+
+@media screen and (max-width: 326px) {
+    .circle span img {
+        top: 1.3vw;
+        left: 2.6vw;
+    }
+
+    .body-part-2 {
+        min-height: 300px;
+    }
+
+    .br-experience .timeline li {
+        padding: 0px;
+    }
+}
