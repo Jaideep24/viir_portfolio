@@ -245,7 +245,11 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".card", property: "backgroundColor", dark: "#202337", light: "#ffffff" },
         { selector: ".my-3", property: "color", dark: "#FFFFFF", light: "#000000" },
         { selector: ".card-title", property: "color", dark: "#FFFFFF", light: "#000000" },
-        { selector: "#date", property: "color", dark: "#EEEEEE", light: "#000000" }
+        { selector: "#date", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".view-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".view-cv-btn", property: "borderColor", dark: "rgba(255, 255, 255, 0.4)", light: "rgba(0, 0, 0, 0.4)" },
+        { selector: ".download-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".download-cv-btn", property: "borderColor", dark: "rgba(0, 0, 0, 0.4)", light: "rgba(0, 0, 0, 0.4)" }
     ];
 
     styles.forEach(({ selector, property, dark, light }) => {

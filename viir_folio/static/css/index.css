@@ -409,8 +409,37 @@ html {
     margin-left: 2px;
 }
 
-.view-cv-text {
-    font-size: x-large;
+.view-cv-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    color: #d0d0d0;
+    font-family: "Quicksand", "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    background: transparent;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.view-cv-btn:hover {
+    background: linear-gradient(#8c6fff);
+    border-color: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+}
+
+.view-cv-btn .text {
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -566,7 +595,37 @@ html {
 }
 
 .download-cv-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    color: #d0d0d0;
+    font-family: "Quicksand", "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    background: transparent;
     margin-left: 30%;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-cv-btn:hover {
+    background: linear-gradient(#8c6fff);
+    border-color: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+}
+
+.download-cv-btn .text {
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -808,9 +867,16 @@ body.light {
 
 .contact-link {
     text-decoration: none;
-    color: inherit;
-    font-weight: normal;
+    color: #8c6fff;
+    font-weight: 500;
     font-style: normal;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #ff6f6f;
+    text-decoration: underline;
 }
 
 
@@ -898,9 +964,15 @@ body.light {
     }
 
     .hoodie-guy {
-        background-size: contain;
-        background-position: center;
-        top: 20%;
+        position: absolute;
+        background: url("{% static 'assets/hoodie-guy.png' %}");
+        top: 5%;
+        height: 50vw;
+        width: 50vw;
+        max-width: 500px;
+        max-height: 500px;
+        background-size: cover;
+        z-index: 0;
     }
 
     .circle {

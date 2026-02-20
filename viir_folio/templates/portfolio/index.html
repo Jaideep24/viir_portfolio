@@ -270,9 +270,9 @@
             <h4 id="typed-text" class="typed-text-output d-inline-block"></h4>
         </div>
         {% for object in cv %}
-        <a href="media/{{ object.pdf }}" target="_blank" class="br-learn-more-right">
+        <a href="media/{{ object.pdf }}" target="_blank" class="view-cv-btn">
             {% endfor %}
-            <span class="view-cv-text text">View CV</span>
+            <span class="text">View CV</span>
         </a>
     </center>
     <!-- Hero End -->
@@ -327,8 +327,7 @@
                                 </li>
                                 <br><br><br>
                                 {% for object in cv %}
-                                <a class="download-cv-btn" href="media/{{ object.pdf }}" class="br-learn-more-right"
-                                    download>
+                                <a class="download-cv-btn" href="media/{{ object.pdf }}" download>
                                     {% endfor %}
                                     <span class="text">Download CV</span>
                                 </a>
@@ -510,7 +509,7 @@
                                                             <li>Client : {{ object.client }}</li>
                                                             <li>Tech : {{ object.tech }}</li>
                                                             <li>URL : <a href="{{ object.url }}" target="_blank"
-                                                                    class="project-link">View Project →</a></li>
+                                                                    class="project-link">{{ object.url }}</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -678,8 +677,8 @@
                                 <h3 class="title">Contact</h3>
                                 <p>
                                     <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;
-                                    <a class="contact-link" href="tel://9819185865/" target="_blank">{{ object.phone_no
-                                        }}</a>
+                                    <a class="contact-link" href="tel:{{ object.phone_no }}" target="_blank">{{
+                                        object.phone_no }}</a>
                                 </p>
                             </div>
                         </div>
@@ -767,7 +766,7 @@
                         </li>
                         <li><a href="https://github.com/Viir-Phuria" target="_blank"><i class="fa fa-github"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="virvphuria@gmail.com" target="_blank"><i class="fa fa-envelope"
+                        <li><a href="mailto:virvphuria@gmail.com" target="_blank"><i class="fa fa-envelope"
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>

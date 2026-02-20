@@ -25,8 +25,10 @@
                 var max = -219.99078369140625;
                 forEach(document.querySelectorAll('.progress'), function (index, value) {
                     var percent = value.getAttribute('data-progress');
-                    value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
-                    value.querySelector('.value').innerHTML = percent + '%';
+                    var fill = value.querySelector('.fill');
+                    var valueEl = value.querySelector('.value');
+                    if (fill) fill.setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+                    if (valueEl) valueEl.innerHTML = percent + '%';
                 });
 
                 b = 1;
@@ -201,7 +203,7 @@
         ]
     });
 
-    /*----------------------------- Client Slider -------------------------------- */    
+    /*----------------------------- Client Slider -------------------------------- */
     $('#br-client-slider').slick({
         rows: 1,
         dots: false,
@@ -211,28 +213,28 @@
         slidesToShow: 6,
         slidesToScroll: 1,
         responsive: [
-        {
-            breakpoint: 992,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                dots: false
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToScroll: 1,
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 575,
+                settings: {
+                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                }
             }
-        },
-        {
-            breakpoint: 768,
-            settings: {
-                slidesToScroll: 1,
-                slidesToShow: 3,
-            }
-        },
-        {
-            breakpoint: 575,
-            settings: {
-                slidesToScroll: 1,
-                slidesToShow: 2,
-            }
-        }
         ]
     });
 
@@ -282,18 +284,18 @@
                 .end().filter("[href='#" + id + "']").parent().addClass("active");
         }
     });
-      /* For Directly Run */
-  $(window).on("load", function () {
-    setTimeout(function () {
-      switch (window.location.protocol) {
-        case 'file:':
-          console.log(
-            '%c Please try to run using local server instead of Directly click or run for better experience. ',
-            'font-size: 20px; background-color: black; color:white; margin-left: 15px; padding: 15px'
-          );
-          break;
-        default:
-      }
-    }, 100);
-  });
+    /* For Directly Run */
+    $(window).on("load", function () {
+        setTimeout(function () {
+            switch (window.location.protocol) {
+                case 'file:':
+                    console.log(
+                        '%c Please try to run using local server instead of Directly click or run for better experience. ',
+                        'font-size: 20px; background-color: black; color:white; margin-left: 15px; padding: 15px'
+                    );
+                    break;
+                default:
+            }
+        }, 100);
+    });
 })(jQuery);
