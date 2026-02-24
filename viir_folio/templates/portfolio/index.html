@@ -482,7 +482,7 @@
                                             onclick="design(event)">ALL</li>
                                         <li class="filter" data-filter=".webdev" onclick="design(event)">WEB DEV</li>
                                         <li class="filter" data-filter=".appdev" onclick="design(event)">APP DEV</li>
-                                        <li class="filter" data-filter=".graphics" onclick="design(event)">GRAPHICS</li>
+                                        <li class="filter" data-filter=".graphic" onclick="design(event)">GRAPHICS</li>
                                         <li class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
                                         <li class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
                                     </ul>
@@ -490,9 +490,9 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="portfolio-content-items">
-                                    <div class="row m-b-minus-30px">
+                                    <div class="row m-b-minus-30px" id="project-items-container">
                                         {% for object in projects %}
-                                        <div class="col-lg-6 mix graphics templates {{ object.category|join:' ' }}">
+                                        <div class="col-lg-6 mix project-item {{ object.category|join:' ' }}">
                                             <div class="br-project-box">
                                                 <h3>{{ object.title }}</h3>
                                                 <div class="links">
@@ -563,8 +563,8 @@
                 </div>
                 <br>
                 <center>
-                    <a href="/certificate" class="br-learn-more-right">
-                        <span class="view-cv-text text">View More</span>
+                    <a href="/certificate" class="capsule-btn">
+                        <span class="text">View More</span>
                     </a>
                 </center>
             </div>
@@ -634,8 +634,8 @@
                 </div>
             </div>
             <center>
-                <a href="/blogspace" class="br-learn-more-right">
-                    <span class="view-cv-text text">View More</span>
+                <a href="/blogspace" class="capsule-btn">
+                    <span class="text">View More</span>
                 </a>
             </center>
         </div>
@@ -662,6 +662,7 @@
                                 <h3 class="title">Mail</h3>
                                 <p>
                                     <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <!-- WARNING: Do NOT split the {{ object.email }} tag across lines — Django won't render it -->
                                     <a class="contact-link" href="mailto:{{ object.email }}" target="_blank">{{
                                         object.email }}</a>
                                 </p>
@@ -677,6 +678,7 @@
                                 <h3 class="title">Contact</h3>
                                 <p>
                                     <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp;
+                                    <!-- WARNING: Do NOT split the {{ object.phone_no }} tag across lines — Django won't render it -->
                                     <a class="contact-link" href="tel:{{ object.phone_no }}" target="_blank">{{
                                         object.phone_no }}</a>
                                 </p>
@@ -723,8 +725,7 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="4"
                                 placeholder="Message"></textarea>
                         </div>
-                        <button name="button" value="{{ success }}" type="submit" class="br-learn-more-right"
-                            fdprocessedid="cqz8h">
+                        <button name="button" value="{{ success }}" type="submit" class="capsule-btn">
                             <span class="text">Submit</span>
                         </button>
                     </form>

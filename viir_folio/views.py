@@ -1,24 +1,13 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-import requests
 from django.views import View
-from django.views.generic import ListView, DetailView, DeleteView, TemplateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-import json
+from django.http import HttpResponseRedirect, JsonResponse
+from django.utils import timezone
+import re
+from datetime import datetime
 from .forms import *
 from .models import *
-from django.core.mail import send_mail
-import re
-from django.conf import settings
-from PIL import Image, ImageDraw, ImageFont, ImageOps
-import random
-import string
-from io import BytesIO
-import datetime
-import csv
-from datetime import datetime
 from django.core.mail import EmailMessage
 
 # Create your views here.
@@ -62,21 +51,7 @@ def parse_date_range(date_range_str):
             month = 1  # default fallback
         return datetime(int(year), month, 1)
     return datetime.min  # fallback if parsing fails
-def load_certificates_from_csv(request):
-    csv_path = r"viir_folio\achievements.csv"  # Raw string to handle backslashes
-    with open(csv_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        next(reader)  # skip the first row with NaNs
-        for row in reader:
-            certificate.objects.create(
-                title=row['ACHIEVEMENT'],
-                url=row['LINK'],
-                date=datetime.strptime(row['DATE'], '%d-%m-%Y').date(),
-                platorm=row['PLATFORM'],
-                criteria=row['CRITERIA'],
-                show=True  # default value
-            )
-    return HttpResponse("Certificates loaded successfully")
+
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
@@ -145,13 +120,6 @@ def view(request):
         return render(request, 'blog/login.html')
     else:
         return render(request, 'blog/login.html')
-
-class Index(ListView):
-    model = Article
-    template_name = 'blog/blog-base.html'
-    context_object_name = 'articles'
-    ordering = ['-date']
-
 
 class Blogspace(ListView):
     model = Article

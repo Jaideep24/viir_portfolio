@@ -249,7 +249,9 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".view-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".view-cv-btn", property: "borderColor", dark: "rgba(255, 255, 255, 0.4)", light: "rgba(0, 0, 0, 0.4)" },
         { selector: ".download-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".download-cv-btn", property: "borderColor", dark: "rgba(0, 0, 0, 0.4)", light: "rgba(0, 0, 0, 0.4)" }
+        { selector: ".download-cv-btn", property: "borderColor", dark: "rgba(255, 255, 255, 1)", light: "rgba(0, 0, 0, 0.4)" },
+        { selector: ".capsule-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
+        { selector: ".capsule-btn", property: "borderColor", dark: "rgba(255, 255, 255, 0.4)", light: "rgba(0, 0, 0, 0.4)" }
     ];
 
     styles.forEach(({ selector, property, dark, light }) => {
@@ -261,35 +263,39 @@ function applyDarkModeStyles(isDarkMode) {
 
 
 /* --------------------------------------------------------------------------
-   7. PROJECT FILTER (MixItUp replacement)
+   7. PROJECT FILTER (Using MixItUp library)
    -------------------------------------------------------------------------- */
 
-let storedelement = document.querySelectorAll(".graphics");
+// MixItUp is initialized in script.js on '.portfolio-content'
+// We just need to handle the filter button clicks and active state
 
 function design(event) {
-    document.querySelectorAll(".filter").forEach(item => {
-        item.classList.remove("mixitup-control-active");
-    });
-
     const clickedItem = event.target;
 
     if (clickedItem.classList.contains('filter')) {
+        // Update active state on filter buttons
+        document.querySelectorAll(".filter").forEach(item => {
+            item.classList.remove("mixitup-control-active");
+        });
         clickedItem.classList.add("mixitup-control-active");
 
         const filterValue = clickedItem.getAttribute("data-filter");
-        const container = document.getElementsByClassName("m-b-minus-30px")[0];
-
-        // Remove all items first
-        storedelement.forEach(item => item.remove());
+        const container = document.getElementById("project-items-container");
+        const items = container.querySelectorAll(".project-item");
 
         if (filterValue === "all") {
-            storedelement.forEach(item => container.appendChild(item));
+            // Show all items
+            items.forEach(item => {
+                item.style.display = "";
+            });
         } else {
-            // Remove the leading dot to get the class name
+            // Filter by class name (remove the leading dot)
             const className = filterValue.substring(1);
-            storedelement.forEach(item => {
+            items.forEach(item => {
                 if (item.classList.contains(className)) {
-                    container.appendChild(item);
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
                 }
             });
         }

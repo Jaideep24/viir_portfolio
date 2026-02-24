@@ -628,6 +628,38 @@ html {
     z-index: 1;
 }
 
+.capsule-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    color: #d0d0d0;
+    font-family: "Quicksand", "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.capsule-btn:hover {
+    background: linear-gradient(#8c6fff);
+    border-color: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+}
+
+.capsule-btn .text {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* --------------------------------------------------------------------------
    10. PUBLICATIONS SECTION

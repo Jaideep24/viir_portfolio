@@ -14,14 +14,13 @@ db.sqlite3
 logs/
 staticfiles/
 
-
 # ============================================================
 # Environment & Secrets
 # ============================================================
 .env
 .env.local
-
-
+.env.production
+.env.development
 secrets/
 *.pem
 *.key
@@ -71,6 +70,10 @@ htmlcov/
 *.backup
 *.tmp
 *.temp
+temp_*.py
+temp_*.js
+temp_*.css
+temp_*.html
 
 # ============================================================
 # Build / Distribution
@@ -78,3 +81,14 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# ============================================================
+# Media Files (uploaded user content)
+# ============================================================
+# Uncomment to ignore all media files in production
+# media/
+
+# ============================================================
+# Documentation Generated Files
+# ============================================================
+# docs/_build/

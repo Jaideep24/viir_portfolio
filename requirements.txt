@@ -4,9 +4,6 @@ Django>=3.2,<4.0
 # Environment Variables
 python-dotenv>=1.0.0
 
-# HTTP Requests
-requests>=2.31.0
-
 # Image Processing
 Pillow>=10.0.0
 
@@ -25,6 +22,6 @@ django-crispy-forms>=2.0
 crispy-bootstrap4>=2.0.0
 crispy-bootstrap5>=0.7
 
-# Production Server (optional - for deployment)
+# Production Server
 gunicorn>=21.2.0
 whitenoise>=6.5.0

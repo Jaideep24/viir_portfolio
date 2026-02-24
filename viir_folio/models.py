@@ -1,5 +1,3 @@
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils import timezone
 from datetime import date
@@ -50,9 +48,9 @@ class Project(models.Model):
     
     @property
     def categories_list(self):
-        if isinstance(self.categories, (list, tuple)):
-            return self.categories
-        return [self.categories] if self.categories else []
+        if isinstance(self.category, (list, tuple)):
+            return self.category
+        return [self.category] if self.category else []
 
 class About(models.Model):
     content=models.TextField()
