@@ -101,7 +101,7 @@ def index(request):
     
     return render(request, "portfolio/index.html", context)
     
-def certificat(request):
+def certificate_view(request):
     return render(request, 'portfolio/certificate.html', {'certificate': certificate.objects.all().order_by('-date'), 'certi': True})
 
 def view(request):

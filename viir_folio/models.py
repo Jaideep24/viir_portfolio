@@ -32,7 +32,7 @@ class Expertise(models.Model):
     
     class Meta:
         # Keep the old table name so Django recognizes it's the same model
-        db_table = 'viir_folio_service'  # replace `yourappname` with your app's name
+        db_table = 'viir_folio_service'
 
 class Project(models.Model):
     title=models.CharField(max_length=100)
@@ -114,28 +114,29 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     content = HTMLField()
     date = models.DateField()
-    image=models.ImageField( default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
-    likes=models.IntegerField(blank=True, null=True, default=0)
+    image = models.ImageField(default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
+    likes = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return self.title
+
 class Comment(models.Model):
-    name=models.TextField(blank=False,default=" ")
-    comment=models.TextField()
-    date=models.DateField(auto_now_add=True)
-    article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    name = models.TextField(blank=False, default=" ")
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
 class Logger(models.Model):
-    user_name=models.CharField(max_length=25)
-    password=models.CharField(max_length=100)
+    user_name = models.CharField(max_length=25)
+    password = models.CharField(max_length=100)
 
 class Publication(models.Model):
-    title=models.CharField(max_length=199)
-    authors=models.CharField(max_length=300)
-    date=models.DateField()
-    place=models.CharField(max_length=300)
-    url=models.URLField()
+    title = models.CharField(max_length=199)
+    authors = models.CharField(max_length=300)
+    date = models.DateField()
+    place = models.CharField(max_length=300)
+    url = models.URLField()
     def __str__(self):
         return self.title

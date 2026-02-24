@@ -20,14 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    path('blogspace/',Blogspace.as_view(),name='blogspace'),
+    path('', index),
+    path('blogspace/', Blogspace.as_view(), name='blogspace'),
     path('blogspace/<int:pk>/', DetailArticleView.as_view(), name='detail_blog'),
     path('blogspace/<int:pk>/delete', DeleteArticleView.as_view(), name='delete_article'),
-    path('blogspace/<int:pk>/update',UpdateBlogView.as_view(),name='updateview'),
+    path('blogspace/<int:pk>/update', UpdateBlogView.as_view(), name='updateview'),
     path('create/', CreateBlogView.as_view(), name='create_blog'),
     path('edit/', view, name='login'),
-    path('certificate/',certificat),
+    path('certificate/', certificate_view),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
