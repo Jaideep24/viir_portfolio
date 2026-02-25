@@ -36,7 +36,7 @@ A full-featured Django-based portfolio website with an integrated blog system, s
 ### Frontend
 - **Bootstrap 4/5**: Responsive UI framework
 - **jQuery**: JavaScript library
-- **Particles.js**: Interactive background animations
+- **Interactive Grid Canvas**: Animated background with continuous droplines
 - **Slick Carousel**: Image/content carousels
 - **Fancybox**: Lightbox for images
 
