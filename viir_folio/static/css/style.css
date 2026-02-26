@@ -1537,6 +1537,9 @@ li.mixitup-control-active {
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
+  overflow-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .br-project-box .project-link:hover {
@@ -2052,12 +2055,7 @@ footer .br-footer-detail .br-social ul li a:hover {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 16;
-}
-
-.br-open {
-  -webkit-transform: translateX(0) !important;
-  transform: translateX(0) !important;
+  z-index: 1000;
 }
 
 .br-sidebar {
@@ -2071,16 +2069,18 @@ footer .br-footer-detail .br-social ul li a:hover {
   right: 0;
   left: auto;
   display: block;
-  -webkit-transition: all 0.5s ease 0s;
-  transition: all 0.5s ease 0s;
+  -webkit-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
   background-color: #07091c;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  overflow: auto;
+  -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
   opacity: 1;
-  z-index: 16;
+  z-index: 1001;
+  will-change: transform;
 }
 
 .br-sidebar .menu-list {
@@ -2112,8 +2112,30 @@ footer .br-footer-detail .br-social ul li a:hover {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 35px;
-  color: #8c6fff;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.br-sidebar .menu-list .close-sidebar svg {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+.br-sidebar .menu-list .close-sidebar:hover svg {
+  transform: rotate(90deg);
+}
+
+.br-sidebar .menu-list .close-sidebar:hover path:nth-child(1),
+.br-sidebar .menu-list .close-sidebar:hover path:nth-child(4) {
+  stroke: #ff6f6f;
+}
+
+.br-sidebar .menu-list .close-sidebar:hover path:nth-child(2),
+.br-sidebar .menu-list .close-sidebar:hover path:nth-child(3) {
+  stroke: #8c6fff;
 }
 
 .br-sidebar ul li {

@@ -247,7 +247,11 @@ function design(event) {
    -------------------------------------------------------------------------- */
 
 function menu() {
-    document.querySelector(".br-sidebar").classList.toggle("dissappear");
+    document.querySelector(".br-sidebar").classList.toggle("br-sidebar-open");
+}
+
+function closeSidebar() {
+    document.querySelector(".br-sidebar").classList.remove("br-sidebar-open");
 }
 
 document.addEventListener("click", function (event) {
@@ -257,7 +261,7 @@ document.addEventListener("click", function (event) {
     const isClickButton = targetBtn.contains(event.target);
 
     if (!isClickInside && !isClickButton) {
-        document.querySelector(".br-sidebar").classList.remove("dissappear");
+        document.querySelector(".br-sidebar").classList.remove("br-sidebar-open");
     }
 });
 

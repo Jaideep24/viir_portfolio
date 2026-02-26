@@ -151,9 +151,11 @@ html {
    3. SIDEBAR
    -------------------------------------------------------------------------- */
 
-.dissappear {
-    right: 200px !important;
-    transition: right 1s ease;
+/* Sidebar is hidden by default with translateX(100%) in style.css */
+/* This class is toggled to show the sidebar */
+.br-sidebar-open {
+    -webkit-transform: translateX(0) !important;
+    transform: translateX(0) !important;
 }
 
 
