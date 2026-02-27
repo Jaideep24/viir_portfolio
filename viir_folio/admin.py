@@ -6,13 +6,28 @@ class AboutAdmin(admin.ModelAdmin):
     list_display = ('name', 'birthdate', 'email', 'phone_no')
     fields = ('content', 'name', 'birthdate', 'language', 'phone_no', 'email', 'address', 'image')
 
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('title', 'institute_name', 'start_date', 'end_date', 'subject')
+    list_filter = ('start_date', 'end_date')
+    search_fields = ('title', 'institute_name', 'subject')
+    fields = ('start_date', 'end_date', 'title', 'institute_name', 'subject')
+    ordering = ('-start_date',)
+
+class ExperienceAdmin(admin.ModelAdmin):
+    list_display = ('role', 'company_name', 'start_date', 'end_date', 'tech_stack')
+    list_filter = ('start_date', 'end_date', 'company_name')
+    search_fields = ('role', 'company_name', 'tech_stack')
+    fields = ('start_date', 'end_date', 'company_name', 'role', 
+              'bullet_points', 'tech_stack')
+    ordering = ('-start_date',)
+
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'number', 'submitted_date')
     list_filter = ('submitted_date',)
     readonly_fields = ('submitted_date',)
 
-admin.site.register(Education)
-admin.site.register(Experience)
+admin.site.register(Education, EducationAdmin)
+admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Skill)
 admin.site.register(Project)
 admin.site.register(About, AboutAdmin)

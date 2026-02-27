@@ -7,20 +7,45 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 class Education(models.Model):
-    date=models.CharField(max_length=100)
-    title=models.CharField(max_length=100)
-    rank=models.CharField(max_length=100)
-    subject=models.CharField(max_length=100)
+    start_date = models.IntegerField(help_text="Start year (YYYY)")
+    end_date = models.IntegerField(help_text="End year (YYYY)")
+    title = models.CharField(max_length=100, help_text="Degree/Qualification title")
+    institute_name = models.CharField(max_length=100, help_text="Name of institute/university")
+    subject = models.CharField(max_length=100, help_text="Subject/Field of study")
+    
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.start_date}-{self.end_date})"
+    
+    class Meta:
+        ordering = ['-start_date']  # Newest first by default
+        verbose_name_plural = "Education"
 
 class Experience(models.Model):
-    date=models.CharField(max_length=100)
-    title=models.CharField(max_length=100)
-    rank=models.CharField(max_length=100)
-    subject=models.CharField(max_length=100)
+    start_date = models.DateField(help_text="Start date")
+    end_date = models.DateField(help_text="End date (or expected end date)")
+    company_name = models.CharField(max_length=200, help_text="Company/Organization name")
+    role = models.CharField(max_length=200, help_text="Job title/Role")
+    bullet_points = models.TextField(blank=True, help_text="Work description (comma-separated bullet points)")
+    tech_stack = models.CharField(max_length=500, blank=True, help_text="Tech stack (comma-separated)")
+    
     def __str__(self):
-        return self.title
+        return f"{self.role} at {self.company_name} ({self.start_date.strftime('%m/%Y')} - {self.end_date.strftime('%m/%Y')})"
+    
+    def get_bullet_points(self):
+        """Returns a list of non-empty bullet points from comma-separated string"""
+        if self.bullet_points:
+            return [point.strip() for point in self.bullet_points.split(',') if point.strip()]
+        return []
+    
+    def get_tech_list(self):
+        """Returns tech stack as a list"""
+        if self.tech_stack:
+            return [tech.strip() for tech in self.tech_stack.split(',') if tech.strip()]
+        return []
+    
+    class Meta:
+        ordering = ['-start_date']  # Newest first by default
+        verbose_name_plural = "Experience"
 
 class Expertise(models.Model):
     title=models.CharField(max_length=100)

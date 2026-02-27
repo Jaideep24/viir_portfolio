@@ -471,113 +471,263 @@ html {
 
 
 /* --------------------------------------------------------------------------
-   8. TIMELINE SECTION (Experience & Education)
+   8. TIMELINE SECTION (Experience & Education) - Enhanced
    -------------------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
-
-.design-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #1f1f1f;
-    min-height: 100vh;
-    padding: 100px 0;
-    font-family: Jost;
+/* Timeline Container */
+.br-experience {
+    position: relative;
 }
 
-.design {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.education h4,
+.experiense h4 {
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
 }
 
-.timeline {
-    width: 80%;
-    height: auto;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.timeline-content {
-    padding: 20px;
-    background: #1f1f1f;
-    -webkit-box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
-    box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #242424;
-    border-radius: 5px;
-    color: white;
-    padding: 1.75rem;
-    transition: 0.4s ease;
-    overflow-wrap: break-word !important;
-    margin: 1rem;
-    margin-bottom: 20px;
-    border-radius: 6px;
-}
-
-.timeline-component {
-    margin: 0px 20px 20px 20px;
-    width: 26vw;
-}
-
-.timeline-content h3 {
-    color: white !important;
-}
-
+/* Timeline Grid Layout */
 .timeline {
     display: grid;
-    grid-template-columns: 2fr 3px 2fr;
+    grid-template-columns: 1fr 3px 1fr;
+    gap: 0;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
+/* Timeline Middle Line */
 .timeline-middle {
     position: relative;
-    background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+    background: linear-gradient(180deg, #8c6fff, #ff6f6f);
     width: 3px;
     height: 100%;
-}
-
-.main-middle {
-    opacity: 0;
+    margin: 0;
 }
 
 .timeline-circle {
     position: absolute;
-    top: 0;
+    top: 8px;
     left: 50%;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
-    -webkit-transform: translateX(-50%);
+    background: #8c6fff;
     transform: translateX(-50%);
+    box-shadow: 0 0 0 4px rgba(140, 111, 255, 0.2);
+    z-index: 1;
 }
 
-.timeline-date {
-    margin-left: 2%;
-    color: black;
+/* Timeline Components */
+.timeline-component {
+    margin: 0;
+    padding: 2px 20px;
+    width: 100%;
 }
 
-.timeline-date-career {
-    margin-left: 0%;
-    color: black;
-}
-
-.timeline-date-container {
-    width: 10.5vw;
+.timeline-date-container,
+.timeline-date-container-career {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-right: 20px;
+    width: 100%;
 }
 
 .timeline-date-container-career {
-    width: 10vw;
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: 20px;
 }
 
-.timeline-title-white {
-    color: white !important;
+/* Timeline Dates */
+.timeline-date,
+.timeline-date-career {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #8c6fff, #a78bfa);
+    color: #fff;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(140, 111, 255, 0.3);
+}
+
+/* Timeline Content Cards */
+.timeline-content {
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0 0 30px 0;
+    border: 1px solid #e5e7eb;
+}
+
+.timeline-content:hover {
+    box-shadow: 0 8px 30px rgba(140, 111, 255, 0.15);
+    transform: translateY(-4px);
+    border-color: #8c6fff;
+}
+
+.timeline-content h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.timeline-content .sub {
+    display: block;
+    font-size: 14px;
+    color: #8c6fff;
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
 .timeline-subject {
-    color: white;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #6b7280;
+    margin: 8px 0 0 0;
+    word-wrap: break-word;
+}
+
+/* Dark Theme Styles */
+body.dark .education h4,
+body.dark .experiense h4 {
+    color: #e5e7eb;
+}
+
+body.dark .timeline-content {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .timeline-content:hover {
+    box-shadow: 0 8px 30px rgba(140, 111, 255, 0.25);
+    border-color: #8c6fff;
+}
+
+body.dark .timeline-content h3 {
+    color: #f1f5f9;
+}
+
+body.dark .timeline-content .sub {
+    color: #a78bfa;
+}
+
+body.dark .timeline-subject {
+    color: #cbd5e1;
+}
+
+/* Light Theme Styles */
+body.light .education h4,
+body.light .experiense h4 {
+    color: #1f2937;
+}
+
+body.light .timeline-content {
+    background: #ffffff;
+    border-color: #e5e7eb;
+}
+
+body.light .timeline-content h3 {
+    color: #1f2937;
+}
+
+body.light .timeline-content .sub {
+    color: #8c6fff;
+}
+
+body.light .timeline-subject {
+    color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .timeline {
+        grid-template-columns: 3px 1fr;
+        gap: 0;
+    }
+    
+    .timeline-date-container,
+    .timeline-date-container-career {
+        grid-column: 2;
+        justify-content: flex-start;
+        padding: 0 0 5px 0 !important;
+        margin-left: 20px;
+    }
+    
+    .timeline-middle {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    
+    .timeline-component.timeline-content {
+        grid-column: 2;
+        margin: 0 0 30px 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .education h4,
+    .experiense h4 {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .timeline-date,
+    .timeline-date-career {
+        font-size: 11px;
+        padding: 5px 12px;
+    }
+    
+    .timeline-content {
+        padding: 18px !important;
+        margin-left: 15px !important;
+    }
+    
+    .timeline-content h3 {
+        font-size: 17px;
+    }
+    
+    .timeline-subject {
+        font-size: 13px;
+    }
+    
+    .timeline-date-container,
+    .timeline-date-container-career {
+        margin-left: 15px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .timeline-content {
+        padding: 16px !important;
+        margin-left: 15px !important;
+    }
+    
+    .timeline-content h3 {
+        font-size: 16px;
+    }
+    
+    .timeline-content .sub {
+        font-size: 13px;
+    }
+    
+    .timeline-date-container,
+    .timeline-date-container-career {
+        margin-left: 15px !important;
+    }
 }
 
 

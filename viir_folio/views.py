@@ -13,12 +13,22 @@ from django.core.mail import EmailMessage
 # Create your views here.
 def parse_date_ran(date_range_str):
     """
-    Convert 'August - September, 2023' or 'June, 2022' → datetime object for sorting
+    Convert date range strings to datetime object for sorting
+    Handles formats:
+    - 'dd/mm/yyyy - dd/mm/yyyy' (e.g., '01/06/2023 - 31/08/2023')
+    - 'August - September, 2023'
+    - 'June, 2022'
     """
-    # Normalize spacing
     text = date_range_str.strip()
 
-    # Case 1: 'August - September, 2023'
+    # Case 1: 'dd/mm/yyyy - dd/mm/yyyy' format (Career Path)
+    match_ddmmyyyy = re.match(r'(\d{2})/(\d{2})/(\d{4})\s*-\s*(\d{2})/(\d{2})/(\d{4})', text)
+    if match_ddmmyyyy:
+        day1, month1, year1, day2, month2, year2 = match_ddmmyyyy.groups()
+        # Use the start date for sorting
+        return datetime(int(year1), int(month1), int(day1))
+
+    # Case 2: 'August - September, 2023'
     match_range = re.match(r'([A-Za-z]+)\s*-\s*([A-Za-z]+),\s*(\d{4})', text)
     if match_range:
         start_month_str, end_month_str, year = match_range.groups()
@@ -28,7 +38,7 @@ def parse_date_ran(date_range_str):
             start_month = 1
         return datetime(int(year), start_month, 1)
 
-    # Case 2: 'June, 2022'
+    # Case 3: 'June, 2022'
     match_single = re.match(r'([A-Za-z]+),\s*(\d{4})', text)
     if match_single:
         month_str, year = match_single.groups()
@@ -41,26 +51,53 @@ def parse_date_ran(date_range_str):
     # Fallback
     return datetime.min
 def parse_date_range(date_range_str):
-    """Converts 'June, 2024 - 2027' → datetime(2024, 6, 1) for sorting"""
-    match = re.match(r'([A-Za-z]+),?\s*(\d{4})', date_range_str)
+    """
+    Convert date range strings to datetime object for sorting
+    Handles formats:
+    - 'yyyy - yyyy' (e.g., '2020 - 2024') - Academics year to year
+    - 'June, 2024 - 2027'
+    - 'June, 2024'
+    """
+    text = date_range_str.strip()
+    
+    # Case 1: 'yyyy - yyyy' format (Academics)
+    match_year_range = re.match(r'(\d{4})\s*-\s*(\d{4})', text)
+    if match_year_range:
+        start_year, end_year = match_year_range.groups()
+        # Use the start year for sorting
+        return datetime(int(start_year), 1, 1)
+    
+    # Case 2: 'June, 2024 - 2027'
+    match_month_year_range = re.match(r'([A-Za-z]+),?\s*(\d{4})\s*-\s*(\d{4})', text)
+    if match_month_year_range:
+        month_str, start_year, end_year = match_month_year_range.groups()
+        try:
+            month = datetime.strptime(month_str, "%B").month
+        except ValueError:
+            month = 1
+        return datetime(int(start_year), month, 1)
+    
+    # Case 3: 'June, 2024'
+    match = re.match(r'([A-Za-z]+),?\s*(\d{4})', text)
     if match:
         month_str, year = match.groups()
         try:
             month = datetime.strptime(month_str, "%B").month
         except ValueError:
-            month = 1  # default fallback
+            month = 1
         return datetime(int(year), month, 1)
-    return datetime.min  # fallback if parsing fails
+    
+    return datetime.min
 
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
 def index(request):
     active_item = certificate.objects.filter(show=True).first()
-    experiences = list(Experience.objects.all())
-    experiences.sort(key=lambda exp: parse_date_ran(exp.date), reverse=True)
-    education = list(Education.objects.all())
-    education.sort(key=lambda exp: parse_date_range(exp.date), reverse=True)
+    # Experience now has start_date and end_date as DateField
+    experiences = Experience.objects.all().order_by('-start_date')
+    # Education now has start_date and end_date as integer fields
+    education = Education.objects.all().order_by('-start_date')
     
     context = {
         "education": education,

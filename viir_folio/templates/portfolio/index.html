@@ -381,14 +381,14 @@
                         <div class="timeline">
                             {% for object in education %}
                             <div id="date-container" class="timeline-component timeline-date-container">
-                                <h5 id="date" class="timeline-date">{{ object.date }}</h5>
+                                <h5 id="date" class="timeline-date">{{ object.start_date }} - {{ object.end_date }}</h5>
                             </div>
                             <div id="circle" class="timeline-middle">
                                 <div class="timeline-circle"></div>
                             </div>
                             <div id="content" class="timeline-component timeline-content">
                                 <h3>{{ object.title }}</h3>
-                                <span class="sub">{{ object.rank }}</span>
+                                <span class="sub">{{ object.institute_name }}</span>
                                 <h5 class="timeline-subject">{{ object.subject }}</h5>
                             </div>
                             {% endfor %}
@@ -403,15 +403,16 @@
                         <div class="timeline">
                             {% for object in experience %}
                             <div class="timeline-component timeline-date-container-career">
-                                <h5 id="date" class="timeline-date-career">{{ object.date }}</h5>
+                                <h5 id="date" class="timeline-date-career">{{ object.start_date|date:"d/m/Y" }} - {{ object.end_date|date:"d/m/Y" }}</h5>
                             </div>
                             <div id="circle" class="timeline-middle">
                                 <div class="timeline-circle"></div>
                             </div>
                             <div id="content" class="timeline-component timeline-content">
-                                <h3 class="timeline-title-white">{{ object.title }}</h3>
-                                <span class="sub">{{ object.rank }}</span>
-                                <h5 class="timeline-subject">{{ object.subject }}</h5>
+                                <h3 class="timeline-title-white">{{ object.role }}</h3>
+                                <span class="sub">{{ object.company_name }}</span>
+                                <h5 class="timeline-subject">{{ object.bullet_points }}</h5>
+                                <h5 class="timeline-subject">{{ object.tech_stack }}</h5>
                             </div>
                             {% endfor %}
                         </div>

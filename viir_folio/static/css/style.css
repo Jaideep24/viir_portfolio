@@ -1252,7 +1252,6 @@ header button:hover {
   line-height: 24px;
   font-weight: 700;
   font-family: "Poppins, sans-serif";
-  color: #333;
   text-align: center;
 }
 
@@ -1260,61 +1259,15 @@ header button:hover {
   padding: 0;
   margin: 0;
   list-style: none;
-
-
 }
 
 .br-experience .timeline .timeline-item {
   position: relative;
 }
 
-.br-experience .timeline li {
-  margin: 0 0 48px 0;
-  padding: 30px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.06);
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.06);
-  background: #fff;
-  border: 1px solid #dfdfdf;
-}
-
-.br-experience .timeline li:last-child {
-  margin: 0;
-}
-
-.br-experience .timeline li .timeline-info {
-  margin-top: -40px;
-  margin-bottom: 30px;
-}
-
-.br-experience .timeline li .timeline-info span {
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  padding: 10px 15px;
-  background: #8c6fff;
-  color: #fff;
-  border-radius: 30px;
-  -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.09);
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.09);
-  border: 1px solid #dfdfdf;
-}
-
-.br-experience .timeline li:hover .timeline-info span {}
-
-.timeline-info span {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.timeline-item:last-child,
-.timeline-item:after {
-  content: none;
-}
-
+/* Timeline content title styling */
 .timeline-content .timeline-title {
-  margin-top: 15px;
+  margin-top: 0;
   color: #8c6fff;
   font-size: 18px;
   line-height: 22px;
@@ -1322,9 +1275,11 @@ header button:hover {
 }
 
 .timeline-content .timeline-title .sub {
-  margin-left: 15px;
+  margin-left: 0;
+  display: block;
   color: #777;
   font-size: 14px;
+  margin-top: 5px;
 }
 
 .timeline-content p {
