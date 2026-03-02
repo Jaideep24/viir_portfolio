@@ -24,10 +24,16 @@ if (hamburger && navMenu) {
 
 // ---- Theme toggle (dark / light) ----
 document.addEventListener("DOMContentLoaded", () => {
-    // Apply theme on load based on localStorage
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    document.body.classList.toggle("light", !isDarkMode);
-    document.body.classList.toggle("dark", isDarkMode);
+    // Get theme from localStorage or from window.__isDarkMode set in head
+    const isDarkMode = typeof window.__isDarkMode !== 'undefined' 
+        ? window.__isDarkMode 
+        : localStorage.getItem('darkMode') === 'true';
+    
+    // Ensure classes are applied (may already be applied by inline script)
+    if (!document.body.classList.contains('dark') && !document.body.classList.contains('light')) {
+        document.body.classList.toggle("light", !isDarkMode);
+        document.body.classList.toggle("dark", isDarkMode);
+    }
 
     const toggleCheckbox = document.getElementById("toggle");
     if (toggleCheckbox) toggleCheckbox.checked = isDarkMode;
@@ -49,7 +55,7 @@ function toggleStyles() {
     localStorage.setItem("darkMode", newMode);
 
     const toggleCheckbox = document.getElementById("toggle");
-    if (toggleCheckbox) toggleCheckbox.checked = !newMode;
+    if (toggleCheckbox) toggleCheckbox.checked = newMode;
 
     applyDarkModeStyles(newMode);
 }

@@ -18,9 +18,22 @@
 
   <!-- Page Styles -->
   <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}">
+  
+  <!-- Theme Initialization -->
+  <script>
+    (function() {
+      const isDarkMode = localStorage.getItem('darkMode') === 'true';
+      window.__theme = isDarkMode ? 'dark' : 'light';
+      window.__isDarkMode = isDarkMode;
+    })();
+  </script>
 </head>
 
 <body>
+  <!-- Apply theme class immediately -->
+  <script>
+    document.body.classList.add(window.__theme || 'dark');
+  </script>
   <header class="header">
     <nav class="navbar bi2-navbar">
       <div class="container-fluid nav-container bi2-nav-container">

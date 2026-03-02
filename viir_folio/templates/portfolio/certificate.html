@@ -1,20 +1,28 @@
 {% extends 'portfolio/index.html' %}
 {% load static %}
+
 {% block content %}
 <style>
+/* Disable all animations and transitions on certificate page - but not on section-title */
+section.br-experience *:not(.section-title):not(.section-title *) {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
 .nav-link {
     text-decoration: none;
     color: #fff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: none;
     position: relative;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: #4f46e5;
+    color: #fff;
 }
 
 @media (max-width: 700px) {
@@ -40,9 +48,8 @@
 .certificate-timeline {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 30px;
     justify-content: center;
-    width: 98vw;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -50,64 +57,51 @@
 
 .timeline-item {
     width: 97%;
-    height: 140px;
-    background: transparent;
-    border-radius: 0;
-    padding: 18px 20px;
+    min-height: 140px;
+    border-radius: 12px;
+    padding: 30px 20px 18px 20px;
     box-shadow: none;
     border: none;
-    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.timeline-item:hover {
-    transform: none;
-    box-shadow: none;
+    position: relative;
 }
 
 @media screen and (min-width:500px){
     .timeline-item{
         min-width: 453px;
-        width: 40%;
+        width: 45%;
     }
 }
 
 @media screen and (max-width:480px){
     .timeline-item{
-        height: 170px;
+        min-height: 170px;
     }
 }
 
-/* Date Badge - Purple Capsule */
-.timeline-info {
-    display: flex;
-}
-
-.timeline-info span {
+/* Date Badge - Match publication card styling */
+.timeline-date {
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    z-index: 10;
     display: inline-block;
     background: #8b5cf6;
     color: #ffffff;
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: bold;
+    font-size: 0.75rem;
     padding: 6px 14px;
-    border-radius: 20px;
+    border-radius: 999px;
     border: none;
+    box-shadow: none;
 }
 
 /* Content */
-.timeline-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.timeline-content .timeline-title {
+.timeline-title {
     font-size: 1.05rem;
     font-weight: 600;
-    color: #1f2937;
     margin: 0;
     line-height: 1.4;
     word-wrap: break-word;
@@ -115,8 +109,7 @@
     white-space: normal;
 }
 
-.timeline-content .timeline-title .sub {
-    color: #4f46e5;
+.timeline-title .sub {
     font-weight: 500;
     font-size: 0.85rem;
     display: inline;
@@ -124,8 +117,7 @@
     overflow-wrap: break-word;
 }
 
-.timeline-content p {
-    color: #6b7280;
+.timeline-item p {
     font-size: 0.9rem;
     margin: 0;
     display: flex;
@@ -137,9 +129,7 @@
 .br-learn-more-right {
     display: inline-block;
     padding: 8px 24px;
-    border: 1.5px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
-    color: #d0d0d0;
     font-family: "Quicksand", "Poppins", sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -147,18 +137,9 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    transition: all 0.35s ease;
     background: transparent;
     position: relative;
     overflow: hidden;
-}
-
-.br-learn-more-right:hover {
-    background: linear-gradient(#8c6fff);
-    border-color: transparent;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
 }
 
 .br-learn-more-right::after {
@@ -166,94 +147,95 @@
 }
 
 /* Dark Theme */
-body.dark .timeline-content .timeline-title {
+body.dark .timeline-item {
+    background: #202337;
+    border: none;
+}
+
+body.dark .timeline-title {
     color: #f1f5f9;
 }
 
-body.dark .timeline-content p {
+body.dark .timeline-title .sub {
+    color: #a78bfa;
+}
+
+body.dark .timeline-item p {
     color: #94a3b8;
 }
 
 body.dark .br-learn-more-right {
     color: #d0d0d0;
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-body.dark .br-learn-more-right:hover {
-    background: linear-gradient(#8c6fff);
-    border-color: transparent;
-    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Light Theme */
-body.light .timeline-content .timeline-title {
+body.light .timeline-item {
+    background: #ffffff;
+    border: none;
+}
+
+body.light .timeline-title {
     color: #1f2937;
 }
 
-body.light .timeline-content p {
+body.light .timeline-title .sub {
+    color: #4f46e5;
+}
+
+body.light .timeline-item p {
     color: #6b7280;
 }
 
 body.light .br-learn-more-right {
     color: #6b7280;
-    border-color: rgba(107, 114, 128, 0.4);
+    border: 1.5px solid rgba(107, 114, 128, 0.4);
 }
 
-body.light .br-learn-more-right:hover {
-    background: linear-gradient(#8c6fff);
-    border-color: transparent;
-    color: #fff;
-}
-
-.container {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-}
-
-/* Force remove all background boxes */
+/* Force remove background from container only */
 section.br-experience,
 section.br-experience .container,
 section.br-experience .row,
-section.br-experience .certificate-timeline,
-section.br-experience .timeline-item {
+section.br-experience .certificate-timeline {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
+
+/* Hide hamburger menu on certificate page */
+.br-sidebar-toggle,
+.sidebar-toggle-btn {
+    display: none !important;
+}
+
+
 </style>
 
 <section class="br-experience padding-tb-80">
     <div class="container">
-        <div class="row" style="width:99vw;">
-            <center>
-                <div class="section-title">
-                    <h2>My <span>Certificates</span></h2>
-                    <span class="ligh-title">Certificates</span>
-                </div>
-            </center>
-            
+        <div class="row">
+            <div class="section-title">
+                <h2>My <span>Certificates</span></h2>
+                <span class="ligh-title">Certificates</span>
+            </div>
             <ul class="certificate-timeline">
-                {% for object in certificate %}
-                <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                    <div class="timeline-info">
-                        <span>{{ object.date|date:"M d, Y" }}</span>
-                    </div>
-                    <div class="timeline-content">
-                        <h5 class="timeline-title">
-                            {{ object.title }}
-                            <span class="sub">- {{ object.criteria }}</span>
-                        </h5>
-                        <p>
-                            {{ object.platorm }}
-                            <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
-                                <span class="text">View Certificate</span>
-                            </a>
-                        </p>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+            {% for object in certificate %}
+            <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                <span class="timeline-date">{{ object.date|date:"M d, Y" }}</span>
+                <h5 class="timeline-title">
+                    {{ object.title }}
+                    <span class="sub">- {{ object.criteria }}</span>
+                </h5>
+                <p>
+                    {{ object.platorm }}
+                    <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
+                        <span class="text">View Certificate</span>
+                    </a>
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
         </div>
     </div>
 </section>

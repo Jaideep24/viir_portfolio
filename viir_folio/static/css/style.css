@@ -78,10 +78,20 @@ p {
   line-height: 29px;
   font-weight: 700;
   font-family: "Quicksand";
+  position: relative;
+  z-index: 2;
 }
 
 .section-title h2 span {
   color: #ff6f6f;
+}
+
+body.dark .section-title h2 {
+  color: #EEEEEE;
+}
+
+body.light .section-title h2 {
+  color: #000000;
 }
 
 .section-title .ligh-title {
@@ -98,6 +108,40 @@ p {
   opacity: 0.12;
   -webkit-transform: translateY(-100%);
   transform: translateY(-100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body.dark .section-title .ligh-title {
+  color: #202337;
+  opacity: 0.12;
+}
+
+body.light .section-title .ligh-title {
+  color: #EEEEEE;
+  opacity: 0.05;
+}
+
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 28px;
+    padding: 40px 0 30px 0;
+  }
+  
+  .section-title .ligh-title {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 24px;
+    padding: 30px 0 25px 0;
+  }
+  
+  .section-title .ligh-title {
+    font-size: 60px;
+  }
 }
 
 .br-loader {
