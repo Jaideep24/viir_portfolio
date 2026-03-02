@@ -916,6 +916,7 @@ header button:hover {
   position: relative;
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
+  perspective: 1000px;
 }
 
 .service-box .main-box:hover .box-front {
