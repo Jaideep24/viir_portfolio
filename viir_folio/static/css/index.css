@@ -1544,3 +1544,45 @@ body.light {
         padding: 0px;
     }
 }
+
+/* --------------------------------------------------------------------------
+   10. CUSTOM ANIMATED CURSOR
+   -------------------------------------------------------------------------- */
+body,
+a,
+button,
+.nav-link,
+.filter,
+.circle-icon,
+.br-nav,
+.br-sidebar-toggle {
+    cursor: none !important;
+}
+
+input,
+textarea {
+    cursor: text !important;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 999999;
+    mix-blend-mode: difference;
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hover effect classes */
+.custom-cursor.hover {
+    width: 75px;
+    height: 75px;
+    background-color: white;
+    /* Maintain solid white so the difference blend works perfectly */
+}

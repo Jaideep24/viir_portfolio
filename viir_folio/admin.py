@@ -4,21 +4,47 @@ from .models import *
 # Register your models here.
 class AboutAdmin(admin.ModelAdmin):
     list_display = ('name', 'birthdate', 'email', 'phone_no')
-    fields = ('content', 'name', 'birthdate', 'language', 'phone_no', 'email', 'address', 'image')
+    fieldsets = (
+        ('Personal Identity', {
+            'fields': ('name', 'image', 'birthdate')
+        }),
+        ('Contact Information', {
+            'fields': ('email', 'phone_no', 'address')
+        }),
+        ('Additional Info', {
+            'fields': ('content', 'language')
+        }),
+    )
 
 class EducationAdmin(admin.ModelAdmin):
     list_display = ('title', 'institute_name', 'start_date', 'end_date', 'is_ongoing', 'subject')
     list_filter = ('start_date', 'end_date', 'is_ongoing')
     search_fields = ('title', 'institute_name', 'subject')
-    fields = ('start_date', 'end_date', 'is_ongoing', 'title', 'institute_name', 'subject')
+    fieldsets = (
+        ('Academic Details', {
+            'fields': ('title', 'institute_name', 'subject')
+        }),
+        ('Duration & Status', {
+            'fields': ('start_date', 'end_date', 'is_ongoing')
+        }),
+    )
     ordering = ('-start_date',)
 
 class ExperienceAdmin(admin.ModelAdmin):
     list_display = ('role', 'company_name', 'start_date', 'end_date', 'is_ongoing', 'tech_stack')
     list_filter = ('start_date', 'end_date', 'is_ongoing', 'company_name')
     search_fields = ('role', 'company_name', 'tech_stack')
-    fields = ('start_date', 'end_date', 'is_ongoing', 'company_name', 'role', 
-              'bullet_points', 'tech_stack')
+    fieldsets = (
+        ('Job Overview', {
+            'fields': ('role', 'company_name')
+        }),
+        ('Timeline', {
+            'fields': ('start_date', 'end_date', 'is_ongoing')
+        }),
+        ('Responsibilities & Skills', {
+            'fields': ('bullet_points', 'tech_stack'),
+        }),
+    )
     ordering = ('-start_date',)
 
 class ContactAdmin(admin.ModelAdmin):
