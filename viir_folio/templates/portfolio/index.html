@@ -404,7 +404,7 @@
                         <div class="timeline">
                             {% for object in education %}
                             <div id="date-container" class="timeline-component timeline-date-container">
-                                <h5 id="date" class="timeline-date">{{ object.start_date }} - {{ object.end_date }}</h5>
+                                <h5 id="date" class="timeline-date">{{ object.start_date }} &ndash; {% if object.is_ongoing or not object.end_date %}Pursuing{% else %}{{ object.end_date }}{% endif %}</h5>
                             </div>
                             <div id="circle" class="timeline-middle">
                                 <div class="timeline-circle"></div>
@@ -426,8 +426,7 @@
                         <div class="timeline">
                             {% for object in experience %}
                             <div class="timeline-component timeline-date-container-career">
-                                <h5 id="date" class="timeline-date-career">{{ object.start_date|date:"d/m/Y" }} -
-                                    {{object.end_date|date:"d/m/Y" }}</h5>
+                                <h5 id="date" class="timeline-date-career">{{ object.start_date|date:"N j, Y" }} &ndash; {% if object.is_ongoing or not object.end_date %}Present{% else %}{{ object.end_date|date:"N j, Y" }}{% endif %}</h5>
                             </div>
                             <div id="circle" class="timeline-middle">
                                 <div class="timeline-circle"></div>

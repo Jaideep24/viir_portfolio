@@ -36,15 +36,23 @@ html {
    -------------------------------------------------------------------------- */
 
 section {
-    position: absolute;
-    width: 100vw;
-    height: 85vh;
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 56px);
+    /* Exact height, never flex-expand */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2px;
     flex-wrap: wrap;
     overflow: hidden;
+    /* Clip overflowing matrix boxes */
+    background: var(--section-bg, #ECF0F1);
+    transition: background-color 1.5s;
+}
+
+body.dark section {
+    --section-bg: #111;
 }
 
 section::before {
@@ -71,9 +79,13 @@ section::before {
     display: block;
     width: calc(6.25vw - 2px);
     height: calc(6.25vw - 2px);
-    background: #181818;
+    background: var(--grid-cell, #ECF0F1);
     z-index: 2;
     transition: 1.5s;
+}
+
+body.dark .green {
+    --grid-cell: #181818;
 }
 
 .green:hover {
@@ -81,33 +93,23 @@ section::before {
     transition: 0s;
 }
 
-.blue {
-    position: relative;
-    display: block;
-    width: calc(6.25vw - 2px);
-    height: calc(6.25vw - 2px);
-    background: #ECF0F1;
-    z-index: 2;
-    transition: 1.5s;
-}
-
-.blue:hover {
-    background: #0f0;
-    transition: 0s;
-}
-
 section .signin {
     position: absolute;
     width: 400px;
-    background: #222;
+    background: var(--card-bg, #fff);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px;
     border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    color: var(--text-color, #333);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark section .signin {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-    color: white;
 }
 
 section .signin .content {
@@ -435,9 +437,9 @@ input[type="submit"].enabled {
     background: transparent !important;
     border: none !important;
     transition:
-        color      0.28s ease,
+        color 0.28s ease,
         background 0.28s ease,
-        transform  0.2s ease,
+        transform 0.2s ease,
         box-shadow 0.28s ease;
     white-space: nowrap;
     line-height: 1;
@@ -485,8 +487,17 @@ input[type="submit"].enabled {
 }
 
 @keyframes blog-icon-pulse {
-    0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0px #fff); }
-    50%       { transform: scale(1.2); filter: drop-shadow(0 0 5px rgba(255,255,255,0.8)); }
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px #fff);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    }
 }
 
 /* Ambient glow ring */
@@ -502,8 +513,17 @@ input[type="submit"].enabled {
 }
 
 @keyframes blog-ring-pulse {
-    0%, 100% { opacity: 0;    transform: scale(1); }
-    50%       { opacity: 0.3;  transform: scale(1.06); }
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.06);
+    }
 }
 
 /* ── Responsive ─────────────────────────────────────── */
@@ -512,6 +532,7 @@ input[type="submit"].enabled {
         right: 8px;
         padding: 3px;
     }
+
     .blog-nav__link {
         padding: 6px 12px !important;
         font-size: 11px !important;
@@ -520,8 +541,16 @@ input[type="submit"].enabled {
 }
 
 @media (max-width: 420px) {
-    .blog-nav__link span { display: none; }
-    .blog-nav__link { padding: 7px 11px !important; }
+    .blog-nav__link span {
+        display: none;
+    }
+
+    .blog-nav__link {
+        padding: 7px 11px !important;
+    }
+
     .blog-nav__link .fas,
-    .blog-nav__link .fa  { font-size: 15px; }
+    .blog-nav__link .fa {
+        font-size: 15px;
+    }
 }

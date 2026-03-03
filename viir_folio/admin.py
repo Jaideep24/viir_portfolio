@@ -7,17 +7,17 @@ class AboutAdmin(admin.ModelAdmin):
     fields = ('content', 'name', 'birthdate', 'language', 'phone_no', 'email', 'address', 'image')
 
 class EducationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'institute_name', 'start_date', 'end_date', 'subject')
-    list_filter = ('start_date', 'end_date')
+    list_display = ('title', 'institute_name', 'start_date', 'end_date', 'is_ongoing', 'subject')
+    list_filter = ('start_date', 'end_date', 'is_ongoing')
     search_fields = ('title', 'institute_name', 'subject')
-    fields = ('start_date', 'end_date', 'title', 'institute_name', 'subject')
+    fields = ('start_date', 'end_date', 'is_ongoing', 'title', 'institute_name', 'subject')
     ordering = ('-start_date',)
 
 class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('role', 'company_name', 'start_date', 'end_date', 'tech_stack')
-    list_filter = ('start_date', 'end_date', 'company_name')
+    list_display = ('role', 'company_name', 'start_date', 'end_date', 'is_ongoing', 'tech_stack')
+    list_filter = ('start_date', 'end_date', 'is_ongoing', 'company_name')
     search_fields = ('role', 'company_name', 'tech_stack')
-    fields = ('start_date', 'end_date', 'company_name', 'role', 
+    fields = ('start_date', 'end_date', 'is_ongoing', 'company_name', 'role', 
               'bullet_points', 'tech_stack')
     ordering = ('-start_date',)
 

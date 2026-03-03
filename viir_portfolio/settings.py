@@ -85,7 +85,7 @@ ROOT_URLCONF = 'viir_portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'viir_folio' / 'templates'],  # Global template lookup
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,7 +144,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# Explicitly add DD/MM/YYYY formatting support for inputting dates in Admin globally
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y', '%d/%m/%y', # '25/10/2006', '25/10/06'
+    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+]
 
 # Logging Configuration
 LOG_DIR = BASE_DIR / 'logs'

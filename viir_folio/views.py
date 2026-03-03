@@ -245,7 +245,7 @@ class DetailArticleView(DetailView):
 class DeleteArticleView(DeleteView):
     model = Article
     template_name = 'blog/blog_delete.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('login')  # resolves to /blogspace/edit/
 
 class CreateBlogView(View):
     template_name = 'blog/editor.html'
@@ -278,4 +278,9 @@ class UpdateBlogView(UpdateView):
     model = Article
     fields = ["title", "content", "image"]
     template_name = 'blog/update_blog.html'
-    success_url = '/edit' 
+    success_url = '/blogspace/edit'
+
+
+def custom_404(request, exception=None):
+    """Custom 404 error page — rendered when DEBUG=False in production."""
+    return render(request, '404.html', status=404)

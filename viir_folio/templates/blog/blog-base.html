@@ -130,10 +130,12 @@
           <a href="/#blog" class="blog-nav__link">
             <i class="fas fa-house"></i><span>Home</span>
           </a>
-          <a href="/blogspace" class="blog-nav__link blog-nav__link--active">
+          <a href="/blogspace"
+            class="blog-nav__link {% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %}blog-nav__link--active{% endif %}">
             <i class="fas fa-newspaper"></i><span>BlogSpace</span>
           </a>
-          <a href="/edit" class="blog-nav__link">
+          <a href="/blogspace/edit"
+            class="blog-nav__link {% if request.resolver_match.url_name in 'login,create_blog,updateview,delete_article' %}blog-nav__link--active{% endif %}">
             <i class="fas fa-pen"></i><span>Write</span>
           </a>
         </div>

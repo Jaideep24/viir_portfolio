@@ -26,8 +26,13 @@ urlpatterns = [
     path('blogspace/<int:pk>/delete', DeleteArticleView.as_view(), name='delete_article'),
     path('blogspace/<int:pk>/update', UpdateBlogView.as_view(), name='updateview'),
     path('create/', CreateBlogView.as_view(), name='create_blog'),
-    path('edit/', view, name='login'),
+    path('blogspace/edit/', view, name='login'),
     path('certificate/', certificate_view),
+    # Dev preview: visit /404-preview/ to see the custom 404 page (works with DEBUG=True too)
+    path('404-preview/', custom_404),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Custom 404 handler (active when DEBUG=False in production)
+handler404 = 'viir_folio.views.custom_404'
