@@ -16,13 +16,22 @@ html {
     background-color: #F0FFFF;
 }
 
+body.dark {
+    background-color: #0c0e22;
+}
+
+body.light {
+    background-color: #E6F4FF;
+}
+
+
 .br-loader-hidden {
     display: none;
 }
 
 .theme-toggle-svg {
     width: 12vw;
-    max-width: 90px;
+    max-width: 75px;
 }
 
 /* Grid Canvas Background */
@@ -132,6 +141,183 @@ html {
 
 
 /* --------------------------------------------------------------------------
+   CERTIFICATE PAGE — Segmented nav (Home / Certificates)
+   -------------------------------------------------------------------------- */
+
+/* ── Container: deep glass pill ────────────────────────────── */
+.cert-nav {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: rgba(10, 10, 25, 0.55);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* ── Individual tab link ────────────────────────────────────── */
+.cert-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Poppins", "Quicksand", sans-serif;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    background: transparent;
+    border: none;
+    transition:
+        color 0.28s ease,
+        background 0.28s ease,
+        transform 0.2s ease,
+        box-shadow 0.28s ease;
+    white-space: nowrap;
+}
+
+/* Icon sizing */
+.cert-nav__link .fa {
+    font-size: 12px;
+    opacity: 0.85;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* ── Hover ──────────────────────────────────────────────────── */
+.cert-nav__link:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-1px);
+}
+
+.cert-nav__link:hover .fa {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/* ── Active tab — glowing gradient pill ─────────────────────── */
+.cert-nav__link--active {
+    color: #fff !important;
+    background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%);
+    box-shadow:
+        0 0 0 2.5px rgba(140, 111, 255, 0.35),
+        0 4px 20px rgba(140, 111, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+}
+
+.cert-nav__link--active .fa {
+    opacity: 1;
+    animation: cert-icon-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes cert-icon-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px #fff);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+    }
+}
+
+/* Subtle live ring around active tab */
+.cert-nav__link--active::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #8c6fff, #e07fff);
+    opacity: 0;
+    z-index: -1;
+    animation: cert-ring-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes cert-ring-pulse {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: scale(1.05);
+    }
+}
+
+/* ── Light theme ────────────────────────────────────────────── */
+body.light .cert-nav {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 0, 0, 0.07);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.light .cert-nav__link {
+    color: rgba(20, 20, 40, 0.45);
+}
+
+body.light .cert-nav__link:hover {
+    color: #8c6fff;
+    background: rgba(140, 111, 255, 0.08);
+}
+
+body.light .cert-nav__link--active {
+    color: #fff !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .cert-nav {
+        right: 10px;
+        padding: 3px;
+    }
+
+    .cert-nav__link {
+        padding: 6px 13px;
+        font-size: 11px;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    /* Hide text labels on very small screens, keep icons */
+    .cert-nav__link span {
+        display: none;
+    }
+
+    .cert-nav__link {
+        padding: 7px 12px;
+    }
+
+    .cert-nav__link .fa {
+        font-size: 14px;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
    2. SECTION TRANSITIONS (vanish animation)
    -------------------------------------------------------------------------- */
 
@@ -175,6 +361,18 @@ html {
 
 .navbar-toggle-wrap {
     position: absolute;
+    top: 50%;
+    right: 320px;
+    /* Sits just to the left of the .cert-nav pills */
+    transform: translateY(-50%);
+    transition: right 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .navbar-toggle-wrap {
+        right: 15px;
+        /* On smaller screens, just align it to the right border */
+    }
 }
 
 .navbar-title {
@@ -184,8 +382,9 @@ html {
     font-weight: 500;
     position: absolute;
     top: 50%;
-    left: 8px;
+    left: 15px;
     transform: translate(0, -50%);
+    white-space: nowrap;
 }
 
 .navbar-certificates-title {
@@ -220,6 +419,11 @@ html {
     max-height: 40px;
 }
 
+.nav-item.active .br-nav {
+    color: #8b5cf6 !important;
+    font-weight: 600;
+}
+
 /* Certificate-mode: hide hamburger */
 .certi-mode .br-sidebar-toggle {
     opacity: 0;
@@ -241,9 +445,17 @@ html {
     font-size: 17px;
     position: relative;
     display: inline-block;
-    width: 7em;
+    width: 70px;
+    height: 35px;
     cursor: pointer;
-    height: 0px;
+}
+
+.theme-toggle-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #toggle {
@@ -264,11 +476,13 @@ html {
     transition-duration: 0.25s;
 }
 
-#toggle:checked+svg #container {
+#toggle:checked+svg #container,
+body.dark #container {
     fill: #2b4360;
 }
 
-#toggle:checked+svg #button {
+#toggle:checked+svg #button,
+body.dark #button {
     transform: translate(28px, 2.333px);
 }
 
@@ -276,7 +490,8 @@ html {
     opacity: 1;
 }
 
-#toggle:checked+svg #sun {
+#toggle:checked+svg #sun,
+body.dark #sun {
     opacity: 0;
 }
 
@@ -284,7 +499,8 @@ html {
     opacity: 0;
 }
 
-#toggle:checked+svg #moon {
+#toggle:checked+svg #moon,
+body.dark #moon {
     opacity: 1;
 }
 
@@ -292,7 +508,8 @@ html {
     opacity: 1;
 }
 
-#toggle:checked+svg #cloud {
+#toggle:checked+svg #cloud,
+body.dark #cloud {
     opacity: 0;
 }
 
@@ -300,7 +517,8 @@ html {
     opacity: 0;
 }
 
-#toggle:checked+svg #stars {
+#toggle:checked+svg #stars,
+body.dark #stars {
     opacity: 1;
 }
 
@@ -657,7 +875,7 @@ body.light .timeline-subject {
         grid-template-columns: 3px 1fr;
         gap: 0;
     }
-    
+
     .timeline-date-container,
     .timeline-date-container-career {
         grid-column: 2;
@@ -665,12 +883,12 @@ body.light .timeline-subject {
         padding: 0 0 5px 0 !important;
         margin-left: 20px;
     }
-    
+
     .timeline-middle {
         grid-column: 1;
         grid-row: auto;
     }
-    
+
     .timeline-component.timeline-content {
         grid-column: 2;
         margin: 0 0 30px 20px;
@@ -679,31 +897,32 @@ body.light .timeline-subject {
 }
 
 @media (max-width: 768px) {
+
     .education h4,
     .experiense h4 {
         font-size: 20px;
         margin-bottom: 30px;
     }
-    
+
     .timeline-date,
     .timeline-date-career {
         font-size: 11px;
         padding: 5px 12px;
     }
-    
+
     .timeline-content {
         padding: 18px !important;
         margin-left: 15px !important;
     }
-    
+
     .timeline-content h3 {
         font-size: 17px;
     }
-    
+
     .timeline-subject {
         font-size: 13px;
     }
-    
+
     .timeline-date-container,
     .timeline-date-container-career {
         margin-left: 15px !important;
@@ -715,15 +934,15 @@ body.light .timeline-subject {
         padding: 16px !important;
         margin-left: 15px !important;
     }
-    
+
     .timeline-content h3 {
         font-size: 16px;
     }
-    
+
     .timeline-content .sub {
         font-size: 13px;
     }
-    
+
     .timeline-date-container,
     .timeline-date-container-career {
         margin-left: 15px !important;
@@ -814,6 +1033,26 @@ body.light .timeline-subject {
     z-index: 1;
 }
 
+/* View Project button in project cards */
+.br-detail ul li .view-project-btn {
+    margin-top: 4px;
+    list-style: none;
+    color: #d0d0d0 !important;
+    font-size: 10px;
+    padding: 5px 12px;
+    letter-spacing: 0.3px;
+}
+
+.br-detail ul li .view-project-btn:hover {
+    color: #fff !important;
+}
+
+
+/* View Publication button in publication cards */
+.pub-card .capsule-btn {
+    font-size: 11px;
+    padding: 5px 14px;
+}
 
 /* --------------------------------------------------------------------------
    10. PUBLICATIONS SECTION

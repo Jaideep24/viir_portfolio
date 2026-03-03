@@ -25,10 +25,10 @@ if (hamburger && navMenu) {
 // ---- Theme toggle (dark / light) ----
 document.addEventListener("DOMContentLoaded", () => {
     // Get theme from localStorage or from window.__isDarkMode set in head
-    const isDarkMode = typeof window.__isDarkMode !== 'undefined' 
-        ? window.__isDarkMode 
+    const isDarkMode = typeof window.__isDarkMode !== 'undefined'
+        ? window.__isDarkMode
         : localStorage.getItem('darkMode') === 'true';
-    
+
     // Ensure classes are applied (may already be applied by inline script)
     if (!document.body.classList.contains('dark') && !document.body.classList.contains('light')) {
         document.body.classList.toggle("light", !isDarkMode);
@@ -46,7 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function toggleStyles() {
+function toggleStyles(event) {
+    // Prevent the parent <label> from automatically toggling the checkbox a second time natively
+    if (event) event.preventDefault();
+
     const isDark = document.body.classList.contains("dark");
     const newMode = !isDark;
 

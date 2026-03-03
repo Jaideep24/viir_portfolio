@@ -41,6 +41,7 @@ let letterIndex = 0;
 let textElement = document.getElementById('typed-text');
 
 function typeWriter() {
+    if (!textElement) return;
     if (letterIndex < typedTexts[typedIndex].length) {
         textElement.textContent += typedTexts[typedIndex].charAt(letterIndex);
         letterIndex++;
@@ -51,6 +52,7 @@ function typeWriter() {
 }
 
 function erase() {
+    if (!textElement) return;
     if (letterIndex >= 0) {
         const currentText = textElement.textContent.slice(0, -1);
         textElement.textContent = currentText;
@@ -62,7 +64,7 @@ function erase() {
     }
 }
 
-typeWriter();
+if (textElement) typeWriter();
 
 
 /* --------------------------------------------------------------------------
@@ -82,22 +84,25 @@ function calculateAge(birth) {
     return age;
 }
 
-document.getElementById("age").innerHTML =
-    " <span class='title'>Age<b>:</b></span>" + calculateAge(birthDate) + " Years";
+const ageEl = document.getElementById("age");
+if (ageEl) ageEl.innerHTML = " <span class='title'>Age<b>:</b></span>" + calculateAge(birthDate) + " Years";
 
 
 /* --------------------------------------------------------------------------
    3. PUBLICATIONS SEARCH
    -------------------------------------------------------------------------- */
 
-document.getElementById('searchInput').addEventListener('input', function () {
-    const query = this.value.toLowerCase();
-    const cards = document.querySelectorAll('.pub-card');
-    cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(query) ? 'block' : 'none';
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.pub-card');
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(query) ? 'block' : 'none';
+        });
     });
-});
+}
 
 
 /* --------------------------------------------------------------------------
@@ -119,6 +124,8 @@ const lightModeColors = ['#4f46e5', '#1e293b', '#64748b'];
 
 document.addEventListener("DOMContentLoaded", () => {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    // Remove the default class so body.dark / body.light CSS rules fully apply
+    document.body.classList.remove("body-default");
     document.body.classList.toggle("light", !isDarkMode);
     document.body.classList.toggle("dark", isDarkMode);
 
@@ -128,7 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
     applyDarkModeStyles(isDarkMode);
 });
 
-function toggleStyles() {
+function toggleStyles(event) {
+    // Prevent the parent <label> from auto-toggling the checkbox a second time
+    if (event) event.preventDefault();
+
     const isDark = document.body.classList.contains("dark");
     const newMode = !isDark;
 
@@ -137,14 +147,14 @@ function toggleStyles() {
     localStorage.setItem("darkMode", newMode);
 
     const toggleCheckbox = document.getElementById("toggle");
-    if (toggleCheckbox) toggleCheckbox.checked = !newMode;
+    if (toggleCheckbox) toggleCheckbox.checked = newMode;
 
     applyDarkModeStyles(newMode);
 }
 
 function applyDarkModeStyles(isDarkMode) {
     const body = document.body;
-    body.style.backgroundColor = isDarkMode ? "#0c0e22ed" : "#E6F4FF";
+    // Background is handled by body.dark / body.light CSS classes — no inline override needed
 
     // Update grid canvas theme
     if (typeof window.updateGridTheme === 'function') {

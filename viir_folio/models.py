@@ -65,7 +65,7 @@ class Project(models.Model):
     date=models.DateField()
     client=models.CharField(max_length=100)
     tech=models.CharField(max_length=100)
-    url=models.URLField()
+    url=models.URLField(blank=True, null=True)
     category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("graphic","Graphics"),("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
     image=models.ImageField(default="image.png")
     def __str__(self):

@@ -209,11 +209,13 @@ footer .br-footer-detail .br-social ul li a:hover {
     transition-duration: 0.25s;
 }
 
-#toggle:checked+svg #container {
+#toggle:checked+svg #container,
+body.dark #container {
     fill: #2b4360;
 }
 
-#toggle:checked+svg #button {
+#toggle:checked+svg #button,
+body.dark #button {
     transform: translate(28px, 2.333px);
 }
 
@@ -221,7 +223,8 @@ footer .br-footer-detail .br-social ul li a:hover {
     opacity: 1;
 }
 
-#toggle:checked+svg #sun {
+#toggle:checked+svg #sun,
+body.dark #sun {
     opacity: 0;
 }
 
@@ -229,7 +232,8 @@ footer .br-footer-detail .br-social ul li a:hover {
     opacity: 0;
 }
 
-#toggle:checked+svg #moon {
+#toggle:checked+svg #moon,
+body.dark #moon {
     opacity: 1;
 }
 
@@ -237,7 +241,8 @@ footer .br-footer-detail .br-social ul li a:hover {
     opacity: 1;
 }
 
-#toggle:checked+svg #cloud {
+#toggle:checked+svg #cloud,
+body.dark #cloud {
     opacity: 0;
 }
 
@@ -245,7 +250,8 @@ footer .br-footer-detail .br-social ul li a:hover {
     opacity: 0;
 }
 
-#toggle:checked+svg #stars {
+#toggle:checked+svg #stars,
+body.dark #stars {
     opacity: 1;
 }
 
@@ -254,15 +260,19 @@ footer .br-footer-detail .br-social ul li a:hover {
    -------------------------------------------------------------------------- */
 
 .bi2-navbar {
-    height: 50px;
-    background-color: #0B132B;
+    height: 56px !important;
+    background: linear-gradient(90deg, #0B132B 0%, #12102a 100%) !important;
+    border-bottom: 1px solid rgba(140, 111, 255, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 .bi2-nav-container {
     width: 100% !important;
 }
 
+/* Title: "Viir Phuria   BlogSpace" */
 .bi2-logo {
+    opacity: 0;
     color: white;
     font-size: 24px;
     font-family: 'Playfair Display', serif;
@@ -276,34 +286,185 @@ footer .br-footer-detail .br-social ul li a:hover {
     font-weight: 500;
     position: absolute;
     top: 50%;
-    left: 8px;
+    left: 15px;
+    /* Matches navbar-title in index.css */
     transform: translate(0, -50%);
+    white-space: nowrap;
 }
 
+@media (max-width: 600px) {
+    .bi2-logo {
+        opacity: 1;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .bi2-headish {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* Theme toggle wrapper — right side of navbar near the pills */
 .bi2-toggle-wrapper {
-    height: 50px !important;
+    position: absolute;
+    top: 50%;
+    right: 485px;
+    /* Sits to the left of the .blog-nav container */
+    transform: translateY(-50%);
+    height: 56px !important;
     align-items: center;
-    margin-left: auto;
     display: flex;
-    padding-bottom: 15px;
+    transition: right 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .bi2-toggle-wrapper {
+        right: 15px;
+        /* Sits on the right edge when pills collapse into a menu or shrink */
+    }
 }
 
 .bi2-toggle-label {
-    height: 0px;
-    display: flex;
-    align-items: center;
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 35px;
     cursor: pointer;
 }
 
 .bi2-toggle-svg {
-    width: 12vw;
-    max-width: 90px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.bi2-nav-menu {
-    background-color: #0B132B;
-    margin-bottom: 20px;
+
+.blog-nav {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1.5px solid rgba(140, 111, 255, 0.45);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 6px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
+
+/* ── Tab links ──────────────────────────────────────── */
+.blog-nav__link {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 18px !important;
+    border-radius: 50px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    font-family: "Poppins", sans-serif !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    background: transparent !important;
+    border: none !important;
+    white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+
+.blog-nav__link .fas,
+.blog-nav__link .fa {
+    font-size: 12px;
+    opacity: 0.75;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover */
+.blog-nav__link:hover {
+    color: #fff !important;
+    background: rgba(140, 111, 255, 0.18) !important;
+    transform: translateY(-1px);
+    text-decoration: none !important;
+}
+
+.blog-nav__link:hover .fas,
+.blog-nav__link:hover .fa {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/* Active — glowing purple gradient pill */
+.blog-nav__link--active {
+    color: #fff !important;
+    background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%) !important;
+    box-shadow:
+        0 0 0 2.5px rgba(140, 111, 255, 0.4),
+        0 4px 18px rgba(140, 111, 255, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    pointer-events: none;
+    border: none !important;
+}
+
+.blog-nav__link--active .fas,
+.blog-nav__link--active .fa {
+    opacity: 1;
+    animation: blog2-icon-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes blog2-icon-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px #fff);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    }
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .blog-nav {
+        right: 8px;
+        padding: 3px;
+    }
+
+    .blog-nav__link {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+    .blog-nav__link span {
+        display: none;
+    }
+
+    .blog-nav__link {
+        padding: 7px 10px !important;
+    }
+
+    .blog-nav__link .fas,
+    .blog-nav__link .fa {
+        font-size: 15px;
+    }
+}
+
 
 /* --------------------------------------------------------------------------
    SUBSCRIPTION & BUTTONS (blog index 2 content block)

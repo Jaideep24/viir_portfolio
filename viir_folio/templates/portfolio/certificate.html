@@ -3,213 +3,199 @@
 
 {% block content %}
 <style>
-/* Disable all animations and transitions on certificate page - but not on section-title */
-section.br-experience *:not(.section-title):not(.section-title *) {
-    transition: none !important;
-    transform: none !important;
-    animation: none !important;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    font-weight: 500;
-    transition: none;
-    position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #fff;
-}
-
-@media (max-width: 700px) {
-    #headish{
-        opacity: 0;
+    /* Disable all animations and transitions on certificate page - but not on section-title */
+    section.br-experience *:not(.section-title):not(.section-title *) {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
     }
-    #headno{
-        left:8px !important;
+
+    .nav-link {
+        text-decoration: none;
+        color: #fff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        font-weight: 500;
+        transition: none;
+        position: relative;
     }
-    #head{
-        left:85vw !important;
-        top:0.4rem !important;
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: #fff;
     }
-}
 
-@media (max-width: 400px){
-    #head{
-        top:0.2rem !important;
+    @media (max-width: 700px) {
+        #headish {
+            opacity: 0;
+        }
     }
-}
 
-/* Certificate Cards Styling */
-.certificate-timeline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 
-.timeline-item {
-    width: 97%;
-    min-height: 140px;
-    border-radius: 12px;
-    padding: 30px 20px 18px 20px;
-    box-shadow: none;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-}
-
-@media screen and (min-width:500px){
-    .timeline-item{
-        min-width: 453px;
-        width: 45%;
+    /* Certificate Cards Styling */
+    .certificate-timeline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
-}
 
-@media screen and (max-width:480px){
-    .timeline-item{
-        min-height: 170px;
+    .timeline-item {
+        width: 97%;
+        min-height: 140px;
+        border-radius: 12px;
+        padding: 30px 20px 18px 20px;
+        box-shadow: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
     }
-}
 
-/* Date Badge - Match publication card styling */
-.timeline-date {
-    position: absolute;
-    top: -14px;
-    left: 20px;
-    z-index: 10;
-    display: inline-block;
-    background: #8b5cf6;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 0.75rem;
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: none;
-    box-shadow: none;
-}
+    @media screen and (min-width:500px) {
+        .timeline-item {
+            min-width: 453px;
+            width: 45%;
+        }
+    }
 
-/* Content */
-.timeline-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.4;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
+    @media screen and (max-width:480px) {
+        .timeline-item {
+            min-height: 170px;
+        }
+    }
 
-.timeline-title .sub {
-    font-weight: 500;
-    font-size: 0.85rem;
-    display: inline;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
+    /* Date Badge - Match publication card styling */
+    .timeline-date {
+        position: absolute;
+        top: -14px;
+        left: 20px;
+        z-index: 10;
+        display: inline-block;
+        background: #8b5cf6;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 0.75rem;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: none;
+        box-shadow: none;
+    }
 
-.timeline-item p {
-    font-size: 0.9rem;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+    /* Content */
+    .timeline-title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
 
-.br-learn-more-right {
-    display: inline-block;
-    padding: 8px 24px;
-    border-radius: 50px;
-    font-family: "Quicksand", "Poppins", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    background: transparent;
-    position: relative;
-    overflow: hidden;
-}
+    .timeline-title .sub {
+        font-weight: 500;
+        font-size: 0.85rem;
+        display: inline;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 
-.br-learn-more-right::after {
-    content: none;
-}
+    .timeline-item p {
+        font-size: 0.9rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
 
-/* Dark Theme */
-body.dark .timeline-item {
-    background: #202337;
-    border: none;
-}
+    .br-learn-more-right {
+        display: inline-block;
+        padding: 8px 24px;
+        border-radius: 50px;
+        font-family: "Quicksand", "Poppins", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+    }
 
-body.dark .timeline-title {
-    color: #f1f5f9;
-}
+    .br-learn-more-right::after {
+        content: none;
+    }
 
-body.dark .timeline-title .sub {
-    color: #a78bfa;
-}
+    /* Dark Theme */
+    body.dark .timeline-item {
+        background: #202337;
+        border: none;
+    }
 
-body.dark .timeline-item p {
-    color: #94a3b8;
-}
+    body.dark .timeline-title {
+        color: #f1f5f9;
+    }
 
-body.dark .br-learn-more-right {
-    color: #d0d0d0;
-    border: 1.5px solid rgba(255, 255, 255, 0.4);
-}
+    body.dark .timeline-title .sub {
+        color: #a78bfa;
+    }
 
-/* Light Theme */
-body.light .timeline-item {
-    background: #ffffff;
-    border: none;
-}
+    body.dark .timeline-item p {
+        color: #94a3b8;
+    }
 
-body.light .timeline-title {
-    color: #1f2937;
-}
+    body.dark .br-learn-more-right {
+        color: #d0d0d0;
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
+    }
 
-body.light .timeline-title .sub {
-    color: #4f46e5;
-}
+    /* Light Theme */
+    body.light .timeline-item {
+        background: #ffffff;
+        border: none;
+    }
 
-body.light .timeline-item p {
-    color: #6b7280;
-}
+    body.light .timeline-title {
+        color: #1f2937;
+    }
 
-body.light .br-learn-more-right {
-    color: #6b7280;
-    border: 1.5px solid rgba(107, 114, 128, 0.4);
-}
+    body.light .timeline-title .sub {
+        color: #4f46e5;
+    }
 
-/* Force remove background from container only */
-section.br-experience,
-section.br-experience .container,
-section.br-experience .row,
-section.br-experience .certificate-timeline {
-    background: transparent !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-}
+    body.light .timeline-item p {
+        color: #6b7280;
+    }
 
-/* Hide hamburger menu on certificate page */
-.br-sidebar-toggle,
-.sidebar-toggle-btn {
-    display: none !important;
-}
+    body.light .br-learn-more-right {
+        color: #6b7280;
+        border: 1.5px solid rgba(107, 114, 128, 0.4);
+    }
 
+    /* Force remove background from container only */
+    section.br-experience,
+    section.br-experience .container,
+    section.br-experience .row,
+    section.br-experience .certificate-timeline {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
 
+    /* Hide hamburger menu on certificate page */
+    .br-sidebar-toggle,
+    .sidebar-toggle-btn {
+        display: none !important;
+    }
 </style>
 
 <section class="br-experience padding-tb-80">
@@ -220,22 +206,22 @@ section.br-experience .certificate-timeline {
                 <span class="ligh-title">Certificates</span>
             </div>
             <ul class="certificate-timeline">
-            {% for object in certificate %}
-            <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                <span class="timeline-date">{{ object.date|date:"M d, Y" }}</span>
-                <h5 class="timeline-title">
-                    {{ object.title }}
-                    <span class="sub">- {{ object.criteria }}</span>
-                </h5>
-                <p>
-                    {{ object.platorm }}
-                    <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
-                        <span class="text">View Certificate</span>
-                    </a>
-                </p>
-            </li>
-            {% endfor %}
-        </ul>
+                {% for object in certificate %}
+                <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                    <span class="timeline-date">{{ object.date|date:"M d, Y" }}</span>
+                    <h5 class="timeline-title">
+                        {{ object.title }}
+                        <span class="sub">- {{ object.criteria }}</span>
+                    </h5>
+                    <p>
+                        {{ object.platorm }}
+                        <a href="{{ object.url }}" target="_blank" class="br-learn-more-right">
+                            <span class="text">View Certificate</span>
+                        </a>
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </section>

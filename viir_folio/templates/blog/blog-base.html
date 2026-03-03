@@ -18,10 +18,10 @@
 
   <!-- Page Styles -->
   <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}">
-  
+
   <!-- Theme Initialization -->
   <script>
-    (function() {
+    (function () {
       const isDarkMode = localStorage.getItem('darkMode') === 'true';
       window.__theme = isDarkMode ? 'dark' : 'light';
       window.__isDarkMode = isDarkMode;
@@ -40,11 +40,12 @@
         <div class="logo bi2-logo">
           <span>BlogSpace</span>
         </div>
-        <h4 id="headish" class="bi2-headish">Viir Phuria &nbsp &nbsp BlogSpace</h4>
+        <h4 id="headish" class="bi2-headish">Viir Phuria &nbsp;<span style="font-size: 0.8em; opacity: 0.85;">·&nbsp;
+            BlogSpace</span></h4>
         <div id="mytoggle" class="bi2-toggle-wrapper">
           <label id="theme-toggle-button" class="bi2-toggle-label" title="Toggle Dark/Light Mode">
             <input type="checkbox" id="toggle">
-            <svg class="bi2-toggle-svg" onclick="toggleStyles()" viewBox="0 0 69.667 44"
+            <svg class="bi2-toggle-svg" onclick="toggleStyles(event)" viewBox="0 0 69.667 44"
               xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
               <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
 
@@ -61,9 +62,9 @@
                       <circle fill="#f8e664" transform="translate(5.83 5.83)" r="15.167" cy="15.167" cx="15.167"
                         data-name="sun-outer" id="sun-outer-2"></circle>
                     </g>
-                    <g filter="url(#sun)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
+                    <g transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
                       <path fill="rgba(246,254,247,0.29)" transform="translate(9.33 9.33)"
-                        d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun"
+                        d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun-path"
                         id="sun-3"></path>
                     </g>
                     <circle fill="#fcf4b9" transform="translate(8.167 8.167)" r="7" cy="7" cx="7" id="sun-inner">
@@ -124,17 +125,18 @@
             </svg>
           </label>
         </div>
-        <ul class="nav-menu bi2-nav-menu">
-          <li class="nav-item">
-            <a href="/#blog" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="/blogspace" class="nav-link">BlogSpace</a>
-          </li>
-          <li class="nav-item">
-            <a href="/edit" class="nav-link">Write</a>
-          </li>
-        </ul>
+        <!-- Premium segmented nav pill -->
+        <div class="blog-nav">
+          <a href="/#blog" class="blog-nav__link">
+            <i class="fas fa-house"></i><span>Home</span>
+          </a>
+          <a href="/blogspace" class="blog-nav__link blog-nav__link--active">
+            <i class="fas fa-newspaper"></i><span>BlogSpace</span>
+          </a>
+          <a href="/edit" class="blog-nav__link">
+            <i class="fas fa-pen"></i><span>Write</span>
+          </a>
+        </div>
         <div class="hamburger">
           <span class="bar"></span>
           <span class="bar"></span>
