@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (toggleCheckbox) toggleCheckbox.checked = isDarkMode;
 
     applyDarkModeStyles(isDarkMode);
+    if (typeof window.updateGridTheme === 'function') window.updateGridTheme(isDarkMode);
 
     // Apply data-bg attributes for blog card images
     document.querySelectorAll('[data-bg]').forEach(el => {
@@ -61,6 +62,7 @@ function toggleStyles(event) {
     if (toggleCheckbox) toggleCheckbox.checked = newMode;
 
     applyDarkModeStyles(newMode);
+    if (typeof window.updateGridTheme === 'function') window.updateGridTheme(newMode);
 }
 
 // Apply inline styles for legacy elements not using CSS variables

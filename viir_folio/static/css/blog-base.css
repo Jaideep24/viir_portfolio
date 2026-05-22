@@ -14,23 +14,18 @@
     --brand-radius: 8px;
 }
 
-body.dark,
-body.light {
+body.dark {
     --badge: #9f78ff;
     --title: #a48fff;
-}
-
-body.dark,
-body.light {
     background-color: #0c0e22 !important;
     background-image: none !important;
 }
 
-body.dark,
-body.light,
-body.dark body,
-body.light body {
-    background-color: #0c0e22 !important;
+body.light {
+    --badge: #9f78ff;
+    --title: #a48fff;
+    /* lighter background for blog pages in light mode */
+    background-color: #f6f9ff !important;
     background-image: none !important;
 }
 
@@ -40,6 +35,24 @@ body.light body {
 
 html {
     overflow-x: visible;
+}
+
+/* Layout helpers to keep footer at bottom */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main, .main-content, .content-wrapper {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
 }
 
 /* Grid canvas (same as index.css) */
