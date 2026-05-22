@@ -36,21 +36,32 @@
         }
     });
 
-    /*----------------------------- Sidebar js | Toggle Icon OnClick Open sidebar  -----------------------------------*/
-    $(".br-sidebar-toggle").on("click", function () {
-        $(".br-sidebar-overlay").fadeIn();
-        $(".br-sidebar").addClass("br-open");
-    });
+    /*----------------------------- Sidebar js | Shared pages only -----------------------------------*/
+    if (!window.__indexSidebar) {
+        $(".br-sidebar-toggle").on("click", function () {
+            const $sidebar = $(".br-sidebar");
+            const $overlay = $(".br-sidebar-overlay");
+            const isOpen = $sidebar.hasClass("br-open");
 
-    $(".close-sidebar, .nav-link.br-nav").on("click", function () {
-        $(".br-sidebar").removeClass("br-open");
-        $(".br-sidebar-overlay").fadeOut();
-    });
+            if (isOpen) {
+                $sidebar.removeClass("br-open br-sidebar-open");
+                $overlay.stop(true, true).fadeOut();
+            } else {
+                $sidebar.addClass("br-open br-sidebar-open");
+                $overlay.stop(true, true).fadeIn();
+            }
+        });
 
-    $(".br-sidebar-overlay").on("click", function () {
-        $(".br-sidebar").removeClass("br-open");
-        $(".br-sidebar-overlay").fadeOut();
-    });
+        $(".close-sidebar, .nav-link.br-nav").on("click", function () {
+            $(".br-sidebar").removeClass("br-open br-sidebar-open");
+            $(".br-sidebar-overlay").stop(true, true).fadeOut();
+        });
+
+        $(".br-sidebar-overlay").on("click", function () {
+            $(".br-sidebar").removeClass("br-open br-sidebar-open");
+            $(".br-sidebar-overlay").stop(true, true).fadeOut();
+        });
+    }
 
     /*-------------------- Potfolio for Mixit up --------------------*/
     var portfolioContent = $('.portfolio-content');

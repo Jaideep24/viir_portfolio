@@ -66,7 +66,7 @@ function toggleStyles(event) {
 // Apply inline styles for legacy elements not using CSS variables
 function applyDarkModeStyles(isDarkMode) {
     const body = document.body;
-    body.style.backgroundColor = isDarkMode ? "rgba(12, 14, 34, 0.95)" : "#E6F4FF";
+    body.style.backgroundColor = "";
 
     const styles = [
         { selector: "#myself", property: "color", dark: "#EEEEEE", light: "#000000" },

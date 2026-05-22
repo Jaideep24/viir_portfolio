@@ -257,11 +257,25 @@ function design(event) {
    -------------------------------------------------------------------------- */
 
 function menu() {
-    document.querySelector(".br-sidebar").classList.toggle("br-sidebar-open");
+    const sidebar = document.querySelector(".br-sidebar");
+    const overlay = document.querySelector(".br-sidebar-overlay");
+    const isOpen = sidebar.classList.contains("br-sidebar-open");
+
+    if (isOpen) {
+        sidebar.classList.remove("br-sidebar-open", "br-open");
+        if (overlay) overlay.style.display = "none";
+    } else {
+        sidebar.classList.add("br-sidebar-open", "br-open");
+        if (overlay) overlay.style.display = "block";
+    }
 }
 
 function closeSidebar() {
-    document.querySelector(".br-sidebar").classList.remove("br-sidebar-open");
+    const sidebar = document.querySelector(".br-sidebar");
+    const overlay = document.querySelector(".br-sidebar-overlay");
+
+    sidebar.classList.remove("br-sidebar-open", "br-open");
+    if (overlay) overlay.style.display = "none";
 }
 
 document.addEventListener("click", function (event) {
@@ -271,7 +285,7 @@ document.addEventListener("click", function (event) {
     const isClickButton = targetBtn.contains(event.target);
 
     if (!isClickInside && !isClickButton) {
-        document.querySelector(".br-sidebar").classList.remove("br-sidebar-open");
+        closeSidebar();
     }
 });
 
@@ -303,51 +317,5 @@ document.addEventListener('scroll', function () {
 });
 
 /* --------------------------------------------------------------------------
-   10. CUSTOM ANIMATED CURSOR
-   -------------------------------------------------------------------------- */
-const cursor = document.querySelector('.custom-cursor');
-
-if (cursor) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
-    window.addEventListener('mousemove', function (e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Smooth animation using requestAnimationFrame
-    function animateCursor() {
-        // Easing factor creates a fast, organic trailing effect
-        cursorX += (mouseX - cursorX) * 0.35;
-        cursorY += (mouseY - cursorY) * 0.35;
-
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hover effect on links and interactive elements
-    const hoverElements = document.querySelectorAll('a, button, .filter, input, textarea, .br-nav, .br-sidebar-toggle, .circle-icon, .social-icon');
-
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                cursor.style.opacity = '0';
-            } else {
-                cursor.classList.add('hover');
-            }
-        });
-        el.addEventListener('mouseleave', () => {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                cursor.style.opacity = '1';
-            } else {
-                cursor.classList.remove('hover');
-            }
-        });
-    });
-}
+    10. LEGACY CUSTOM CURSOR REMOVED
+    -------------------------------------------------------------------------- */

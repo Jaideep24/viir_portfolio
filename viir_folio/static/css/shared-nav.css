@@ -1,0 +1,194 @@
+/* Shared segmented navigation used by Portfolio and BlogSpace. */
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    position: absolute;
+    right: var(--site-nav-right, 8rem);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(10, 10, 25, 0.55);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    z-index: 1005;
+}
+
+.site-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Poppins", "Quicksand", sans-serif;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    background: transparent;
+    border: none;
+    transition:
+        color 0.28s ease,
+        background 0.28s ease,
+        transform 0.2s ease,
+        box-shadow 0.28s ease;
+    white-space: nowrap;
+}
+
+.site-nav__link .fa,
+.site-nav__link .fas,
+.site-nav__link .far {
+    font-size: 12px;
+    opacity: 0.85;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.site-nav__link:hover {
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-1px);
+}
+
+.site-nav__link:hover .fa,
+.site-nav__link:hover .fas,
+.site-nav__link:hover .far {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.site-nav__link--active {
+    color: #fff !important;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    box-shadow:
+        0 0 0 2px rgba(159, 120, 255, 0.35),
+        0 4px 20px rgba(140, 111, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+}
+
+.site-nav__link--active .fa,
+.site-nav__link--active .fas,
+.site-nav__link--active .far {
+    opacity: 1;
+    animation: site-nav-icon-pulse 2.5s ease-in-out infinite;
+}
+
+.site-nav__link--active::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #8c6fff, #a48fff);
+    opacity: 0;
+    z-index: -1;
+    animation: site-nav-ring-pulse 2.5s ease-in-out infinite;
+}
+
+.site-nav--light {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 0, 0, 0.07);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.site-nav--light .site-nav__link {
+    color: rgba(20, 20, 40, 0.45);
+}
+
+.site-nav--light .site-nav__link:hover {
+    color: #8c6fff;
+    background: rgba(140, 111, 255, 0.08);
+}
+
+.site-nav--light .site-nav__link--active {
+    color: #fff !important;
+}
+
+body.light .site-nav {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow:
+        0 8px 32px rgba(15, 23, 42, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.light .site-nav__link {
+    color: rgba(30, 41, 59, 0.6);
+}
+
+body.light .site-nav__link:hover {
+    color: #8c6fff;
+    background: rgba(140, 111, 255, 0.08);
+}
+
+body.light .site-nav__link--active {
+    color: #fff !important;
+}
+
+@keyframes site-nav-icon-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px #fff);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+    }
+}
+
+@keyframes site-nav-ring-pulse {
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 900px) {
+    .site-nav {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .site-nav {
+        padding: 3px;
+    }
+
+    .site-nav__link {
+        padding: 6px 13px;
+        font-size: 11px;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+    .site-nav__link span {
+        display: none;
+    }
+
+    .site-nav__link {
+        padding: 7px 12px;
+    }
+
+    .site-nav__link .fa,
+    .site-nav__link .fas,
+    .site-nav__link .far {
+        font-size: 14px;
+    }
+}

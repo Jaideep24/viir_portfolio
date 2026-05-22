@@ -784,11 +784,11 @@ header button:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px dashed #dfdfdf;
+  border-bottom: none;
 }
 
 .br-about-info ul li:first-child {
-  border-top: 1px dashed #dfdfdf;
+  border-top: none;
 }
 
 .br-about-info ul li span {

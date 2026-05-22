@@ -160,7 +160,7 @@ def view(request):
 
 class Blogspace(ListView):
     model = Article
-    template_name = 'blog/blog-base.html'
+    template_name = 'blog/blogspace.html'
     context_object_name = 'articles'
     ordering = ['-date']
     

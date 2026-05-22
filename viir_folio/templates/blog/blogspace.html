@@ -24,27 +24,28 @@
 
 	{% for object in object_list %}
 	<div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
-		<div class="card">
-			{% if object.image %}
-			<img src="/media/{{ object.image }}" class="card-img-top">
-			{% else %}
-			<img src="/media/default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png" class="card-img-top">
-			{% endif %}
-			<div class="card-body">
-				<h5 class="card-title">{{ object.title }}</h5>
-				<p>{{ object.date }}</p>
-
-				{% if object.likes == 1 %}
-				<p>{{ object.likes }} person likes this post</p>
+		<a href="{% url 'detail_blog' object.id %}" class="blogspace-card-link">
+			<div class="card blogspace-card">
+				{% if object.image %}
+				<img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.title }}">
 				{% else %}
-				<p>{{ object.likes }} people like this post</p>
+				<img src="/media/default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png" class="card-img-top" alt="{{ object.title }}">
 				{% endif %}
-				<div class="my-3">
-					{{ object.content|truncatewords_html:20|safe}}
+				<div class="card-body">
+					<h5 class="card-title">{{ object.title }}</h5>
+					<p>{{ object.date }}</p>
+
+					{% if object.likes == 1 %}
+					<p>{{ object.likes }} person likes this post</p>
+					{% else %}
+					<p>{{ object.likes }} people like this post</p>
+					{% endif %}
+					<div class="my-3">
+						{{ object.content|truncatewords_html:20|safe}}
+					</div>
 				</div>
-				<a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
 			</div>
-		</div>
+		</a>
 	</div>
 	{% endfor %}
 </div>

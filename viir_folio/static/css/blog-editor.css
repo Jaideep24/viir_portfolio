@@ -3,6 +3,18 @@
    Extracted from editor.html, update_blog.html, view_blog.html, create_blog.html, blog.html
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --brand-accent: #9f78ff;
+    --brand-accent-strong: #8c6fff;
+    --brand-accent-soft: rgba(159, 120, 255, 0.16);
+    --brand-heading: 'Playfair Display', serif;
+    --brand-body: 'Quicksand', 'Poppins', sans-serif;
+    --brand-radius: 8px;
+}
+
 
 /* --------------------------------------------------------------------------
    CONTENT EDITOR — Dark theme fixes
@@ -10,12 +22,12 @@
 
 body.dark #contentEditor,
 body.dark .content-editor {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 body.dark #contentEditor *,
 body.dark .content-editor * {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 
@@ -47,7 +59,7 @@ body.dark .content-editor * {
 
 body.dark #contentEditor ul li,
 body.dark #contentEditor ol li {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 #contentEditor p {
@@ -56,7 +68,7 @@ body.dark #contentEditor ol li {
 }
 
 body.dark #contentEditor p {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 #contentEditor strong {
@@ -65,7 +77,7 @@ body.dark #contentEditor p {
 }
 
 body.dark #contentEditor strong {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 #contentEditor em {
@@ -74,7 +86,7 @@ body.dark #contentEditor strong {
 }
 
 body.dark #contentEditor em {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 #contentEditor u {
@@ -83,7 +95,7 @@ body.dark #contentEditor em {
 }
 
 body.dark #contentEditor u {
-    color: #000000 !important;
+    color: #f8fafc !important;
 }
 
 
@@ -92,11 +104,11 @@ body.dark #contentEditor u {
    -------------------------------------------------------------------------- */
 
 .btn-primary {
-    background: #007bff !important;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
     color: white !important;
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -106,9 +118,9 @@ body.dark #contentEditor u {
 }
 
 .btn-primary:hover {
-    background: #0056b3 !important;
+    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
 }
 
 .btn-primary i {
@@ -116,20 +128,20 @@ body.dark #contentEditor u {
 }
 
 .btn-secondary {
-    background: #007bff !important;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
     color: white !important;
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background: #0056b3 !important;
+    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
 }
 
 
@@ -159,7 +171,8 @@ body.dark #contentEditor u {
     font-weight: 700;
     margin-bottom: 1.5rem;
     text-shadow: none;
-    color: inherit;
+    color: var(--brand-accent);
+    font-family: var(--brand-heading);
 }
 
 .admin-header p {
@@ -174,7 +187,7 @@ body.dark #contentEditor u {
     align-items: center;
     gap: 0.5rem;
     padding: 12px 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
     color: white;
     border: none;
     border-radius: 50px;
@@ -183,14 +196,14 @@ body.dark #contentEditor u {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(140, 111, 255, 0.35);
     margin-top: 1rem;
 }
 
 .create-btn:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.45);
     color: white;
 }
 
@@ -213,12 +226,12 @@ body.dark #contentEditor u {
 }
 
 .blog-item {
-    background: white;
+    background: rgba(10, 12, 24, 0.84);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
+    border: 1px solid rgba(159, 120, 255, 0.14);
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -228,13 +241,13 @@ body.dark #contentEditor u {
 
 .blog-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 25px rgba(140, 111, 255, 0.18);
 }
 
 .blog-item-header {
     background: transparent;
     padding: 0;
-    color: inherit;
+    color: #f4f1ff;
     flex: 1;
     min-height: 3rem;
     display: flex;
@@ -247,12 +260,13 @@ body.dark #contentEditor u {
     margin: 0;
     line-height: 1.4;
     word-wrap: break-word;
-    color: inherit;
+    color: #f4f1ff;
+    font-family: var(--brand-heading);
 }
 
 .blog-item-body {
     padding: 0;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid rgba(159, 120, 255, 0.14);
     padding-top: 1rem;
 }
 
@@ -270,7 +284,7 @@ body.dark #contentEditor u {
     gap: 0.5rem;
     padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 500;
     font-size: 0.9rem;
     cursor: pointer;
@@ -282,13 +296,13 @@ body.dark #contentEditor u {
 }
 
 .btn-update {
-    background: #28a745 !important;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
 }
 
 .btn-update:hover {
-    background: #218838 !important;
+    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
     color: white;
 }
 
@@ -328,7 +342,8 @@ body.dark #contentEditor u {
 .empty-state h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #666;
+    color: #f4f1ff;
+    font-family: var(--brand-heading);
 }
 
 .empty-state p {
@@ -424,4 +439,66 @@ body.dark .empty-state p {
 .blog-image img {
     aspect-ratio: 1/1;
     max-width: 450px;
+}
+
+body.light .admin-header h1,
+body.light .blog-item-title,
+body.light .empty-state h3,
+body.light .form-group label {
+    color: #111827;
+}
+
+body.light .admin-header p,
+body.light .empty-state,
+body.light .empty-state p {
+    color: #475569;
+}
+
+body.light .blog-item,
+body.light .blog-form {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(148, 163, 184, 0.24);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+body.light .blog-item-body {
+    border-top-color: rgba(148, 163, 184, 0.2);
+}
+
+body.light .blog-item-header,
+body.light .blog-item-body {
+    color: #111827;
+}
+
+body.light .btn-secondary {
+    background: rgba(255, 255, 255, 0.88);
+    color: #334155 !important;
+}
+
+body.light .editor-toolbar,
+body.light .content-editor {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(148, 163, 184, 0.28);
+    color: #111827;
+}
+
+body.light .toolbar-btn {
+    background: rgba(255, 255, 255, 0.92);
+    color: #334155;
+    border-color: rgba(148, 163, 184, 0.28);
+}
+
+body.light .toolbar-btn:hover,
+body.light .toolbar-btn.active {
+    background: var(--brand-accent);
+    color: #fff;
+}
+
+body.light .content-editor:empty:before {
+    color: #94a3b8;
+}
+
+body.light .content-editor,
+body.light .content-editor * {
+    color: #111827 !important;
 }

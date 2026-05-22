@@ -33,6 +33,11 @@
 
     <!-- CSS: Custom Styles -->
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
+
+    <script>
+        window.__indexSidebar = true;
+    </script>
 
     <!-- Theme Initialization -->
     <script>
@@ -45,9 +50,6 @@
 </head>
 
 <body class="body-default">
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-
     <!-- Apply theme class immediately -->
     <script>
         document.body.classList.remove("body-default");
@@ -79,8 +81,9 @@
 
         <!-- Hamburger Menu Button -->
         <header>
-            <button class="br-sidebar-toggle sidebar-toggle-btn" fdprocessedid="ji9wpg">
-                <svg onclick="menu()" xmlns="http://www.w3.org/2000/svg" width="6vw" height="6vw" viewBox="0 0 24 24"
+            <button type="button" class="br-sidebar-toggle sidebar-toggle-btn" onclick="menu(event)"
+                fdprocessedid="ji9wpg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="6vw" height="6vw" viewBox="0 0 24 24"
                     fill="none" src="assets/img/icons/menu.svg" class="svg_img" alt="menu">
                     <path
                         d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z"
@@ -842,6 +845,7 @@
 
     <!-- Custom JS (all page logic) -->
     <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/custom-cursor.js' %}"></script>
 
 </body>
 

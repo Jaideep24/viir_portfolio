@@ -72,7 +72,7 @@ footer .br-footer-detail .br-social ul li a {
     justify-content: center;
     background: #8c6fff;
     color: #fff;
-    border-radius: 30px;
+    border-radius: 50px;
 }
 
 @media (max-width: 480px) {
@@ -261,9 +261,9 @@ body.dark #stars {
 
 .bi2-navbar {
     height: 56px !important;
-    background: linear-gradient(90deg, #0B132B 0%, #12102a 100%) !important;
-    border-bottom: 1px solid rgba(140, 111, 255, 0.3) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    background: linear-gradient(90deg, #0d0d1f 0%, #12102a 100%) !important;
+    border-bottom: 1px solid rgba(159, 120, 255, 0.26) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.38) !important;
 }
 
 .bi2-nav-container {
@@ -354,8 +354,8 @@ body.dark #stars {
     top: 50%;
     transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.07);
-    border: 1.5px solid rgba(140, 111, 255, 0.45);
-    border-radius: 50px;
+    border: 1px solid rgba(159, 120, 255, 0.26);
+    border-radius: 8px;
     padding: 4px;
     box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.04) inset,
@@ -370,11 +370,11 @@ body.dark #stars {
     display: inline-flex !important;
     align-items: center;
     gap: 7px;
-    padding: 7px 18px !important;
-    border-radius: 50px !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
     font-size: 13px !important;
     font-weight: 600 !important;
-    font-family: "Poppins", sans-serif !important;
+    font-family: 'Quicksand', 'Poppins', sans-serif !important;
     text-decoration: none !important;
     color: rgba(255, 255, 255, 0.6) !important;
     background: transparent !important;
@@ -393,7 +393,7 @@ body.dark #stars {
 /* Hover */
 .blog-nav__link:hover {
     color: #fff !important;
-    background: rgba(140, 111, 255, 0.18) !important;
+    background: rgba(159, 120, 255, 0.16) !important;
     transform: translateY(-1px);
     text-decoration: none !important;
 }
@@ -407,10 +407,10 @@ body.dark #stars {
 /* Active — glowing purple gradient pill */
 .blog-nav__link--active {
     color: #fff !important;
-    background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%) !important;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
     box-shadow:
-        0 0 0 2.5px rgba(140, 111, 255, 0.4),
-        0 4px 18px rgba(140, 111, 255, 0.55),
+        0 0 0 2px rgba(159, 120, 255, 0.35),
+        0 4px 18px rgba(140, 111, 255, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
     pointer-events: none;
     border: none !important;
@@ -471,24 +471,24 @@ body.dark #stars {
    -------------------------------------------------------------------------- */
 
 .btn-info {
-    border-radius: 5px;
+    border-radius: 50px;
 }
 
 .btn-success {
     padding: 10px;
-    background-color: #28a745;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
     color: white;
     border: none;
     cursor: pointer;
     width: auto;
     align-self: center;
-    border-radius: 5px;
+    border-radius: 50px;
 }
 
 .subscription-success {
-    background: #ecfdf5;
-    border: 1px solid #10b981;
-    color: #065f46;
+    background: rgba(159, 120, 255, 0.12);
+    border: 1px solid rgba(159, 120, 255, 0.28);
+    color: #f4f1ff;
     padding: 12px 16px;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -497,9 +497,9 @@ body.dark #stars {
 }
 
 .subscription-error {
-    background: #fef2f2;
-    border: 1px solid #ef4444;
-    color: #991b1b;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    color: #ffd7d7;
     padding: 12px 16px;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -522,19 +522,97 @@ body.dark #stars {
     margin-right: 10px;
     padding: 10px;
     box-sizing: border-box;
+    border-radius: 50px;
 }
 
 .bi2-subscribe-btn {
     padding: 10px;
-    background-color: #17a2b8;
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
     color: white;
     border: none;
     cursor: pointer;
     width: auto;
     align-self: center;
+    border-radius: 50px;
 }
 
 /* Blog card link - no underline */
 .bi2-blog-link {
     text-decoration: none;
+}
+
+body.light .bi2-navbar,
+body.light .blog-navba {
+    background: linear-gradient(90deg, #ffffff 0%, #f7f3ff 100%) !important;
+    border-bottom-color: rgba(148, 163, 184, 0.22) !important;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light .bi2-headish,
+body.light .bi2-logo {
+    color: #111827;
+}
+
+body.light .blog-nav {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(148, 163, 184, 0.24);
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+}
+
+body.light .blog-nav__link {
+    color: #475569 !important;
+}
+
+body.light .blog-nav__link:hover {
+    color: #111827 !important;
+    background: rgba(140, 111, 255, 0.1) !important;
+}
+
+body.light .blog-nav__link--active {
+    color: #fff !important;
+}
+
+body.light footer {
+    background: #ffffff;
+}
+
+body.light footer .br-footer-detail {
+    color: #475569;
+}
+
+body.light footer .br-footer-detail a {
+    color: var(--brand-accent-strong, #8c6fff);
+}
+
+body.light footer .br-footer-detail a:hover {
+    color: #ef4444;
+}
+
+body.light footer .br-footer-detail .br-social ul li a {
+    color: #fff;
+}
+
+body.light .subscription-success {
+    background: rgba(140, 111, 255, 0.1);
+    border-color: rgba(140, 111, 255, 0.24);
+    color: #1f2937;
+}
+
+body.light .subscription-error {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.24);
+    color: #991b1b;
+}
+
+body.light .bi2-subscribe-input,
+body.light .form-control {
+    background: rgba(255, 255, 255, 0.92);
+    color: #111827;
+    border-color: rgba(148, 163, 184, 0.32);
+}
+
+body.light .bi2-subscribe-btn,
+body.light .btn-success {
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    color: #fff;
 }

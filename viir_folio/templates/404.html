@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
 
     <style>
         *,
@@ -214,6 +215,8 @@
 
 <body>
 
+    {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' %}
+
     <!-- Floating particles -->
     <div class="particles" id="particles"></div>
 
@@ -245,6 +248,7 @@
             container.appendChild(p);
         }
     </script>
+    <script src="{% static 'js/site-navbar.js' %}"></script>
 </body>
 
 </html>

@@ -21,7 +21,13 @@ body.dark {
 }
 
 body.light {
-    background-color: #E6F4FF;
+    background-color: #0c0e22;
+}
+
+body.dark,
+body.light {
+    --badge: #9f78ff;
+    --title: #a48fff;
 }
 
 
@@ -350,22 +356,38 @@ body.light .cert-nav__link--active {
    -------------------------------------------------------------------------- */
 
 .navbar-fixed {
-    z-index: 1000;
+    z-index: 20000;
     position: fixed;
+    display: flex;
+    align-items: center;
     background-color: #0B132B;
     height: 8vw;
     max-height: 51.6px;
     width: 100vw;
     margin-top: -10px;
+    padding: 0 1rem 0 0.5rem;
+    overflow: visible;
+}
+
+body.light .navbar-fixed {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
 }
 
 .navbar-toggle-wrap {
     position: absolute;
     top: 50%;
-    right: 320px;
-    /* Sits just to the left of the .cert-nav pills */
+    right: 68px; /* leave room for the hamburger at the extreme right */
     transform: translateY(-50%);
     transition: right 0.3s ease;
+    z-index: 1002;
+}
+
+.navbar-fixed header {
+    position: relative;
+    z-index: 1002;
+    flex: 0 0 auto;
 }
 
 @media (max-width: 600px) {
@@ -382,9 +404,20 @@ body.light .cert-nav__link--active {
     font-weight: 500;
     position: absolute;
     top: 50%;
-    left: 15px;
-    transform: translate(0, -50%);
+    left: 12px;
+    transform: translateY(-50%);
+    max-width: calc(100vw - 140px);
+    text-align: left;
     white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+}
+
+body.light .navbar-title,
+body.light .navbar-certificates-title,
+body.light #headish,
+body.light #headno {
+    color: #111827 !important;
 }
 
 .navbar-certificates-title {
@@ -405,23 +438,79 @@ body.light .cert-nav__link--active {
 }
 
 .sidebar-toggle-btn {
-    position: absolute;
-    margin-top: 2px;
-    margin-left: 80vw;
-    width: 7vw;
-    height: 7vw;
-    max-width: 50px;
-    max-height: 50px;
+    position: fixed;
+    left: auto;
+    right: 10px; /* rightmost placement */
+    top: 7px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+    max-width: 38px;
+    max-height: 38px;
+    z-index: 20001;
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(140, 111, 255, 0.22);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .sidebar-toggle-btn svg {
-    max-width: 40px;
-    max-height: 40px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 28px;
+    max-height: 28px;
+    margin: 0 auto;
+    color: #8c6fff !important;
+    stroke: currentColor;
+    fill: none;
+    font-weight: 600;
 }
 
-.nav-item.active .br-nav {
-    color: #8b5cf6 !important;
-    font-weight: 600;
+.sidebar-toggle-btn:hover {
+    background: rgba(140, 111, 255, 0.12);
+    border-color: rgba(140, 111, 255, 0.4);
+    box-shadow: 0 10px 28px rgba(140, 111, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transform: scale(1.02);
+}
+
+.sidebar-toggle-btn:active {
+    transform: scale(0.98);
+}
+
+/* Ensure hamburger button is visible on all pages unless explicitly hidden */
+.br-sidebar-toggle,
+.sidebar-toggle-btn {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+@media (max-width: 600px) {
+    .navbar-toggle-wrap {
+        right: 58px; /* slightly closer on small screens */
+    }
+
+    .sidebar-toggle-btn {
+        right: 8px;
+        top: 8px;
+        width: 34px;
+        height: 34px;
+        max-width: 34px;
+        max-height: 34px;
+    }
+
+    .navbar-title {
+        max-width: calc(100vw - 120px);
+        left: 10px;
+        font-size: 20px;
+    }
 }
 
 /* Certificate-mode: hide hamburger */
