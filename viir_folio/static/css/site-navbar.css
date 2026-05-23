@@ -202,7 +202,7 @@ body.light #headno {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.3;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-item {
@@ -225,6 +225,7 @@ body.light #headno {
     font-size: 1.08rem;
     text-decoration: none !important;
     line-height: 1.45;
+    transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu a,
@@ -255,7 +256,7 @@ body.light #headno {
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link:hover {
     color: #8c6fff;
-    transform: none;
+    transform: translateX(4px) scale(1.04);
     text-decoration: none !important;
 }
 
@@ -266,14 +267,14 @@ body.light #headno {
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active {
-    color: #ff6f5f;
-    transform: none;
+    color: #8c6fff;
+    transform: translateX(4px) scale(1.04);
     text-decoration: none !important;
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active::before {
-    background: #ff6f5f;
-    box-shadow: 0 0 0 1px rgba(255, 111, 95, 0.3), 0 0 12px rgba(255, 111, 95, 0.35);
+    background: #8c6fff;
+    box-shadow: 0 0 0 1px rgba(140, 111, 255, 0.3), 0 0 12px rgba(140, 111, 255, 0.35);
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link::after,
@@ -289,7 +290,8 @@ body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active::after {
 .br-sidebar .menu-list .nav-link:hover,
 .br-sidebar .menu-list .nav-link.active {
     color: #8c6fff;
-    transform: translateX(2px);
+    transform: translateX(4px) scale(1.04);
+    text-shadow: 0 0 14px rgba(140, 111, 255, 0.18);
 }
 
 body.light .br-sidebar {
@@ -298,6 +300,11 @@ body.light .br-sidebar {
 
 body.light .br-sidebar .menu-list .nav-link {
     color: #111827;
+}
+
+body.light .br-sidebar .menu-list .nav-link:hover,
+body.light .br-sidebar .menu-list .nav-link.active {
+    color: #8c6fff;
 }
 
 body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link {

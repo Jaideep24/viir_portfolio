@@ -54,8 +54,11 @@ function darktheme() {
     document.querySelectorAll(".card-body").forEach(x => x.classList.toggle('darkmode'));
     document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
     document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
-    document.getElementById("menuthing").classList.toggle("navbar-light");
-    document.getElementById("menuthing").classList.toggle("navbar-dark");
+    const menuthingEl = document.getElementById("menuthing");
+    if (menuthingEl) {
+        menuthingEl.classList.toggle("navbar-light");
+        menuthingEl.classList.toggle("navbar-dark");
+    }
     const currentMode = document.body.classList.contains('darkmode');
     localStorage.setItem('darkMode', currentMode);
 }

@@ -18,6 +18,17 @@ from django.urls import path
 from viir_folio.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+
+# Sitemap
+from django.contrib.sitemaps.views import sitemap
+from viir_folio.sitemaps import StaticViewSitemap, ArticleSitemap, ProjectSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap(),
+    'articles': ArticleSitemap(),
+    'projects': ProjectSitemap(),
+}
 
 admin.site.site_header = "Viir Portfolio Administration"
 admin.site.site_title = "Portfolio Admin Portal"
@@ -25,14 +36,17 @@ admin.site.index_title = "Welcome to Viir Portfolio Management"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index, name='index'),
     path('blogspace/', Blogspace.as_view(), name='blogspace'),
     path('blogspace/<int:pk>/', DetailArticleView.as_view(), name='detail_blog'),
     path('blogspace/<int:pk>/delete', DeleteArticleView.as_view(), name='delete_article'),
     path('blogspace/<int:pk>/update', UpdateBlogView.as_view(), name='updateview'),
     path('create/', CreateBlogView.as_view(), name='create_blog'),
     path('blogspace/edit/', view, name='login'),
-    path('certificate/', certificate_view),
+    path('certificate/', certificate_view, name='certificate'),
+    path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     # Dev preview: visit /404-preview/ to see the custom 404 page (works with DEBUG=True too)
     path('404-preview/', custom_404),
 ]

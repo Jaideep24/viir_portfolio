@@ -1,0 +1,451 @@
+/* Global capsule button system aligned with existing project style */
+
+:root {
+    --capsule-bg: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    --capsule-border: rgba(140, 111, 255, 0.46);
+    --capsule-shadow: 0 4px 14px rgba(2, 6, 23, 0.22);
+    --capsule-hover-shadow: 0 8px 24px rgba(140, 111, 255, 0.42);
+}
+
+/* Apply one style to all action buttons across portfolio and blog */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1.5px solid var(--capsule-border);
+    background: transparent !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-family: "Quicksand", "Poppins", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    line-height: 1;
+    box-shadow: var(--capsule-shadow);
+    transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover stays purple with white text in both themes */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):hover {
+    color: #ffffff !important;
+    background: var(--capsule-bg) !important;
+    background-image: var(--capsule-bg) !important;
+    filter: brightness(1.06) saturate(1.05);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--capsule-hover-shadow);
+}
+
+/* Active state: transparent with theme-aware text color */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active {
+    background: transparent !important;
+    background-image: none !important;
+    border-color: rgba(140, 111, 255, 0.62) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 1px rgba(140, 111, 255, 0.34) !important;
+    filter: none !important;
+    transform: translateY(0) scale(0.98);
+}
+
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active {
+    color: #111827 !important;
+}
+
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn) {
+    color: #111827 !important;
+}
+
+/* Some frameworks apply .active class instead of :active pseudo-state */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active {
+    background: transparent !important;
+    background-image: none !important;
+    border-color: rgba(140, 111, 255, 0.62) !important;
+    color: #ffffff !important;
+    filter: none !important;
+}
+
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):hover {
+    color: #ffffff !important;
+}
+
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active {
+    color: #111827 !important;
+}
+
+/* Neutralize bootstrap variant tokens so one system is applied */
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-info,
+.btn-outline-secondary {
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+}
+
+/* Final active override layer for legacy selectors with !important */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active,
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active {
+    background: transparent !important;
+    background-image: none !important;
+    filter: none !important;
+}
+
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active,
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active,
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active .text,
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active .text {
+    color: #ffffff !important;
+}
+
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active,
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active,
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active .text,
+body.light :is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active .text {
+    color: #111827 !important;
+}

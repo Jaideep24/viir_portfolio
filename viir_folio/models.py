@@ -4,6 +4,7 @@ from datetime import date
 from multiselectfield import MultiSelectField
 from phonenumber_field.modelfields import PhoneNumberField
 from tinymce.models import HTMLField
+from django.urls import reverse
 
 # Create your models here.
 class Education(models.Model):
@@ -81,6 +82,9 @@ class Project(models.Model):
             return self.category
         return [self.category] if self.category else []
 
+    def get_absolute_url(self):
+        return reverse('project_detail', args=[self.pk])
+
 class About(models.Model):
     content=models.TextField()
     name=models.CharField(max_length=100)
@@ -148,6 +152,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('detail_blog', args=[self.pk])
 
 class Comment(models.Model):
     name = models.TextField(blank=False, default=" ")

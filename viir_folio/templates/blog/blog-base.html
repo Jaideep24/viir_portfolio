@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BlogSpace</title>
 
+  {% block meta %}
+    {% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Articles and tutorials by Viir Phuria.' %}
+  {% endblock %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
   <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}">
@@ -14,6 +17,7 @@
   <link rel="stylesheet" href="{% static 'css/blog-base.css' %}">
   <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
   <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
 
   <script>
     (function () {
@@ -31,7 +35,7 @@
 
   <canvas id="gridCanvas"></canvas>
 
-  {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' %}
+  {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' navbar_subtitle='Blog Space' %}
 
   {% block content %}{% endblock content %}
 

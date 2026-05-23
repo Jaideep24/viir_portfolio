@@ -1,9 +1,12 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="col-md-6 col-12 mx-md-auto px-3 mt-5 mb-5 text-center">
-	<h1 class="fw-bolder">Blog Spot</h1>
 
+{% block meta %}
+	{% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Latest blog posts from Viir Phuria. Subscribe for updates.' %}
+{% endblock %}
+
+<div class="blogspace-hero text-center">
 	{% if submitted %}
 	<div class="btn btn-success">Subscribed</div>
 	{% else %}
@@ -19,11 +22,12 @@
 	</form>
 	{% endif %}
 </div>
+
 {% load static %}
-<div class="row justify-content-center px-3">
+<div class="container blogspace-shell">
+    <div class="blogs-grid">
 
 	{% for object in object_list %}
-	<div class="col-lg-4 col-md-6 col-sm-12 mb-4 ">
 		<a href="{% url 'detail_blog' object.id %}" class="blogspace-card-link">
 			<div class="card blogspace-card">
 				{% if object.image %}
@@ -46,8 +50,8 @@
 				</div>
 			</div>
 		</a>
-	</div>
 	{% endfor %}
+    </div>
 </div>
 
 {% endblock content %}

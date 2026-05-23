@@ -1,0 +1,31 @@
+{% extends 'portfolio/index.html' %}
+{% load static %}
+
+{% block meta %}
+  {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url %}
+{% endblock %}
+
+{% block content %}
+<section class="padding-tb-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h2>{{ project.title }}</h2>
+        <p><strong>Client:</strong> {{ project.client }}</p>
+        <p><strong>Date:</strong> {{ project.date }}</p>
+        <p><strong>Tech:</strong> {{ project.tech }}</p>
+        <div class="project-image text-center my-3">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" style="max-width:100%;height:auto;border-radius:12px;"/>
+        </div>
+        <div class="project-topic">
+          <p>{{ project.topic }}</p>
+        </div>
+        {% if project.url %}
+        <p><a href="{{ project.url }}" target="_blank" class="capsule-btn view-project-btn">Visit Project</a></p>
+        {% endif %}
+        <p><a href="/" class="capsule-btn">Back to Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

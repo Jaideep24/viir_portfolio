@@ -27,6 +27,11 @@ footer,
     flex-shrink: 0;
 }
 
+footer.margin-t-80 {
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+}
+
 
 /* --------------------------------------------------------------------------
    FOOTER

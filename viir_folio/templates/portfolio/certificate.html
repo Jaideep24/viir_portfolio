@@ -2,27 +2,26 @@
 {% load static %}
 
 {% block content %}
+{% block meta %}
+    {% include 'includes/meta.html' with meta_title='Certificates — Viir Phuria' meta_description='Certificates and credentials earned by Viir Phuria.' %}
+{% endblock %}
 <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
     /* Disable all animations and transitions on certificate page - but not on section-title */
     section.br-experience *:not(.section-title):not(.section-title *) {
         transition: none !important;
         transform: none !important;
         animation: none !important;
-    }
-
-    .nav-link {
-        text-decoration: none;
-        color: #fff;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        line-height: 1.6;
-        font-weight: 500;
-        transition: none;
-        position: relative;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-        color: #fff;
     }
 
     @media (max-width: 700px) {
@@ -41,6 +40,18 @@
         list-style: none;
         padding: 0;
         margin: 0;
+    }
+
+    section.br-experience {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.br-experience .container,
+    section.br-experience .row {
+        flex: 1 0 auto;
+        width: 100%;
     }
 
     .timeline-item {
@@ -180,6 +191,10 @@
         border: 1.5px solid rgba(107, 114, 128, 0.4);
     }
 
+    footer.margin-t-80 {
+        margin-top: auto !important;
+    }
+
     /* Force remove background from container only */
     section.br-experience,
     section.br-experience .container,
@@ -191,11 +206,6 @@
         border: none !important;
     }
 
-    /* Hide hamburger menu on certificate page */
-    .br-sidebar-toggle,
-    .sidebar-toggle-btn {
-        display: none !important;
-    }
 </style>
 
 <section class="br-experience padding-tb-80">

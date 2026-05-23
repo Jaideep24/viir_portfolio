@@ -1,0 +1,61 @@
+{% load static %}
+{# Shared SEO meta include. Accepts: meta_title, meta_description, meta_image, meta_url, og_type, meta_robots #}
+{# Defaults are site-wide fallbacks. #}
+{% static 'assets/viir_logo.png' as default_image %}
+{% with site_name="Viir Phuria" default_desc="Viir Phuria — portfolio, projects, and blog by Viir Phuria. Explore projects, articles, and contact details." %}
+{# Optional verification: pass `google_site_verification` or `bing_site_verification` when including this file #}
+{% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}">{% endif %}
+{% if bing_site_verification %}<meta name="msvalidate.01" content="{{ bing_site_verification }}">{% endif %}
+{% if meta_keywords %}<meta name="keywords" content="{{ meta_keywords }}">{% endif %}
+<meta name="description" content="{{ meta_description|default:default_desc }}">
+<meta name="robots" content="{{ meta_robots|default:'index,follow' }}">
+{% if meta_url %}
+  <link rel="canonical" href="{{ meta_url }}">
+{% elif request %}
+  <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}">
+{% endif %}
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="{{ og_type|default:'website' }}">
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:title" content="{{ meta_title|default:site_name }}">
+<meta property="og:description" content="{{ meta_description|default:default_desc }}">
+{% if meta_url %}
+<meta property="og:url" content="{{ meta_url }}">
+{% elif request %}
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}">
+{% endif %}
+{% if meta_image %}
+<meta property="og:image" content="{% if meta_image|slice:":1" == "/" and request %}{{ request.scheme }}://{{ request.get_host }}{{ meta_image }}{% else %}{{ meta_image }}{% endif %}">
+{% else %}
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ default_image }}">
+{% endif %}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title|default:site_name }}">
+<meta name="twitter:description" content="{{ meta_description|default:default_desc }}">
+{% if meta_image %}
+<meta name="twitter:image" content="{% if meta_image|slice:":1" == "/" and request %}{{ request.scheme }}://{{ request.get_host }}{{ meta_image }}{% else %}{{ meta_image }}{% endif %}">
+{% else %}
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ default_image }}">
+{% endif %}
+
+<!-- Basic structured data (Person) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Viir Phuria",
+  "url": "{% if meta_url %}{{ meta_url }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}{% endif %}",
+  "sameAs": [
+    "https://github.com/Viir-Phuria",
+    "https://www.linkedin.com/in/viir-phuria/",
+    "https://www.instagram.com/viir_phuria/"
+  ],
+  "image": "{% if meta_image %}{% if meta_image|slice:":1" == "/" and request %}{{ request.scheme }}://{{ request.get_host }}{{ meta_image }}{% else %}{{ meta_image }}{% endif %}{% else %}{{ request.scheme }}://{{ request.get_host }}{{ default_image }}{% endif %}",
+  "jobTitle": "Software Developer"
+}
+</script>
+{% endwith %}

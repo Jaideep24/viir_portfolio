@@ -11,8 +11,8 @@
         </button>
     </header>
 
-    <h4 id="headish" class="navbar-title{% if navbar_subtitle or request.resolver_match.url_name == 'certificate' %} cert-page-title{% endif %}">
-        {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle or request.resolver_match.url_name == 'certificate' %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85;">·&nbsp;{% if navbar_subtitle %}{{ navbar_subtitle }}{% elif request.resolver_match.url_name == 'certificate' %}Certificates{% endif %}</span>{% endif %}
+    <h4 id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
+        {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&middot;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
     </h4>
 
     <div id="mytoggle" class="navbar-toggle-wrap">
@@ -80,15 +80,21 @@
                 {% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' or request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' or request.resolver_match.url_name == 'featured' %}
                 <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}" href="{% url 'blogspace' %}" onclick="closeSidebar()">BlogSpace</a></li>
                 <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}" href="{% url 'login' %}" onclick="closeSidebar()">Write</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'home' %} active{% endif %}" href="/#blog" onclick="closeSidebar()">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'home' %} active{% endif %}" href="{% if request.resolver_match.url_name == 'certificate' or certi %}/#certificate{% else %}/#home{% endif %}" onclick="closeSidebar()">Home</a></li>
+                {% elif request.resolver_match.url_name == 'certificate' or certi %}
+                <li class="nav-item"><a class="nav-link br-nav active" href="/#certificate" onclick="closeSidebar()">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#certificate" onclick="closeSidebar()">Home</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'index' %} active{% endif %}" href="/#home" onclick="closeSidebar()">Home</a></li>
                 <li class="nav-item"><a class="nav-link br-nav" href="/#about" onclick="closeSidebar()">About</a></li>
                 <li class="nav-item"><a class="nav-link br-nav" href="/#experience" onclick="closeSidebar()">Timeline</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#project" onclick="closeSidebar()">Projects</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/certificate" onclick="closeSidebar()">Certificates</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}" href="{% url 'blogspace' %}" onclick="closeSidebar()">BlogSpace</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}" href="{% url 'login' %}" onclick="closeSidebar()">Write</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#expertise" onclick="closeSidebar()">Expertise</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#skills" onclick="closeSidebar()">Skills</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#project" onclick="closeSidebar()">Project</a></li>
+                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/#certificate" onclick="closeSidebar()">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#publications" onclick="closeSidebar()">Publications</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#blog" onclick="closeSidebar()">Blog</a></li>
+                <li class="nav-item"><a class="nav-link br-nav" href="/#contact" onclick="closeSidebar()">Contacts</a></li>
                 {% endif %}
             </ul>
         </div>

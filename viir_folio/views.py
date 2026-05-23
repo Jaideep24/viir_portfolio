@@ -240,6 +240,16 @@ class DetailArticleView(DetailView):
             return HttpResponseRedirect(self.request.path_info)
         else:
             return self.render_to_response(self.get_context_data(form=form, error_data="error"))
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'portfolio/project_detail.html'
+    context_object_name = 'project'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
     
 
 class DeleteArticleView(DeleteView):

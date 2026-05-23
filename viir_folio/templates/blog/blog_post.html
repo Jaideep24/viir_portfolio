@@ -1,4 +1,13 @@
 {% extends 'blog/base.html' %}
+{% block meta %}
+  {% if article %}
+    {% if article.image %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 meta_image=article.image.url %}
+    {% else %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 %}
+    {% endif %}
+  {% endif %}
+{% endblock %}
 {% load static %}
 
 {% block content %}

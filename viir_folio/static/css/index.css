@@ -40,6 +40,50 @@ body.light {
     max-width: 75px;
 }
 
+.cert-home-btn {
+    position: absolute;
+    right: 148px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Quicksand', 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(140, 111, 255, 0.35);
+    box-shadow:
+        0 0 0 2.5px rgba(140, 111, 255, 0.22),
+        0 4px 20px rgba(140, 111, 255, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    z-index: 1002;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.cert-home-btn:hover {
+    filter: brightness(1.06) saturate(1.05);
+    transform: translateY(-50%) scale(1.02);
+    box-shadow:
+        0 0 0 2.5px rgba(140, 111, 255, 0.28),
+        0 6px 24px rgba(140, 111, 255, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.cert-home-btn:active {
+    transform: translateY(-50%) scale(0.98);
+}
+
+body.light .cert-home-btn {
+    color: #ffffff;
+}
+
 /* Grid Canvas Background */
 #gridCanvas {
     position: fixed;
@@ -388,13 +432,6 @@ body.light .navbar-fixed {
     position: relative;
     z-index: 1002;
     flex: 0 0 auto;
-}
-
-@media (max-width: 600px) {
-    .navbar-toggle-wrap {
-        right: 15px;
-        /* On smaller screens, just align it to the right border */
-    }
 }
 
 .navbar-title {
