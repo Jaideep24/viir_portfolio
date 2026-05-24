@@ -7,11 +7,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap');
 
 :root {
-    --brand-accent: #9f78ff;
-    --brand-accent-strong: #8c6fff;
+    --brand-accent: var(--accent, #8b5cf6);
+    --brand-accent-strong: var(--accent-600, #7c3aed);
     --brand-heading: 'Playfair Display', serif;
-    --brand-body: 'Quicksand', 'Poppins', sans-serif;
-    --brand-radius: 8px;
+    --brand-body: var(--body-font, 'Quicksand'), 'Poppins', sans-serif;
+    --brand-radius: var(--radius, 12px);
+    --brand-pill-radius: 999px;
+    --brand-shadow: var(--card-shadow, 0 8px 24px rgba(15, 15, 15, 0.08));
+    --brand-shadow-hover: var(--card-shadow-hover, 0 12px 32px rgba(15, 15, 15, 0.12));
 }
 
 body.dark {
@@ -155,8 +158,8 @@ section .signin {
     justify-content: center;
     align-items: center;
     padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-radius: var(--brand-radius);
+    box-shadow: var(--brand-shadow-hover);
     color: var(--text-color, #333);
     transition: background-color 0.3s, color 0.3s;
 }
@@ -176,10 +179,10 @@ section .signin .content {
 }
 
 section .signin .content h2 {
-    font-size: 2em;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
     color: var(--brand-accent);
     font-family: var(--brand-heading);
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
 }
 
 section .signin .content .form {
@@ -203,7 +206,7 @@ section .signin .content .form .inputBox input[type="password"] {
     border: none;
     outline: none;
     padding: 25px 10px 7.5px;
-    border-radius: 8px;
+    border-radius: var(--brand-radius);
     color: #fff;
     font-weight: 500;
     font-size: 1em;
@@ -262,7 +265,7 @@ section .signin .content .form .inputBox .toggle-password {
 
 .signin .content .form .inputBox input[type="submit"] {
     padding: 10px;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: #fff;
     font-weight: 600;
     font-size: 1.35em;
@@ -272,7 +275,7 @@ section .signin .content .form .inputBox .toggle-password {
     transition: background 0.3s;
     display: block;
     margin: 0 auto;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
 }
 
 input[type="submit"]:active {
@@ -280,7 +283,7 @@ input[type="submit"]:active {
 }
 
 input[type="submit"]:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%);
+    background: var(--brand-accent-strong);
 }
 
 input[type="submit"].enabled {
@@ -409,13 +412,17 @@ input[type="submit"].enabled {
 
 .subscribe-btn {
     padding: 10px;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: white;
     border: none;
     cursor: pointer;
     width: auto;
     align-self: center;
-    border-radius: 8px;
+    border-radius: var(--brand-pill-radius);
+}
+
+.subscribe-btn:hover {
+    background: var(--brand-accent-strong);
 }
 
 

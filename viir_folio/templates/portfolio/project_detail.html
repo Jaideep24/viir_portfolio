@@ -11,7 +11,9 @@
     <div class="row">
       <div class="col-md-8 mx-auto">
         <h2>{{ project.title }}</h2>
+        {% if project.client %}
         <p><strong>Client:</strong> {{ project.client }}</p>
+        {% endif %}
         <p><strong>Date:</strong> {{ project.date }}</p>
         <p><strong>Tech:</strong> {{ project.tech }}</p>
         <div class="project-image text-center my-3">
@@ -22,6 +24,9 @@
         </div>
         {% if project.url %}
         <p><a href="{{ project.url }}" target="_blank" class="capsule-btn view-project-btn">Visit Project</a></p>
+        {% endif %}
+        {% if project.demo_video %}
+        <p><a href="{{ project.demo_video }}" target="_blank" class="capsule-btn view-project-btn">Demo Video</a></p>
         {% endif %}
         <p><a href="/" class="capsule-btn">Back to Home</a></p>
       </div>

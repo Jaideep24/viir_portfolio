@@ -369,14 +369,21 @@
                                                     <div class="br-detail">
                                                         <ul>
                                                             <li>Date : {{ object.date }}</li>
+                                                            {% if object.client %}
                                                             <li>Client : {{ object.client }}</li>
+                                                            {% endif %}
                                                             <li>Tech : {{ object.tech }}</li>
                                                             {% if object.url %}
                                                             <li><a href="{{ object.url }}" target="_blank"
                                                                     class="capsule-btn view-project-btn"><span
                                                                         class="text">Visit Project</span></a></li>
                                                             {% endif %}
-                                                            <li><a href="{% url 'project_detail' object.pk %}" class="capsule-btn view-project-btn"><span class="text">View Details</span></a></li>
+                                                            {% if object.demo_video %}
+                                                            <li><a href="{{ object.demo_video }}" target="_blank"
+                                                                    class="capsule-btn view-project-btn"><span
+                                                                        class="text">Demo Video</span></a></li>
+                                                            {% endif %}
+                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -415,25 +422,28 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <br>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon carousel-btn-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <br>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon carousel-btn-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="certificate-carousel-controls" aria-label="Certificate navigation">
+                        <button class="certificate-carousel-control certificate-carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="prev" aria-label="Previous certificate">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M15 5.5L8.75 12 15 18.5" />
+                            </svg>
+                        </button>
+                        <button class="certificate-carousel-control certificate-carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="next" aria-label="Next certificate">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M9 5.5L15.25 12 9 18.5" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <br>
+                <div class="certificate-view-more-wrap">
                 <center>
                     <a href="/certificate" class="capsule-btn">
                         <span class="text">View More</span>
                     </a>
                 </center>
+                </div>
             </div>
         </div>
     </section>

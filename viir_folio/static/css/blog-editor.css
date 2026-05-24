@@ -7,12 +7,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap');
 
 :root {
-    --brand-accent: #9f78ff;
-    --brand-accent-strong: #8c6fff;
-    --brand-accent-soft: rgba(159, 120, 255, 0.16);
+    --brand-accent: var(--accent, #8b5cf6);
+    --brand-accent-strong: var(--accent-600, #7c3aed);
+    --brand-accent-soft: rgba(139, 92, 246, 0.16);
     --brand-heading: 'Playfair Display', serif;
-    --brand-body: 'Quicksand', 'Poppins', sans-serif;
-    --brand-radius: 8px;
+    --brand-body: var(--body-font, 'Quicksand'), 'Poppins', sans-serif;
+    --brand-radius: var(--radius, 12px);
+    --brand-pill-radius: 999px;
+    --brand-shadow: var(--card-shadow, 0 8px 24px rgba(15, 15, 15, 0.08));
+    --brand-shadow-hover: var(--card-shadow-hover, 0 12px 32px rgba(15, 15, 15, 0.12));
 }
 
 
@@ -104,11 +107,11 @@ body.dark #contentEditor u {
    -------------------------------------------------------------------------- */
 
 .btn-primary {
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
+    background: var(--brand-accent) !important;
     color: white !important;
     border: none;
     padding: 12px 24px;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -118,7 +121,7 @@ body.dark #contentEditor u {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
+    background: var(--brand-accent-strong) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
 }
@@ -128,18 +131,18 @@ body.dark #contentEditor u {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
+    background: var(--brand-accent) !important;
     color: white !important;
     border: none;
     padding: 12px 24px;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
+    background: var(--brand-accent-strong) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
 }
@@ -167,7 +170,7 @@ body.dark #contentEditor u {
 }
 
 .admin-header h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
     text-shadow: none;
@@ -187,23 +190,23 @@ body.dark #contentEditor u {
     align-items: center;
     gap: 0.5rem;
     padding: 12px 30px;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(140, 111, 255, 0.35);
+    box-shadow: var(--brand-shadow);
     margin-top: 1rem;
 }
 
 .create-btn:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%);
+    background: var(--brand-accent-strong);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.45);
+    box-shadow: var(--brand-shadow-hover);
     color: white;
 }
 
@@ -227,9 +230,9 @@ body.dark #contentEditor u {
 
 .blog-item {
     background: rgba(10, 12, 24, 0.84);
-    border-radius: 12px;
+    border-radius: var(--brand-radius);
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--brand-shadow);
     transition: all 0.3s ease;
     border: 1px solid rgba(159, 120, 255, 0.14);
     display: flex;
@@ -241,7 +244,7 @@ body.dark #contentEditor u {
 
 .blog-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(140, 111, 255, 0.18);
+    box-shadow: var(--brand-shadow-hover);
 }
 
 .blog-item-header {
@@ -284,7 +287,7 @@ body.dark #contentEditor u {
     gap: 0.5rem;
     padding: 10px 20px;
     border: none;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 500;
     font-size: 0.9rem;
     cursor: pointer;
@@ -296,13 +299,13 @@ body.dark #contentEditor u {
 }
 
 .btn-update {
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
+    background: var(--brand-accent) !important;
 }
 
 .btn-update:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%) !important;
+    background: var(--brand-accent-strong) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
+    box-shadow: var(--brand-shadow);
     color: white;
 }
 

@@ -2,12 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap');
 
 :root {
-    --brand-accent: #9f78ff;
-    --brand-accent-strong: #8c6fff;
-    --brand-accent-soft: rgba(159, 120, 255, 0.16);
+    --brand-accent: var(--accent, #8b5cf6);
+    --brand-accent-strong: var(--accent-600, #7c3aed);
+    --brand-accent-soft: rgba(139, 92, 246, 0.16);
     --brand-heading: 'Playfair Display', serif;
-    --brand-body: 'Quicksand', 'Poppins', sans-serif;
-    --brand-radius: 8px;
+    --brand-body: var(--body-font, 'Quicksand'), 'Poppins', sans-serif;
+    --brand-radius: var(--radius, 12px);
+    --brand-pill-radius: 999px;
+    --brand-shadow: var(--card-shadow, 0 8px 24px rgba(15, 15, 15, 0.08));
+    --brand-shadow-hover: var(--card-shadow-hover, 0 12px 32px rgba(15, 15, 15, 0.12));
 }
 
 *
@@ -19,7 +22,7 @@
 
 body {
     font-family: var(--brand-body);
-    line-height: 1.6;
+    line-height: var(--base-line-height);
     color: #e5e7eb;
     background:
         radial-gradient(circle at top, rgba(159, 120, 255, 0.14), transparent 38%),
@@ -270,18 +273,18 @@ ul{
     height: 100%;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(159, 120, 255, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.22);
     background: rgba(10, 12, 24, 0.88);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    box-shadow: var(--brand-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    border-radius: 20px;
+    border-radius: var(--brand-radius);
     overflow: hidden;
 }
 
 .blogspace-card-link:hover .blogspace-card {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(140, 111, 255, 0.18);
-    border-color: rgba(140, 111, 255, 0.3);
+    box-shadow: var(--brand-shadow-hover);
+    border-color: rgba(139, 92, 246, 0.32);
 }
 
 .blogspace-card .card-img-top {
@@ -305,8 +308,10 @@ ul{
 
 .blogspace-card .card-title {
     margin-bottom: 0.65rem;
-    font-size: 1.08rem;
+    font-size: 1.1rem;
     font-weight: 700;
+    font-family: var(--brand-heading);
+    line-height: 1.2;
 }
 
 .blogspace-card .my-3 {
@@ -352,13 +357,13 @@ body.light .blogspace-card-link:hover .blogspace-card {
     margin-bottom: 0.5rem;
     color: #f4f1ff;
     line-height: 1.4;
+.blog-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #f4f1ff;
+    line-height: 1.25;
     font-family: var(--brand-heading);
-}
-
-.blog-excerpt {
-    color: rgba(229, 231, 235, 0.82);
-    margin-bottom: 1rem;
-    line-height: 1.6;
 }
 
 .blog-meta {
@@ -410,10 +415,10 @@ body.light .blogspace-card-link:hover .blogspace-card {
     max-width: 980px;
     margin: 0 auto;
     padding: 0 24px 28px;
-    border-radius: 24px;
+    border-radius: var(--brand-radius);
     background: linear-gradient(180deg, rgba(12, 14, 34, 0.88) 0%, rgba(12, 14, 34, 0.72) 100%);
-    border: 1px solid rgba(159, 120, 255, 0.12);
-    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: var(--brand-shadow-hover);
     backdrop-filter: blur(10px);
 }
 
@@ -432,7 +437,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
     background: var(--brand-accent);
     color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: 8px;
+    border-radius: var(--brand-pill-radius);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -489,7 +494,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
 
 .blog-image {
     margin: 0.75rem 0 1.5rem;
-    border-radius: 18px;
+    border-radius: var(--brand-radius);
     overflow: hidden;
     border: 1px solid rgba(159, 120, 255, 0.18);
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.26);
@@ -564,10 +569,10 @@ body.light .blogspace-card-link:hover .blogspace-card {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 1rem;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(159, 120, 255, 0.18);
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
@@ -576,7 +581,8 @@ body.light .blogspace-card-link:hover .blogspace-card {
 
 .action-btn:hover {
     border-color: var(--brand-accent);
-    color: var(--brand-accent);
+    color: #fff;
+    background: var(--brand-accent);
 }
 
 .like-btn.liked {
@@ -610,16 +616,16 @@ body.light .blogspace-card-link:hover .blogspace-card {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: white;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 500;
     transition: background 0.3s ease;
 }
 
 .edit-btn:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%);
+    background: var(--brand-accent-strong);
 }
 
 /* Comments Section */
@@ -640,6 +646,11 @@ body.light .blogspace-card-link:hover .blogspace-card {
     margin-bottom: 2rem;
     justify-content: flex-start;
     align-items: flex-start;
+.blog-excerpt {
+    color: rgba(229, 231, 235, 0.82);
+    margin-bottom: 1rem;
+    line-height: 1.45;
+}
 }
 
 .comment-form form {
@@ -663,7 +674,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
     width: 100%;
     padding: 1rem;
     border: 1px solid rgba(159, 120, 255, 0.18);
-    border-radius: 14px;
+    border-radius: var(--brand-radius);
     resize: vertical;
     font-family: inherit;
     margin-bottom: 1rem;
@@ -690,19 +701,23 @@ body.light .blogspace-card-link:hover .blogspace-card {
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(159, 120, 255, 0.24);
-    border-radius: 50px;
+    border-radius: var(--brand-pill-radius);
     cursor: pointer;
     color: #e5e7eb;
 }
 
 .submit-btn {
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--brand-pill-radius);
     cursor: pointer;
     font-weight: 500;
+}
+
+.submit-btn:hover {
+    background: var(--brand-accent-strong);
 }
 
 .comment {
@@ -827,9 +842,10 @@ body.light .comment {
 }
 
 .editor-header h1 {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
     color: #f4f1ff;
     font-family: var(--brand-heading);
+    line-height: 1.08;
 }
 
 .editor-actions {
@@ -843,19 +859,19 @@ body.light .comment {
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
     border: 1px solid rgba(159, 120, 255, 0.24);
-    border-radius: 8px;
+    border-radius: var(--brand-pill-radius);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    background: var(--brand-accent);
     color: white;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #7f61e8 0%, #9e83ff 100%);
+    background: var(--brand-accent-strong);
 }
 
 .btn-secondary {
@@ -872,8 +888,8 @@ body.light .comment {
 .blog-form {
     background: rgba(10, 12, 24, 0.84);
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: var(--brand-radius);
+    box-shadow: var(--brand-shadow);
     border: 1px solid rgba(159, 120, 255, 0.14);
 }
 
@@ -900,7 +916,7 @@ body.light .comment {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: var(--brand-radius);
     font-family: inherit;
     font-size: 1rem;
 }
@@ -930,7 +946,7 @@ body.light .comment {
     padding: 0.75rem;
     border: 1px solid rgba(159, 120, 255, 0.24);
     border-bottom: none;
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--brand-radius) var(--brand-radius) 0 0;
     background: rgba(255, 255, 255, 0.04);
     flex-wrap: wrap;
 }
@@ -939,7 +955,7 @@ body.light .comment {
     padding: 0.5rem;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(159, 120, 255, 0.24);
-    border-radius: 8px;
+    border-radius: var(--brand-radius);
     cursor: pointer;
     transition: all 0.3s ease;
     width: 35px;
@@ -970,7 +986,7 @@ body.light .comment {
     padding: 1rem;
     border: 1px solid rgba(159, 120, 255, 0.24);
     border-top: none;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 var(--brand-radius) var(--brand-radius);
     background: rgba(255, 255, 255, 0.04);
     line-height: 1.6;
     font-size: 1rem;

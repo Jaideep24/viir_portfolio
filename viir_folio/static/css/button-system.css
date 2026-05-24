@@ -367,6 +367,61 @@ body.light :is(
     color: #ffffff !important;
 }
 
+/* Accessible focus: visible ring and subtle lift matching hover */
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):focus {
+    outline: none;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--capsule-hover-shadow), 0 0 0 4px rgba(140,111,255,0.12);
+}
+
+:is(
+    button,
+    .btn,
+    .action-btn,
+    .capsule-btn,
+    .view-cv-btn,
+    .download-cv-btn,
+    .br-learn-more-right,
+    .subscribe-btn,
+    .comment-button,
+    .create-btn,
+    .btn-update,
+    .btn-delete,
+    .btn-cancel,
+    .view-project-btn,
+    a[class*="btn"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"]
+):focus-visible {
+    outline: none;
+    box-shadow: var(--capsule-hover-shadow), 0 0 0 6px rgba(140,111,255,0.18) !important;
+}
+
+/* Ensure keyboard users see a clear focus ring for anchor-links that look like buttons */
+a[class*="btn"]:focus-visible {
+    box-shadow: 0 0 0 6px rgba(124,58,237,0.18) !important;
+}
+
 body.light :is(
     button,
     .btn,

@@ -1464,6 +1464,190 @@ body.light {
     object-fit: contain;
 }
 
+.certificate-carousel-controls {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 clamp(4px, 1vw, 18px);
+}
+
+.certificate-carousel-control {
+    width: auto;
+    height: auto;
+    padding: 8px 6px;
+    border: none !important;
+    border-radius: 0;
+    background: transparent;
+    color: #8c6fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    outline: none;
+    transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+    opacity: 0.92;
+}
+
+.certificate-carousel-control-prev {
+    transform: translateX(-12px);
+}
+
+.certificate-carousel-control-next {
+    transform: translateX(12px);
+}
+
+.certificate-carousel-control svg {
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: none;
+}
+
+.certificate-carousel-control:hover,
+.certificate-carousel-control:focus-visible {
+    transform: translateY(-2px) scale(1.03);
+    color: #6d28d9;
+    opacity: 1;
+    outline: none;
+}
+
+.certificate-carousel-control-prev:hover,
+.certificate-carousel-control-prev:focus-visible,
+.certificate-carousel-control-next:hover,
+.certificate-carousel-control-next:focus-visible {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.certificate-carousel-control:active {
+    transform: translateY(0);
+}
+
+.certificate-view-more-wrap {
+    margin-top: 26px;
+    text-align: center;
+}
+
+.carousel.slide {
+    position: relative;
+    padding-inline: clamp(30px, 4vw, 80px);
+}
+
+@media screen and (max-width: 1024px) {
+    .carousel-img {
+        max-width: 74%;
+        max-height: 58vh;
+    }
+
+    .certificate-carousel-control svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .certificate-carousel-control-prev {
+        transform: translateX(-6px);
+    }
+
+    .certificate-carousel-control-next {
+        transform: translateX(6px);
+    }
+
+    .carousel.slide {
+        padding-inline: clamp(22px, 3vw, 48px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .certificate-carousel-control svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .certificate-carousel-controls {
+        inset: 0;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+        margin-top: 0;
+        padding: 0 clamp(2px, 0.7vw, 8px);
+    }
+
+    .certificate-carousel-control-prev {
+        transform: translateX(-3px);
+    }
+
+    .certificate-carousel-control-next {
+        transform: translateX(3px);
+    }
+
+    .carousel.slide {
+        padding-inline: clamp(12px, 2vw, 20px);
+    }
+
+    .carousel-img {
+        max-width: 68%;
+        max-height: 46vh;
+    }
+
+    .certificate-carousel-control:hover,
+    .certificate-carousel-control:focus-visible,
+    .certificate-carousel-control-prev:hover,
+    .certificate-carousel-control-prev:focus-visible,
+    .certificate-carousel-control-next:hover,
+    .certificate-carousel-control-next:focus-visible {
+        transform: translateY(-1px) scale(1.02);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .certificate-carousel-control {
+        padding: 0;
+        border: 0 !important;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .certificate-carousel-control svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .certificate-carousel-controls {
+        position: static;
+        inset: auto;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 16px;
+        padding: 0;
+    }
+
+    .certificate-carousel-control-prev {
+        transform: translateX(0);
+    }
+
+    .certificate-carousel-control-next {
+        transform: translateX(0);
+    }
+
+    .carousel.slide {
+        padding-inline: 0;
+    }
+
+    .carousel-img {
+        max-width: 76%;
+        max-height: 46vh;
+    }
+}
+
 
 /* --------------------------------------------------------------------------
    14. RESPONSIVE / MEDIA QUERIES
