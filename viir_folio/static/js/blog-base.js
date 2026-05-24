@@ -8,20 +8,64 @@
    1. DARK MODE INITIALIZATION
    -------------------------------------------------------------------------- */
 
-const isDarkMode = localStorage.getItem('darkMode') === 'true';
+function generateBackgroundSpans() {
+    const section = document.getElementById('section');
+    if (!section) return;
+
+    // Remove all existing background spans
+    section.querySelectorAll('span#log').forEach(span => span.remove());
+
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    
+    // Sync with CSS media queries responsive columns
+    let cols = 16;
+    if (window.innerWidth <= 600) {
+        cols = 6;
+    } else if (window.innerWidth <= 900) {
+        cols = 10;
+    }
+
+    const spanSize = window.innerWidth / cols;
+    const rows = Math.ceil(window.innerHeight / spanSize) + 4; // Add extra rows to ensure full coverage
+    const totalSpans = cols * rows;
+
+    const fragment = document.createDocumentFragment();
+    const signinForm = section.querySelector('.signin');
+
+    for (let i = 0; i < totalSpans; i++) {
+        const span = document.createElement('span');
+        span.id = 'log';
+        span.className = isDarkMode ? 'green' : 'blue';
+        fragment.appendChild(span);
+    }
+
+    if (signinForm) {
+        section.insertBefore(fragment, signinForm);
+    } else {
+        section.appendChild(fragment);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     document.body.classList.toggle("light", !isDarkMode);
     document.body.classList.toggle("dark", isDarkMode);
     document.body.classList.toggle('darkmode', isDarkMode);
-    document.querySelectorAll("section span").forEach(x => x.classList.toggle("green", isDarkMode));
-    document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue", !isDarkMode));
+    
+    // Generate spans dynamically on load
+    generateBackgroundSpans();
+
+    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("green", isDarkMode));
+    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("blue", !isDarkMode));
     const toggleCheckbox = document.getElementById("toggle");
     if (toggleCheckbox) toggleCheckbox.checked = isDarkMode;
 
-    applyDarkModeStyles(isDarkMode);
+    if (typeof applyDarkModeStyles === 'function') {
+        applyDarkModeStyles(isDarkMode);
+    }
 });
+
+window.addEventListener('resize', generateBackgroundSpans);
 
 
 /* --------------------------------------------------------------------------
@@ -52,8 +96,8 @@ function darktheme() {
     document.querySelectorAll("p").forEach(some);
     document.querySelectorAll("span").forEach(some);
     document.querySelectorAll(".card-body").forEach(x => x.classList.toggle('darkmode'));
-    document.querySelectorAll("section span").forEach(x => x.classList.toggle("green"));
-    document.querySelectorAll("section span").forEach(x => x.classList.toggle("blue"));
+    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("green"));
+    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("blue"));
     const menuthingEl = document.getElementById("menuthing");
     if (menuthingEl) {
         menuthingEl.classList.toggle("navbar-light");
@@ -85,41 +129,10 @@ function myFunction() {
    -------------------------------------------------------------------------- */
 
 document.querySelectorAll('.inputBox input').forEach(input => {
-    input.addEventListener('focus', function () {
-        this.nextElementSibling.classList.add('active');
-    });
-
-    input.addEventListener('blur', function () {
-        if (this.value === '') {
-            this.nextElementSibling.classList.remove('active');
-        }
-    });
-
     input.addEventListener('input', function () {
-        if (this.value !== '') {
-            this.nextElementSibling.classList.add('active');
-        } else {
-            this.nextElementSibling.classList.remove('active');
-        }
         toggleSubmitButton();
     });
 });
-
-
-/* --------------------------------------------------------------------------
-   5. PASSWORD VISIBILITY TOGGLE (button)
-   -------------------------------------------------------------------------- */
-
-const togglePasswordBtn = document.getElementById('togglePassword');
-if (togglePasswordBtn) {
-    togglePasswordBtn.addEventListener('click', function () {
-        const password = document.getElementById('password');
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.querySelector('i').classList.toggle('fa-eye');
-        this.querySelector('i').classList.toggle('fa-eye-slash');
-    });
-}
 
 
 /* --------------------------------------------------------------------------

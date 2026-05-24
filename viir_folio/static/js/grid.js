@@ -23,22 +23,30 @@ let config = {
 // Dark mode configuration
 const darkConfig = {
     gridColor: '#334155',
-    particleColors: ['#ffffff', '#64748b', '#94a3b8'],
+    particleColors: ['#ffffff', '#8b5cf6', '#a78bfa', '#64748b'],
     backgroundColor: '#0c0e22ed'
 };
 
 // Light mode configuration  
 const lightConfig = {
     gridColor: '#94a3b8',
-    particleColors: ['#1e293b', '#334155', '#475569'],
+    particleColors: ['#8b5cf6', '#a78bfa', '#1e293b', '#334155'],
     backgroundColor: '#E6F4FF'
 };
 
 function updateConfig(isDarkMode) {
+    const isLoginPage = document.body.classList.contains('login-page');
     const modeConfig = isDarkMode ? darkConfig : lightConfig;
-    config.gridColor = modeConfig.gridColor;
+    
+    if (isLoginPage) {
+        config.gridColor = isDarkMode ? '#1c1c1e' : '#b4c6e7';
+        config.backgroundColor = isDarkMode ? '#000000' : '#E6F4FF';
+    } else {
+        config.gridColor = modeConfig.gridColor;
+        config.backgroundColor = modeConfig.backgroundColor;
+    }
+    
     config.particleColors = modeConfig.particleColors;
-    config.backgroundColor = modeConfig.backgroundColor;
 }
 
 function createGrid() {
@@ -102,6 +110,8 @@ class Particle {
     }
 
     draw() {
+        const isLoginPage = document.body.classList.contains('login-page');
+        const radius = isLoginPage ? 1.5 : 0.4;
         for (let i = 0; i < this.trail.length; i++) {
             const point = this.trail[i];
             const alpha = (i / this.trail.length);
@@ -111,7 +121,7 @@ class Particle {
                 ctx.fillStyle = this.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
             }
             ctx.beginPath();
-            ctx.arc(point.x, point.y, 0.4, 0, Math.PI * 2);
+            ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
             ctx.fill();
         }
     }
@@ -139,10 +149,13 @@ const particles = Array(config.particleCount).fill().map(() => new Particle());
 function animate() {
     createGrid();
     
-    particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-    });
+    const isLoginPage = document.body.classList.contains('login-page');
+    if (!isLoginPage) {
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+    }
     
     requestAnimationFrame(animate);
 }

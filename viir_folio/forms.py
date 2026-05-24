@@ -21,8 +21,8 @@ class ArticleForm(forms.ModelForm):
         }
 
 class CommentForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'true', 'style': 'max-width: 100%; width: auto;'}))
-    comment = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'style': 'max-width: 100%; width: auto;'}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control comment-input', 'required': 'true', 'placeholder': 'Your name'}))
+    comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control comment-textarea', 'placeholder': 'Write your comment...'}))
     
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)

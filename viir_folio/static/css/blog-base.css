@@ -22,6 +22,18 @@ body.dark {
     --title: #a48fff;
     background-color: #0c0e22 !important;
     background-image: none !important;
+    
+    /* Login Page Variables */
+    --login-bg: #000000;
+    --login-cell: #000000;
+    --login-sweep: rgba(139, 92, 246, 0.65);
+    --login-card: rgba(15, 23, 42, 0.85);
+    --login-text: #f4f1ff;
+    --login-border: rgba(255, 255, 255, 0.08);
+    --login-input-bg: rgba(255, 255, 255, 0.03);
+    --login-input-border: rgba(255, 255, 255, 0.15);
+    --login-input-color: #fff;
+    --login-label-color: rgba(255, 255, 255, 0.5);
 }
 
 body.light {
@@ -30,6 +42,18 @@ body.light {
     /* lighter background for blog pages in light mode */
     background-color: #f6f9ff !important;
     background-image: none !important;
+    
+    /* Login Page Variables */
+    --login-bg: #E6F4FF;
+    --login-cell: #f4f6fa;
+    --login-sweep: rgba(139, 92, 246, 0.45);
+    --login-card: rgba(255, 255, 255, 0.85);
+    --login-text: #111827;
+    --login-border: rgba(15, 23, 42, 0.06);
+    --login-input-bg: rgba(255, 255, 255, 0.95);
+    --login-input-border: rgba(148, 163, 184, 0.35);
+    --login-input-color: #111827;
+    --login-label-color: rgba(15, 23, 42, 0.55);
 }
 
 .row {
@@ -91,73 +115,157 @@ footer {
    LOGIN / SIGN-IN SECTION
    -------------------------------------------------------------------------- */
 
+/* On the login page, hide the footer but allow canvas to be visible */
+body.login-page {
+    overflow: hidden !important;
+    height: 100vh;
+    background-color: var(--login-bg) !important;
+}
+body.login-page footer {
+    display: none !important;
+}
+body.login-page #gridCanvas {
+    z-index: 1 !important;
+}
+body.login-page section {
+    z-index: 2 !important;
+    background: transparent !important;
+    gap: 2px !important;
+    height: 100vh !important;
+    overflow: visible !important;
+}
+body.login-page section::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, var(--login-sweep), transparent);
+    animation: purpleSweep 4s linear infinite;
+    pointer-events: none;
+    z-index: 1 !important;
+}
+@keyframes purpleSweep {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+body.login-page section span#log {
+    background: var(--login-cell) !important;
+    --grid-cell: var(--login-cell) !important;
+    z-index: 2 !important;
+    transition: background 1.5s ease-out !important;
+}
+body.login-page section span#log:hover {
+    background: var(--brand-accent) !important;
+    transition: background 0s !important;
+}
+body.login-page section .signin {
+    --card-bg: var(--login-card) !important;
+    --text-color: var(--login-text) !important;
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--login-border) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2) !important;
+}
+body.login-page section .signin .content h2 {
+    color: var(--brand-accent) !important;
+}
+body.login-page section .signin .content .form .inputBox input[type="text"],
+body.login-page section .signin .content .form .inputBox input[type="password"] {
+    background: var(--login-input-bg) !important;
+    color: var(--login-input-color) !important;
+    border: 1px solid var(--login-input-border) !important;
+}
+body.login-page section .signin .content .form .inputBox label {
+    color: var(--login-label-color) !important;
+}
+body.login-page section .signin .content .form .inputBox input:focus ~ label,
+body.login-page section .signin .content .form .inputBox input:not(:placeholder-shown) ~ label {
+    color: var(--brand-accent) !important;
+}
+body.login-page section .signin .content .form .inputBox .toggle-password {
+    color: var(--login-label-color) !important;
+}
+body.login-page section .signin .content .form .inputBox .toggle-password:hover {
+    color: var(--login-input-color) !important;
+}
+body.login-page .signin .content .form .links a {
+    color: var(--login-input-color) !important;
+}
+body.login-page .signin .content .form .links a:nth-child(2) {
+    color: var(--brand-accent) !important;
+}
+
 section {
     position: relative;
     width: 100%;
     height: calc(100vh - 56px);
     /* Exact height, never flex-expand */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
     gap: 2px;
-    flex-wrap: wrap;
     overflow: hidden;
     /* Clip overflowing matrix boxes */
-    background: var(--section-bg, #ECF0F1);
+    background: transparent;
     transition: background-color 1.5s;
 }
 
 body.dark section {
-    --section-bg: #111;
+    --section-bg: transparent;
+}
+
+body.light section {
+    --section-bg: transparent;
 }
 
 section::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(transparent, rgba(159, 120, 255, 0.45), transparent);
-    animation: animate 5s linear infinite;
+    content: none;
+    display: none;
 }
 
-@keyframes animate {
-    0% {
-        transform: translateY(-100%);
-    }
-
-    100% {
-        transform: translateY(100%);
-    }
-}
-
-.green {
+section span#log {
     position: relative;
     display: block;
-    width: calc(6.25vw - 2px);
-    height: calc(6.25vw - 2px);
-    background: var(--grid-cell, #ECF0F1);
+    aspect-ratio: 1;
+    background: var(--grid-cell, rgba(244, 246, 250, 0.7));
     z-index: 2;
     transition: 1.5s;
 }
 
-body.dark .green {
-    --grid-cell: #181818;
+body.dark section span#log {
+    --grid-cell: rgba(19, 21, 38, 0.65);
 }
 
-.green:hover {
+body.light section span#log {
+    --grid-cell: rgba(244, 246, 250, 0.7);
+}
+
+section span#log:hover {
     background: var(--brand-accent);
     transition: 0s;
 }
 
 section .signin {
     position: absolute;
-    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
     background: var(--card-bg, #fff);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 40px 30px;
     border-radius: var(--brand-radius);
     box-shadow: var(--brand-shadow-hover);
     color: var(--text-color, #333);
@@ -165,7 +273,12 @@ section .signin {
 }
 
 body.dark section .signin {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    --card-bg: rgba(15, 23, 42, 0.75);
+    --text-color: #f4f1ff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 section .signin .content {
@@ -195,55 +308,65 @@ section .signin .content .form {
 section .signin .content .form .inputBox {
     position: relative;
     width: 100%;
-    margin: 20px 0;
 }
 
 section .signin .content .form .inputBox input[type="text"],
 section .signin .content .form .inputBox input[type="password"] {
     position: relative;
     width: 100%;
-    background: #333;
-    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     outline: none;
-    padding: 25px 10px 7.5px;
+    padding: 24px 14px 8px;
     border-radius: var(--brand-radius);
     color: #fff;
     font-weight: 500;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 15px;
+    transition: all 0.3s ease;
 }
 
-section .signin .content .form .inputBox i {
+section .signin .content .form .inputBox input[type="text"]:focus,
+section .signin .content .form .inputBox input[type="password"]:focus {
+    border-color: var(--brand-accent);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+section .signin .content .form .inputBox label {
     position: absolute;
-    left: 10px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    padding: 15px 10px;
-    font-style: normal;
-    color: #aaa;
-    transition: 0.5s;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
     pointer-events: none;
-    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-section .signin .content .form .inputBox i.active {
-    display: none;
+section .signin .content .form .inputBox input:focus ~ label,
+section .signin .content .form .inputBox input:not(:placeholder-shown) ~ label {
+    top: 12px;
+    font-size: 11px;
+    color: var(--brand-accent);
 }
 
 section .signin .content .form .inputBox .toggle-password {
     position: absolute;
-    left: 270px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.5);
     font-size: 16px;
     background: transparent;
-    padding-right: 10px;
-    z-index: 2;
-    width: 40px;
-    height: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+section .signin .content .form .inputBox .toggle-password:hover {
+    color: #fff;
 }
 
 .signin .content .form .links {
@@ -264,18 +387,21 @@ section .signin .content .form .inputBox .toggle-password {
 }
 
 .signin .content .form .inputBox input[type="submit"] {
-    padding: 10px;
+    width: 100% !important;
+    padding: 12px;
     background: var(--brand-accent);
     color: #fff;
     font-weight: 600;
-    font-size: 1.35em;
+    font-size: 1.1em;
     letter-spacing: 0.05em;
     cursor: pointer;
     border: none;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
     display: block;
     margin: 0 auto;
     border-radius: var(--brand-pill-radius);
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
 }
 
 input[type="submit"]:active {
@@ -297,25 +423,18 @@ input[type="submit"].enabled {
    -------------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-    section span {
-        width: calc(10vw - 2px);
-        height: calc(10vw - 2px);
+    section {
+        grid-template-columns: repeat(10, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    section span {
-        width: calc(20vw - 2px);
-        height: calc(20vw - 2px);
+    section {
+        grid-template-columns: repeat(6, 1fr);
     }
 
     .signin {
-        padding: 10px;
-    }
-
-    .inputBox i,
-    .inputBox .toggle-password {
-        font-size: 14px;
+        padding: 30px 20px;
     }
 }
 
@@ -624,25 +743,29 @@ body.light .darkmode {
 }
 
 body.light section {
-    --section-bg: #f8fafc;
-    background: #f8fafc;
+    --section-bg: transparent;
+    background: var(--section-bg);
 }
 
 body.light section::before {
-    background: linear-gradient(transparent, rgba(140, 111, 255, 0.22), transparent);
+    content: none;
+    display: none;
 }
 
 body.light .green {
-    --grid-cell: #edf2ff;
+    --grid-cell: rgba(244, 246, 250, 0.7);
     background: var(--grid-cell);
 }
 
 body.light section .signin {
-    --card-bg: rgba(255, 255, 255, 0.92);
+    --card-bg: rgba(255, 255, 255, 0.75);
     --text-color: #111827;
     background: var(--card-bg);
     color: var(--text-color);
-    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
 }
 
 body.light section .signin .content h2,
@@ -657,7 +780,12 @@ body.light .blog-nav-link {
 }
 
 body.light section .signin .content .form .inputBox input[type="text"],
-body.light section .signin .content .form .inputBox input[type="password"],
+body.light section .signin .content .form .inputBox input[type="password"] {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111827;
+    border-color: rgba(148, 163, 184, 0.35);
+}
+
 body.light .form-control,
 body.light .subscribe-input {
     background: rgba(255, 255, 255, 0.95);
@@ -665,9 +793,21 @@ body.light .subscribe-input {
     border-color: rgba(148, 163, 184, 0.35);
 }
 
-body.light section .signin .content .form .inputBox i,
+body.light section .signin .content .form .inputBox label {
+    color: rgba(15, 23, 42, 0.55);
+}
+
+body.light section .signin .content .form .inputBox input:focus ~ label,
+body.light section .signin .content .form .inputBox input:not(:placeholder-shown) ~ label {
+    color: var(--brand-accent-strong);
+}
+
 body.light section .signin .content .form .inputBox .toggle-password {
-    color: #64748b;
+    color: rgba(15, 23, 42, 0.55);
+}
+
+body.light section .signin .content .form .inputBox .toggle-password:hover {
+    color: #111827;
 }
 
 body.light section .signin .content .form .links a:nth-child(2) {

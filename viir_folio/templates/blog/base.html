@@ -16,9 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-  <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}?v=20260525d">
   <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}">
-  <link rel="stylesheet" href="{% static 'css/blog-base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog-base.css' %}?v=20260525n">
   <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
   <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
   <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
@@ -32,7 +32,7 @@
   </script>
 </head>
 
-<body>
+<body class="{% if request.resolver_match.url_name == 'login' %}login-page{% endif %}">
   <script>
     document.body.classList.add(window.__theme || 'dark');
   </script>

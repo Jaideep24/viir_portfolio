@@ -37,15 +37,18 @@
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ object.title }}</h5>
-					<p>{{ object.date }}</p>
-
-					{% if object.likes == 1 %}
-					<p>{{ object.likes }} person likes this post</p>
-					{% else %}
-					<p>{{ object.likes }} people like this post</p>
-					{% endif %}
-					<div class="my-3">
-						{{ object.content|truncatewords_html:20|safe}}
+					<div class="blogspace-excerpt">
+						{{ object.content|truncatewords_html:20|safe }}
+					</div>
+					<div class="blogspace-card-meta">
+						<div class="blogspace-likes">
+							{% if object.likes == 1 %}
+							Liked by 1 person
+							{% else %}
+							Liked by {{ object.likes }} people
+							{% endif %}
+						</div>
+						<div class="blogspace-date">{{ object.date }}</div>
 					</div>
 				</div>
 			</div>

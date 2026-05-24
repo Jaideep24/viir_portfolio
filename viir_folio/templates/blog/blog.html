@@ -12,7 +12,7 @@
                 <img id="blogImage" src="/media/{{ article.image }}" alt="Blog Image">
             </div>
             <div class="blog-content" id="blogContent">
-                <p>{{ article.content|safe }}</p>
+                {{ article.content|safe }}
             </div>
 
             <div class="blog-actions">
@@ -45,6 +45,73 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section" id="commentsSection">
+                <div class="comments-shell">
+
+                    <div class="comments-header">
+                        <h3 class="comments-title">Comments</h3>
+                        <div class="comments-divider"></div>
+                    </div>
+
+                    <div class="comments-list" id="commentsList">
+                        {% if not comment %}
+                        <div class="comments-empty">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+                            <span>No comments yet. Be the first to start the conversation!</span>
+                        </div>
+                        {% endif %}
+                        {% for i in comment %}
+                        <div class="comment-item">
+                            <div class="comment-avatar">{{ i.name|slice:":1"|upper }}</div>
+                            <div class="comment-body">
+                                <div class="comment-meta-row">
+                                    <span class="comment-name">{{ i.name }}</span>
+                                    <span class="comment-date">{{ i.date }}</span>
+                                </div>
+                                <p class="comment-text">{{ i.comment }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="comment-form-wrapper" id="commentFormWrapper">
+                        <h4 class="comment-form-title">Leave a Comment</h4>
+                        {% if error_data == "error" %}
+                        <div class="comment-error-alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>
+                            Please fill out all required fields.
+                        </div>
+                        {% endif %}
+
+                        <form method="POST" class="comment-form-grid">
+                            {% csrf_token %}
+                            <div class="comment-field comment-field-name">
+                                <label for="{{ comment_form.name.id_for_label }}">Name</label>
+                                {{ comment_form.name }}
+                                {{ comment_form.name.errors }}
+                            </div>
+                            <div class="comment-field comment-field-comment">
+                                <label for="{{ comment_form.comment.id_for_label }}">Comment</label>
+                                {{ comment_form.comment }}
+                                {{ comment_form.comment.errors }}
+                            </div>
+                            {{ comment_form.article.as_hidden }}
+                            <div class="comment-submit-row">
+                                <button class="comment-submit-btn" type="submit">
+                                    Post Comment
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </article>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -89,11 +156,18 @@
             });
         }
 
-        // Scroll to comments section
+        // Scroll to comment form
         function scrollToComments() {
-            document.getElementById('commentsSection').scrollIntoView({
-                behavior: 'smooth'
-            });
+            const formWrapper = document.getElementById('commentFormWrapper');
+            if (formWrapper) {
+                formWrapper.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } else {
+                document.getElementById('commentsSection').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         }
 
         // Share blog
@@ -121,42 +195,5 @@
             }
         }
     </script>
-    <section class="comments-section" id="commentsSection">
-        <div class="container">
-            <h3>Comments</h3>
-
-            <div class="comment-form">
-                {% if error_data == "error" %}
-                <div class="alert alert-danger">
-                    <strong>Error:</strong>Please fill out the required field
-                </div>
-                {% endif %}
-
-                <p>{{ comment_form.errors }}</p>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    {{ comment_form.article.as_hidden}}
-                    <button class="btn btn-success comment-button" type="submit">Comment <svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-send" viewBox="0 0 16 16">
-                            <path
-                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-                        </svg></button>
-                </form>
-            </div>
-
-            <div class="comments-list" id="commentsList">
-                {% for i in comment %}
-                <div class="comment">
-                    <div class="comment-content">
-                        <div class="comment-author">{{ i.name }} <span class="comment-date"> {{ i.date }} </span></div>
-                        <div class="comment-text">{{ i.comment }}</div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 </main>
 {% endblock content %}

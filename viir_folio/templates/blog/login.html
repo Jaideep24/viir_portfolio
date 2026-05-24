@@ -219,7 +219,6 @@
             id="log"></span><span class="green" id="log"></span><span class="green" id="log"></span><span class="green"
             id="log"></span><span class="green" id="log"></span><span class="green" id="log"></span><span class="green"
             id="log"></span><span class="green" id="log"></span>
-
         {% csrf_token %}
         <div class="signin">
             <div class="content">
@@ -229,15 +228,13 @@
                 {% endif %}
                 <div class="form">
                     <div class="inputBox">
-                        <Label>Username</Label>
-                        <input type="text" name="username" required>
-
+                        <input type="text" name="username" required placeholder=" ">
+                        <label>Username</label>
                     </div>
                     <div class="inputBox">
-                        <Label>Password</Label>
-                        <input type="password" id="password" name="password" required>
-
-                        <span class="toggle-password" id="togglePassword">
+                        <input type="password" id="password" name="password" required placeholder=" ">
+                        <label>Password</label>
+                        <span class="toggle-password" id="togglePassword" onclick="myFunction()">
                             <i class="fa fa-eye toggle-password-icon" id="something"></i>
                         </span>
                     </div>
