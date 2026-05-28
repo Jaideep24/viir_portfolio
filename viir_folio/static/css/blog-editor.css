@@ -269,7 +269,7 @@ body.dark #contentEditor u {
 
 .blog-item-body {
     padding: 0;
-    border-top: 1px solid rgba(159, 120, 255, 0.14);
+    border-top: none;
     padding-top: 1rem;
 }
 
@@ -374,7 +374,7 @@ body.dark .blog-item-title {
 
 body.dark .blog-item-body {
     background: transparent;
-    border-top-color: #353250;
+    border-top: none;
 }
 
 body.dark .blog-item:hover {
@@ -465,7 +465,7 @@ body.light .blog-form {
 }
 
 body.light .blog-item-body {
-    border-top-color: rgba(148, 163, 184, 0.2);
+    border-top: none;
 }
 
 body.light .blog-item-header,
@@ -478,23 +478,49 @@ body.light .btn-secondary {
     color: #334155 !important;
 }
 
-body.light .editor-toolbar,
-body.light .content-editor {
-    background: rgba(255, 255, 255, 0.92);
-    border-color: rgba(148, 163, 184, 0.28);
-    color: #111827;
+.editor-toolbar {
+    position: sticky !important;
+    top: 41.6px !important;
+    z-index: 100 !important;
+    background: #15182b !important;
+    border-bottom: 1px solid rgba(159, 120, 255, 0.24) !important;
 }
 
-body.light .toolbar-btn {
-    background: rgba(255, 255, 255, 0.92);
-    color: #334155;
-    border-color: rgba(148, 163, 184, 0.28);
+body.light .editor-toolbar {
+    background: #ffffff !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
+}
+
+body.light .content-editor {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    color: #111827 !important;
+}
+
+body.light .toolbar-btn,
+body.light .toolbar-btn i {
+    background: transparent !important;
+    color: #000000 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
 }
 
 body.light .toolbar-btn:hover,
-body.light .toolbar-btn.active {
-    background: var(--brand-accent);
-    color: #fff;
+body.light .toolbar-btn:hover i {
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: var(--brand-accent-strong, #8c6fff) !important;
+    border-color: transparent !important;
+}
+
+/* Active state: Solid purple with white icon/text in both themes */
+.toolbar-btn.active,
+.toolbar-btn.active i,
+body.light .toolbar-btn.active,
+body.light .toolbar-btn.active i {
+    background: #8c6fff !important;
+    color: #ffffff !important;
+    border-color: #8c6fff !important;
 }
 
 body.light .content-editor:empty:before {
@@ -504,4 +530,58 @@ body.light .content-editor:empty:before {
 body.light .content-editor,
 body.light .content-editor * {
     color: #111827 !important;
+}
+
+/* Theme aware File input styles */
+input[type="file"] {
+    padding: 0.5rem 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+    border: 2px solid rgba(159, 120, 255, 0.24) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #f4f1ff !important;
+    border-radius: var(--brand-radius) !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+}
+
+body.light input[type="file"] {
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: #111827 !important;
+    border-color: rgba(148, 163, 184, 0.32) !important;
+}
+
+input[type="file"]::file-selector-button,
+input[type="file"]::-webkit-file-upload-button {
+    background: rgba(159, 120, 255, 0.15) !important;
+    color: #f4f1ff !important;
+    border: 1px solid rgba(159, 120, 255, 0.4) !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 0.8rem !important;
+    margin-right: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+    font-family: inherit !important;
+    font-size: 0.9rem !important;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: rgba(159, 120, 255, 0.25) !important;
+    border-color: var(--brand-accent) !important;
+}
+
+body.light input[type="file"]::file-selector-button,
+body.light input[type="file"]::-webkit-file-upload-button {
+    background: rgba(140, 111, 255, 0.1) !important;
+    color: #8c6fff !important;
+    border: 1px solid rgba(140, 111, 255, 0.25) !important;
+}
+
+body.light input[type="file"]::file-selector-button:hover,
+body.light input[type="file"]::-webkit-file-upload-button:hover {
+    background: rgba(140, 111, 255, 0.2) !important;
+    border-color: var(--brand-accent) !important;
 }

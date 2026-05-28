@@ -297,16 +297,6 @@
     });
     /* For Directly Run */
     $(window).on("load", function () {
-        setTimeout(function () {
-            switch (window.location.protocol) {
-                case 'file:':
-                    console.log(
-                        '%c Please try to run using local server instead of Directly click or run for better experience. ',
-                        'font-size: 20px; background-color: black; color:white; margin-left: 15px; padding: 15px'
-                    );
-                    break;
-                default:
-            }
-        }, 100);
+        // Production: Debug logging removed
     });
 })(jQuery);

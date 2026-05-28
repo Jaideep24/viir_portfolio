@@ -14,9 +14,10 @@ class ContactForm(forms.ModelForm):
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'content', 'image']
+        fields = ['title', 'slug', 'content', 'image']
         widgets = {
             'title': forms.TextInput(attrs={'id': 'blogTitleInput'}),
+            'slug': forms.TextInput(attrs={'placeholder': 'Leave blank to auto-generate from title', 'class': 'form-control'}),
             'content': forms.HiddenInput(),
         }
 

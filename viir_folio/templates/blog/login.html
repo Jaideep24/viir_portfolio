@@ -223,8 +223,12 @@
         <div class="signin">
             <div class="content">
                 <h2>Sign In</h2>
-                {% if warning == "error" %}
-                <div class='alert alert-danger'><strong>Error:</strong>Email or password incorrect</div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                            <strong>{% if message.tags == 'error' %}Error{% else %}{{ message.tags|title }}{% endif %}:</strong> {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endif %}
                 <div class="form">
                     <div class="inputBox">
@@ -234,9 +238,26 @@
                     <div class="inputBox">
                         <input type="password" id="password" name="password" required placeholder=" ">
                         <label>Password</label>
-                        <span class="toggle-password" id="togglePassword" onclick="myFunction()">
-                            <i class="fa fa-eye toggle-password-icon" id="something"></i>
+                        <span class="toggle-password" id="togglePassword">
+                            <i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>
                         </span>
+                        <script>
+                            (function() {
+                                var passwordInput = document.getElementById("password");
+                                var toggleBtn = document.getElementById("togglePassword");
+                                if (passwordInput && toggleBtn) {
+                                    toggleBtn.addEventListener("click", function() {
+                                        if (passwordInput.type === "password") {
+                                            passwordInput.type = "text";
+                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash toggle-password-icon" id="togglePasswordIcon"></i>';
+                                        } else {
+                                            passwordInput.type = "password";
+                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>';
+                                        }
+                                    });
+                                }
+                            })();
+                        </script>
                     </div>
                     <div class="inputBox">
                         <input type="submit" value="Login" formmethod="post">

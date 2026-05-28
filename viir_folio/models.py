@@ -114,6 +114,16 @@ class contact(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        from django.utils.html import strip_tags
+        if self.name:
+            self.name = strip_tags(self.name)
+        if self.email:
+            self.email = strip_tags(self.email)
+        if self.message:
+            self.message = strip_tags(self.message)
+        super().save(*args, **kwargs)
+
 class Skill(models.Model):
     language=models.CharField(max_length=100)
     percentage=models.PositiveIntegerField()
@@ -144,8 +154,15 @@ class subscriber(models.Model):
     def __str__(self):
         return self.email
 
+    def save(self, *args, **kwargs):
+        from django.utils.html import strip_tags
+        if self.email:
+            self.email = strip_tags(self.email)
+        super().save(*args, **kwargs)
+
 class Article(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     content = HTMLField()
     date = models.DateField()
     image = models.ImageField(default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
@@ -155,7 +172,20 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('detail_blog', args=[self.pk])
+        return reverse('detail_blog', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        from django.utils.text import slugify
+        from .utils import sanitize_html
+        from django.utils.html import strip_tags
+        if self.title:
+            self.title = strip_tags(self.title)
+        if self.content:
+            self.content = sanitize_html(self.content)
+        # Auto-generate slug from title if not provided
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 class Comment(models.Model):
     name = models.TextField(blank=False, default=" ")
@@ -164,6 +194,14 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        from django.utils.html import strip_tags
+        if self.name:
+            self.name = strip_tags(self.name)
+        if self.comment:
+            self.comment = strip_tags(self.comment)
+        super().save(*args, **kwargs)
 
 class Logger(models.Model):
     user_name = models.CharField(max_length=25)

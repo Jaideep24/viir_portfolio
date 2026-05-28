@@ -30,7 +30,7 @@
 				<div class="my-3">
 					{{ object.content|truncatewords_html:20|safe}}
 				</div>
-				<a href="{% url 'detail_blog' object.id %}" class="btn btn-primary">Read More</a>
+				<a href="{% url 'detail_blog' object.slug %}" class="btn btn-primary">Read More</a>
 			</div>
 		</div>
 	</div>

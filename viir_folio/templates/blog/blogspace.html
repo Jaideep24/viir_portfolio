@@ -28,7 +28,7 @@
     <div class="blogs-grid">
 
 	{% for object in object_list %}
-		<a href="{% url 'detail_blog' object.id %}" class="blogspace-card-link">
+		<a href="{% url 'detail_blog' object.slug %}" class="blogspace-card-link">
 			<div class="card blogspace-card">
 				{% if object.image %}
 				<img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.title }}">

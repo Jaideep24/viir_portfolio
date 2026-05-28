@@ -570,6 +570,13 @@ body.light .blogspace-card-link:hover .blogspace-card {
     color: rgba(229, 231, 235, 0.9);
 }
 
+/* Force all text elements inside blog content (except headings, links, code, and media) to have the same size, font, and color as standard text, while preserving bold, italic, and underline formatting */
+.blog-content *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(a):not(img):not(iframe):not(video):not(svg):not(path):not(pre):not(code) {
+    font-size: inherit !important;
+    font-family: inherit !important;
+    color: inherit !important;
+}
+
 .blog-content p {
     margin-bottom: 1.2rem;
 }
@@ -790,6 +797,71 @@ body.light .blogspace-card-link:hover .blogspace-card {
 #btn {
     min-width: 58px;
     justify-content: center;
+}
+
+.like-btn,
+#btn.like-btn,
+#btn.like-btn:hover,
+#btn.like-btn:focus,
+#btn.like-btn:active {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.like-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.like-btn:hover svg {
+    transform: scale(1.2);
+}
+
+.like-btn:active svg {
+    transform: scale(0.9);
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+    35% {
+        transform: scale(1.45) rotate(-8deg);
+    }
+    65% {
+        transform: scale(0.88) rotate(4deg);
+    }
+    85% {
+        transform: scale(1.08) rotate(-2deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.like-pop {
+    animation: heartPop 0.48s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.bi-heart-fill {
+    color: #ff3040 !important;
+}
+
+.blog-author-meta {
+    text-align: right;
+    margin: 1.8rem 0 1.2rem;
+}
+
+.blog-author-meta .date {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.blog-author-meta .author-name {
+    font-size: 0.95rem;
 }
 
 .action-btn.comment-btn,
@@ -1022,7 +1094,7 @@ body.light .blog-image {
 }
 
 body.light .blog-content p:first-child::first-letter {
-    color: var(--brand-accent-strong);
+    color: inherit;
 }
 
 body.light .blog-content hr {
@@ -1145,7 +1217,7 @@ body.light .comment {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #1e293b;
+    color: rgba(229, 231, 235, 0.9);
 }
 
 .form-group input,
@@ -1153,7 +1225,9 @@ body.light .comment {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid rgba(159, 120, 255, 0.24);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f4f1ff;
     border-radius: var(--brand-radius);
     font-family: inherit;
     font-size: 1rem;
@@ -1164,6 +1238,60 @@ body.light .comment {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--brand-accent);
+}
+
+/* Theme aware File input styles */
+input[type="file"] {
+    padding: 0.5rem 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+    border: 2px solid rgba(159, 120, 255, 0.24) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #f4f1ff !important;
+    border-radius: var(--brand-radius) !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+}
+
+body.light input[type="file"] {
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: #111827 !important;
+    border-color: rgba(148, 163, 184, 0.32) !important;
+}
+
+input[type="file"]::file-selector-button,
+input[type="file"]::-webkit-file-upload-button {
+    background: rgba(159, 120, 255, 0.15) !important;
+    color: #f4f1ff !important;
+    border: 1px solid rgba(159, 120, 255, 0.4) !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 0.8rem !important;
+    margin-right: 1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+    font-family: inherit !important;
+    font-size: 0.9rem !important;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: rgba(159, 120, 255, 0.25) !important;
+    border-color: var(--brand-accent) !important;
+}
+
+body.light input[type="file"]::file-selector-button,
+body.light input[type="file"]::-webkit-file-upload-button {
+    background: rgba(140, 111, 255, 0.1) !important;
+    color: #8c6fff !important;
+    border: 1px solid rgba(140, 111, 255, 0.25) !important;
+}
+
+body.light input[type="file"]::file-selector-button:hover,
+body.light input[type="file"]::-webkit-file-upload-button:hover {
+    background: rgba(140, 111, 255, 0.2) !important;
+    border-color: var(--brand-accent) !important;
 }
 
 /* blog-excerpt helper */
@@ -1190,10 +1318,13 @@ body.light .comment {
     gap: 0.5rem;
     padding: 0.75rem;
     border: 1px solid rgba(159, 120, 255, 0.24);
-    border-bottom: none;
     border-radius: var(--brand-radius) var(--brand-radius) 0 0;
-    background: rgba(255, 255, 255, 0.04);
+    background: #15182b;
     flex-wrap: wrap;
+    position: sticky;
+    top: 41.6px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(159, 120, 255, 0.24);
 }
 
 .toolbar-btn {
@@ -1208,6 +1339,7 @@ body.light .comment {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #ffffff !important;
 }
 
 .toolbar-btn:hover {
@@ -1440,11 +1572,35 @@ body.light .empty-state h3 {
 body.light .filter-btn,
 body.light .action-btn,
 body.light .cancel-btn,
-body.light .btn-secondary,
-body.light .toolbar-btn {
+body.light .btn-secondary {
     background: rgba(255, 255, 255, 0.85);
     color: #334155;
     border-color: rgba(148, 163, 184, 0.28);
+}
+
+body.light .toolbar-btn,
+body.light .toolbar-btn i {
+    background: transparent !important;
+    color: #000000 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+body.light .toolbar-btn:hover,
+body.light .toolbar-btn:hover i {
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: var(--brand-accent-strong, #8c6fff) !important;
+    border-color: transparent !important;
+}
+
+/* Active state: Solid purple with white icon/text in both themes */
+.toolbar-btn.active,
+.toolbar-btn.active i,
+body.light .toolbar-btn.active,
+body.light .toolbar-btn.active i {
+    background: #8c6fff !important;
+    color: #ffffff !important;
+    border-color: #8c6fff !important;
 }
 
 body.light .filter-btn:hover,
@@ -1457,11 +1613,15 @@ body.light .filter-btn.active {
 body.light .blog-card,
 body.light .blog-form,
 body.light .content-editor,
-body.light .editor-toolbar,
-body.light .blog-actions,
 body.light .comment-input-container textarea,
 body.light .section-header {
     background: rgba(255, 255, 255, 0.84);
+}
+
+body.light .editor-toolbar {
+    background: #ffffff !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
 }
 
 body.light .blog-card,
@@ -1480,6 +1640,7 @@ body.light .blog-card:hover {
 }
 
 body.light .blog-actions {
+    background: transparent !important;
     border-top-color: #e5e7eb;
     border-bottom-color: #e5e7eb;
 }
@@ -1492,6 +1653,8 @@ body.light .form-group textarea {
     color: #111827;
     border-color: rgba(148, 163, 184, 0.32);
 }
+
+/* File input styles merged with base definitions */
 
 body.light .content-editor:empty:before {
     color: #94a3b8;

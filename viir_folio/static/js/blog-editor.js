@@ -14,13 +14,18 @@ const contentEditor = document.getElementById('contentEditor');
 const tagsInput = document.getElementById('tagsInput');
 const editorTitle = document.getElementById('editorTitle');
 
-// Initialize the editor
-document.addEventListener('DOMContentLoaded', function() {
+function initBlogEditor() {
     setupEventListeners();
     setupRichTextEditor();
     checkEditMode();
     loadDraftIfExists();
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogEditor);
+} else {
+    initBlogEditor();
+}
 
 // Check if we're in edit mode
 function checkEditMode() {
@@ -56,6 +61,7 @@ function loadBlogForEditing(blogId) {
 
 // Setup rich text editor
 function setupRichTextEditor() {
+    if (!contentEditor) return;
     // Focus and placeholder handling
     contentEditor.addEventListener('focus', function() {
         if (this.innerHTML === '' || this.innerHTML === '<br>') {
@@ -87,7 +93,7 @@ function setupRichTextEditor() {
 // Format text in editor
 function formatText(command, value = null) {
     document.execCommand(command, false, value);
-    contentEditor.focus();
+    if (contentEditor) contentEditor.focus();
     
     // Update button states
     updateToolbarButtons();
@@ -105,7 +111,7 @@ function insertLink() {
             document.execCommand('insertHTML', false, link);
         }
     }
-    contentEditor.focus();
+    if (contentEditor) contentEditor.focus();
 }
 
 // Insert image
@@ -115,7 +121,7 @@ function insertImage() {
         const img = `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; margin: 1rem 0;">`;
         document.execCommand('insertHTML', false, img);
     }
-    contentEditor.focus();
+    if (contentEditor) contentEditor.focus();
 }
 
 // Update toolbar button states
@@ -368,21 +374,27 @@ function showNotification(message, type = 'success') {
 // Setup event listeners
 function setupEventListeners() {
     // Image URL input change
-    imageUrlInput.addEventListener('input', function() {
-        updateImagePreview(this.value);
-    });
+    if (imageUrlInput) {
+        imageUrlInput.addEventListener('input', function() {
+            updateImagePreview(this.value);
+        });
+    }
     
     // Form inputs for auto-save
     [blogTitleInput, categorySelect, authorInput, excerptInput, tagsInput].forEach(input => {
-        input.addEventListener('input', function() {
-            clearTimeout(this.saveTimeout);
-            this.saveTimeout = setTimeout(saveDraft, 2000);
-        });
+        if (input) {
+            input.addEventListener('input', function() {
+                clearTimeout(this.saveTimeout);
+                this.saveTimeout = setTimeout(saveDraft, 2000);
+            });
+        }
     });
     
     // Content editor selection change for toolbar updates
-    contentEditor.addEventListener('mouseup', updateToolbarButtons);
-    contentEditor.addEventListener('keyup', updateToolbarButtons);
+    if (contentEditor) {
+        contentEditor.addEventListener('mouseup', updateToolbarButtons);
+        contentEditor.addEventListener('keyup', updateToolbarButtons);
+    }
     
     // Mobile navigation
     const hamburger = document.querySelector('.hamburger');
@@ -396,11 +408,13 @@ function setupEventListeners() {
     }
     
     // Prevent form submission on Enter key
-    blogForm.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-        }
-    });
+    if (blogForm) {
+        blogForm.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+    }
     
     // Handle beforeunload to warn about unsaved changes
     window.addEventListener('beforeunload', function(e) {
@@ -414,13 +428,13 @@ function setupEventListeners() {
 // Check if there are unsaved changes
 function hasUnsavedChanges() {
     const currentData = {
-        title: blogTitleInput.value,
-        category: categorySelect.value,
-        author: authorInput.value,
-        excerpt: excerptInput.value,
-        image: imageUrlInput.value,
-        content: contentEditor.innerHTML,
-        tags: tagsInput.value
+        title: blogTitleInput ? blogTitleInput.value : '',
+        category: categorySelect ? categorySelect.value : '',
+        author: authorInput ? authorInput.value : '',
+        excerpt: excerptInput ? excerptInput.value : '',
+        image: imageUrlInput ? imageUrlInput.value : '',
+        content: contentEditor ? contentEditor.innerHTML : '',
+        tags: tagsInput ? tagsInput.value : ''
     };
     
     const savedDraft = localStorage.getItem('blogDraft');
@@ -442,13 +456,22 @@ function hasUnsavedChanges() {
 
 // Reset form
 function resetForm() {
-    blogForm.reset();
-    contentEditor.innerHTML = '';
-    imagePreview.innerHTML = '';
-    imagePreview.style.display = 'none';
+    if (blogForm) blogForm.reset();
+    if (contentEditor) contentEditor.innerHTML = '';
+    if (imagePreview) {
+        imagePreview.innerHTML = '';
+        imagePreview.style.display = 'none';
+    }
     clearDraft();
 }
-document.getElementById('blogForm').addEventListener('submit', function () {
-    const editorContent = document.getElementById('contentEditor').innerHTML;
-    document.getElementById('id_content').value = editorContent;
-});
+
+const blogFormEl = document.getElementById('blogForm');
+if (blogFormEl) {
+    blogFormEl.addEventListener('submit', function () {
+        const editorContentEl = document.getElementById('contentEditor');
+        const hiddenContentEl = document.getElementById('id_content');
+        if (editorContentEl && hiddenContentEl) {
+            hiddenContentEl.value = editorContentEl.innerHTML;
+        }
+    });
+}

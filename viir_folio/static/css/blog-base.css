@@ -310,14 +310,27 @@ section .signin .content .form .inputBox {
     width: 100%;
 }
 
-section .signin .content .form .inputBox input[type="text"],
-section .signin .content .form .inputBox input[type="password"] {
+section .signin .content .form .inputBox input[type="text"] {
     position: relative;
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.15);
     outline: none;
     padding: 24px 14px 8px;
+    border-radius: var(--brand-radius);
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+section .signin .content .form .inputBox input[type="password"] {
+    position: relative;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    outline: none;
+    padding: 24px 40px 8px 14px;
     border-radius: var(--brand-radius);
     color: #fff;
     font-weight: 500;
@@ -492,7 +505,11 @@ input[type="submit"].enabled {
 
 .toggle-password-icon {
     z-index: 20000;
-    padding-top: 100%;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+section .signin .content .form .inputBox .toggle-password:hover .toggle-password-icon {
+    transform: scale(1.15);
 }
 
 
@@ -820,11 +837,16 @@ body.light .subscribe-btn {
 }
 
 body.light .blog-navba,
-body.light .header,
-body.light .blog-header {
+body.light .header {
     background: linear-gradient(90deg, #ffffff 0%, #f7f3ff 100%) !important;
     border-bottom-color: rgba(148, 163, 184, 0.22) !important;
     box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light .blog-header {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
 }
 
 body.light .blog-nav {

@@ -1,11 +1,8 @@
 {% extends 'blog/blog-base.html' %}{% load static %}{% block content %}
-<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}?v=20260527">
 <main class="main-content">
-    <div class="editor-container">
+    <div class="editor-container" style="margin-top: 40px;">
         <div class="container">
-            <div class="editor-header">
-                <h1 id="editorTitle">Write New Blog</h1>
-            </div>
 
             <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
                 {% csrf_token %}
@@ -13,6 +10,11 @@
                     <label for="blogTitleInput">Title</label>
                     <input type="text" id="blogTitleInput" name="title" placeholder="Enter an engaging title..."
                         required fdprocessedid="gs6g3h">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_slug">URL Slug</label>
+                    {{ form.slug }}
                 </div>
 
                 <div class="form-group">
@@ -56,5 +58,5 @@
     </div>
 </main>
 
-<script src="{% static 'js/blog-editor.js' %}"></script>
+<script src="{% static 'js/blog-editor.js' %}?v=20260526a"></script>
 {% endblock content %}

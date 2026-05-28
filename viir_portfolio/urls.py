@@ -38,11 +38,19 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('blogspace/', Blogspace.as_view(), name='blogspace'),
-    path('blogspace/<int:pk>/', DetailArticleView.as_view(), name='detail_blog'),
-    path('blogspace/<int:pk>/delete', DeleteArticleView.as_view(), name='delete_article'),
-    path('blogspace/<int:pk>/update', UpdateBlogView.as_view(), name='updateview'),
-    path('create/', CreateBlogView.as_view(), name='create_blog'),
+    # Numeric article URLs FIRST for backward compatibility (redirects to slug)
+    path('blog/<int:pk>/', redirect_article_numeric_to_slug, name='detail_blog_numeric'),
+    path('blogspace/<int:pk>/', redirect_article_numeric_to_slug, name='detail_blog_old'),
+    path('blogspace/<int:pk>/delete', redirect_article_numeric_to_slug, name='delete_article_old'),
+    path('blogspace/<int:pk>/update', redirect_article_numeric_to_slug, name='updateview_old'),
+    # Slug-based article URLs (new) - AFTER numeric patterns
+    path('blog/<slug:slug>/', DetailArticleView.as_view(), name='detail_blog'),
+    path('blog/<slug:slug>/delete', DeleteArticleView.as_view(), name='delete_article'),
+    path('blog/<slug:slug>/update', UpdateBlogView.as_view(), name='updateview'),
+    # Other URLs
+    path('blogspace/create/', CreateBlogView.as_view(), name='create_blog'),
     path('blogspace/edit/', view, name='login'),
+    path('blogspace/logout/', logout_view, name='logout'),
     path('certificate/', certificate_view, name='certificate'),
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),

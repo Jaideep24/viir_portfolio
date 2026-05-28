@@ -2,15 +2,22 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog-editor.css' %}?v=20260527">
 
 <main class="main-content">
     <div class="container admin-panel">
-        <div class="admin-header">
-            <a href="/create" class="create-btn">
+        <div class="admin-header" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="/blogspace/create" class="create-btn" style="margin: 0;">
                 <i class="fas fa-plus-circle"></i>
                 Create New Blog
             </a>
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary logout-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 24px; border-radius: var(--brand-pill-radius); font-weight: 500; border: none; cursor: pointer; background: rgba(255, 255, 255, 0.08); color: #f4f1ff;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </form>
         </div>
 
         {% if article %}
@@ -22,11 +29,11 @@
                 </div>
                 <div class="blog-item-body">
                     <div class="blog-actions">
-                        <a class="action-btn btn-update" href="{% url 'updateview' pk=object.pk %}">
+                        <a class="action-btn btn-update" href="{% url 'updateview' slug=object.slug %}">
                             <i class="fas fa-edit"></i>
                             Update
                         </a>
-                        <a class="action-btn btn-delete" href="{% url 'delete_article' pk=object.pk %}">
+                        <a class="action-btn btn-delete" href="{% url 'delete_article' slug=object.slug %}">
                             <i class="fas fa-trash-alt"></i>
                             Delete
                         </a>

@@ -1,14 +1,19 @@
+import os
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils import timezone
+from django.conf import settings
 import re
 from datetime import datetime
 from .forms import *
 from .models import *
 from django.core.mail import EmailMessage
+from django.core import signing
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import messages
 
 # Create your views here.
 def parse_date_ran(date_range_str):
@@ -120,14 +125,14 @@ def index(request):
         
         if form.is_valid():
             form.save()
-            recipient_email = 'virvphuria@gmail.com'
+            recipient_email = os.getenv('EMAIL_RECIPIENT_EMAIL', 'admin@example.com')
             subject = 'Portfolio contact'
             submission_date = form.instance.submitted_date.strftime('%d/%m/%Y') if form.instance.submitted_date else datetime.now().strftime('%d/%m/%Y')
             message = f"Name: {form.cleaned_data['name']}\nEmail: {form.cleaned_data['email']}\nMessage: {form.cleaned_data['message']}\nNumber: {form.cleaned_data['number']}\nDate: {submission_date}"
             from_email = form.cleaned_data['email']
 
             # Send email
-            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"], bcc=[recipient_email]).send()
+            EmailMessage(subject, message, from_email, to=[recipient_email], bcc=[recipient_email]).send()
             
             # Set success message in session
             request.session['contact_success'] = True
@@ -141,22 +146,94 @@ def index(request):
 def certificate_view(request):
     return render(request, 'portfolio/certificate.html', {'certificate': certificate.objects.all().order_by('-date'), 'certi': True})
 
+def is_verified_user(request):
+    # Check session first
+    token = request.session.get('auth_token')
+    if not token:
+        # Check cookie next
+        token = request.COOKIES.get('auth_token')
+    
+    if not token:
+        return False
+        
+    try:
+        data = signing.loads(token, max_age=1800)  # Valid for 30 minutes (1800 seconds)
+        username = data.get('username')
+        if username and Logger.objects.filter(user_name=username).exists():
+            return True
+    except (signing.SignatureExpired, signing.BadSignature):
+        pass
+        
+    return False
+
 def view(request):
+    # Check if already logged in and verified (auto-bypass)
+    if is_verified_user(request):
+        return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+
     userlist = Logger.objects.all().values()
     if request.method == "POST":
-        if "username" in request.POST:
+        if "username" in request.POST and "password" in request.POST:
+            username_input = request.POST["username"]
+            password_input = request.POST["password"]
+            
             # Check if credentials match any user
             for i in userlist:
-                if i["user_name"] == request.POST["username"] and i["password"] == request.POST["password"]:
-                    return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+                if i["user_name"] == username_input:
+                    password_match = False
+                    
+                    # Check if stored password is a secure Django hash
+                    if i["password"].startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2$')):
+                        if check_password(password_input, i["password"]):
+                            password_match = True
+                    else:
+                        # Plaintext password fallback
+                        if i["password"] == password_input:
+                            password_match = True
+                            # Migrate the password to a secure hash immediately
+                            logger_obj = Logger.objects.filter(id=i["id"]).first()
+                            if logger_obj:
+                                logger_obj.password = make_password(password_input)
+                                logger_obj.save()
+                    
+                    if password_match:
+                        # Login successful: generate secure token
+                        token = signing.dumps({'username': username_input})
+                        # Set token in session
+                        request.session['auth_token'] = token
+                        
+                        response = render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+                        # Set token as an HTTP-only secure cookie with 30 minutes max age
+                        response.set_cookie(
+                            'auth_token', 
+                            token, 
+                            max_age=1800, 
+                            httponly=True, 
+                            secure=True, 
+                            samesite='Lax'
+                        )
+                        return response
+            
             # If no match found after checking all users
-            return render(request, 'blog/login.html', {"warning": "error"})
+            messages.error(request, "Email or password incorrect")
+            return redirect('login')
         else:
-            return render(request, 'blog/login.html', {"warning": "error"})
+            messages.error(request, "Email or password incorrect")
+            return redirect('login')
     elif request.method == "GET":
         return render(request, 'blog/login.html')
     else:
         return render(request, 'blog/login.html')
+
+def logout_view(request):
+    if request.method == "POST":
+        if 'auth_token' in request.session:
+            del request.session['auth_token']
+        response = HttpResponseRedirect(reverse('login'))
+        response.delete_cookie('auth_token')
+        messages.success(request, "You have been logged out successfully.")
+        return response
+    return redirect('login')
 
 class Blogspace(ListView):
     model = Article
@@ -183,13 +260,20 @@ class Blogspace(ListView):
         try:
             certificate = subscriber(email=email)
             certificate.save()
-            values_list=[email]
-            subject = 'New Subscription'
-            message = f"Thank you for subscribing to our blogs! 🎉\nWe’re thrilled to have you join our community of readers. You’ve just taken the first step toward receiving insightful articles, exciting updates, and exclusive content right to your inbox. \nRegards,\nViir Phuria"
-            from_email = 'virvphuria@gmail.com'  # Replace with your email address
+            
+            subject = 'Welcome to Our Blog Community'
+            message = f"""Dear Reader,
 
-            # Send email
-            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"],bcc=values_list).send()
+Thank you for subscribing to our blog! We're excited to have you join our community.
+
+You'll now receive notifications whenever new articles are published. We share insightful content on web development, technology, and professional growth.
+
+Best regards,
+Viir Phuria"""
+            from_email = settings.EMAIL_HOST_USER
+
+            # Send confirmation email to the new subscriber
+            EmailMessage(subject, message, from_email, to=[email]).send()
             confirmation=True
             return HttpResponseRedirect(request.path_info)
         except ValueError as e:
@@ -198,10 +282,22 @@ class Blogspace(ListView):
             context['error'] = f'Invalid input: {e}'
             return render(request, self.template_name, context)
 
+
+def redirect_article_numeric_to_slug(request, pk):
+    """Redirect old numeric article URLs to new slug-based URLs for backward compatibility"""
+    try:
+        article = Article.objects.get(pk=pk)
+        return redirect('detail_blog', slug=article.slug)
+    except Article.DoesNotExist:
+        return render(request, '404.html', status=404)
+
+
 class DetailArticleView(DetailView):
     model = Article
     template_name = 'blog/blog.html'
     context_object_name = 'article'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
         
 
     def get_context_data(self, **kwargs):
@@ -255,10 +351,24 @@ class ProjectDetailView(DetailView):
 class DeleteArticleView(DeleteView):
     model = Article
     template_name = 'blog/blog_delete.html'
-    success_url = reverse_lazy('login')  # resolves to /blogspace/edit/
+    success_url = reverse_lazy('login')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not is_verified_user(request):
+            messages.warning(request, "Please login to access this page.")
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
 
 class CreateBlogView(View):
     template_name = 'blog/editor.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not is_verified_user(request):
+            messages.warning(request, "Please login to access this page.")
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
         form = ArticleForm()
@@ -270,25 +380,49 @@ class CreateBlogView(View):
             blog = form.save(commit=False)
             blog.date = timezone.now()  # Override any form value
             blog.save()
-            blog.save()
             
-            entries = subscriber.objects.all()
-            values_list = [entry.email for entry in entries]
-            subject = 'New Blog'
-            message = f"Hey there, a new blog is waiting for you!\nTitle: {form.cleaned_data['title']}\nRegards,\nViir Phuria"
-            from_email = 'virvphuria@gmail.com'
+            # Get all subscriber emails from database
+            subscribers = subscriber.objects.all()
+            subscriber_emails = [sub.email for sub in subscribers]
+            
+            if subscriber_emails:
+                subject = f'New Article: {form.cleaned_data["title"]}'
+                
+                # Generate blog post URL
+                blog_url = request.build_absolute_uri(reverse('detail_blog', args=[blog.slug]))
+                
+                message = f"""Dear Reader,
 
-            # Send email
-            EmailMessage(subject, message, from_email, to=["virvphuria@gmail.com"], bcc=values_list).send()
+A new article has been published on our blog:
+
+Title: {form.cleaned_data['title']}
+Link: {blog_url}
+
+Visit our blog to read the full article and stay updated with our latest content.
+
+Best regards,
+Viir Phuria"""
+                from_email = settings.EMAIL_HOST_USER
+
+                # Send notification to all subscribers (using BCC to hide recipient list)
+                EmailMessage(subject, message, from_email, bcc=subscriber_emails).send()
             return redirect('blogspace')
         
         return render(request, self.template_name, {'form': form})
     
 class UpdateBlogView(UpdateView):
     model = Article
-    fields = ["title", "content", "image"]
+    fields = ["title", "slug", "content", "image"]
     template_name = 'blog/update_blog.html'
     success_url = '/blogspace/edit'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not is_verified_user(request):
+            messages.warning(request, "Please login to access this page.")
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
 
 
 def custom_404(request, exception=None):

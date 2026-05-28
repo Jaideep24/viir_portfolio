@@ -151,17 +151,24 @@ const loadMoreBtn = document.getElementById('loadMoreBtn');
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-// Initialize the app
-document.addEventListener('DOMContentLoaded', function() {
+function initBlogScript() {
     // Load blogs from localStorage if available
     const savedBlogs = localStorage.getItem('blogPosts');
     if (savedBlogs) {
         allBlogs = [...JSON.parse(savedBlogs), ...sampleBlogs];
     }
     
-    renderBlogs();
-    setupEventListeners();
-});
+    if (blogsGrid) {
+        renderBlogs();
+        setupEventListeners();
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogScript);
+} else {
+    initBlogScript();
+}
 
 // Render blogs
 function renderBlogs() {

@@ -61,7 +61,16 @@ admin.site.register(contact, ContactAdmin)
 admin.site.register(Expertise)
 admin.site.register(Article)
 admin.site.register(Comment)
-admin.site.register(Logger)
+
+class LoggerAdmin(admin.ModelAdmin):
+    list_display = ('user_name',)
+    
+    def save_model(self, request, obj, form, change):
+        if obj.password and not obj.password.startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2$')):
+            obj.password = make_password(obj.password)
+        super().save_model(request, obj, form, change)
+
+admin.site.register(Logger, LoggerAdmin)
 admin.site.register(cv)
 admin.site.register(certificate)
 admin.site.register(maincertificate)

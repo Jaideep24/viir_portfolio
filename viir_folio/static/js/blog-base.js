@@ -46,7 +46,7 @@ function generateBackgroundSpans() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initBlogBase() {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     document.body.classList.toggle("light", !isDarkMode);
     document.body.classList.toggle("dark", isDarkMode);
@@ -63,7 +63,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof applyDarkModeStyles === 'function') {
         applyDarkModeStyles(isDarkMode);
     }
-});
+
+    // Set up password toggle listener
+    const togglePasswordBtn = document.getElementById("togglePassword");
+    if (togglePasswordBtn) {
+        togglePasswordBtn.addEventListener("click", myFunction);
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogBase);
+} else {
+    initBlogBase();
+}
 
 window.addEventListener('resize', generateBackgroundSpans);
 
@@ -114,13 +126,16 @@ function darktheme() {
 
 function myFunction() {
     var x = document.getElementById("password");
+    var toggleBtn = document.getElementById("togglePassword");
+    if (!x || !toggleBtn) return;
+
     if (x.type === "password") {
         x.type = "text";
+        toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash toggle-password-icon" id="togglePasswordIcon"></i>';
     } else {
         x.type = "password";
+        toggleBtn.innerHTML = '<i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>';
     }
-    document.getElementById('something').classList.toggle('fa-eye');
-    document.getElementById('something').classList.toggle('fa-eye-slash');
 }
 
 

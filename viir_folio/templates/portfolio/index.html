@@ -489,7 +489,7 @@
             <div class="container">
                 <div class="blogs-grid" id="blogsGrid">
                     {% for object in article %}
-                    <a class="blog-link" href="{% url 'detail_blog' object.id %}">
+                    <a class="blog-link" href="{% url 'detail_blog' object.slug %}">
                         <div class="blog-card fade-in-up blog-card-visible">
                             <div class="blog-card-image" data-bg="/media/{{ object.image }}"></div>
                             <div class="blog-card-content">
