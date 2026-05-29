@@ -418,6 +418,10 @@ function setupEventListeners() {
     
     // Handle beforeunload to warn about unsaved changes
     window.addEventListener('beforeunload', function(e) {
+        // Don't show warning if form is submitting
+        if (window.formSubmitting) {
+            return;
+        }
         if (hasUnsavedChanges()) {
             e.preventDefault();
             e.returnValue = '';
@@ -473,5 +477,8 @@ if (blogFormEl) {
         if (editorContentEl && hiddenContentEl) {
             hiddenContentEl.value = editorContentEl.innerHTML;
         }
+        // Clear unsaved changes flag on submit
+        localStorage.removeItem('blogDraft');
+        window.formSubmitting = true;
     });
 }
