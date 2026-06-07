@@ -22,12 +22,18 @@ from django.views.generic import TemplateView
 
 # Sitemap
 from django.contrib.sitemaps.views import sitemap
-from viir_folio.sitemaps import StaticViewSitemap, ArticleSitemap, ProjectSitemap
+from viir_folio.sitemaps import (
+    StaticViewSitemap,
+    ArticleSitemap,
+    ProjectSitemap,
+    CertificateSitemap,
+)
 
 sitemaps = {
     'static': StaticViewSitemap(),
     'articles': ArticleSitemap(),
     'projects': ProjectSitemap(),
+    'certificates': CertificateSitemap(),
 }
 
 admin.site.site_header = "Viir Portfolio Administration"
@@ -55,6 +61,7 @@ urlpatterns = [
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('manifest.json', TemplateView.as_view(template_name="manifest.json", content_type='application/json'), name='manifest'),
     # Dev preview: visit /404-preview/ to see the custom 404 page (works with DEBUG=True too)
     path('404-preview/', custom_404),
 ]

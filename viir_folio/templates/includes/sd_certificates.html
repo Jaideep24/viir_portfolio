@@ -1,0 +1,42 @@
+{% comment %}
+  Structured data for the Certificates listing page.
+  Include with: {% include 'includes/sd_certificates.html' with certificate=certificate %}
+  `certificate` should be the queryset of certificate objects.
+{% endcomment %}
+{% if certificate %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Certificates & Credentials — Viir Phuria",
+  "description": "Professional certificates and credentials earned by Viir Phuria from leading online platforms.",
+  "url": "{{ site_url }}/certificate/",
+  "numberOfItems": {{ certificate|length }},
+  "itemListElement": [
+    {% for cert in certificate %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "item": {
+        "@type": "EducationalOccupationalCredential",
+        "name": "{{ cert.title|escapejs }}",
+        "description": "{{ cert.criteria|escapejs }}",
+        "url": "{{ cert.url|escapejs }}",
+        "dateCreated": "{{ cert.date|date:'Y-m-d' }}",
+        "credentialCategory": "certificate",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "{{ cert.platorm|escapejs }}"
+        },
+        "holder": {
+          "@type": "Person",
+          "@id": "{{ site_url }}/#person",
+          "name": "Viir Phuria"
+        }
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

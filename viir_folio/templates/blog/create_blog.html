@@ -1,4 +1,9 @@
-{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% load static %} {% block content %}
+{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% load static %}
+{% block page_title %}Create Blog Post | Viir Phuria{% endblock %}
+{% block meta %}
+  {% include 'includes/meta.html' with meta_title='Create Blog Post | Viir Phuria' meta_description='Private blog editor.' meta_robots='noindex,nofollow,noarchive' %}
+{% endblock %}
+{% block content %}
 
 <link rel="stylesheet" href="{% static 'css/blog-editor.css' %}?v=20260527">
 

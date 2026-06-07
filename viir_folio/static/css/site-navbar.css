@@ -36,16 +36,84 @@ body.light .navbar-fixed {
 }
 
 #theme-toggle-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    height: auto;
-}
-
-#theme-toggle-button .theme-toggle-svg {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
     width: 70px;
     height: 35px;
+    cursor: pointer;
+}
+
+.theme-toggle-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.25s;
+}
+
+#toggle:checked+svg #container,
+body.dark #container {
+    fill: #2b4360;
+}
+
+#toggle:checked+svg #button,
+body.dark #button {
+    transform: translate(28px, 2.333px);
+}
+
+#sun {
+    opacity: 1;
+}
+
+#toggle:checked+svg #sun,
+body.dark #sun {
+    opacity: 0;
+}
+
+#moon {
+    opacity: 0;
+}
+
+#toggle:checked+svg #moon,
+body.dark #moon {
+    opacity: 1;
+}
+
+#cloud {
+    opacity: 1;
+}
+
+#toggle:checked+svg #cloud,
+body.dark #cloud {
+    opacity: 0;
+}
+
+#stars {
+    opacity: 0;
+}
+
+#toggle:checked+svg #stars,
+body.dark #stars {
+    opacity: 1;
 }
 
 .navbar-fixed header {

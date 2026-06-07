@@ -107,7 +107,6 @@ def index(request):
     context = {
         "education": education,
         "experience": experiences,
-        "services": Expertise.objects.all(),
         "projects": Project.objects.all(),
         "about": About.objects.all(),
         "skill": Skill.objects.all(),
@@ -244,6 +243,7 @@ class Blogspace(ListView):
     def get_context_data(self, **kwargs):
         context = super(Blogspace, self).get_context_data(**kwargs)
         context['submitted'] = self.request.session.pop('subscription_success', False)
+        context['info'] = self.request.session.pop('subscription_info', None)
         return context
     
     def post(self, request, **kwargs):
@@ -258,8 +258,13 @@ class Blogspace(ListView):
 
         # Create and save model instance
         try:
-            certificate = subscriber(email=email)
-            certificate.save()
+            # Check if email already exists
+            if subscriber.objects.filter(email=email).exists():
+                request.session['subscription_info'] = 'This email is already subscribed. You\'re all set!'
+                return HttpResponseRedirect(request.path_info)
+            
+            new_subscriber = subscriber(email=email)
+            new_subscriber.save()
             
             subject = 'Welcome to Our Blog Community'
             message = f"""Dear Reader,
@@ -274,7 +279,7 @@ Viir Phuria"""
 
             # Send confirmation email to the new subscriber
             EmailMessage(subject, message, from_email, to=[email]).send()
-            confirmation=True
+            request.session['subscription_success'] = True
             return HttpResponseRedirect(request.path_info)
         except ValueError as e:
             # Handle date parsing error or other validation issues
@@ -287,7 +292,7 @@ def redirect_article_numeric_to_slug(request, pk):
     """Redirect old numeric article URLs to new slug-based URLs for backward compatibility"""
     try:
         article = Article.objects.get(pk=pk)
-        return redirect('detail_blog', slug=article.slug)
+        return redirect('detail_blog', slug=article.slug, permanent=True)
     except Article.DoesNotExist:
         return render(request, '404.html', status=404)
 
@@ -381,9 +386,8 @@ class CreateBlogView(View):
             blog.date = timezone.now()  # Override any form value
             blog.save()
             
-            # Get all subscriber emails from database
-            subscribers = subscriber.objects.all()
-            subscriber_emails = [sub.email for sub in subscribers]
+            # Get all unique subscriber emails from database.
+            subscriber_emails = list(subscriber.objects.values_list('email', flat=True).distinct())
             
             if subscriber_emails:
                 subject = f'New Article: {form.cleaned_data["title"]}'
@@ -412,9 +416,9 @@ Viir Phuria"""
     
 class UpdateBlogView(UpdateView):
     model = Article
-    fields = ["title", "slug", "content", "image"]
+    form_class = ArticleForm
     template_name = 'blog/update_blog.html'
-    success_url = '/blogspace/edit'
+    success_url = reverse_lazy('login')
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 

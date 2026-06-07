@@ -7,9 +7,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <title>VIIR PHURIA</title>
+    <title>{% block title %}Viir Phuria - Full-Stack Developer, ML/AI &amp; Cyber Security | Portfolio{% endblock %}</title>
 
-    {% include 'includes/meta.html' with meta_title='VIIR PHURIA' meta_description='Portfolio of Viir Phuria — projects, blog posts, and contact information.' %}
+    {% block meta %}
+    {# Primary SEO for Portfolio Home #}
+    {% include 'includes/meta.html' with meta_title='Viir Phuria — Full-Stack Developer, ML/AI & Cyber Security' meta_description='Portfolio of Viir Phuria — Full-Stack Developer, ML/AI Engineer, and Cyber Security enthusiast from Mumbai. Explore projects, publications, certifications, and blog posts.' meta_keywords='Viir Phuria, portfolio, full stack developer, Django, Flutter, cyber security, ML AI, IoT, web development, Mumbai, Python, publications, certificates' og_type='profile' %}
+    {% endblock %}
+
+    {# WebSite structured data with SearchAction for Google Sitelinks Searchbox #}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "{{ site_url }}/#website",
+      "name": "Viir Phuria Portfolio",
+      "url": "{{ site_url }}/",
+      "description": "Portfolio of Viir Phuria — Full-Stack Developer, ML/AI Engineer, and Cyber Security enthusiast.",
+      "author": {
+        "@type": "Person",
+        "@id": "{{ site_url }}/#person",
+        "name": "Viir Phuria"
+      },
+      "inLanguage": "en-IN",
+      "copyrightYear": "2025"
+    }
+    </script>
 
     <!-- Site Favicon -->
     <link rel="icon" href="{% static 'assets/viir_logo.png' %}" sizes="32x32">
@@ -62,8 +84,8 @@
     <!-- Grid Canvas Background -->
     <canvas id="gridCanvas"></canvas>
 
-    <!-- Hero Title (typing animation target) -->
-    <h1 class="br-hero-title title-right-overflow">
+    <!-- Visually-hidden H1 for SEO — screen readers & crawlers need a single H1 per page -->
+    <h1 class="br-hero-title title-right-overflow" aria-label="Viir Phuria — Full-Stack Developer">
         <span id="myself"><span class="name"></span></span>
     </h1>
 
@@ -132,10 +154,10 @@
             <h4 id="typed-text" class="typed-text-output d-inline-block"></h4>
         </div>
         {% for object in cv %}
-        <a href="media/{{ object.pdf }}" target="_blank" class="view-cv-btn">
-            {% endfor %}
+        <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="view-cv-btn">
             <span class="text">View CV</span>
         </a>
+        {% endfor %}
     </center>
     <!-- Hero End -->
 
@@ -155,10 +177,7 @@
                         <div class="br-hero-img">
                             <div class="br-card" data-tilt="">
                                 {% load static %}
-                                <img src="media/{{ object.image }}" alt="viir" class="about-img">
-                                <div class="js-tilt-glare">
-                                    <div class="js-tilt-glare-inner"></div>
-                                </div>
+                                <img src="{{ object.image.url }}" alt="viir" class="about-img">
                             </div>
                         </div>
                     </div>
@@ -172,27 +191,27 @@
                                 <li id="age"><span class="title">Age<b>:</b></span> Years</li>
                                 <li><span class="title">Languages<b>:</b></span>{{ object.language }}</li>
                                 <li>
-                                    <a class="about-link" href="tel://9819185865/" target="_blank">
+                                    <a class="about-link" href="tel://9819185865/" target="_blank" rel="noopener noreferrer">
                                         <span class="title">Phone No<b>:</b></span>{{ object.phone_no }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="about-link" href="mailto:{{ object.email }}" target="_blank">
+                                    <a class="about-link" href="mailto:{{ object.email }}" target="_blank" rel="noopener noreferrer">
                                         <span class="title">Email<b>:</b></span>{{ object.email }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a target="_blank" class="about-link"
+                                    <a target="_blank" rel="noopener noreferrer" class="about-link"
                                         href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu">
                                         <span class="title">Address<b>:</b></span>{{ object.address }}
                                     </a>
                                 </li>
                                 <br><br><br>
                                 {% for object in cv %}
-                                <a class="download-cv-btn" href="media/{{ object.pdf }}" download>
-                                    {% endfor %}
-                                    <span class="text">Download CV</span>
+                                <a class="download-cv-btn" href="{{ object.pdf.url }}" download>
+                                     <span class="text">Download CV</span>
                                 </a>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -264,42 +283,6 @@
     <!-- Timeline Section End -->
 
     <!-- ============================================================ -->
-    <!-- EXPERTISE SECTION -->
-    <!-- ============================================================ -->
-    <section id="expertise" class="br-portfolio padding-tb-80 vanish">
-        <div class="container">
-            <div class="section-title">
-                <h2>My <span>Expertise</span></h2>
-                <span class="ligh-title">Expertise</span>
-            </div>
-            <div class="row service-box m-tb-minus-15px">
-                {% for object in services %}
-                <div class="col-lg-3 col-md-6 col-xs-12">
-                    <div class="flipper">
-                        <div class="main-box">
-                            <div class="box-front height-300 white-bg">
-                                <div class="content-wrap">
-                                    <div class="icon">{{ object.icon|safe }}</div>
-                                    <h3>{{ object.title }}</h3>
-                                    <p>{{ object.front_content }}</p>
-                                </div>
-                            </div>
-                            <div class="box-back height-300 gradient-bg">
-                                <div class="content-wrap">
-                                    <h3>{{ object.title }}</h3>
-                                    <p>{{ object.back_content }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <!-- Expertise Section End -->
-
-    <!-- ============================================================ -->
     <!-- SKILLS SECTION -->
     <!-- ============================================================ -->
     <section id="skills" class="br-portfolio padding-tb-80 vanish">
@@ -348,6 +331,7 @@
                                         <li class="filter" data-filter=".graphic" onclick="design(event)">GRAPHICS</li>
                                         <li class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
                                         <li class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
+                                        <li class="filter" data-filter=".cybersec" onclick="design(event)">CYBER SECURITY</li>
                                     </ul>
                                 </div>
                             </div>
@@ -363,26 +347,29 @@
                                                 </div>
                                                 <p>{{ object.topic }}</p>
                                                 <div class="br-info">
-                                                    <div class="portfolio-img">
-                                                        <img src="media/{{ object.image }}">
-                                                    </div>
-                                                    <div class="br-detail">
-                                                        <ul>
-                                                            <li>Date : {{ object.date }}</li>
-                                                            {% if object.client %}
-                                                            <li>Client : {{ object.client }}</li>
-                                                            {% endif %}
-                                                            <li>Tech : {{ object.tech }}</li>
-                                                            {% if object.url %}
-                                                            <li><a href="{{ object.url }}" target="_blank"
-                                                                    class="capsule-btn view-project-btn"><span
-                                                                        class="text">Visit Project</span></a></li>
-                                                            {% endif %}
-                                                            {% if object.demo_video %}
-                                                            <li><a href="{{ object.demo_video }}" target="_blank"
-                                                                    class="capsule-btn view-project-btn"><span
-                                                                        class="text">Demo Video</span></a></li>
-                                                            {% endif %}
+                                                     <div class="portfolio-img">
+                                                         <img src="{{ object.image.url }}">
+                                                     </div>
+                                                     <div class="br-detail">
+                                                         <ul>
+                                                             <li>Date : {{ object.date }}</li>
+                                                             {% if object.client %}
+                                                             <li>Client : {{ object.client }}</li>
+                                                             {% endif %}
+                                                             <li>Tech : {{ object.tech }}</li>
+                                                             <li><a href="{% url 'project_detail' object.pk %}"
+                                                                     class="capsule-btn view-project-btn"><span
+                                                                         class="text">View Details</span></a></li>
+                                                             {% if object.url %}
+                                                             <li><a href="{{ object.url }}" target="_blank" rel="noopener noreferrer"
+                                                                     class="capsule-btn view-project-btn"><span
+                                                                         class="text">Visit Project</span></a></li>
+                                                             {% endif %}
+                                                             {% if object.demo_video %}
+                                                             <li><a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer"
+                                                                     class="capsule-btn view-project-btn"><span
+                                                                         class="text">Demo Video</span></a></li>
+                                                             {% endif %}
                                                             
                                                         </ul>
                                                     </div>
@@ -414,11 +401,11 @@
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {% for object in maincertificate %}
-                        <div class="carousel-item {% if object.id == 1 %}active{% endif %}">
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
                             <center>
                                 <h3>{{ object.title }}</h3>
                             </center>
-                            <center><img src="media/{{ object.image }}" class="d-block carousel-img"></center>
+                            <center><img src="{{ object.image.url }}" class="d-block carousel-img"></center>
                         </div>
                         {% endfor %}
                     </div>
@@ -468,7 +455,7 @@
                     <div class="pub-title">{{ object.title }}</div>
                     <div class="pub-authors">{{ object.authors }}</div>
                     <div class="pub-meta">Published in: {{ object.place }}</div>
-                    <a href="{{ object.url }}" class="capsule-btn" target="_blank"><span class="text">View
+                    <a href="{{ object.url }}" class="capsule-btn" target="_blank" rel="noopener noreferrer"><span class="text">View
                             Publication</span></a>
                 </div>
                 {% endfor %}
@@ -540,7 +527,7 @@
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Mail</h3>
                                 <p class="mb-0">
                                     <a class="contact-link" href="mailto:{{ object.email }}"
-                                        target="_blank">{{object.email }}</a>
+                                        target="_blank" rel="noopener noreferrer">{{object.email }}</a>
                                 </p>
                             </div>
                         </div>
@@ -555,7 +542,7 @@
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
                                 <p class="mb-0">
                                     <a class="contact-link" href="tel:{{ object.phone_no }}"
-                                        target="_blank">{{object.phone_no }}</a>
+                                        target="_blank" rel="noopener noreferrer">{{object.phone_no }}</a>
                                 </p>
                             </div>
                         </div>
@@ -571,7 +558,7 @@
                                     <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;
                                     <a class="contact-link"
                                         href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"
-                                        target="_blank">{{ object.address }}</a>
+                                        target="_blank" rel="noopener noreferrer">{{ object.address }}</a>
                                 </p>
                             </div>
                         </div>
@@ -626,23 +613,23 @@
             <div class="br-footer-detail">
                 <div class="br-copy">
                     Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name"
-                        href="https://technographix.netlify.app/" target="_blank">Techno Graphix</a>.
+                        href="https://technographix.netlify.app/" target="_blank" rel="noopener noreferrer">Techno Graphix</a>.
                 </div>
                 <div class="br-social">
                     <ul>
-                        <li><a href="https://www.facebook.com/vir.phuria/" target="_blank"><i class="fa fa-facebook"
+                        <li><a href="https://www.facebook.com/vir.phuria/" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.instagram.com/viir_phuria/" target="_blank"><i class="fa fa-instagram"
+                        <li><a href="https://www.instagram.com/viir_phuria/" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank"><i class="fa fa-linkedin"
+                        <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="https://wa.me//9819185865" target="_blank"><i class="fa fa-whatsapp"
+                        <li><a href="https://wa.me//9819185865" target="_blank" rel="noopener noreferrer"><i class="fa fa-whatsapp"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="tel:9819185865" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                        <li><a href="tel:9819185865" target="_blank" rel="noopener noreferrer"><i class="fa fa-phone" aria-hidden="true"></i></a>
                         </li>
-                        <li><a href="https://github.com/Viir-Phuria" target="_blank"><i class="fa fa-github"
+                        <li><a href="https://github.com/Viir-Phuria" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"
                                     aria-hidden="true"></i></a></li>
-                        <li><a href="mailto:virvphuria@gmail.com" target="_blank"><i class="fa fa-envelope"
+                        <li><a href="mailto:virvphuria@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa fa-envelope"
                                     aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
@@ -668,6 +655,12 @@
     <!-- Custom JS (all page logic) -->
     <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/custom-cursor.js' %}"></script>
+
+    <!-- Structured Data: Projects List -->
+    {% include 'includes/sd_projects_list.html' with projects=projects %}
+
+    <!-- Structured Data: Publications List -->
+    {% include 'includes/sd_publications.html' with publications=publications %}
 
 </body>
 

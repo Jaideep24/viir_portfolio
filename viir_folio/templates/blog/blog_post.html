@@ -1,11 +1,34 @@
 {% extends 'blog/base.html' %}
+{% block page_title %}{{ article.title }} — Viir Phuria{% endblock %}
 {% block meta %}
   {% if article %}
     {% if article.image %}
-      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 meta_image=article.image.url %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 meta_image=article.image.url og_type='article' %}
     {% else %}
-      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 og_type='article' %}
     {% endif %}
+    <!-- BlogPosting Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{ article.title|escapejs }}",
+      "description": "{{ article.content|striptags|truncatechars:200|escapejs }}",
+      "datePublished": "{{ article.date|date:'c' }}",
+      "dateModified": "{{ article.date|date:'c' }}",
+      "author": {
+        "@type": "Person",
+        "name": "Viir Phuria",
+        "url": "{{ site_url }}/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Viir Phuria"
+      },
+      {% if article.image %}"image": "{{ site_url }}{{ article.image.url }}",{% endif %}
+      "url": "{{ site_url }}{% url 'detail_blog' article.slug %}"
+    }
+    </script>
   {% endif %}
 {% endblock %}
 {% load static %}

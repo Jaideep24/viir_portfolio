@@ -5,9 +5,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BlogSpace</title>
+  <title>{% block page_title %}BlogSpace — Viir Phuria{% endblock %}</title>
   {% block meta %}
-    {% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Articles and tutorials by Viir Phuria.' %}
+    {% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Articles, tutorials, and insights by Viir Phuria on web development, cyber security, ML/AI, and more.' %}
   {% endblock %}
   <link rel="stylesheet" href="https://bootswatch.com/5/simplex/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -48,17 +48,17 @@
     <div class="container">
       <div class="br-footer-detail">
         <div class="br-copy">
-          Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/" target="_blank">Techno Graphix</a>.
+          Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/" target="_blank" rel="noopener noreferrer">Techno Graphix</a>.
         </div>
         <div class="br-social">
           <ul>
-            <li><a href="https://www.facebook.com/vir.phuria/" target="_blank"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.instagram.com/viir_phuria/" target="_blank"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-            <li><a href="https://wa.me//9819185865" target="_blank"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
-            <li><a href="tel:9819185865" target="_blank"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
-            <li><a href="https://github.com/Viir-Phuria" target="_blank"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
-            <li><a href="mailto:virvphuria@gmail.com" target="_blank"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.facebook.com/vir.phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com/viir_phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            <li><a href="https://wa.me//9819185865" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
+            <li><a href="tel:9819185865" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
+            <li><a href="https://github.com/Viir-Phuria" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="mailto:virvphuria@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
           </ul>
         </div>
       </div>
@@ -79,6 +79,7 @@
   <script src="{% static 'js/blog-base.js' %}?v=20260526c"></script>
   <script src="{% static 'js/blog-script.js' %}?v=20260526c"></script>
   <script src="{% static 'js/custom-cursor.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
 </body>
 
 </html>

@@ -1,26 +1,17 @@
 {% extends 'blog/base.html' %}
 
-{% block content %}
+{% block page_title %}BlogSpace — Articles &amp; Insights | Viir Phuria{% endblock %}
 
 {% block meta %}
-	{% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Latest blog posts from Viir Phuria. Subscribe for updates.' %}
+	{% include 'includes/meta.html' with meta_title='BlogSpace — Articles & Insights | Viir Phuria' meta_description='Read the latest articles and insights by Viir Phuria on web development, cyber security, ML/AI, IoT, and more. Subscribe for updates.' meta_keywords='Viir Phuria blog, web development articles, cyber security tutorials, ML AI posts, Django tutorials, Flutter, IoT, tech articles' og_type='blog' %}
 {% endblock %}
 
-<div class="blogspace-hero text-center">
-	{% if submitted %}
-	<div class="btn btn-success">Subscribed</div>
-	{% else %}
-	<form action="" method="post">
-		{% csrf_token %}
-		<div class="form-group subscribe-form-group">
-			<input type="email" class="form-control subscribe-input" id="umail" name="email"
-				placeholder="Subscribe to our blogs">
-			<button name="button" value="{{ success }}" type="submit" class="btn btn-info subscribe-btn">
-				Submit
-			</button>
-		</div>
-	</form>
-	{% endif %}
+{% block content %}
+
+<div class="blogspace-hero">
+	<div class="blogspace-hero-content">
+		<h1>Blog Space</h1>
+	</div>
 </div>
 
 {% load static %}
@@ -57,4 +48,76 @@
     </div>
 </div>
 
+<div class="blogspace-subscribe-section">
+	<div class="container">
+		{% if info %}
+		<div class="subscribe-info-alert">
+			<i class="fas fa-info-circle"></i>
+			<span>{{ info }}</span>
+		</div>
+		{% endif %}
+
+		{% if submitted %}
+		<div class="subscribe-success-alert">
+			<i class="fas fa-check-circle"></i>
+			<span>Successfully subscribed! Check your email for confirmation.</span>
+		</div>
+		{% else %}
+		<div class="blogspace-subscribe-content">
+			<h2>Never Miss a Post</h2>
+			<p>Get latest articles delivered to your inbox</p>
+			<form action="" method="post" class="blogspace-subscribe-form">
+				{% csrf_token %}
+				<div class="subscribe-form-wrapper">
+					<div class="subscribe-input-group">
+						<i class="fas fa-envelope subscribe-icon"></i>
+						<input type="email" class="subscribe-input" id="umail" name="email"
+							placeholder="Enter your email address..." required>
+					</div>
+					<button type="submit" class="subscribe-btn" name="button" value="{{ success }}">
+						<span>Subscribe</span>
+						<i class="fas fa-arrow-right"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
 {% endblock content %}
+
+{# Blog Structured Data for Google #}
+{% block extra_scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://viirportfolio.pythonanywhere.com/blogspace/#blog",
+  "name": "BlogSpace — Viir Phuria",
+  "description": "Articles and insights by Viir Phuria on web development, cyber security, ML/AI, IoT, and more.",
+  "url": "https://viirportfolio.pythonanywhere.com/blogspace/",
+  "author": {
+    "@type": "Person",
+    "@id": "https://viirportfolio.pythonanywhere.com/#person",
+    "name": "Viir Phuria"
+  },
+  "inLanguage": "en-IN",
+  "blogPost": [
+    {% for object in object_list %}
+    {
+      "@type": "BlogPosting",
+      "headline": "{{ object.title|escapejs }}",
+      "url": "https://viirportfolio.pythonanywhere.com{% url 'detail_blog' object.slug %}",
+      "datePublished": "{{ object.date|date:'c' }}",
+      "author": {
+        "@type": "Person",
+        "@id": "https://viirportfolio.pythonanywhere.com/#person",
+        "name": "Viir Phuria"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% comment %}
+  Structured data for the Publications section on the home page.
+  Include with: {% include 'includes/sd_publications.html' with publications=publications %}
+  `publications` should be the queryset of Publication objects.
+{% endcomment %}
+{% if publications %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Publications — Viir Phuria",
+  "description": "Academic and research publications authored or co-authored by Viir Phuria.",
+  "url": "{{ site_url }}/#publications",
+  "numberOfItems": {{ publications|length }},
+  "itemListElement": [
+    {% for pub in publications %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "{{ pub.title|escapejs }}",
+        "author": [{% for author in pub.authors_list %}{"@type": "Person", "name": "{{ author|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "datePublished": "{{ pub.date|date:'Y-m-d' }}",
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ pub.place|escapejs }}"
+        },
+        "url": "{{ pub.url|escapejs }}"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

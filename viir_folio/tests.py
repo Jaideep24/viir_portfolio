@@ -163,3 +163,18 @@ class SecurityTests(TestCase):
         messages = list(post_response.context['messages'])
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), "You have been logged out successfully.")
+
+    def test_publication_authors_list(self):
+        """
+        Verify that the authors_list property on Publication correctly parses comma-separated names.
+        """
+        from .models import Publication
+        pub = Publication(
+            title="A secure system",
+            authors="Viir Phuria, John Doe, Jane Smith",
+            date=timezone.now().date(),
+            place="Mumbai",
+            url="https://example.com"
+        )
+        self.assertEqual(pub.authors_list, ["Viir Phuria", "John Doe", "Jane Smith"])
+

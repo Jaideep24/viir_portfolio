@@ -1,0 +1,29 @@
+{% comment %}
+  Structured data for a single Project.
+  Include with: {% include 'includes/sd_project.html' with project=project %}
+{% endcomment %}
+{% if project %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ project.title|escapejs }}",
+  "description": "{{ project.topic|escapejs }}",
+  "author": {
+    "@type": "Person",
+    "@id": "{{ site_url }}/#person",
+    "name": "Viir Phuria"
+  },
+  "dateCreated": "{{ project.date|date:'Y-m-d' }}",
+  "applicationCategory": "{{ project.get_category_display }}",
+  "keywords": "{{ project.tech|escapejs }}",
+  {% if project.url %}"url": "{{ project.url|escapejs }}",{% endif %}
+  "image": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{{ project.image.url }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Viir Phuria Portfolio",
+    "url": "{{ site_url }}/"
+  }
+}
+</script>
+{% endif %}

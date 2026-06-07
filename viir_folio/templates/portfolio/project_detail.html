@@ -1,8 +1,18 @@
 {% extends 'portfolio/index.html' %}
 {% load static %}
 
+{% block title %}{{ project.title }} | Project by Viir Phuria{% endblock %}
+
 {% block meta %}
-  {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url %}
+  {% if project %}
+    {% if project.image %}
+      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords=project.tech %}
+    {% else %}
+      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic og_type='website' meta_keywords=project.tech %}
+    {% endif %}
+    <!-- Project structured data -->
+    {% include 'includes/sd_project.html' with project=project %}
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -10,25 +20,33 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 mx-auto">
-        <h2>{{ project.title }}</h2>
+        <h1>{{ project.title }}</h1>
+        <p class="text-muted mb-1">
+          <strong>Category:</strong>
+          {% for cat in project.categories_list %}
+            <span class="badge" style="background:#7c3aed;color:#fff;border-radius:20px;padding:3px 10px;font-size:0.78rem;margin-right:4px;">{{ cat }}</span>
+          {% endfor %}
+        </p>
         {% if project.client %}
         <p><strong>Client:</strong> {{ project.client }}</p>
         {% endif %}
         <p><strong>Date:</strong> {{ project.date }}</p>
-        <p><strong>Tech:</strong> {{ project.tech }}</p>
+        <p><strong>Tech Stack:</strong> {{ project.tech }}</p>
         <div class="project-image text-center my-3">
-          <img src="{{ project.image.url }}" alt="{{ project.title }}" style="max-width:100%;height:auto;border-radius:12px;"/>
+          {% if project.image %}
+          <img src="{{ project.image.url }}" alt="{{ project.title }} — project by Viir Phuria" style="max-width:100%;height:auto;border-radius:12px;"/>
+          {% endif %}
         </div>
         <div class="project-topic">
           <p>{{ project.topic }}</p>
         </div>
         {% if project.url %}
-        <p><a href="{{ project.url }}" target="_blank" class="capsule-btn view-project-btn">Visit Project</a></p>
+        <p><a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">Visit Project</a></p>
         {% endif %}
         {% if project.demo_video %}
-        <p><a href="{{ project.demo_video }}" target="_blank" class="capsule-btn view-project-btn">Demo Video</a></p>
+        <p><a href="{{ project.demo_video }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">Demo Video</a></p>
         {% endif %}
-        <p><a href="/" class="capsule-btn">Back to Home</a></p>
+        <p><a href="/#projects" class="capsule-btn">Back to Projects</a></p>
       </div>
     </div>
   </div>

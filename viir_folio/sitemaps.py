@@ -1,21 +1,37 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from .models import Article, Project
+from django.utils import timezone
+from .models import Article, Project, certificate
 
 
 class StaticViewSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.6
+    """Static pages that don't change based on model data."""
+    protocol = 'https'
 
     def items(self):
-        return ['index', 'blogspace', 'certificate']
+        # Each item is a tuple: (url_name, priority, changefreq)
+        return [
+            ('index', 1.0, 'weekly'),
+            ('blogspace', 0.9, 'daily'),
+        ]
 
     def location(self, item):
-        return reverse(item)
+        return reverse(item[0])
+
+    def priority(self, item):
+        return item[1]
+
+    def changefreq(self, item):
+        return item[2]
+
+    def lastmod(self, item):
+        return timezone.now().date()
 
 
 class ArticleSitemap(Sitemap):
-    changefreq = "monthly"
+    """Blog article pages — highest content priority."""
+    protocol = 'https'
+    changefreq = 'monthly'
     priority = 0.8
 
     def items(self):
@@ -24,9 +40,14 @@ class ArticleSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.date
 
+    def location(self, obj):
+        return obj.get_absolute_url()
+
 
 class ProjectSitemap(Sitemap):
-    changefreq = "monthly"
+    """Individual project detail pages."""
+    protocol = 'https'
+    changefreq = 'monthly'
     priority = 0.7
 
     def items(self):
@@ -34,3 +55,25 @@ class ProjectSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.date
+
+    def location(self, obj):
+        return obj.get_absolute_url()
+
+
+class CertificateSitemap(Sitemap):
+    """Certificate page — changes rarely."""
+    protocol = 'https'
+    changefreq = 'yearly'
+    priority = 0.5
+
+    def items(self):
+        # One item = the certificates listing page
+        return ['certificate']
+
+    def location(self, item):
+        return reverse(item)
+
+    def lastmod(self, item):
+        # Use the date of the most recent certificate
+        latest = certificate.objects.order_by('-date').first()
+        return latest.date if latest else timezone.now().date()

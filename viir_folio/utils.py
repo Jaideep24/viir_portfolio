@@ -1,11 +1,13 @@
 import html
 from html.parser import HTMLParser
+from urllib.parse import urlparse
 
 class SafeHTMLParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.result = []
         self.tag_stack = []
+        self.skip_content_depth = 0
         # Define allowed tags for rich text
         self.allowed_tags = {
             'p', 'b', 'i', 'u', 'strong', 'em', 'span', 'div', 
@@ -15,7 +17,7 @@ class SafeHTMLParser(HTMLParser):
         }
         # Define allowed attributes for permitted tags
         self.allowed_attrs = {
-            'a': {'href', 'title', 'target', 'class', 'style'},
+            'a': {'href', 'title', 'target', 'rel', 'class', 'style'},
             'img': {'src', 'alt', 'title', 'width', 'height', 'class', 'style'},
             'span': {'style', 'class'},
             'div': {'style', 'class'},
@@ -36,8 +38,49 @@ class SafeHTMLParser(HTMLParser):
             'pre': {'style', 'class'},
             'code': {'style', 'class'},
         }
+        self.drop_content_tags = {'script', 'style', 'iframe', 'object', 'embed'}
+
+    def _is_safe_url(self, value, attr):
+        value = (value or '').strip()
+        if not value:
+            return False
+
+        if value.startswith(('#', '/')) and not value.startswith('//'):
+            return True
+
+        parsed = urlparse(value)
+        if not parsed.scheme:
+            return True
+
+        scheme = parsed.scheme.lower()
+        if attr == 'href':
+            return scheme in {'http', 'https', 'mailto', 'tel'}
+        if attr == 'src':
+            if scheme in {'http', 'https'}:
+                return True
+            if scheme == 'data':
+                return value.lower().startswith((
+                    'data:image/png;',
+                    'data:image/jpeg;',
+                    'data:image/jpg;',
+                    'data:image/gif;',
+                    'data:image/webp;',
+                ))
+        return False
+
+    def _is_safe_style(self, value):
+        value_lower = (value or '').lower()
+        blocked_tokens = ('javascript:', 'expression(', '@import', 'url(')
+        return not any(token in value_lower for token in blocked_tokens)
 
     def handle_starttag(self, tag, attrs):
+        if self.skip_content_depth:
+            return
+
+        if tag in self.drop_content_tags:
+            self.skip_content_depth += 1
+            return
+
         if tag not in self.allowed_tags:
             return  # Ignore disallowed tag (stripping it)
         
@@ -48,28 +91,38 @@ class SafeHTMLParser(HTMLParser):
             if attr not in allowed_for_tag:
                 continue
             
-            # Prevent javascript: and data: (HTML) protocols in links and sources
             if attr in ('href', 'src'):
-                val_lower = val.lower().strip()
-                if val_lower.startswith('javascript:') or val_lower.startswith('data:text/html'):
+                if not self._is_safe_url(val, attr):
                     continue
             
-            # Prevent javascript: or expression() injections inside style attributes
             if attr == 'style':
-                val_lower = val.lower()
-                if 'javascript:' in val_lower or 'expression(' in val_lower:
+                if not self._is_safe_style(val):
                     continue
+
+            if attr == 'target' and val not in {'_blank', '_self', '_parent', '_top'}:
+                continue
             
             clean_attrs.append((attr, val))
-            
+
+        if tag == 'a':
+            attrs_dict = dict(clean_attrs)
+            if attrs_dict.get('target') == '_blank':
+                attrs_dict['rel'] = 'noopener noreferrer'
+                clean_attrs = list(attrs_dict.items())
+
         attr_str = ''
         if clean_attrs:
-            attr_str = ' ' + ' '.join(f'{attr}="{html.escape(val)}"' for attr, val in clean_attrs)
+            attr_str = ' ' + ' '.join(f'{attr}="{html.escape(val, quote=True)}"' for attr, val in clean_attrs)
             
         self.result.append(f'<{tag}{attr_str}>')
         self.tag_stack.append(tag)
 
     def handle_endtag(self, tag):
+        if self.skip_content_depth:
+            if tag in self.drop_content_tags:
+                self.skip_content_depth -= 1
+            return
+
         if tag not in self.allowed_tags:
             return
         # Ensure correct nesting/closing order
@@ -81,13 +134,19 @@ class SafeHTMLParser(HTMLParser):
                     break
 
     def handle_data(self, data):
+        if self.skip_content_depth:
+            return
         # Escape HTML entities in raw content text
         self.result.append(html.escape(data))
 
     def handle_entityref(self, name):
+        if self.skip_content_depth:
+            return
         self.result.append(f'&{name};')
 
     def handle_charref(self, name):
+        if self.skip_content_depth:
+            return
         self.result.append(f'&#{name};')
 
 def sanitize_html(html_content):

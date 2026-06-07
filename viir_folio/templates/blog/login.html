@@ -1,7 +1,12 @@
 {% extends 'blog/base.html' %}
 
+{% block page_title %}Blog Admin Login | Viir Phuria{% endblock %}
+{% block meta %}
+  {% include 'includes/meta.html' with meta_title='Blog Admin Login | Viir Phuria' meta_description='Private blog administration login.' meta_robots='noindex,nofollow,noarchive' %}
+{% endblock %}
+
 {% block content %}
-<form>
+<form method="POST">
     <section id="section">
         <span class="green" id="log"></span><span class="green" id="log"></span><span class="green"
             id="log"></span><span class="green" id="log"></span><span class="green" id="log"></span><span class="green"

@@ -1,6 +1,40 @@
 User-agent: *
 Disallow: /admin/
-Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
-# Optional: allow Googlebot image indexing
+Disallow: /blogspace/create/
+Disallow: /blogspace/edit/
+Disallow: /blogspace/logout/
+Disallow: /blog/*/delete
+Disallow: /blog/*/update
+Disallow: /blogspace/*/delete
+Disallow: /blogspace/*/update
+Disallow: /404-preview/
+Disallow: /media/db.sqlite3
+Allow: /media/
+Allow: /static/
+Crawl-delay: 10
+
+# Allow all major crawlers explicitly
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /blogspace/edit/
+Disallow: /blogspace/create/
+
 User-agent: Googlebot-Image
 Allow: /media/
+Allow: /static/assets/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /blogspace/edit/
+Disallow: /blogspace/create/
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap
+Sitemap: {{ site_url }}/sitemap.xml

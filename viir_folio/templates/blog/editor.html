@@ -1,5 +1,18 @@
-{% extends 'blog/blog-base.html' %}{% load static %}{% block content %}
+{% extends 'blog/blog-base.html' %}{% load static %}
+{% block page_title %}Create Blog Post | Viir Phuria{% endblock %}
+{% block meta %}
+    {% include 'includes/meta.html' with meta_title='Create Blog Post | Viir Phuria' meta_description='Private blog editor.' meta_robots='noindex,nofollow,noarchive' %}
+{% endblock %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'css/blog-editor.css' %}?v=20260527">
+<style>
+    .form-group a {
+        color: #6ec5ff;
+    }
+    .form-group a:hover {
+        color: #a3d9ff;
+    }
+</style>
 <main class="main-content">
     <div class="editor-container" style="margin-top: 40px;">
         <div class="container">

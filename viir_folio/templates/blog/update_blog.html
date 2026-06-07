@@ -1,26 +1,40 @@
-{% extends 'blog/blog-base.html' %}{% load static %}{% block content %}
+{% extends 'blog/blog-base.html' %}{% load static %}
+{% block page_title %}Update Blog Post | Viir Phuria{% endblock %}
+{% block meta %}
+    {% include 'includes/meta.html' with meta_title='Update Blog Post | Viir Phuria' meta_description='Private blog editor.' meta_robots='noindex,nofollow,noarchive' %}
+{% endblock %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'css/blog-editor.css' %}?v=20260527">
+<style>
+    .form-group a {
+        color: #6ec5ff;
+    }
+    .form-group a:hover {
+        color: #a3d9ff;
+    }
+</style>
 <main class="main-content">
-    <div class="editor-container">
+    <div class="editor-container" style="margin-top: 40px;">
         <div class="container">
-            <div class="editor-header">
-                <h1 id="editorTitle">Write New Blog</h1>
-            </div>
 
             <form enctype="multipart/form-data" method="POST" class="blog-form" id="blogForm">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="blogTitleInput">Title</label>
-                    <input type="text" id="blogTitleInput" name="title"
-                        value="{{ form.instance.title|default_if_none:'' }}" placeholder="Enter an engaging title..."
+                    <input type="text" id="blogTitleInput" name="title" value="{{ form.instance.title|default_if_none:'' }}" placeholder="Enter an engaging title..."
                         required fdprocessedid="gs6g3h">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_slug">URL Slug</label>
+                    {{ form.slug }}
                 </div>
 
                 <div class="form-group">
                     <label for="imageUrlInput">Featured Image URL</label>
                     {{ form.image }}
                 </div>
-                {{ form.content.as_hidden }}
+                {{ form.content }}
                 <div class="form-group">
                     <label for="contentEditor">Content</label>
                     <div class="editor-toolbar">

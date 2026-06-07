@@ -52,18 +52,6 @@ class Experience(models.Model):
         ordering = ['-start_date']  # Newest first by default
         verbose_name_plural = "Experience"
 
-class Expertise(models.Model):
-    title=models.CharField(max_length=100)
-    front_content=models.CharField(max_length=100)
-    back_content=models.CharField(max_length=100)
-    icon=models.CharField(max_length=1000000)
-    def __str__(self):
-        return self.title
-    
-    class Meta:
-        # Keep the old table name so Django recognizes it's the same model
-        db_table = 'viir_folio_service'
-
 class Project(models.Model):
     title=models.CharField(max_length=100)
     topic=models.CharField(max_length=100)
@@ -215,3 +203,9 @@ class Publication(models.Model):
     url = models.URLField()
     def __str__(self):
         return self.title
+
+    @property
+    def authors_list(self):
+        if self.authors:
+            return [author.strip() for author in self.authors.split(',') if author.strip()]
+        return []

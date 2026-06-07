@@ -1,0 +1,39 @@
+{% comment %}
+  Structured data for the Projects section — ItemList of CreativeWork.
+  Include with: {% include 'includes/sd_projects_list.html' with projects=projects %}
+  `projects` should be the queryset of Project objects.
+{% endcomment %}
+{% if projects %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Projects — Viir Phuria",
+  "description": "Portfolio of software and design projects by Viir Phuria covering web development, mobile apps, ML/AI, IoT, graphics, and cyber security.",
+  "url": "{{ site_url }}/#projects",
+  "numberOfItems": {{ projects|length }},
+  "itemListElement": [
+    {% for proj in projects %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "item": {
+        "@type": "SoftwareApplication",
+        "@id": "{{ site_url }}/project/{{ proj.pk }}/",
+        "name": "{{ proj.title|escapejs }}",
+        "description": "{{ proj.topic|escapejs }}",
+        "author": {
+          "@type": "Person",
+          "@id": "{{ site_url }}/#person",
+          "name": "Viir Phuria"
+        },
+        "dateCreated": "{{ proj.date|date:'Y-m-d' }}",
+        "keywords": "{{ proj.tech|escapejs }}",
+        "url": "{{ site_url }}/project/{{ proj.pk }}/"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
