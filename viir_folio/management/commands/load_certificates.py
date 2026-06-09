@@ -23,7 +23,7 @@ class Command(BaseCommand):
                         title=row['ACHIEVEMENT'],
                         url=row['LINK'],
                         date=datetime.strptime(row['DATE'], '%d-%m-%Y').date(),
-                        platorm=row['PLATFORM'],
+                        platform=row['PLATFORM'],
                         criteria=row['CRITERIA'],
                         show=True
                     )

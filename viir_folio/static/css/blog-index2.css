@@ -548,7 +548,7 @@ body.dark #stars {
 
 body.light .bi2-navbar,
 body.light .blog-navba {
-    background: linear-gradient(90deg, #ffffff 0%, #f7f3ff 100%) !important;
+    background: linear-gradient(90deg, #fcfaff 0%, #f7f3ff 100%) !important;
     border-bottom-color: rgba(148, 163, 184, 0.22) !important;
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08) !important;
 }
@@ -559,7 +559,7 @@ body.light .bi2-logo {
 }
 
 body.light .blog-nav {
-    background: rgba(255, 255, 255, 0.82);
+    background: #eef1f6;
     border-color: rgba(148, 163, 184, 0.24);
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
 }
@@ -578,7 +578,7 @@ body.light .blog-nav__link--active {
 }
 
 body.light footer {
-    background: #ffffff;
+    background: #eef1f6;
 }
 
 body.light footer .br-footer-detail {
@@ -611,7 +611,7 @@ body.light .subscription-error {
 
 body.light .bi2-subscribe-input,
 body.light .form-control {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(248, 250, 252, 0.95);
     color: #111827;
     border-color: rgba(148, 163, 184, 0.32);
 }

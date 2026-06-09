@@ -26,7 +26,7 @@
 /* Light theme overrides (toggle by adding `light` to the <body> element)
    Example: <body class="light"> ... */
 body.light {
-    --comment-bg: rgba(255, 255, 255, 0.92);
+    --comment-bg: rgba(245, 247, 250, 0.92);
     --comment-border: rgba(148, 163, 184, 0.28);
     --comment-color: #111827;
     --comment-radius: 10px;
@@ -380,7 +380,7 @@ body.light .blogspace-likes {
 }
 
 body.light .blogspace-card {
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(248, 250, 252, 0.95);
     border-color: rgba(148, 163, 184, 0.22);
 }
 
@@ -1107,12 +1107,12 @@ body.light .blog-actions {
 }
 
 body.light .action-btn {
-    background: rgba(255, 255, 255, 0.85);
+    background: #eef1f6;
     color: #334155;
 }
 
 body.light .comment-input-container textarea {
-    background: rgba(255, 255, 255, 0.92);
+    background: #f5f7fa;
     color: #111827;
     border-color: rgba(148, 163, 184, 0.28);
 }
@@ -1255,7 +1255,7 @@ input[type="file"] {
 }
 
 body.light input[type="file"] {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: #f5f7fa !important;
     color: #111827 !important;
     border-color: rgba(148, 163, 184, 0.32) !important;
 }
@@ -1399,12 +1399,16 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
         left: -100%;
         top: 50px;
         flex-direction: column;
-        background-color: white;
+        background-color: #f5f7fa;
         width: 100vw;
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 2rem 0;
+    }
+    
+    body.dark .nav-menu {
+        background-color: #15182b;
     }
     
     .nav-menu.active {
@@ -1527,7 +1531,7 @@ body.light {
 }
 
 body.light .header {
-    background: linear-gradient(90deg, #ffffff 0%, #f7f3ff 100%);
+    background: linear-gradient(90deg, #fcfaff 0%, #f7f3ff 100%);
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
 }
 
@@ -1543,7 +1547,7 @@ body.light .nav-link.active {
 body.light .hero {
     background:
         radial-gradient(circle at top right, rgba(159, 120, 255, 0.12), transparent 32%),
-        linear-gradient(135deg, #ffffff 0%, #f8f5ff 48%, #eef2ff 100%);
+        linear-gradient(135deg, #fcfaff 0%, #f8f5ff 48%, #eef2ff 100%);
     color: #111827;
 }
 
@@ -1573,7 +1577,7 @@ body.light .filter-btn,
 body.light .action-btn,
 body.light .cancel-btn,
 body.light .btn-secondary {
-    background: rgba(255, 255, 255, 0.85);
+    background: #eef1f6;
     color: #334155;
     border-color: rgba(148, 163, 184, 0.28);
 }
@@ -1615,11 +1619,11 @@ body.light .blog-form,
 body.light .content-editor,
 body.light .comment-input-container textarea,
 body.light .section-header {
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(248, 250, 252, 0.93);
 }
 
 body.light .editor-toolbar {
-    background: #ffffff !important;
+    background: #f8fafc !important;
     border-color: rgba(148, 163, 184, 0.28) !important;
     border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
 }
@@ -1649,7 +1653,7 @@ body.light .comment-input-container textarea,
 body.light .form-group input,
 body.light .form-group select,
 body.light .form-group textarea {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(248, 250, 252, 0.95);
     color: #111827;
     border-color: rgba(148, 163, 184, 0.32);
 }
@@ -1661,7 +1665,7 @@ body.light .content-editor:empty:before {
 }
 
 body.light .footer {
-    background: #ffffff;
+    background: #eef1f6;
     color: #334155;
     border-top: 1px solid rgba(148, 163, 184, 0.22);
 }
@@ -1703,7 +1707,7 @@ body.light .comment-field label {
 /* Light mode: identical styling for both inputs */
 body.light input.form-control.comment-input,
 body.light textarea.form-control.comment-textarea {
-    background: rgba(255, 255, 255, 0.95) !important;
+    background: #f5f7fa !important;
     color: #111827 !important;
     border-color: rgba(15, 23, 42, 0.15) !important;
 }
@@ -1733,5 +1737,436 @@ body.light textarea.form-control.comment-textarea::placeholder {
     .blog-post {
         padding: 2.5rem 0 2.5rem !important;
     }
+}
+
+
+/* ==========================================================================
+   BLOG SPACE — Subscribe Section Styling
+   ========================================================================== */
+
+.blogspace-subscribe-section {
+    padding: 60px 0 45px;
+    position: relative;
+    z-index: 10;
+}
+
+body.dark .blogspace-subscribe-section {
+    background: linear-gradient(180deg, rgba(140, 111, 255, 0.02) 0%, rgba(140, 111, 255, 0.16) 100%);
+}
+
+body.light .blogspace-subscribe-section {
+    background: linear-gradient(180deg, rgba(243, 232, 255, 0.3) 0%, rgba(243, 232, 255, 0.95) 100%);
+}
+
+.blogspace-subscribe-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Dark theme style */
+body.dark .blogspace-subscribe-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+}
+
+body.dark .blogspace-subscribe-content h2 span {
+    color: #a48fff;
+    text-shadow: 0 0 15px rgba(164, 143, 255, 0.35);
+}
+
+body.dark .blogspace-subscribe-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+}
+
+/* Light theme style */
+body.light .blogspace-subscribe-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.light .blogspace-subscribe-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+}
+
+body.light .blogspace-subscribe-content h2 span {
+    color: #4f46e5;
+}
+
+body.light .blogspace-subscribe-content p {
+    color: rgba(17, 24, 39, 0.65);
+    font-size: 1.05rem;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+}
+
+/* Form layout */
+.subscribe-form-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.subscribe-input-group {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.subscribe-icon {
+    position: absolute;
+    left: 18px;
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+body.dark .subscribe-icon {
+    color: rgba(164, 143, 255, 0.65);
+}
+
+body.dark .subscribe-input-group:focus-within .subscribe-icon {
+    color: #a48fff;
+    filter: drop-shadow(0 0 8px rgba(164, 143, 255, 0.8));
+}
+
+body.light .subscribe-icon {
+    color: rgba(79, 70, 229, 0.65);
+}
+
+body.light .subscribe-input-group:focus-within .subscribe-icon {
+    color: #4f46e5;
+    filter: drop-shadow(0 0 6px rgba(79, 70, 229, 0.5));
+}
+
+.subscribe-input {
+    width: 100%;
+    padding: 13px 20px 13px 48px !important;
+    border-radius: 50px !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+}
+
+body.dark .subscribe-input {
+    background: rgba(10, 10, 25, 0.5) !important;
+    border: 1px solid rgba(140, 111, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+body.dark .subscribe-input::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+
+body.dark .subscribe-input:focus {
+    background: rgba(10, 10, 25, 0.75) !important;
+    border-color: #8c6fff !important;
+    box-shadow: 0 0 0 3px rgba(140, 111, 255, 0.25) !important;
+}
+
+body.light .subscribe-input {
+    background: #f8fafc !important;
+    border: 1px solid rgba(15, 23, 42, 0.15) !important;
+    color: #111827 !important;
+}
+
+body.light .subscribe-input::placeholder {
+    color: rgba(17, 24, 39, 0.45) !important;
+}
+
+body.light .subscribe-input:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Button Custom Overrides */
+.blogspace-subscribe-section .subscribe-btn {
+    padding: 13px 32px !important;
+    border-radius: 50px !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    flex-shrink: 0;
+    min-height: 48px !important;
+}
+
+body.dark .blogspace-subscribe-section .subscribe-btn {
+    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(140, 111, 255, 0.3) !important;
+}
+
+body.dark .blogspace-subscribe-section .subscribe-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(140, 111, 255, 0.45) !important;
+    filter: brightness(1.1) !important;
+}
+
+body.dark .blogspace-subscribe-section .subscribe-btn:active {
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 2px 10px rgba(140, 111, 255, 0.2) !important;
+}
+
+body.light .blogspace-subscribe-section .subscribe-btn {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25) !important;
+}
+
+body.light .blogspace-subscribe-section .subscribe-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4) !important;
+    filter: brightness(1.05) !important;
+}
+
+body.light .blogspace-subscribe-section .subscribe-btn:active {
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Custom Alert Styling */
+.subscribe-success-alert,
+.subscribe-info-alert {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .subscribe-success-alert {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    color: #34d399 !important;
+}
+
+body.light .subscribe-success-alert {
+    background: #f0fdf4 !important;
+    border: 1px solid rgba(16, 185, 129, 0.2) !important;
+    color: #15803d !important;
+}
+
+body.dark .subscribe-info-alert {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
+    color: #60a5fa !important;
+}
+
+body.light .subscribe-info-alert {
+    background: #eff6ff !important;
+    border: 1px solid rgba(59, 130, 246, 0.2) !important;
+    color: #1d4ed8 !important;
+}
+
+/* Mobile responsive query */
+@media screen and (max-width: 650px) {
+    .blogspace-subscribe-content {
+        padding: 35px 20px;
+    }
+    
+    .blogspace-subscribe-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .subscribe-form-wrapper {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .subscribe-input-group,
+    .blogspace-subscribe-section .subscribe-btn {
+        width: 100% !important;
+    }
+}
+
+/* ==========================================================================
+   PREMIUM FOOTER STYLING
+   ========================================================================== */
+footer {
+    background: #f8fafc !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    padding: 30px 0 !important;
+}
+
+body.dark footer {
+    background: #0c0e22 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+footer .br-footer-detail {
+    height: auto !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #475569 !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+body.dark footer .br-footer-detail {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Styled Name */
+footer .br-footer-detail .footer-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+body.dark footer .br-footer-detail .footer-name {
+    color: #ffffff;
+}
+
+/* Styled Separator */
+footer .br-footer-detail .footer-separator {
+    color: #8c6fff;
+    font-weight: bold;
+    margin: 0 6px;
+    opacity: 0.8;
+}
+
+body.dark footer .br-footer-detail .footer-separator {
+    color: #a48fff;
+    text-shadow: 0 0 8px rgba(164, 143, 255, 0.4);
+}
+
+/* Styled Link */
+footer .br-footer-detail .footer-me-link {
+    color: #4f46e5 !important;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid rgba(79, 70, 229, 0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark footer .br-footer-detail .footer-me-link {
+    color: #a48fff !important;
+    border-bottom-color: rgba(164, 143, 255, 0.25);
+}
+
+footer .br-footer-detail .footer-me-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: -1.5px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+footer .br-footer-detail .footer-me-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+footer .br-footer-detail .footer-me-link:hover {
+    color: #6366f1 !important;
+    border-bottom-color: transparent;
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+}
+
+body.dark footer .br-footer-detail .footer-me-link:hover {
+    color: #c0b3ff !important;
+    border-bottom-color: transparent;
+    text-shadow: 0 0 12px rgba(164, 143, 255, 0.35);
+}
+
+/* ==========================================================================
+   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright White)
+   ========================================================================== */
+body.light {
+    background: linear-gradient(180deg, #eef1f6 0%, #e9ecf0 44%, #e2e8f0 100%) !important;
+}
+
+body.light footer {
+    background: #eef1f6 !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light .bi2-navbar,
+body.light .blog-navba,
+body.light .header {
+    background: linear-gradient(90deg, #eef1f6 0%, #e9ecf0 100%) !important;
+}
+
+body.light .blog-nav {
+    background: #eef1f6 !important;
+}
+
+body.light .blogspace-card {
+    background: #f5f7fa !important;
+}
+
+body.light .blog-card,
+body.light .blog-form,
+body.light .content-editor,
+body.light .section-header {
+    background: #f5f7fa !important;
+}
+
+body.light .editor-toolbar {
+    background: #e9ecf0 !important;
+}
+
+body.light .comment-input-container textarea,
+body.light .form-group input,
+body.light .form-group select,
+body.light .form-group textarea,
+body.light .bi2-subscribe-input,
+body.light .subscribe-input,
+body.light .form-control {
+    background: #f5f7fa !important;
 }
 

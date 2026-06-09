@@ -42,6 +42,8 @@
 <meta property="og:image" content="{% if site_url %}{{ site_url }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{{ default_image }}">
 {% endif %}
 <meta property="og:image:alt" content="{{ meta_title|default:resolved_site_name }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 {% if article_published_time %}<meta property="article:published_time" content="{{ article_published_time }}">
 {% endif %}{% if article_modified_time %}<meta property="article:modified_time" content="{{ article_modified_time }}">
 {% endif %}
@@ -55,7 +57,12 @@
 <meta name="twitter:image" content="{% if site_url %}{{ site_url }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{{ default_image }}">
 {% endif %}
 {% if social_twitter %}<meta name="twitter:site" content="{{ social_twitter }}">
+<meta name="twitter:creator" content="{{ social_twitter }}">
 {% endif %}
+
+{# hreflang for Indian English audience #}
+<link rel="alternate" hreflang="en-IN" href="{% if site_url %}{{ site_url }}{{ request.path }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endif %}">
+<link rel="alternate" hreflang="en" href="{% if site_url %}{{ site_url }}{{ request.path }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endif %}">
 
 <script type="application/ld+json">
 {

@@ -4,8 +4,8 @@ from .models import *
 
 class ContactForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'true', 'style': 'max-width: 100%; width: auto;'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'true', 'style': 'max-width: 100%; width: auto;'}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'required': 'true', 'style': 'max-width: 100%; width: auto;'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'required': True, 'style': 'max-width: 100%; width: auto;'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'required': True, 'style': 'max-width: 100%; width: auto;'}))
 
     class Meta:
         model = contact

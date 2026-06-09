@@ -21,40 +21,37 @@
 			{% endif %} {% endcomment %}
 
 			<div class="my-3">
-				{{ object.content|truncatewords_html:50|safe }}
+				{{ object.content|striptags|truncatechars:200 }}
 			</div>
 
-			<a href="{% url 'detail_article' object.id %}">Read more</a>
+			<a href="{% url 'detail_blog' object.slug %}">Read more</a>
 		</div>
 	</div>
 	{% endfor %}
 
 	<nav>
 		<ul class="pagination">
-			<div class="mx-auto d-flex flex-row mt-5">
+			<li class="mx-auto d-flex flex-row mt-5">
 				{% if page_obj.has_previous %}
-					<li class="page-item">
+					<span class="page-item">
 						<a class="page-link" href="?page=1">&laquo; First</a>
-					</li>
-
-					<li class="page-item">
+					</span>
+					<span class="page-item">
 						<a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-					</li>
+					</span>
 				{% endif %}
-
-				<li class="page-item">
+				<span class="page-item">
 					<a class="page-link" href="#">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a>
-				</li>
-
+				</span>
 				{% if page_obj.has_next %}
-					<li class="page-item">
+					<span class="page-item">
 						<a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-					</li>
-					<li class="page-item">
+					</span>
+					<span class="page-item">
 						<a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-					</li>
+					</span>
 				{% endif %}
-			</div>
+			</li>
 		</ul>
 	</nav>
 {% endblock content %}

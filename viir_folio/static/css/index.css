@@ -316,7 +316,7 @@ body.light .cert-home-btn {
 
 /* ── Light theme ────────────────────────────────────────────── */
 body.light .cert-nav {
-    background: rgba(255, 255, 255, 0.75);
+    background: #f5f7fa;
     border-color: rgba(0, 0, 0, 0.07);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
@@ -414,7 +414,7 @@ body.light .cert-nav__link--active {
 }
 
 body.light .navbar-fixed {
-    background-color: rgba(255, 255, 255, 0.92);
+    background-color: #eef1f6;
     border-bottom: 1px solid rgba(148, 163, 184, 0.22);
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
 }
@@ -757,6 +757,21 @@ body.dark #stars {
     margin-left: 2px;
 }
 
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: inline;
+    color: var(--text-color, #ffffff);
+}
+
+.hero-subtitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: inline;
+    color: #7c3aed;
+    margin-left: 8px;
+}
+
 .view-cv-btn {
     display: inline-block;
     padding: 12px 32px;
@@ -973,7 +988,7 @@ body.light .experiense h4 {
 }
 
 body.light .timeline-content {
-    background: #ffffff;
+    background: #f8fafc;
     border-color: #e5e7eb;
 }
 
@@ -1277,10 +1292,10 @@ body.light .br-about .br-card::before {
 
 body.light {
     --text: #222;
-    --card-bg: #fff;
+    --card-bg: #f8fafc;
     --border: #ccc;
     --link: #0047ab;
-    --button-bg: #fff;
+    --button-bg: #f8fafc;
     --button-border: #4a2fb7;
     --button-text: #4a2fb7;
     --hover-bg: #eee;
@@ -1957,4 +1972,245 @@ textarea {
     height: 75px;
     background-color: white;
     /* Maintain solid white so the difference blend works perfectly */
+}
+
+/* ==========================================================================
+   PREMIUM FOOTER STYLING
+   ========================================================================== */
+footer {
+    background: #f8fafc !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    padding: 30px 0 !important;
+}
+
+body.dark footer {
+    background: #0c0e22 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+footer .br-footer-detail {
+    height: auto !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #475569 !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+body.dark footer .br-footer-detail {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Styled Name */
+footer .br-footer-detail .footer-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+body.dark footer .br-footer-detail .footer-name {
+    color: #ffffff;
+}
+
+/* Styled Separator */
+footer .br-footer-detail .footer-separator {
+    color: #8c6fff;
+    font-weight: bold;
+    margin: 0 6px;
+    opacity: 0.8;
+}
+
+body.dark footer .br-footer-detail .footer-separator {
+    color: #a48fff;
+    text-shadow: 0 0 8px rgba(164, 143, 255, 0.4);
+}
+
+/* Styled Link */
+footer .br-footer-detail .footer-me-link {
+    color: #4f46e5 !important;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid rgba(79, 70, 229, 0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark footer .br-footer-detail .footer-me-link {
+    color: #a48fff !important;
+    border-bottom-color: rgba(164, 143, 255, 0.25);
+}
+
+footer .br-footer-detail .footer-me-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: -1.5px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+footer .br-footer-detail .footer-me-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+footer .br-footer-detail .footer-me-link:hover {
+    color: #6366f1 !important;
+    border-bottom-color: transparent;
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+}
+
+body.dark footer .br-footer-detail .footer-me-link:hover {
+    color: #c0b3ff !important;
+    border-bottom-color: transparent;
+    text-shadow: 0 0 12px rgba(164, 143, 255, 0.35);
+}
+
+/* ==========================================================================
+   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright White)
+   ========================================================================== */
+body.light {
+    background-color: #eef1f6 !important;
+    --card-bg: #f5f7fa !important;
+    --button-bg: #f5f7fa !important;
+    --hover-bg: #e2e8f0 !important;
+}
+
+body.light footer {
+    background: #eef1f6 !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light .navbar-fixed {
+    background-color: #eef1f6 !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
+}
+
+body.light .br-about .br-box {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+body.light .service-box .main-box .box-front,
+body.light .service-box .main-box .box-back {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+body.light .br-project-box {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+body.light .pub-card {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+body.light .blog-card {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+body.light .timeline-content {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Categorized Skills Grid (Glassmorphism Chips)
+   -------------------------------------------------------------------------- */
+.skill-category-card {
+    background: rgba(16, 18, 35, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-category-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(140, 111, 255, 0.4);
+}
+
+.skill-category-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #a48fff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-category-title i {
+    font-size: 1.1rem;
+    color: #8c6fff;
+}
+
+.skill-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-chip {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(140, 111, 255, 0.08);
+    border: 1px solid rgba(140, 111, 255, 0.18);
+    border-radius: 50px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.skill-chip:hover {
+    background: rgba(140, 111, 255, 0.22);
+    border-color: #8c6fff;
+    color: #ffffff;
+    transform: scale(1.03);
+}
+
+/* Light Mode support */
+body.light .skill-category-card {
+    background: #f5f7fa !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.light .skill-category-title {
+    color: #4f46e5;
+}
+
+body.light .skill-category-title i {
+    color: #6366f1;
+}
+
+body.light .skill-chip {
+    background: rgba(99, 102, 241, 0.06);
+    border-color: rgba(99, 102, 241, 0.18);
+    color: #475569;
+}
+
+body.light .skill-chip:hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: #4f46e5;
+    color: #1e293b;
 }

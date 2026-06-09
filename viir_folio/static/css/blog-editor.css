@@ -459,7 +459,7 @@ body.light .empty-state p {
 
 body.light .blog-item,
 body.light .blog-form {
-    background: rgba(255, 255, 255, 0.9);
+    background: #f5f7fa;
     border-color: rgba(148, 163, 184, 0.24);
     box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
 }
@@ -474,7 +474,7 @@ body.light .blog-item-body {
 }
 
 body.light .btn-secondary {
-    background: rgba(255, 255, 255, 0.88);
+    background: #eef1f6;
     color: #334155 !important;
 }
 
@@ -487,13 +487,13 @@ body.light .btn-secondary {
 }
 
 body.light .editor-toolbar {
-    background: #ffffff !important;
+    background: #f5f7fa !important;
     border-color: rgba(148, 163, 184, 0.28) !important;
     border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
 }
 
 body.light .content-editor {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: rgba(248, 250, 252, 0.95) !important;
     border-color: rgba(148, 163, 184, 0.28) !important;
     color: #111827 !important;
 }
@@ -547,7 +547,7 @@ input[type="file"] {
 }
 
 body.light input[type="file"] {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: #f5f7fa !important;
     color: #111827 !important;
     border-color: rgba(148, 163, 184, 0.32) !important;
 }

@@ -13,7 +13,7 @@ function generateBackgroundSpans() {
     if (!section) return;
 
     // Remove all existing background spans
-    section.querySelectorAll('span#log').forEach(span => span.remove());
+    section.querySelectorAll('span.bg-span').forEach(span => span.remove());
 
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     
@@ -34,8 +34,8 @@ function generateBackgroundSpans() {
 
     for (let i = 0; i < totalSpans; i++) {
         const span = document.createElement('span');
-        span.id = 'log';
-        span.className = isDarkMode ? 'green' : 'blue';
+        span.classList.add('bg-span');
+        span.className += ' ' + (isDarkMode ? 'green' : 'blue');
         fragment.appendChild(span);
     }
 
@@ -55,8 +55,8 @@ function initBlogBase() {
     // Generate spans dynamically on load
     generateBackgroundSpans();
 
-    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("green", isDarkMode));
-    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("blue", !isDarkMode));
+    document.querySelectorAll("section span.bg-span").forEach(x => x.classList.toggle("green", isDarkMode));
+    document.querySelectorAll("section span.bg-span").forEach(x => x.classList.toggle("blue", !isDarkMode));
     const toggleCheckbox = document.getElementById("toggle");
     if (toggleCheckbox) toggleCheckbox.checked = isDarkMode;
 
@@ -108,8 +108,8 @@ function darktheme() {
     document.querySelectorAll("p").forEach(some);
     document.querySelectorAll("span").forEach(some);
     document.querySelectorAll(".card-body").forEach(x => x.classList.toggle('darkmode'));
-    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("green"));
-    document.querySelectorAll("section span#log").forEach(x => x.classList.toggle("blue"));
+    document.querySelectorAll("section span.bg-span").forEach(x => x.classList.toggle("green"));
+    document.querySelectorAll("section span.bg-span").forEach(x => x.classList.toggle("blue"));
     const menuthingEl = document.getElementById("menuthing");
     if (menuthingEl) {
         menuthingEl.classList.toggle("navbar-light");

@@ -62,9 +62,12 @@ urlpatterns = [
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     path('manifest.json', TemplateView.as_view(template_name="manifest.json", content_type='application/json'), name='manifest'),
-    # Dev preview: visit /404-preview/ to see the custom 404 page (works with DEBUG=True too)
-    path('404-preview/', custom_404),
 ]
+
+# Only expose 404 preview in local development (not in production)
+if settings.DEBUG:
+    urlpatterns += [path('404-preview/', custom_404)]
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

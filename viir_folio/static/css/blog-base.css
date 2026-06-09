@@ -47,10 +47,10 @@ body.light {
     --login-bg: #E6F4FF;
     --login-cell: #f4f6fa;
     --login-sweep: rgba(139, 92, 246, 0.45);
-    --login-card: rgba(255, 255, 255, 0.85);
+    --login-card: rgba(245, 247, 250, 0.88);
     --login-text: #111827;
     --login-border: rgba(15, 23, 42, 0.06);
-    --login-input-bg: rgba(255, 255, 255, 0.95);
+    --login-input-bg: rgba(245, 247, 250, 0.96);
     --login-input-border: rgba(148, 163, 184, 0.35);
     --login-input-color: #111827;
     --login-label-color: rgba(15, 23, 42, 0.55);
@@ -155,13 +155,13 @@ body.login-page section::before {
         transform: translateY(100%);
     }
 }
-body.login-page section span#log {
+body.login-page section span.bg-span {
     background: var(--login-cell) !important;
     --grid-cell: var(--login-cell) !important;
     z-index: 2 !important;
     transition: background 1.5s ease-out !important;
 }
-body.login-page section span#log:hover {
+body.login-page section span.bg-span:hover {
     background: var(--brand-accent) !important;
     transition: background 0s !important;
 }
@@ -231,7 +231,7 @@ section::before {
     display: none;
 }
 
-section span#log {
+section span.bg-span {
     position: relative;
     display: block;
     aspect-ratio: 1;
@@ -240,15 +240,15 @@ section span#log {
     transition: 1.5s;
 }
 
-body.dark section span#log {
+body.dark section span.bg-span {
     --grid-cell: rgba(19, 21, 38, 0.65);
 }
 
-body.light section span#log {
+body.light section span.bg-span {
     --grid-cell: rgba(244, 246, 250, 0.7);
 }
 
-section span#log:hover {
+section span.bg-span:hover {
     background: var(--brand-accent);
     transition: 0s;
 }
@@ -798,14 +798,14 @@ body.light .blog-nav-link {
 
 body.light section .signin .content .form .inputBox input[type="text"],
 body.light section .signin .content .form .inputBox input[type="password"] {
-    background: rgba(255, 255, 255, 0.95);
+    background: #f5f7fa;
     color: #111827;
     border-color: rgba(148, 163, 184, 0.35);
 }
 
 body.light .form-control,
 body.light .subscribe-input {
-    background: rgba(255, 255, 255, 0.95);
+    background: #f5f7fa;
     color: #111827;
     border-color: rgba(148, 163, 184, 0.35);
 }
@@ -838,7 +838,7 @@ body.light .subscribe-btn {
 
 body.light .blog-navba,
 body.light .header {
-    background: linear-gradient(90deg, #ffffff 0%, #f7f3ff 100%) !important;
+    background: linear-gradient(90deg, #fcfaff 0%, #f7f3ff 100%) !important;
     border-bottom-color: rgba(148, 163, 184, 0.22) !important;
     box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08) !important;
 }
@@ -850,7 +850,7 @@ body.light .blog-header {
 }
 
 body.light .blog-nav {
-    background: rgba(255, 255, 255, 0.82);
+    background: #eef1f6;
     border-color: rgba(148, 163, 184, 0.22);
     box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
 }
@@ -865,6 +865,6 @@ body.light .blog-nav__link:hover {
 
 body.light .footer,
 body.light footer {
-    background: #ffffff;
+    background: #eef1f6;
     color: #334155;
 }

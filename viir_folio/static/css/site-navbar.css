@@ -15,7 +15,7 @@
 }
 
 body.light .navbar-fixed {
-    background-color: rgba(255, 255, 255, 0.92);
+    background-color: #eef1f6;
     border-bottom: 1px solid rgba(148, 163, 184, 0.22);
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
 }
@@ -363,7 +363,7 @@ body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active::after {
 }
 
 body.light .br-sidebar {
-    background-color: #ffffff;
+    background-color: #f5f7fa;
 }
 
 body.light .br-sidebar .menu-list .nav-link {

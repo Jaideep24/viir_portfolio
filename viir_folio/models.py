@@ -24,7 +24,7 @@ class Education(models.Model):
         verbose_name_plural = "Education"
 
 class Experience(models.Model):
-    start_date = models.DateField(help_text="Start date")
+    start_date = models.DateField(db_index=True, help_text="Start date")
     end_date = models.DateField(null=True, blank=True, help_text="End date — leave blank if currently working here")
     is_ongoing = models.BooleanField(default=False, help_text="Check if currently working here")
     company_name = models.CharField(max_length=200, help_text="Company/Organization name")
@@ -60,6 +60,8 @@ class Project(models.Model):
     tech=models.CharField(max_length=100)
     url=models.URLField(blank=True, null=True)
     demo_video=models.URLField(blank=True, null=True)
+    github_url=models.URLField(blank=True, null=True, help_text="GitHub repository URL")
+    description=models.TextField(blank=True, help_text="Detailed project case study using the PAR method (Problem, Action, Results).")
     category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("graphic","Graphics"),("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
     image=models.ImageField(default="image.png")
     def __str__(self):
@@ -98,7 +100,7 @@ class contact(models.Model):
     email=models.EmailField()
     number=PhoneNumberField(blank=True,null=True, region='IN')
     message=models.TextField()
-    submitted_date=models.DateField(auto_now_add=True, null=True, blank=True)
+    submitted_date=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.name
 
@@ -121,11 +123,14 @@ class Skill(models.Model):
 class cv(models.Model):
     pdf=models.FileField()
 
+    def __str__(self):
+        return f"CV #{self.pk}"
+
 class certificate(models.Model):
     title=models.CharField(max_length=100)
     url=models.URLField()
     date=models.DateField()
-    platorm=models.CharField(max_length=100)
+    platform=models.CharField(max_length=100)
     criteria=models.CharField(max_length=100)
     show=models.BooleanField(default=False)
     def __str__(self):
@@ -138,7 +143,8 @@ class maincertificate(models.Model):
         return self.title
 
 class subscriber(models.Model):
-    email=models.EmailField()
+    # unique=True enforces DB-level deduplication; view also checks before saving
+    email=models.EmailField(unique=True)
     def __str__(self):
         return self.email
 
@@ -152,8 +158,9 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     content = HTMLField()
-    date = models.DateField()
-    image = models.ImageField(default="default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png")
+    date = models.DateField(db_index=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(default="default-blog-image.png")
     likes = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
@@ -193,7 +200,8 @@ class Comment(models.Model):
 
 class Logger(models.Model):
     user_name = models.CharField(max_length=25)
-    password = models.CharField(max_length=100)
+    # max_length=300 to safely accommodate Argon2/bcrypt hashes (pbkdf2_sha256 ~77 chars, argon2 ~97+ chars)
+    password = models.CharField(max_length=300)
 
 class Publication(models.Model):
     title = models.CharField(max_length=199)

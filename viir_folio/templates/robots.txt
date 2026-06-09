@@ -1,24 +1,17 @@
 User-agent: *
+Allow: /
 Disallow: /admin/
 Disallow: /blogspace/create/
 Disallow: /blogspace/edit/
 Disallow: /blogspace/logout/
-Disallow: /blog/*/delete
-Disallow: /blog/*/update
-Disallow: /blogspace/*/delete
-Disallow: /blogspace/*/update
-Disallow: /404-preview/
-Disallow: /media/db.sqlite3
-Allow: /media/
-Allow: /static/
-Crawl-delay: 10
+Crawl-delay: 2
 
-# Allow all major crawlers explicitly
 User-agent: Googlebot
 Allow: /
 Disallow: /admin/
-Disallow: /blogspace/edit/
 Disallow: /blogspace/create/
+Disallow: /blogspace/edit/
+Disallow: /blogspace/logout/
 
 User-agent: Googlebot-Image
 Allow: /media/
@@ -27,8 +20,9 @@ Allow: /static/assets/
 User-agent: Bingbot
 Allow: /
 Disallow: /admin/
-Disallow: /blogspace/edit/
 Disallow: /blogspace/create/
+Disallow: /blogspace/edit/
+Disallow: /blogspace/logout/
 
 User-agent: Twitterbot
 Allow: /
@@ -36,5 +30,4 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
-# Sitemap
-Sitemap: {{ site_url }}/sitemap.xml
+Sitemap: https://viirportfolio.pythonanywhere.com/sitemap.xml

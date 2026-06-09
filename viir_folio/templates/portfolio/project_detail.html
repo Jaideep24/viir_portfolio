@@ -37,16 +37,49 @@
           <img src="{{ project.image.url }}" alt="{{ project.title }} — project by Viir Phuria" style="max-width:100%;height:auto;border-radius:12px;"/>
           {% endif %}
         </div>
-        <div class="project-topic">
-          <p>{{ project.topic }}</p>
+        <div class="project-topic mb-4">
+          <p class="lead"><em>{{ project.topic }}</em></p>
         </div>
-        {% if project.url %}
-        <p><a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">Visit Project</a></p>
+
+        {% if project.description %}
+        <div class="project-description mb-4">
+          <h3 class="mb-3">Project Case Study</h3>
+          <div style="font-size: 1.05rem; line-height: 1.7; opacity: 0.95;">
+            {{ project.description|linebreaks }}
+          </div>
+        </div>
         {% endif %}
+
         {% if project.demo_video %}
-        <p><a href="{{ project.demo_video }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">Demo Video</a></p>
+        <div class="project-video mb-4">
+          <h3 class="mb-3">Project Demo</h3>
+          {% if "youtube.com" in project.demo_video or "youtu.be" in project.demo_video %}
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+              {% if "youtube.com/watch?v=" in project.demo_video %}
+                <iframe src="https://www.youtube.com/embed/{{ project.demo_video|cut:"https://www.youtube.com/watch?v=" }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+              {% elif "youtu.be/" in project.demo_video %}
+                <iframe src="https://www.youtube.com/embed/{{ project.demo_video|cut:"https://youtu.be/" }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+              {% else %}
+                <iframe src="{{ project.demo_video }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+              {% endif %}
+            </div>
+          {% else %}
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+              <iframe src="{{ project.demo_video }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+        </div>
         {% endif %}
-        <p><a href="/#projects" class="capsule-btn">Back to Projects</a></p>
+
+        <div class="project-actions mt-5 d-flex flex-wrap gap-3 align-items-center" style="gap: 12px;">
+          {% if project.url %}
+          <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn"><span class="text">Visit Project</span></a>
+          {% endif %}
+          {% if project.github_url %}
+          <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn"><span class="text">View on GitHub</span></a>
+          {% endif %}
+          <a href="/#project" class="capsule-btn"><span class="text">Back to Projects</span></a>
+        </div>
       </div>
     </div>
   </div>

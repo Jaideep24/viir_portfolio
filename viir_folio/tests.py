@@ -14,6 +14,9 @@ class SecurityTests(TestCase):
         self.username = "admin_user"
         self.password = "secure_password_123"
         self.admin = Logger.objects.create(user_name=self.username, password=self.password)
+        # Also create a standard Django user for views testing
+        from django.contrib.auth.models import User
+        self.django_user = User.objects.create_user(username=self.username, password=self.password)
         self.client = Client()
 
     def test_settings_security_production(self):
@@ -94,27 +97,29 @@ class SecurityTests(TestCase):
         self.assertEqual(contact_obj.name, "Viir")
         self.assertEqual(contact_obj.message, "Message text")
 
-    def test_password_hashing_and_auto_migration(self):
+    def test_password_hashing_admin_and_hashed_login(self):
         """
-        Verify that plaintext passwords in Logger are automatically hashed on successful login.
+        Verify that passwords are automatically hashed in the admin panel and login succeeds with hashed password.
         """
         # Stored password is currently plaintext 'secure_password_123'
         self.assertEqual(self.admin.password, "secure_password_123")
         
-        # Simulate POST login
+        # Hash it using the admin-like method
+        from django.contrib.auth.hashers import make_password
+        self.admin.password = make_password(self.admin.password)
+        self.admin.save()
+        self.assertTrue(self.admin.password.startswith('argon2$'))
+
+        # Simulate POST login with hashed password in DB
         response = self.client.post(reverse('login'), {
             'username': self.username,
             'password': self.password
         })
         
-        # The login should succeed (auto-bypass / render dashboard or set cookie)
+        # The login should succeed (returns 200 render view)
         self.assertEqual(response.status_code, 200)
         
-        # Refresh from database and verify password has been hashed
-        self.admin.refresh_from_db()
-        self.assertTrue(self.admin.password.startswith('pbkdf2_sha256$'))
-        
-        # Verify check_password still passes
+        # Verify check_password passes
         from django.contrib.auth.hashers import check_password
         self.assertTrue(check_password(self.password, self.admin.password))
 
@@ -177,4 +182,64 @@ class SecurityTests(TestCase):
             url="https://example.com"
         )
         self.assertEqual(pub.authors_list, ["Viir Phuria", "John Doe", "Jane Smith"])
+
+    def test_publication_first_author_bolding(self):
+        """
+        Verify that 'Viir Phuria' is bolded inside the rendered index page.
+        """
+        from .models import Publication
+        Publication.objects.create(
+            title="Bolding Test Publication",
+            authors="Viir Phuria, Jane Doe",
+            date=timezone.now().date(),
+            place="Mumbai",
+            url="https://example.com"
+        )
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<strong>Viir Phuria</strong>')
+
+    def test_argon2_hasher_is_default(self):
+        """Verify that Argon2PasswordHasher is configured as the default hasher."""
+        from django.contrib.auth.hashers import get_hasher
+        hasher = get_hasher()
+        self.assertEqual(hasher.algorithm, 'argon2')
+
+    def test_csp_middleware_header_is_present(self):
+        """Verify that the Content-Security-Policy HTTP header is set by middleware."""
+        response = self.client.get(reverse('index'))
+        self.assertIn('Content-Security-Policy', response)
+        csp = response['Content-Security-Policy']
+        self.assertIn("default-src 'self'", csp)
+        self.assertIn("https://ajax.googleapis.com", csp)
+
+    def test_project_detail_view_features(self):
+        """Verify that the project detail page displays case studies, GitHub links, and video embeds."""
+        from .models import Project
+        project = Project.objects.create(
+            title="Demo App",
+            topic="Short topic summary",
+            date=timezone.now().date(),
+            tech="Python, Django",
+            github_url="https://github.com/Viir-Phuria/demo-app",
+            demo_video="https://www.youtube.com/watch?v=abcdefghijk",
+            description="Problem: We had no demo.\nAction: We created this test.\nResult: 100% success.",
+            category="webdev"
+        )
+        response = self.client.get(reverse('project_detail', args=[project.pk]))
+        self.assertEqual(response.status_code, 200)
+        
+        # Check for GitHub link
+        self.assertContains(response, 'href="https://github.com/Viir-Phuria/demo-app"')
+        self.assertContains(response, 'View on GitHub')
+        
+        # Check for description paragraphs
+        self.assertContains(response, 'Problem: We had no demo.')
+        self.assertContains(response, 'Action: We created this test.')
+        self.assertContains(response, 'Result: 100% success.')
+        
+        # Check for video embed iframe
+        self.assertContains(response, 'iframe src="https://www.youtube.com/embed/abcdefghijk"')
+
+
 

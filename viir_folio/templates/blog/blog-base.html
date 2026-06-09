@@ -10,7 +10,7 @@
   {% block meta %}
     {% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Articles, tutorials, and insights by Viir Phuria on web development, cyber security, ML/AI, and more.' %}
   {% endblock %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="{% static 'css/site-theme.css' %}">
   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
   <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}?v=20260526g">
@@ -53,17 +53,27 @@
     <div class="container">
       <div class="br-footer-detail">
         <div class="br-copy">
-          Copyright © Viir Phuria all rights reserved. Powered by <a class="site-name" href="https://technographix.netlify.app/" target="_blank" rel="noopener noreferrer">Techno Graphix</a>.
+          &copy; {% now "Y" %} <span class="footer-name">Viir Phuria</span> <span class="footer-separator">&middot;</span> Designed, Developed &amp; Secured by <a class="footer-me-link" href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer">Me</a>
         </div>
         <div class="br-social">
           <ul>
             <li><a href="https://www.facebook.com/vir.phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
             <li><a href="https://www.instagram.com/viir_phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
             <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-            <li><a href="https://wa.me//9819185865" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
-            <li><a href="tel:9819185865" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
             <li><a href="https://github.com/Viir-Phuria" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+            {% if about_global %}
+            {% if about_global.phone_no %}
+            <li><a href="https://wa.me/{{ about_global.phone_no.as_e164|cut:"+" }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
+            <li><a href="tel:{{ about_global.phone_no }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
+            {% endif %}
+            {% if about_global.email %}
+            <li><a href="mailto:{{ about_global.email }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="https://wa.me/919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
+            <li><a href="tel:+919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
             <li><a href="mailto:virvphuria@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

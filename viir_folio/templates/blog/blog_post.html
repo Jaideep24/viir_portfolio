@@ -44,7 +44,7 @@
 <div class="row">
   <div class="col-md-6 col-11 mx-md-auto mb-3 pb-2 mx-3">
     <h1>{{article.title }}</h1>
-    <center><img src="/media/{{ article.image }}" alt="" width="60%"></center>
+    <div style="text-align:center;"><img src="/media/{{ article.image }}" alt="{{ article.title }}" width="60%"></div>
     <p>{{ article.date }}</p>
     <div>{{ article.content|safe }}</div>
     <br>
@@ -55,13 +55,13 @@
 
   </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{# jQuery is already loaded in base.html — do not load it again here #}
 <script>
   // Pass Django template URL to the external JS
   var blogPostAjaxUrl = "{% url 'detail_blog' object.slug %}";
 </script>
 <script src="{% static 'js/blog-post.js' %}?v=20260526b"></script>
-<center>
+<div style="text-align:center;">
   <div>
     {% if error_data == "error" %}
     <div class="alert alert-danger">
@@ -81,7 +81,7 @@
         </svg></button>
     </form>
   </div>
-</center>
+</div>
 <div class="comments-section">
   <h3>Comments</h3>
   {% for i in comment %}

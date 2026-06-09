@@ -14,12 +14,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# This explicitly points to the .env file in your root directory
+# Explicitly point to the .env file in the project root
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -57,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'viir_folio',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -71,26 +69,38 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'viir_folio.middleware.ContentSecurityPolicyMiddleware',
 ]
 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
+# SESSION_COOKIE_SECURE: always True unless explicitly disabled (e.g. local HTTP dev)
+SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True') == 'True'
 CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True') == 'True'
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+# Always-on security headers (do not require HTTPS)
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
 
-# Security Settings for Production
+# Production-only HTTPS/HSTS settings
 if not DEBUG:
     # NOTE: On PythonAnywhere, SSL is handled by their proxy.
     SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True') == 'True'
-    SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True') == 'True'
-    CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True') == 'True'
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    X_FRAME_OPTIONS = 'DENY'
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+# Trusted origins for CSRF (required for Django 4+ and good practice in 3.2)
+CSRF_TRUSTED_ORIGINS = [
+    host.strip()
+    for host in os.getenv(
+        'CSRF_TRUSTED_ORIGINS',
+        'https://viirportfolio.pythonanywhere.com'
+    ).split(',')
+    if host.strip()
+]
 
 ROOT_URLCONF = 'viir_portfolio.urls'
 
@@ -124,6 +134,14 @@ DATABASES = {
     }
 }
 
+
+# Password Hashers (Argon2 as default, fallbacks for older/migrated hashes)
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

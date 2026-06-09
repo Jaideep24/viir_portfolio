@@ -3,7 +3,7 @@
 {% block page_title %}BlogSpace — Articles &amp; Insights | Viir Phuria{% endblock %}
 
 {% block meta %}
-	{% include 'includes/meta.html' with meta_title='BlogSpace — Articles & Insights | Viir Phuria' meta_description='Read the latest articles and insights by Viir Phuria on web development, cyber security, ML/AI, IoT, and more. Subscribe for updates.' meta_keywords='Viir Phuria blog, web development articles, cyber security tutorials, ML AI posts, Django tutorials, Flutter, IoT, tech articles' og_type='blog' %}
+	{% include 'includes/meta.html' with meta_title='BlogSpace — Articles & Insights | Viir Phuria' meta_description='Read the latest articles and insights by Viir Phuria on web development, cyber security, ML/AI, IoT, and more. Subscribe for updates.' meta_keywords='Viir Phuria blog, web development articles, cyber security tutorials, ML AI posts, Django tutorials, Flutter, IoT, tech articles' og_type='website' %}
 {% endblock %}
 
 {% block content %}
@@ -22,14 +22,14 @@
 		<a href="{% url 'detail_blog' object.slug %}" class="blogspace-card-link">
 			<div class="card blogspace-card">
 				{% if object.image %}
-				<img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.title }}">
+				<img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }}">
 				{% else %}
-				<img src="/media/default-ui-image-placeholder-wireframes-600nw-1037719192 (1).png" class="card-img-top" alt="{{ object.title }}">
+				<img src="{% static 'assets/default-blog-image.png' %}" class="card-img-top" alt="{{ object.title }}">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ object.title }}</h5>
 					<div class="blogspace-excerpt">
-						{{ object.content|truncatewords_html:20|safe }}
+						{{ object.content|striptags|truncatechars:200 }}
 					</div>
 					<div class="blogspace-card-meta">
 						<div class="blogspace-likes">
@@ -64,17 +64,19 @@
 		</div>
 		{% else %}
 		<div class="blogspace-subscribe-content">
-			<h2>Never Miss a Post</h2>
+			<h2>Never Miss a <span>Post</span></h2>
 			<p>Get latest articles delivered to your inbox</p>
 			<form action="" method="post" class="blogspace-subscribe-form">
 				{% csrf_token %}
+				{# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
+				<input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
 				<div class="subscribe-form-wrapper">
 					<div class="subscribe-input-group">
 						<i class="fas fa-envelope subscribe-icon"></i>
 						<input type="email" class="subscribe-input" id="umail" name="email"
 							placeholder="Enter your email address..." required>
 					</div>
-					<button type="submit" class="subscribe-btn" name="button" value="{{ success }}">
+					<button type="submit" class="subscribe-btn">
 						<span>Subscribe</span>
 						<i class="fas fa-arrow-right"></i>
 					</button>
@@ -93,13 +95,13 @@
 {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "@id": "https://viirportfolio.pythonanywhere.com/blogspace/#blog",
+  "@id": "{{ site_url }}/blogspace/#blog",
   "name": "BlogSpace — Viir Phuria",
   "description": "Articles and insights by Viir Phuria on web development, cyber security, ML/AI, IoT, and more.",
-  "url": "https://viirportfolio.pythonanywhere.com/blogspace/",
+  "url": "{{ site_url }}/blogspace/",
   "author": {
     "@type": "Person",
-    "@id": "https://viirportfolio.pythonanywhere.com/#person",
+    "@id": "{{ site_url }}/#person",
     "name": "Viir Phuria"
   },
   "inLanguage": "en-IN",
@@ -108,11 +110,11 @@
     {
       "@type": "BlogPosting",
       "headline": "{{ object.title|escapejs }}",
-      "url": "https://viirportfolio.pythonanywhere.com{% url 'detail_blog' object.slug %}",
+      "url": "{{ site_url }}{% url 'detail_blog' object.slug %}",
       "datePublished": "{{ object.date|date:'c' }}",
       "author": {
         "@type": "Person",
-        "@id": "https://viirportfolio.pythonanywhere.com/#person",
+        "@id": "{{ site_url }}/#person",
         "name": "Viir Phuria"
       }
     }{% if not forloop.last %},{% endif %}

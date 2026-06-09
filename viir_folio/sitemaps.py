@@ -25,6 +25,10 @@ class StaticViewSitemap(Sitemap):
         return item[2]
 
     def lastmod(self, item):
+        # Use the most recently modified content date instead of always returning today
+        latest_article = Article.objects.order_by('-date').first()
+        if latest_article:
+            return latest_article.date
         return timezone.now().date()
 
 

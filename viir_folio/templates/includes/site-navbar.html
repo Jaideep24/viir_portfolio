@@ -11,9 +11,9 @@
         </button>
     </header>
 
-    <h4 id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
-        {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&middot;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
-    </h4>
+    	<span id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
+		{{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&middot;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
+	</span>
 
     <div id="mytoggle" class="navbar-toggle-wrap">
         <label id="theme-toggle-button" title="Toggle Dark/Light Mode">

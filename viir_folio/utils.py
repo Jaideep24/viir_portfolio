@@ -41,7 +41,10 @@ class SafeHTMLParser(HTMLParser):
         self.drop_content_tags = {'script', 'style', 'iframe', 'object', 'embed'}
 
     def _is_safe_url(self, value, attr):
-        value = (value or '').strip()
+        # Strip whitespace AND control chars (\t, \n, \r) that can smuggle
+        # 'javascript:' past naive scheme detection
+        import re as _re
+        value = _re.sub(r'[\x00-\x20]+', '', (value or '')).strip()
         if not value:
             return False
 
@@ -59,6 +62,8 @@ class SafeHTMLParser(HTMLParser):
             if scheme in {'http', 'https'}:
                 return True
             if scheme == 'data':
+                # NOTE: data:image/svg+xml is intentionally excluded — SVGs can
+                # embed JavaScript and bypass content security policies.
                 return value.lower().startswith((
                     'data:image/png;',
                     'data:image/jpeg;',

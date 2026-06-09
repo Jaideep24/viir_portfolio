@@ -25,3 +25,12 @@ crispy-bootstrap5>=0.7
 # Production Server
 gunicorn>=21.2.0
 whitenoise>=6.5.0
+
+# HTML Sanitization (safer alternative to custom parser — Ammonia/Rust-based)
+# nh3>=0.2.14  # Uncomment to switch to nh3 for stronger XSS protection
+
+# Rate Limiting (recommended for login + contact form protection)
+# django-ratelimit>=4.0.0  # Uncomment and configure in views.py to enable
+
+# Password Hashing (Argon2)
+argon2-cffi>=23.1.0
