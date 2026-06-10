@@ -3,9 +3,9 @@
 {% block meta %}
   {% if article %}
     {% if article.image %}
-      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 meta_image=article.image.url og_type='article' %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 meta_image=article.image.url og_type='article' article_published_time=article.date|date:'c' article_modified_time=article.updated_at|date:'c' %}
     {% else %}
-      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 og_type='article' %}
+      {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:160 og_type='article' article_published_time=article.date|date:'c' article_modified_time=article.updated_at|date:'c' %}
     {% endif %}
     <!-- BlogPosting Structured Data -->
     <script type="application/ld+json">
@@ -15,7 +15,7 @@
       "headline": "{{ article.title|escapejs }}",
       "description": "{{ article.content|striptags|truncatechars:200|escapejs }}",
       "datePublished": "{{ article.date|date:'c' }}",
-      "dateModified": "{{ article.date|date:'c' }}",
+      "dateModified": "{{ article.updated_at|date:'c' }}",
       "author": {
         "@type": "Person",
         "name": "Viir Phuria",
@@ -44,7 +44,7 @@
 <div class="row">
   <div class="col-md-6 col-11 mx-md-auto mb-3 pb-2 mx-3">
     <h1>{{article.title }}</h1>
-    <div style="text-align:center;"><img src="/media/{{ article.image }}" alt="{{ article.title }}" width="60%"></div>
+    <div style="text-align:center;"><img src="{{ article.image.url }}" alt="{{ article.title }}" width="60%"></div>
     <p>{{ article.date }}</p>
     <div>{{ article.content|safe }}</div>
     <br>
@@ -58,7 +58,7 @@
 {# jQuery is already loaded in base.html — do not load it again here #}
 <script>
   // Pass Django template URL to the external JS
-  var blogPostAjaxUrl = "{% url 'detail_blog' object.slug %}";
+  var blogPostAjaxUrl = "{% url 'detail_blog' article.slug %}";
 </script>
 <script src="{% static 'js/blog-post.js' %}?v=20260526b"></script>
 <div style="text-align:center;">

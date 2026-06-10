@@ -5,8 +5,12 @@ from multiselectfield import MultiSelectField
 from phonenumber_field.modelfields import PhoneNumberField
 from tinymce.models import HTMLField
 from django.urls import reverse
+from django_cryptography.fields import encrypt
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
+
+
 class Education(models.Model):
     start_date = models.IntegerField(help_text="Start year (YYYY)")
     end_date = models.IntegerField(null=True, blank=True, help_text="End year (YYYY) — leave blank if ongoing")
@@ -54,7 +58,7 @@ class Experience(models.Model):
 
 class Project(models.Model):
     title=models.CharField(max_length=100)
-    topic=models.CharField(max_length=100)
+
     date=models.DateField()
     client=models.CharField(max_length=100, blank=True, null=True)
     tech=models.CharField(max_length=100)
@@ -74,32 +78,41 @@ class Project(models.Model):
         return [self.category] if self.category else []
 
     def get_absolute_url(self):
-        return reverse('project_detail', args=[self.pk])
+        return reverse('index') + '#project'
 
 class About(models.Model):
-    content=models.TextField()
-    name=models.CharField(max_length=100)
-    birthdate=models.DateField(default='2005-08-27')  # 27/08/2005
-    language=models.CharField(max_length=100)
-    phone_no=PhoneNumberField(blank=True,null=True, region='IN')
+    hero_typed_text = models.CharField(
+        max_length=500, 
+        default="Full-Stack Developer, Cyber Security, ML/AI, IoT",
+        help_text="Comma-separated strings for the hero typing animation"
+    )
+    current_role = models.CharField(max_length=150, default="Cyber Security Enthusiast", help_text="e.g., Full-Stack Engineer & ML Specialist")
+    current_focus = models.CharField(max_length=200, blank=True, null=True, help_text="e.g., Application Security • Threat Detection")
+    projects_count = models.CharField(max_length=50, default="10+", help_text="e.g., 10+")
+    research_count = models.CharField(max_length=50, default="2+", help_text="e.g., 2+")
+    certifications_count = models.CharField(max_length=50, default="5+", help_text="e.g., 5+")
+    open_to_work = models.BooleanField(default=True, help_text="Show the blinking green status dot on your profile picture")
+    status_text = models.CharField(max_length=50, default="OPEN TO WORK", help_text="Text for the blinking status dot (e.g., OPEN TO WORK)")
+    content=models.TextField(help_text="Your professional bio/elevator pitch")
     email=models.EmailField()
-    address=models.CharField(max_length=100)
+    location=models.CharField(max_length=100)
+    github_url=models.URLField(blank=True, null=True, help_text="Direct link to your GitHub")
+    linkedin_url=models.URLField(blank=True, null=True, help_text="Direct link to your LinkedIn")
     image=models.ImageField(default="image.png")
-    
-    @property
-    def age(self):
-        """Calculate age from birthdate"""
-        today = date.today()
-        return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
     
     def __str__(self):
         return "About me"
+    
+    def get_competencies_list(self):
+        if self.core_competencies:
+            return [tech.strip() for tech in self.core_competencies.split(',') if tech.strip()]
+        return []
 
 class contact(models.Model):
-    name=models.CharField(max_length=100)
-    email=models.EmailField()
-    number=PhoneNumberField(blank=True,null=True, region='IN')
-    message=models.TextField()
+    name=encrypt(models.CharField(max_length=100))
+    email=encrypt(models.EmailField())
+    number=encrypt(PhoneNumberField(blank=True,null=True, region='IN'))
+    message=encrypt(models.TextField())
     submitted_date=models.DateTimeField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.name
@@ -121,7 +134,7 @@ class Skill(models.Model):
         return self.language
 
 class cv(models.Model):
-    pdf=models.FileField()
+    pdf=models.FileField(validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 
     def __str__(self):
         return f"CV #{self.pk}"

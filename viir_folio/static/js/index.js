@@ -29,7 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
    1. TYPING ANIMATION (Hero section)
    -------------------------------------------------------------------------- */
 
-const typedTexts = [
+let textElement = document.getElementById('typed-text');
+const rawTexts = textElement ? textElement.getAttribute('data-texts') : null;
+const typedTexts = rawTexts ? rawTexts.split(',').map(s => s.trim()) : [
     "a Web Designer",
     "a Web Developer",
     "a Front End Developer",
@@ -38,7 +40,6 @@ const typedTexts = [
 ];
 let typedIndex = 0;
 let letterIndex = 0;
-let textElement = document.getElementById('typed-text');
 
 function typeWriter() {
     if (!textElement) return;

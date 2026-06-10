@@ -48,22 +48,6 @@ class ArticleSitemap(Sitemap):
         return obj.get_absolute_url()
 
 
-class ProjectSitemap(Sitemap):
-    """Individual project detail pages."""
-    protocol = 'https'
-    changefreq = 'monthly'
-    priority = 0.7
-
-    def items(self):
-        return Project.objects.all().order_by('-date')
-
-    def lastmod(self, obj):
-        return obj.date
-
-    def location(self, obj):
-        return obj.get_absolute_url()
-
-
 class CertificateSitemap(Sitemap):
     """Certificate page — changes rarely."""
     protocol = 'https'

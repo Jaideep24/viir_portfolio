@@ -4,16 +4,16 @@ from .models import *
 
 # Register your models here.
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('name', 'birthdate', 'email', 'phone_no')
+    list_display = ('current_role', 'email', 'location')
     fieldsets = (
-        ('Personal Identity', {
-            'fields': ('name', 'image', 'birthdate')
+        ('Global Hero Settings', {
+            'fields': ('hero_typed_text',)
         }),
-        ('Contact Information', {
-            'fields': ('email', 'phone_no', 'address')
+        ('Professional Identity', {
+            'fields': ('image', 'open_to_work', 'status_text', 'current_role', 'current_focus', 'projects_count', 'research_count', 'certifications_count', 'content')
         }),
-        ('Additional Info', {
-            'fields': ('content', 'language')
+        ('Contact & Links', {
+            'fields': ('email', 'location', 'github_url', 'linkedin_url')
         }),
     )
 
@@ -76,3 +76,5 @@ admin.site.register(certificate)
 admin.site.register(maincertificate)
 admin.site.register(subscriber)
 admin.site.register(Publication)
+
+

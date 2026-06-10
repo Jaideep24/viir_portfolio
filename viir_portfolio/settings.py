@@ -73,7 +73,7 @@ MIDDLEWARE = [
 ]
 
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Strict'
 # SESSION_COOKIE_SECURE: always True unless explicitly disabled (e.g. local HTTP dev)
 SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True') == 'True'
 CSRF_COOKIE_SAMESITE = 'Lax'
@@ -137,6 +137,7 @@ DATABASES = {
 
 # Password Hashers (Argon2 as default, fallbacks for older/migrated hashes)
 PASSWORD_HASHERS = [
+    'viir_portfolio.hashers.ParanoidArgon2Hasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',

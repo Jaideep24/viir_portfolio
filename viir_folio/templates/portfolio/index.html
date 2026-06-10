@@ -51,7 +51,7 @@
 
 
     <!-- CSS: Vendor Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
@@ -87,11 +87,11 @@
     <!-- Grid Canvas Background -->
     <canvas id="gridCanvas"></canvas>
 
-    <!-- Visually-hidden H1 for SEO — screen readers & crawlers need a single H1 per page -->
-    <h1 class="br-hero-title title-right-overflow" aria-label="Viir Phuria — Full-Stack Developer" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
+    <!-- Visually-hidden hero label keeps the name in the DOM without creating a second H1 -->
+    <p class="br-hero-title title-right-overflow" aria-hidden="true" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
         {# Static text is the fallback for crawlers; JS animation replaces it visually at runtime #}
         <span id="myself"><span class="name">Viir Phuria</span></span>
-    </h1>
+    </p>
 
     <!-- Site Loader -->
     <div class="br-loader br-loader-hidden">
@@ -140,15 +140,12 @@
     <div class="text-center" style="text-align: center;">
         <div class="footer-text">
             <h1 class="hero-title">Hello I'm Viir Phuria</h1>
-            <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle"></h2>
+            <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle" data-texts="{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}"></h2>
         </div>
         {% for object in cv %}
         <div class="hero-cta-buttons" style="margin-top: 25px; display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <a href="#project" class="capsule-btn hero-btn" style="min-width: 150px;">
-                <span class="text">View Projects</span>
-            </a>
-            <a href="{{ object.pdf.url }}" download class="capsule-btn hero-btn download-cv-btn" style="min-width: 150px;">
-                <span class="text">Download CV</span>
+            <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn hero-btn download-cv-btn" style="min-width: 150px; margin: 0 auto;">
+                <span class="text">View CV</span>
             </a>
         </div>
         {% endfor %}
@@ -169,43 +166,73 @@
                 <div class="col-lg-6">
                     <div class="br-skill-progress m-b-991">
                         <div class="br-hero-img">
-                            <div class="br-card" data-tilt="">
+                            <div class="br-card" data-tilt="" style="position: relative; display: inline-block;">
                                 <img src="{{ object.image.url }}" alt="{{ object.name }} — profile photo" class="about-img">
+                                {% if object.open_to_work %}
+                                <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.75); padding: 8px 18px; border-radius: 30px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10;">
+                                    <div style="width: 10px; height: 10px; background-color: #2ecc71; border-radius: 50%; animation: pulse-green 2s infinite;"></div>
+                                    <span style="color: white; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;">{{ object.status_text }}</span>
+                                </div>
+                                <style>
+                                @keyframes pulse-green {
+                                    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+                                    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+                                    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+                                }
+                                </style>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="br-about-detail">
-                        <p>{{ object.content }}</p>
-                        <div class="br-about-info">
-                            <ul class="m-r-30">
-                                <li><span class="title">Full Name<b>:</b></span>{{ object.name }}</li>
-                                <li><span class="title">Age<b>:</b></span> {{ object.age }} years</li>
-                                <li><span class="title">Languages<b>:</b></span> {{ object.language }}</li>
-                                <li>
-                                    <a class="about-link" href="tel:{{ object.phone_no }}" target="_blank" rel="noopener noreferrer">
-                                        <span class="title">Phone No<b>:</b></span>{{ object.phone_no }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="about-link" href="mailto:{{ object.email }}" target="_blank" rel="noopener noreferrer">
-                                        <span class="title">Email<b>:</b></span>{{ object.email }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" rel="noopener noreferrer" class="about-link"
-                                        href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu">
-                                        <span class="title">Address<b>:</b></span>{{ object.address }}
-                                    </a>
-                                </li>
-                                <br><br><br>
+                        <div class="about-modern-info" style="display: flex; flex-direction: column; width: 100%;">
+                            <h3 style="color: #ff6f6f; font-weight: 700; margin-bottom: 8px; font-size: 1.8rem;">{{ object.current_role }}</h3>
+                            
+                            {% if object.current_focus %}
+                            <div style="color: var(--text-color); opacity: 0.8; font-size: 0.95rem; margin-bottom: 25px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <span style="color: #ff6f6f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;"><i class="fa-solid fa-crosshairs"></i> Current Focus:</span> 
+                                <span>{{ object.current_focus }}</span>
+                            </div>
+                            {% endif %}
+
+                            <p style="margin-bottom: 25px; line-height: 1.8; color: var(--text-color); opacity: 0.9; font-size: 1.05rem;">{{ object.content }}</p>
+
+                            <!-- Quick Stats Row (Manual Text Fields) -->
+                            <div class="quick-stats" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 15px 25px; background: rgba(255, 111, 111, 0.03); border-radius: 12px; border: 1px solid rgba(255, 111, 111, 0.1);">
+                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.projects_count }}</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Projects Built</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.research_count }}</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Research Papers</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.certifications_count }}</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Certifications</span>
+                                </div>
+                            </div>
+
+                            <div class="professional-actions" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
                                 {% for cv_item in cv %}
-                                <a class="download-cv-btn" href="{{ cv_item.pdf.url }}" download>
-                                     <span class="text">Download CV</span>
+                                <a class="capsule-btn hero-btn download-cv-btn" href="{{ cv_item.pdf.url }}" download style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600;">
+                                     <span class="text" style="margin: 0 auto;"><i class="fa-solid fa-download m-r-10"></i> Download Resume</span>
                                 </a>
                                 {% endfor %}
-                            </ul>
+                                
+                                <div style="display: flex; gap: 18px; margin-left: auto; align-items: center;">
+                                    <span style="color: var(--text-color); font-size: 1.1rem; opacity: 0.8; font-weight: 500;"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
+                                    <a href="mailto:{{ object.email }}" style="color: var(--text-color); font-size: 1.3rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
+                                    {% if object.github_url %}
+                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-color); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                    {% endif %}
+                                    {% if object.linkedin_url %}
+                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-color); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -409,7 +436,10 @@
                                                 <div class="links">
                                                     {{ object.get_category_display|replace_commas:" | " }}
                                                 </div>
-                                                <p>{{ object.topic }}</p>
+
+                                                {% if object.description %}
+                                                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-color); opacity: 0.9;">{{ object.description|safe }}</p>
+                                                {% endif %}
                                                 <div class="br-info">
                                                      <div class="portfolio-img">
                                                          <img src="{{ object.image.url }}" alt="{{ object.title }} — project by Viir Phuria">
@@ -421,26 +451,24 @@
                                                              <li>Client : {{ object.client }}</li>
                                                              {% endif %}
                                                              <li>Tech : {{ object.tech }}</li>
-                                                             <li><a href="{% url 'project_detail' object.pk %}"
-                                                                     class="capsule-btn view-project-btn"><span
-                                                                         class="text">View Details</span></a></li>
+                                                         </ul>
+                                                         <div class="project-actions" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
                                                              {% if object.github_url %}
-                                                             <li><a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn"><span
-                                                                         class="text">GitHub</span></a></li>
+                                                             <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer"
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">GitHub</span></a>
                                                              {% endif %}
                                                              {% if object.url %}
-                                                             <li><a href="{{ object.url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn"><span
-                                                                         class="text">Visit Project</span></a></li>
+                                                             <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer"
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">Visit Project</span></a>
                                                              {% endif %}
                                                              {% if object.demo_video %}
-                                                             <li><a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn"><span
-                                                                         class="text">Demo Video</span></a></li>
+                                                             <a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer"
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">Demo Video</span></a>
                                                              {% endif %}
-                                                            
-                                                        </ul>
+                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -474,7 +502,7 @@
                             <div class="text-center">
                                 <h3>{{ object.title }}</h3>
                             </div>
-                            <div class="text-center"><img src="{{ object.image.url }}" class="d-block carousel-img" alt="{{ object.title }} certificate"></div>
+                            <div class="text-center"><img src="{{ object.image.url }}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate"></div>
                         </div>
                         {% endfor %}
                     </div>
@@ -601,7 +629,7 @@
                     <!-- Email -->
                     <div class="br-box">
                         <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+                            <div class="icon"><i class="fa-solid fa-envelope" aria-hidden="true" style="color: #ff6f6f;"></i></div>
                             <div class="info">
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Mail</h3>
                                 <p class="mb-0">
@@ -615,7 +643,7 @@
                     <!-- Phone -->
                     <div class="br-box">
                         <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true" style="font-size: 24px;"></i>
+                            <div class="icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true" style="font-size: 24px; color: #ff6f6f;"></i>
                             </div>
                             <div class="info">
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
@@ -630,7 +658,7 @@
                     <!-- Address -->
                     <div class="br-box">
                         <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                            <div class="icon"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: #ff6f6f;"></i></div>
                             <div class="info">
                                 <h3 class="title">Address</h3>
                                 <p>

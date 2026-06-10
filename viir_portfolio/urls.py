@@ -25,14 +25,12 @@ from django.contrib.sitemaps.views import sitemap
 from viir_folio.sitemaps import (
     StaticViewSitemap,
     ArticleSitemap,
-    ProjectSitemap,
     CertificateSitemap,
 )
 
 sitemaps = {
     'static': StaticViewSitemap(),
     'articles': ArticleSitemap(),
-    'projects': ProjectSitemap(),
     'certificates': CertificateSitemap(),
 }
 
@@ -41,7 +39,7 @@ admin.site.site_title = "Portfolio Admin Portal"
 admin.site.index_title = "Welcome to Viir Portfolio Management"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('dashboard/', admin.site.urls),
     path('', index, name='index'),
     path('blogspace/', Blogspace.as_view(), name='blogspace'),
     # Numeric article URLs FIRST for backward compatibility (redirects to slug)
@@ -55,10 +53,10 @@ urlpatterns = [
     path('blog/<slug:slug>/update', UpdateBlogView.as_view(), name='updateview'),
     # Other URLs
     path('blogspace/create/', CreateBlogView.as_view(), name='create_blog'),
-    path('blogspace/edit/', view, name='login'),
+    path('blogspace/login/', login_view, name='login'),
+    path('blogspace/edit/', login_view),
     path('blogspace/logout/', logout_view, name='logout'),
     path('certificate/', certificate_view, name='certificate'),
-    path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     path('manifest.json', TemplateView.as_view(template_name="manifest.json", content_type='application/json'), name='manifest'),

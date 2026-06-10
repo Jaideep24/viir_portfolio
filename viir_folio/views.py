@@ -17,6 +17,7 @@ from django.core import signing
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
+from django_ratelimit.decorators import ratelimit
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,7 @@ logger = logging.getLogger(__name__)
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
+@ratelimit(key='ip', rate='3/5m', method='POST', block=False)
 def index(request):
     active_item = certificate.objects.filter(show=True).first()
     # Experience now has start_date and end_date as DateField
@@ -52,6 +54,7 @@ def index(request):
         "experience": experiences,
         "projects": Project.objects.all(),
         "about": About.objects.all(),
+        "about_global": About.objects.first(),
         "skill": skills,
         "languages": languages,
         "frameworks": frameworks,
@@ -66,16 +69,10 @@ def index(request):
     }
     
     if request.method == 'POST':
-        # Rate-limiting: max 3 messages per 5 minutes per session
-        import time
-        now = time.time()
-        submissions = request.session.get('contact_submissions', [])
-        submissions = [t for t in submissions if now - t < 300]
-        if len(submissions) >= 3:
+        # Rate-limiting: max 3 messages per 5 minutes per IP
+        if getattr(request, 'limited', False):
             messages.error(request, "Too many messages sent. Please wait a few minutes before sending another.")
             return redirect(f'{request.path}#contact')
-        submissions.append(now)
-        request.session['contact_submissions'] = submissions
 
         form = ContactForm(request.POST)
         
@@ -132,69 +129,18 @@ def certificate_view(request):
     return render(request, 'portfolio/certificate.html', {'certificate': certificate.objects.all().order_by('-date'), 'certi': True})
 
 def is_verified_user(request):
-    if request.user.is_authenticated:
-        return True
+    return request.user.is_authenticated
 
-    # Check session first
-    token = request.session.get('auth_token')
-    if not token:
-        # Check cookie next
-        token = request.COOKIES.get('auth_token')
-    
-    if not token:
-        return False
-        
-    try:
-        data = signing.loads(token, max_age=1800)  # Valid for 30 minutes (1800 seconds)
-        username = data.get('username')
-        from django.contrib.auth.models import User
-        if username and (User.objects.filter(username=username).exists() or Logger.objects.filter(user_name=username).exists()):
-            return True
-    except (signing.SignatureExpired, signing.BadSignature):
-        pass
-        
-    return False
-
-# ─── Login rate-limiting constants ───────────────────────────────────────────
-_LOGIN_MAX_ATTEMPTS = 5          # max failures before lockout
-_LOGIN_LOCKOUT_SECONDS = 900     # 15-minute lockout window
-
-
-def _get_login_attempts(request):
-    """Return (attempts, locked_until) from session."""
-    return (
-        request.session.get('login_attempts', 0),
-        request.session.get('login_locked_until', 0),
-    )
-
-
-def _record_login_failure(request):
-    """Increment failure counter and set lockout timestamp if limit reached."""
-    attempts = request.session.get('login_attempts', 0) + 1
-    request.session['login_attempts'] = attempts
-    if attempts >= _LOGIN_MAX_ATTEMPTS:
-        import time
-        request.session['login_locked_until'] = time.time() + _LOGIN_LOCKOUT_SECONDS
-
-
-def _reset_login_attempts(request):
-    """Clear rate-limit counters on successful login."""
-    request.session.pop('login_attempts', None)
-    request.session.pop('login_locked_until', None)
-
-
-def view(request):
-    import time
+@ratelimit(key='ip', rate='5/15m', method='POST', block=False)
+def login_view(request):
     # Check if already logged in and verified (auto-bypass)
     if is_verified_user(request):
         return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
 
     if request.method == "POST":
         # ── Rate-limit check ──────────────────────────────────────────────────
-        attempts, locked_until = _get_login_attempts(request)
-        if locked_until and time.time() < locked_until:
-            remaining = int((locked_until - time.time()) / 60) + 1
-            messages.error(request, f"Too many failed attempts. Try again in {remaining} minute(s).")
+        if getattr(request, 'limited', False):
+            messages.error(request, "Too many failed attempts from your IP. Try again in 15 minute(s).")
             return redirect('login')
 
         if "username" in request.POST and "password" in request.POST:
@@ -204,26 +150,10 @@ def view(request):
             # Authenticate using standard Django auth
             user = authenticate(request, username=username_input, password=password_input)
             if user is not None:
-                # Successful login — clear rate limit, log user in
-                _reset_login_attempts(request)
+                # Successful login — log user in
                 auth_login(request, user)
-                
-                # Keep compatibility with tests and old views that check request.session['auth_token']
-                token = signing.dumps({'username': username_input})
-                request.session['auth_token'] = token
-                
-                response = render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
-                response.set_cookie(
-                    'auth_token',
-                    token,
-                    max_age=1800,
-                    httponly=True,
-                    secure=True,
-                    samesite='Lax'
-                )
-                return response
+                return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
             else:
-                _record_login_failure(request)
                 messages.error(request, "Email or password incorrect")
                 return redirect('login')
         else:
@@ -231,15 +161,16 @@ def view(request):
             return redirect('login')
     return render(request, 'blog/login.html')
 
+
+# Backward-compatible alias retained for existing imports/routes.
+def view(request):
+    return login_view(request)
+
 def logout_view(request):
     if request.method == "POST":
         auth_logout(request)
-        if 'auth_token' in request.session:
-            del request.session['auth_token']
-        response = HttpResponseRedirect(reverse('login'))
-        response.delete_cookie('auth_token')
         messages.success(request, "You have been logged out successfully.")
-        return response
+        return HttpResponseRedirect(reverse('login'))
     return redirect('login')
 
 class Blogspace(ListView):
@@ -381,15 +312,6 @@ class DetailArticleView(DetailView):
             return self.render_to_response(self.get_context_data(form=form, error_data="error"))
 
 
-class ProjectDetailView(DetailView):
-    model = Project
-    template_name = 'portfolio/project_detail.html'
-    context_object_name = 'project'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-    
 
 class DeleteArticleView(DeleteView):
     model = Article
