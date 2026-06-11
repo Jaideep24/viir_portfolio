@@ -73,4 +73,30 @@
             setSidebarState(false);
         }
     });
+
+    // Handle Active Link State dynamically
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.br-sidebar .menu-list .nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Remove active from all
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                // Add active to the clicked one
+                this.classList.add('active');
+            });
+        });
+        
+        // Pre-set active state if URL has a hash on load
+        const currentHash = window.location.hash;
+        if (currentHash) {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentHash || href === '/' + currentHash) {
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
 })();

@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
     <!-- CSS: Custom Styles -->
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
@@ -191,16 +192,21 @@
                             <h3 style="color: #ff6f6f; font-weight: 700; margin-bottom: 8px; font-size: 1.8rem;">{{ object.current_role }}</h3>
                             
                             {% if object.current_focus %}
-                            <div style="color: var(--text-color); opacity: 0.8; font-size: 0.95rem; margin-bottom: 25px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                <span style="color: #ff6f6f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;"><i class="fa-solid fa-crosshairs"></i> Current Focus:</span> 
-                                <span>{{ object.current_focus }}</span>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; padding: 14px 22px; margin-bottom: 25px; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 4px solid #ff6f6f; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); width: fit-content;">
+                                <span style="color: #ff6f6f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Focus:</span>
+                                <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.95rem; font-weight: 600;">
+                                    {% for focus in object.get_focus_list %}
+                                        <span style="color: #8c6fff;">{{ focus }}</span>
+                                        {% if not forloop.last %}<span style="color: #8c6fff; opacity: 0.7;">&bull;</span>{% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
                             {% endif %}
 
                             <p style="margin-bottom: 25px; line-height: 1.8; color: var(--text-color); opacity: 0.9; font-size: 1.05rem;">{{ object.content }}</p>
 
                             <!-- Quick Stats Row (Manual Text Fields) -->
-                            <div class="quick-stats" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 15px 25px; background: rgba(255, 111, 111, 0.03); border-radius: 12px; border: 1px solid rgba(255, 111, 111, 0.1);">
+                            <div class="quick-stats" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 25px 35px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
                                 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                                     <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.projects_count }}</h4>
                                     <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Projects Built</span>
@@ -648,8 +654,8 @@
                             <div class="info">
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
                                 <p class="mb-0">
-                                    <a class="contact-link" href="tel:{{ object.phone_no }}"
-                                        target="_blank" rel="noopener noreferrer">{{object.phone_no }}</a>
+                                    <a class="contact-link" href="tel:+919819185865"
+                                        target="_blank" rel="noopener noreferrer">+91 9819185865</a>
                                 </p>
                             </div>
                         </div>
@@ -664,8 +670,8 @@
                                 <p>
                                     <i class="fa-solid fa-location-dot" aria-hidden="true"></i> &nbsp;
                                     <a class="contact-link"
-                                        href="https://www.google.com/maps/dir//techno+graphix/@19.1917376,72.829619,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321993!2d19.1917326?entry=ttu"
-                                        target="_blank" rel="noopener noreferrer">{{ object.address }}</a>
+                                        href="https://www.google.com/maps/dir//Techno+Graphix,+Classique+Building,+Sai+Baba+Park,+Malad,+Evershine+Nagar,+Malad+West,+Mumbai,+Maharashtra+400064/@19.1834173,72.8399872,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321877!2d19.1917348?entry=ttu"
+                                        target="_blank" rel="noopener noreferrer">Techno Graphix, Malad West, Mumbai</a>
                                 </p>
                             </div>
                         </div>
@@ -714,46 +720,7 @@
     <!-- ============================================================ -->
     <!-- FOOTER -->
     <!-- ============================================================ -->
-    <footer class="margin-t-80">
-        <div class="container">
-            <div class="br-footer-detail">
-                <div class="br-copy">
-                    &copy; {% now "Y" %} <span class="footer-name">Viir Phuria</span> <span class="footer-separator">&middot;</span> Designed, Developed &amp; Secured by <a class="footer-me-link" href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer">Me</a>
-                </div>
-                <div class="br-social">
-                    <ul>
-                        <li><a href="https://www.facebook.com/vir.phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.instagram.com/viir_phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a href="https://github.com/Viir-Phuria" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"
-                                    aria-hidden="true"></i></a></li>
-                        {% if about.0 %}
-                        {% if about.0.phone_no %}
-                        <li><a href="https://wa.me/{{ about.0.phone_no.as_e164|cut:"+" }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a href="tel:{{ about.0.phone_no }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
-                        </li>
-                        {% endif %}
-                        {% if about.0.email %}
-                        <li><a href="mailto:{{ about.0.email }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"
-                                    aria-hidden="true"></i></a></li>
-                        {% endif %}
-                        {% else %}
-                        <li><a href="https://wa.me/919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a href="tel:+919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
-                        </li>
-                        <li><a href="mailto:virvphuria@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"
-                                    aria-hidden="true"></i></a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {% include 'includes/site-footer.html' %}
     <!-- Footer End -->
 
     <!-- ============================================================ -->
@@ -770,6 +737,7 @@
     <script src="{% static 'js/script.js' %}"></script>
 
     <!-- Custom JS (all page logic) -->
+    <script src="{% static 'js/site-navbar.js' %}"></script>
     <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/custom-cursor.js' %}"></script>
 

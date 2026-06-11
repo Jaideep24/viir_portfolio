@@ -98,6 +98,11 @@ class About(models.Model):
     location=models.CharField(max_length=100)
     github_url=models.URLField(blank=True, null=True, help_text="Direct link to your GitHub")
     linkedin_url=models.URLField(blank=True, null=True, help_text="Direct link to your LinkedIn")
+    leetcode_url=models.URLField(blank=True, null=True, help_text="Direct link to your LeetCode profile")
+    hackthebox_url=models.URLField(blank=True, null=True, help_text="Direct link to your HackTheBox profile")
+    tryhackme_url=models.URLField(blank=True, null=True, help_text="Direct link to your TryHackMe profile")
+    phone_no=models.CharField(max_length=20, blank=True, null=True, help_text="e.g., +919819185865")
+    whatsapp_no=models.CharField(max_length=20, blank=True, null=True, help_text="e.g., 919819185865 (without +)")
     image=models.ImageField(default="image.png")
     
     def __str__(self):
@@ -106,6 +111,14 @@ class About(models.Model):
     def get_competencies_list(self):
         if self.core_competencies:
             return [tech.strip() for tech in self.core_competencies.split(',') if tech.strip()]
+        return []
+
+    @property
+    def get_focus_list(self):
+        if self.current_focus:
+            if '•' in self.current_focus:
+                return [f.strip() for f in self.current_focus.split('•') if f.strip()]
+            return [f.strip() for f in self.current_focus.split(',') if f.strip()]
         return []
 
 class contact(models.Model):

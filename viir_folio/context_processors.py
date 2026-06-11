@@ -34,11 +34,9 @@ def site_meta(request):
     }
 
     try:
-        from .models import About, SiteSettings
+        from .models import About
         context['about_global'] = About.objects.first()
-        context['site_settings'] = SiteSettings.objects.first()
     except Exception:
         context['about_global'] = None
-        context['site_settings'] = None
 
     return context

@@ -13,7 +13,7 @@ class AboutAdmin(admin.ModelAdmin):
             'fields': ('image', 'open_to_work', 'status_text', 'current_role', 'current_focus', 'projects_count', 'research_count', 'certifications_count', 'content')
         }),
         ('Contact & Links', {
-            'fields': ('email', 'location', 'github_url', 'linkedin_url')
+            'fields': ('github_url', 'linkedin_url', 'tryhackme_url', 'hackthebox_url', 'leetcode_url', 'email', 'location', 'phone_no', 'whatsapp_no')
         }),
     )
 

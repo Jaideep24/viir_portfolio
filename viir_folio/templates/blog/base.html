@@ -44,36 +44,7 @@
   {% block content %}{% endblock content %}
 
   {% if request.resolver_match.url_name != 'login' %}
-  <footer class="margin-t-80">
-    <div class="container">
-      <div class="br-footer-detail">
-        <div class="br-copy">
-          &copy; {% now "Y" %} <span class="footer-name">Viir Phuria</span> <span class="footer-separator">&middot;</span> Designed, Developed &amp; Secured by <a class="footer-me-link" href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer">Me</a>
-        </div>
-        <div class="br-social">
-          <ul>
-            <li><a href="https://www.facebook.com/vir.phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.instagram.com/viir_phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/viir-phuria/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-            <li><a href="https://github.com/Viir-Phuria" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
-            {% if about_global %}
-            {% if about_global.phone_no %}
-            <li><a href="https://wa.me/{{ about_global.phone_no.as_e164|cut:"+" }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
-            <li><a href="tel:{{ about_global.phone_no }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
-            {% endif %}
-            {% if about_global.email %}
-            <li><a href="mailto:{{ about_global.email }}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
-            {% endif %}
-            {% else %}
-            <li><a href="https://wa.me/919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></li>
-            <li><a href="tel:+919819185865" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
-            <li><a href="mailto:virvphuria@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  {% include 'includes/site-footer.html' %}
   {% endif %}
 
   <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
