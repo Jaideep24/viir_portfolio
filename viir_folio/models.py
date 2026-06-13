@@ -66,7 +66,7 @@ class Project(models.Model):
     demo_video=models.URLField(blank=True, null=True)
     github_url=models.URLField(blank=True, null=True, help_text="GitHub repository URL")
     description=models.TextField(blank=True, help_text="Detailed project case study using the PAR method (Problem, Action, Results).")
-    category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("graphic","Graphics"),("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
+    category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
     image=models.ImageField(default="image.png")
     def __str__(self):
         return self.title
@@ -79,6 +79,9 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('index') + '#project'
+
+    class Meta:
+        ordering = ['-date']
 
 class About(models.Model):
     hero_typed_text = models.CharField(
@@ -140,6 +143,9 @@ class contact(models.Model):
             self.message = strip_tags(self.message)
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['-submitted_date']
+
 class Skill(models.Model):
     language=models.CharField(max_length=100)
     percentage=models.PositiveIntegerField()
@@ -161,6 +167,9 @@ class certificate(models.Model):
     show=models.BooleanField(default=False)
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-date']
 
 class maincertificate(models.Model):
     title=models.CharField(max_length=100)
@@ -208,6 +217,9 @@ class Article(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['-date']
+
 class Comment(models.Model):
     name = models.TextField(blank=False, default=" ")
     comment = models.TextField()
@@ -223,6 +235,9 @@ class Comment(models.Model):
         if self.comment:
             self.comment = strip_tags(self.comment)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-date']
 
 class Logger(models.Model):
     user_name = models.CharField(max_length=25)
@@ -243,3 +258,6 @@ class Publication(models.Model):
         if self.authors:
             return [author.strip() for author in self.authors.split(',') if author.strip()]
         return []
+
+    class Meta:
+        ordering = ['-date']

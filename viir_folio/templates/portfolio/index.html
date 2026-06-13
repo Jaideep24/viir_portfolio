@@ -61,7 +61,7 @@
 
     <!-- CSS: Custom Styles -->
     <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=1.4">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=1.39">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=1.46">
     <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
 
@@ -430,7 +430,7 @@
                                             onclick="design(event)">ALL</li>
                                         <li class="filter" data-filter=".webdev" onclick="design(event)">WEB DEV</li>
                                         <li class="filter" data-filter=".appdev" onclick="design(event)">APP DEV</li>
-                                        <li class="filter" data-filter=".graphic" onclick="design(event)">GRAPHICS</li>
+
                                         <li class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
                                         <li class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
                                         <li class="filter" data-filter=".cybersec" onclick="design(event)">CYBER SECURITY</li>
@@ -636,7 +636,7 @@
                 <span class="ligh-title">Contact</span>
             </div>
             <div class="row m-b-minus-30px">
-                <div class="col-lg-5 col-md-12 m-b-991-20">
+                <div class="col-lg-5 col-md-5 col-12 m-b-991-20">
                     <!-- Email -->
                     <div class="br-box">
                         <div class="detail">
@@ -672,8 +672,7 @@
                             <div class="icon"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: #ff6f6f;"></i></div>
                             <div class="info">
                                 <h3 class="title">Address</h3>
-                                <p>
-                                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i> &nbsp;
+                                <p class="mb-0">
                                     <a class="contact-link"
                                         href="https://www.google.com/maps/dir//Techno+Graphix,+Classique+Building,+Sai+Baba+Park,+Malad,+Evershine+Nagar,+Malad+West,+Mumbai,+Maharashtra+400064/@19.1834173,72.8399872,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321877!2d19.1917348?entry=ttu"
                                         target="_blank" rel="noopener noreferrer">Techno Graphix, Malad West, Mumbai</a>
@@ -686,7 +685,7 @@
                 {% endfor %}
 
                 <!-- Contact Form -->
-                <div class="col-lg-7 col-md-12">
+                <div class="col-lg-7 col-md-7 col-12">
                     <form method="post">
                         {% csrf_token %}
                         {# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
@@ -744,7 +743,7 @@
     <!-- Custom JS (all page logic) -->
     <script src="{% static 'js/site-navbar.js' %}?v=1.1"></script>
     <script src="{% static 'js/index.js' %}?v=1.2"></script>
-    <script src="{% static 'js/custom-cursor.js' %}"></script>
+    <script src="{% static 'js/custom-cursor.js' %}?v=1.1"></script>
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}

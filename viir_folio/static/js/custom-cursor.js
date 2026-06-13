@@ -49,6 +49,13 @@
         window.addEventListener('mousemove', event => {
             mouseX = event.clientX;
             mouseY = event.clientY;
+            
+            // Failsafe: If the cursor vanished due to a missed mouseenter event, 
+            // force it back to visible as soon as the mouse moves.
+            if (cursor.style.opacity === '0') {
+                cursor.style.opacity = '1';
+                trail.style.opacity = '1';
+            }
         });
 
         function animate() {
