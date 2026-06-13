@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/certificate.css' %}?v=1.4">
 <style>
     html,
     body {
@@ -57,7 +58,7 @@
         width: 100%;
     }
 
-    .timeline-item {
+    .cert-timeline-item {
         width: 97%;
         min-height: 140px;
         border-radius: 12px;
@@ -71,20 +72,20 @@
     }
 
     @media screen and (min-width:500px) {
-        .timeline-item {
+        .cert-timeline-item {
             min-width: 453px;
             width: 45%;
         }
     }
 
     @media screen and (max-width:480px) {
-        .timeline-item {
+        .cert-timeline-item {
             min-height: 170px;
         }
     }
 
     /* Date Badge - Match publication card styling */
-    .timeline-date {
+    .cert-timeline-date {
         position: absolute;
         top: -14px;
         left: 20px;
@@ -101,7 +102,7 @@
     }
 
     /* Content */
-    .timeline-title {
+    .cert-timeline-title {
         font-size: 1.05rem;
         font-weight: 600;
         margin: 0;
@@ -111,7 +112,7 @@
         white-space: normal;
     }
 
-    .timeline-title .sub {
+    .cert-timeline-title .sub {
         font-weight: 500;
         font-size: 0.85rem;
         display: inline;
@@ -119,7 +120,7 @@
         overflow-wrap: break-word;
     }
 
-    .timeline-item p {
+    .cert-timeline-item p {
         font-size: 0.9rem;
         margin: 0;
         display: flex;
@@ -149,20 +150,20 @@
     }
 
     /* Dark Theme */
-    body.dark .timeline-item {
+    body.dark .cert-timeline-item {
         background: #202337;
         border: none;
     }
 
-    body.dark .timeline-title {
+    body.dark .cert-timeline-title {
         color: #f1f5f9;
     }
 
-    body.dark .timeline-title .sub {
+    body.dark .cert-timeline-title .sub {
         color: #a78bfa;
     }
 
-    body.dark .timeline-item p {
+    body.dark .cert-timeline-item p {
         color: #94a3b8;
     }
 
@@ -172,20 +173,20 @@
     }
 
     /* Light Theme */
-    body.light .timeline-item {
+    body.light .cert-timeline-item {
         background: #f5f7fa;
         border: none;
     }
 
-    body.light .timeline-title {
+    body.light .cert-timeline-title {
         color: #1f2937;
     }
 
-    body.light .timeline-title .sub {
+    body.light .cert-timeline-title .sub {
         color: #4f46e5;
     }
 
-    body.light .timeline-item p {
+    body.light .cert-timeline-item p {
         color: #6b7280;
     }
 
@@ -220,9 +221,9 @@
             </div>
             <ul class="certificate-timeline">
                 {% for object in certificate %}
-                <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                    <span class="timeline-date">{{ object.date|date:"M d, Y" }}</span>
-                    <h5 class="timeline-title">
+                <li class="cert-timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                    <span class="cert-timeline-date">{{ object.date|date:"M d, Y" }}</span>
+                    <h5 class="cert-timeline-title">
                         {{ object.title }}
                         <span class="sub">- {{ object.criteria }}</span>
                     </h5>

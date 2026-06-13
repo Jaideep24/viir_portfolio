@@ -87,8 +87,6 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: ".br-box", property: "borderColor", dark: "#1b1d30", light: "#ccc" },
         { selector: ".track", property: "stroke", dark: "#333754", light: "#ccc" },
         { selector: ".margin-t-80", property: "backgroundColor", dark: "#202337", light: "#eef1f6" },
-        { selector: ".timeline-item", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".timeline-item", property: "borderColor", dark: "#353250", light: "#ccc" },
         { selector: ".box-front", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
         { selector: ".box-front", property: "borderColor", dark: "#353250", light: "#ccc" },
         { selector: ".br-project-box", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },

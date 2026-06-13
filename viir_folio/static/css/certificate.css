@@ -40,14 +40,14 @@
 }
 
 /* Default: 1 per row (phone) */
-.timeline-item {
+.cert-timeline-item {
     width: 97%;
     height: 140px;
 }
 
 /* Tablet (portrait): 1 per row */
 @media screen and (min-width: 500px) and (max-width: 1023px) {
-    .timeline-item {
+    .cert-timeline-item {
         min-width: 90% !important;
         width: 95% !important;
     }
@@ -55,21 +55,22 @@
 
 /* Laptop & Desktop: 2 per row */
 @media screen and (min-width: 1024px) {
-    .timeline-item {
+    .cert-timeline-item {
         min-width: 453px !important;
         width: 47% !important;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .timeline-item {
+    .cert-timeline-item {
         height: 170px;
     }
 }
 
 @media (max-width: 700px) {
     #headish {
-        opacity: 0;
+        font-size: 16px !important;
+        white-space: nowrap;
     }
 
     #headno {

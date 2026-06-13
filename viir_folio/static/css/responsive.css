@@ -204,8 +204,26 @@
   .br-project-box h3 {
     font-size: 18px;
   }
+  .br-project-box {
+    padding: 20px;
+  }
   .br-project-box .portfolio-img {
     width: 200px;
+  }
+  .br-project-box .br-detail {
+    padding-left: 15px;
+  }
+  .br-project-box .project-link {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .br-project-box a.info {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .br-project-box .br-detail ul li {
+    font-size: 11px;
   }
   .achive .count-block h3 {
     font-size: 36px;
@@ -230,6 +248,21 @@
   }
   .br-contact .br-box:hover:after {
     right: -15%;
+  }
+  footer .br-footer-detail {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  footer .br-footer-detail .br-copy {
+    margin-bottom: 15px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -273,23 +306,24 @@
   .br-contact .br-box:hover:after {
     right: -18%;
   }
-  .br-contact form .form-group input, .br-contact form .form-group textarea {
-    padding: 10px 15px;
-  }
-  footer .br-footer-detail {
+  .br-project-box .br-info {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
   }
-  footer .br-footer-detail .br-copy {
-    margin-bottom: 15px;
+  .br-project-box .portfolio-img {
+    width: 100%;
+    height: 200px;
+  }
+  .br-project-box .portfolio-img a {
+    background-size: 100%;
+  }
+  .br-project-box .br-detail {
+    padding: 30px 0 0 0;
+  }
+  .br-contact form .form-group input, .br-contact form .form-group textarea {
+    padding: 10px 15px;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -321,35 +355,13 @@
   .br-about-detail h4 {
     margin-bottom: 15px;
   }
-  .br-project-box .portfolio-img {
-    width: 150px;
-  }
 }
 @media only screen and (max-width: 480px) {
-  .br-project-box .portfolio-img {
-    width: 120px;
-  }
   .br-hero .hero-content .br-hero-img {
     margin: 50px 15px 30px 15px;
   }
 }
 @media only screen and (max-width: 420px) {
-  .br-project-box .br-info {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .br-project-box .portfolio-img {
-    width: 100%;
-    height: 200px;
-  }
-  .br-project-box .portfolio-img a {
-    background-size: 100%;
-  }
-  .br-project-box .br-detail {
-    padding: 30px 0 0 0;
-  }
   .br-about .br-box:after {
     right: -28%;
   }

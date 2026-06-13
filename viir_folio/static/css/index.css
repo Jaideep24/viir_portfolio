@@ -655,8 +655,8 @@ body.light .hero-title {
     position: relative;
 }
 
-.education h4,
-.experiense h4 {
+.education h3,
+.experiense h3 {
     margin-bottom: 40px;
     font-size: 24px;
     font-weight: 700;
@@ -664,29 +664,63 @@ body.light .hero-title {
     position: relative;
 }
 
-/* Timeline Grid Layout */
-.timeline {
-    display: grid;
-    grid-template-columns: 1fr 3px 1fr;
-    gap: 0;
+/* Force section titles to sit cleanly */
+.timeline-section-title {
     position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 40px;
+    padding-left: 290px; /* Align perfectly with cards on desktop */
+    white-space: normal;
+    z-index: 10;
 }
 
-/* Timeline Middle Line */
-.timeline-middle {
+/* ==========================================================================
+   ROBUST ABSOLUTE-ANCHORED TIMELINE
+   ========================================================================== */
+.timeline {
     position: relative;
-    background: linear-gradient(180deg, #8c6fff, #ff6f6f);
-    width: 3px;
-    height: 100%;
+    width: 100%;
     margin: 0;
+    padding: 0;
+}
+
+/* Individual Timeline Item Wrapper */
+.timeline-item {
+    position: relative;
+    width: 100%;
+    min-height: 80px; /* Ensure space for date */
+    margin-bottom: 30px;
+}
+
+/* The Line is absolutely bolted into place */
+.timeline-middle {
+    position: absolute;
+    left: 260px; /* Exactly where we want it */
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin: 0;
+    z-index: 0;
+}
+
+.timeline-middle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 32px; /* Center of the circle */
+    height: calc(100% + 100px); /* Overshoot height instead of negative bottom */
+    background: linear-gradient(180deg, #8c6fff, #ff6f6f);
+    z-index: -1;
+}
+
+.timeline-item:last-child .timeline-middle::before {
+    height: calc(100% - 32px); /* Stop exactly at the bottom of the last item */
 }
 
 .timeline-circle {
     position: absolute;
-    top: 8px;
+    top: 24px; /* Align with first line of card */
     left: 50%;
     width: 16px;
     height: 16px;
@@ -700,36 +734,50 @@ body.light .hero-title {
 /* Timeline Components */
 .timeline-component {
     margin: 0;
-    padding: 2px 20px;
-    width: 100%;
 }
 
+/* Default (Date on Left, Content on Right) */
 .timeline-date-container,
 .timeline-date-container-career {
+    position: absolute;
+    left: 0;
+    top: 22px; /* Align vertically with circle */
+    width: 240px; /* Space allocated for longest possible dates like 'September 2024 – September 2025' */
+    text-align: right;
     display: flex;
-    align-items: flex-start;
     justify-content: flex-end;
-    padding-right: 20px;
-    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
 }
 
-.timeline-date-container-career {
-    justify-content: flex-start;
-    padding-right: 0;
-    padding-left: 20px;
+.timeline-component.timeline-content {
+    margin: 0 0 0 290px; /* Push to the right of the line */
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+    position: relative;
+    z-index: 1;
 }
 
 /* Timeline Dates */
 .timeline-date,
 .timeline-date-career {
     display: inline-block;
+    max-width: 100%; 
+    word-wrap: break-word; 
     font-size: 13px;
     font-weight: 600;
     padding: 6px 14px;
     border-radius: 20px;
     background: linear-gradient(135deg, #8c6fff, #a78bfa);
     color: #fff;
-    white-space: nowrap;
+    white-space: nowrap; /* Keep dates on one line */
+    text-align: right;
     box-shadow: 0 2px 8px rgba(140, 111, 255, 0.3);
 }
 
@@ -747,18 +795,6 @@ body.light .hero-title {
     vertical-align: middle;
     margin-left: 2px;
     text-transform: uppercase;
-}
-
-/* Timeline Content Cards */
-.timeline-content {
-    padding: 24px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    position: relative;
-    margin: 0 0 30px 0;
-    border: 1px solid #e5e7eb;
 }
 
 .timeline-content:hover {
@@ -791,7 +827,39 @@ body.light .hero-title {
     word-wrap: break-word;
 }
 
+/* Timeline Bullet Points & Tech Tags */
+.timeline-bullets {
+    padding-left: 20px;
+    margin-top: 12px;
+    list-style-type: disc;
+}
+
+.timeline-bullets li {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.timeline-tech-tags {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.timeline-tech-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(140, 111, 255, 0.1);
+    color: #8c6fff;
+}
+
 /* Dark Theme Styles */
+body.dark .education h3,
+body.dark .experiense h3,
 body.dark .education h4,
 body.dark .experiense h4 {
     color: #e5e7eb;
@@ -808,7 +876,7 @@ body.dark .timeline-content:hover {
     border-color: #8c6fff;
 }
 
-body.dark .timeline-content h3 {
+body.dark .timeline-content h4 {
     color: #f1f5f9;
 }
 
@@ -820,7 +888,18 @@ body.dark .timeline-subject {
     color: #cbd5e1;
 }
 
+body.dark .timeline-bullets li {
+    color: #cbd5e1;
+}
+
+body.dark .timeline-tech-badge {
+    background: rgba(140, 111, 255, 0.2);
+    color: #a78bfa;
+}
+
 /* Light Theme Styles */
+body.light .education h3,
+body.light .experiense h3,
 body.light .education h4,
 body.light .experiense h4 {
     color: #1f2937;
@@ -831,7 +910,7 @@ body.light .timeline-content {
     border-color: #e5e7eb;
 }
 
-body.light .timeline-content h3 {
+body.light .timeline-content h4 {
     color: #1f2937;
 }
 
@@ -843,83 +922,101 @@ body.light .timeline-subject {
     color: #6b7280;
 }
 
+body.light .timeline-bullets li {
+    color: #6b7280;
+}
+
+body.light .timeline-tech-badge {
+    background: rgba(140, 111, 255, 0.1);
+    color: #8c6fff;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
-    .timeline {
-        grid-template-columns: 3px 1fr;
-        gap: 0;
+    .timeline-section-title {
+        text-align: center;
+        padding-left: 0;
     }
+}
 
+@media (max-width: 576px) {
+    .timeline {
+        padding-left: 10px; /* Extremely small line gap for phones */
+    }
+    
+    .timeline-middle {
+        left: 0;
+    }
+    
+    .timeline-middle::before {
+        top: 16px; /* Center of the circle */
+        height: calc(100% + 100px); /* Overshoot height */
+    }
+    
+    .timeline-item:last-child .timeline-middle::before {
+        height: calc(100% - 16px);
+    }
+    
+    .timeline-circle {
+        left: 0;
+        top: 8px; /* Align with Date */
+    }
+    
+    .timeline-item {
+        margin-bottom: 40px;
+    }
+    
     .timeline-date-container,
     .timeline-date-container-career {
-        grid-column: 2;
+        position: relative; /* Break out of absolute anchoring */
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: left;
         justify-content: flex-start;
-        padding: 0 0 5px 0 !important;
-        margin-left: 20px;
+        padding: 0 0 10px 15px !important; /* Float above the card */
     }
-
-    .timeline-middle {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
+    
     .timeline-component.timeline-content {
-        grid-column: 2;
-        margin: 0 0 30px 20px;
-        padding: 20px;
+        margin: 0 0 0 15px; /* Sit right next to the line */
+        padding: 16px 20px;
     }
 }
 
 @media (max-width: 768px) {
-
     .education h4,
     .experiense h4 {
         font-size: 20px;
         margin-bottom: 30px;
     }
-
-    .timeline-date,
-    .timeline-date-career {
-        font-size: 11px;
-        padding: 5px 12px;
-    }
-
-    .timeline-content {
-        padding: 18px !important;
-        margin-left: 15px !important;
-    }
-
-    .timeline-content h3 {
-        font-size: 17px;
-    }
-
-    .timeline-subject {
-        font-size: 13px;
-    }
-
-    .timeline-date-container,
-    .timeline-date-container-career {
-        margin-left: 15px !important;
+    
+    /* Force bullet points to stay compact on tablets and phones */
+    .timeline-bullets li {
+        margin-bottom: 4px !important;
+        line-height: 1.4 !important;
+        padding-bottom: 0 !important;
+        padding-top: 0 !important;
     }
 }
 
-@media (max-width: 576px) {
-    .timeline-content {
-        padding: 16px !important;
-        margin-left: 15px !important;
+/* Expand the container slightly on large screens to give timeline cards more space */
+@media (min-width: 1024px) {
+    .br-experience .container {
+        max-width: 100% !important;
+        padding-left: 20px;
+        padding-right: 20px;
     }
+}
 
-    .timeline-content h3 {
-        font-size: 16px;
+@media (min-width: 1100px) {
+    .br-experience .container {
+        max-width: 1080px !important;
     }
+}
 
-    .timeline-content .sub {
-        font-size: 13px;
-    }
-
-    .timeline-date-container,
-    .timeline-date-container-career {
-        margin-left: 15px !important;
+@media (min-width: 1200px) {
+    .br-experience .container {
+        max-width: 1240px !important;
     }
 }
 
@@ -1312,9 +1409,21 @@ body.light {
 
 .blogs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 3rem;
+}
+
+@media (max-width: 991px) {
+    .blogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .blogs-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .container {
@@ -1580,10 +1689,6 @@ body.light {
 }
 
 @media screen and (max-width: 2562px) and (min-width: 1500px) {
-    .timeline-component {
-        width: 333px;
-    }
-
     #date-container {
         width: 10vw !important;
     }
@@ -1606,10 +1711,6 @@ body.light {
 
     #mytoggle {
         margin-left: 75vw;
-    }
-
-    .timeline-component {
-        width: 30vw;
     }
 }
 
@@ -1659,14 +1760,6 @@ body.light {
     #mytoggle {
         margin-left: 70vw;
     }
-
-    .timeline-component {
-        width: 40vw;
-    }
-
-    .timeline-component #date {
-        width: 20vw !important;
-    }
 }
 
 @media screen and (max-width: 426px) {
@@ -1691,10 +1784,6 @@ body.light {
 
     .br-experience .timeline li {
         padding: 30px;
-    }
-
-    .timeline-component {
-        width: 50vw;
     }
 
     #content {
@@ -1836,6 +1925,13 @@ footer .br-footer-detail {
     gap: 20px;
     flex-wrap: wrap;
     color: #475569 !important;
+}
+
+html, body {
+    overflow-x: hidden; /* Guarantee no side scroll anywhere */
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 400;

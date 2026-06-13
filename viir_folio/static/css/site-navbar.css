@@ -177,6 +177,11 @@ body.light #headno {
     stroke: currentColor;
     fill: none;
     font-weight: 600;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-toggle-btn.btn-open svg {
+    transform: rotate(180deg);
 }
 
 .sidebar-toggle-btn:hover {
@@ -343,6 +348,12 @@ body.light #headno {
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active::before {
     background: #ff6f6f;
     box-shadow: 0 0 0 1px rgba(255, 111, 111, 0.3), 0 0 12px rgba(255, 111, 111, 0.35);
+    width: 18px;
+    height: 10px;
+    border-radius: 10px;
+    flex: 0 0 18px;
+    margin-left: -4px;
+    margin-right: -4px;
 }
 
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link::after,

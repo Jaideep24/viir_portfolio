@@ -2155,7 +2155,7 @@ footer .br-footer-detail .br-social ul li a:hover {
   -ms-flex-align: center;
   align-items: center;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   color: #fff;
   position: relative;
 }
@@ -2181,18 +2181,27 @@ footer .br-footer-detail .br-social ul li a:hover {
   color: #ff6f6f;
 }
 
-.br-sidebar ul li.active a {
-  padding-left: 40px !important;
+.br-sidebar ul li.active a,
+.br-sidebar ul li a.active {
+  padding-left: 30px !important;
   color: #ff6f6f;
-  font-size: 25px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.br-sidebar ul li.active a:hover {
+.br-sidebar ul li.active a:hover,
+.br-sidebar ul li a.active:hover {
   color: #8c6fff;
 }
 
-.br-sidebar ul li.active a:after {
-  width: 25px;
+.br-sidebar ul li.active a:after,
+.br-sidebar ul li a.active:after {
+  width: 18px !important;
+  height: 4px !important;
+  top: 48% !important;
+  left: -4px !important;
+  background-color: #ff6f6f !important;
+  border-radius: 4px !important;
 }
 
 /* End Sidebar */

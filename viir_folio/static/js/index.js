@@ -178,8 +178,6 @@ function applyDarkModeStyles(isDarkMode) {
         { selector: "h4", property: "color", dark: "#EEEEEE", light: "#000000" },
         { selector: ".track", property: "stroke", dark: "#333754", light: "#ccc" },
         { selector: ".margin-t-80", property: "backgroundColor", dark: "#202337", light: "#eef1f6" },
-        { selector: ".timeline-item", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".timeline-item", property: "borderColor", dark: "#353250", light: "#ccc" },
         { selector: ".box-front", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
         { selector: ".box-front", property: "borderColor", dark: "#353250", light: "#ccc" },
         { selector: ".br-project-box", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
@@ -260,23 +258,28 @@ function design(event) {
 function menu() {
     const sidebar = document.querySelector(".br-sidebar");
     const overlay = document.querySelector(".br-sidebar-overlay");
+    const toggleBtn = document.querySelector(".sidebar-toggle-btn");
     const isOpen = sidebar.classList.contains("br-sidebar-open");
 
     if (isOpen) {
         sidebar.classList.remove("br-sidebar-open", "br-open");
         if (overlay) overlay.style.display = "none";
+        if (toggleBtn) toggleBtn.classList.remove("btn-open");
     } else {
         sidebar.classList.add("br-sidebar-open", "br-open");
         if (overlay) overlay.style.display = "block";
+        if (toggleBtn) toggleBtn.classList.add("btn-open");
     }
 }
 
 function closeSidebar() {
     const sidebar = document.querySelector(".br-sidebar");
     const overlay = document.querySelector(".br-sidebar-overlay");
+    const toggleBtn = document.querySelector(".sidebar-toggle-btn");
 
     sidebar.classList.remove("br-sidebar-open", "br-open");
     if (overlay) overlay.style.display = "none";
+    if (toggleBtn) toggleBtn.classList.remove("btn-open");
 }
 
 document.addEventListener("click", function (event) {

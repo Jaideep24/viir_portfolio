@@ -149,13 +149,13 @@ ul{
     align-items: center;  /* vertically center */
     justify-content: center;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 991px) {
     .blogs-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
     .blogs-grid {
         grid-template-columns: 1fr;
     }
@@ -209,8 +209,8 @@ ul{
 
 .blogspace-hero {
     max-width: 920px;
-    margin: 2rem auto 1.5rem;
-    padding: 0 20px;
+    margin: 0 auto 1.5rem;
+    padding: 100px 20px 0; /* Add top padding to clear the sticky header */
 }
 
 .blogspace-hero h1 {
@@ -1718,11 +1718,20 @@ body.light textarea.form-control.comment-textarea::placeholder {
 }
 
 /* Responsive adjustments for Phone and Tablet to use full width */
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
     .blogs-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem !important;
     }
+}
+
+@media screen and (max-width: 767px) {
+    .blogs-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
     
     .blog-post .container.blog-post-container {
         max-width: 100% !important;

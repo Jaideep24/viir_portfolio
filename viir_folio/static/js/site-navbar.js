@@ -2,6 +2,7 @@
     function setSidebarState(isOpen) {
         const sidebar = document.querySelector('.br-sidebar');
         const overlay = document.querySelector('.br-sidebar-overlay');
+        const toggleBtn = document.querySelector('.sidebar-toggle-btn');
 
         if (!sidebar || !overlay) {
             return;
@@ -10,6 +11,10 @@
         sidebar.classList.toggle('br-sidebar-open', isOpen);
         sidebar.classList.toggle('br-open', isOpen);
         overlay.style.display = isOpen ? 'block' : 'none';
+        
+        if (toggleBtn) {
+            toggleBtn.classList.toggle('btn-open', isOpen);
+        }
     }
 
     window.menu = function (event) {
