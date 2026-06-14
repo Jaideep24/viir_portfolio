@@ -261,3 +261,31 @@ class Publication(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+class Visitor(models.Model):
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)
+    user_agent = models.TextField(null=True, blank=True)
+    first_visit = models.DateTimeField(auto_now_add=True)
+    last_visit = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-last_visit']
+        verbose_name = 'Site Visitor'
+        verbose_name_plural = 'Site Visitors'
+
+    def __str__(self):
+        return f"Visitor: {self.ip_address} (Last seen: {self.last_visit.strftime('%Y-%m-%d %H:%M')})"
+
+class PageVisit(models.Model):
+    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE, related_name='visits', null=True)
+    path = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'Page Visit'
+        verbose_name_plural = 'Page Visits'
+
+    def __str__(self):
+        return f"{self.path} at {self.timestamp.strftime('%Y-%m-%d %H:%M')}"

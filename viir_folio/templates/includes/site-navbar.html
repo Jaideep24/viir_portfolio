@@ -1,5 +1,6 @@
 {% load static %}
 <nav class="navbar-fixed">
+    {% if not hide_sidebar %}
     <header>
         <button type="button" class="br-sidebar-toggle sidebar-toggle-btn" onclick="menu(event)">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="svg_img" alt="menu">
@@ -10,6 +11,7 @@
             </svg>
         </button>
     </header>
+    {% endif %}
 
     	<span id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
 		{{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&middot;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
@@ -65,6 +67,7 @@
         </label>
     </div>
 
+    {% if not hide_sidebar %}
     <div class="br-sidebar-overlay"></div>
     <div class="br-sidebar">
         <div class="menu-list">
@@ -90,4 +93,5 @@
             </ul>
         </div>
     </div>
+    {% endif %}
 </nav>

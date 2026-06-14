@@ -32,18 +32,20 @@
   </script>
 </head>
 
-<body class="{% if request.resolver_match.url_name == 'login' %}login-page{% endif %}">
+<body class="{% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
   <script>
     document.body.classList.add(window.__theme || 'dark');
   </script>
 
   <canvas id="gridCanvas"></canvas>
 
+  {% block navbar %}
   {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' navbar_subtitle='Blog Space' %}
+  {% endblock %}
 
   {% block content %}{% endblock content %}
 
-  {% if request.resolver_match.url_name != 'login' %}
+  {% if request.resolver_match.url_name != 'login' and 'login' not in request.path %}
   {% include 'includes/site-footer.html' %}
   {% endif %}
 

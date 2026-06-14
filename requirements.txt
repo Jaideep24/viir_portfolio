@@ -1,5 +1,6 @@
 # Django Framework
 Django>=3.2,<4.0
+django-jazzmin>=2.6.2
 
 # Environment Variables
 python-dotenv>=1.0.0

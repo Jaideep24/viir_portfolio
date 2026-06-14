@@ -1,0 +1,96 @@
+{% extends 'blog/base.html' %}
+{% load i18n static %}
+
+{% block page_title %}Admin Login | Viir Phuria{% endblock %}
+{% block meta %}
+  {% include 'includes/meta.html' with meta_title='Admin Login | Viir Phuria' meta_description='Private administration login.' meta_robots='noindex,nofollow,noarchive' %}
+{% endblock %}
+
+{% block navbar %}
+  {% include 'includes/site-navbar.html' with navbar_title='Viir' navbar_subtitle='Dashboard' hide_sidebar=True %}
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ app_path }}">
+    <section id="section">
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        <span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span><span class="bg-span green"></span>
+        
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <div class="signin">
+            <div class="content">
+                <h2>Admin Sign In</h2>
+                
+                {% if form.errors and not form.non_field_errors %}
+                    <div class="alert alert-danger" style="margin-bottom: 20px; font-size: 14px; text-align: center;">
+                        <strong>Error:</strong> {% blocktrans %}Please correct the errors below.{% endblocktrans %}
+                    </div>
+                {% endif %}
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger" style="margin-bottom: 20px; font-size: 14px; text-align: center;">
+                            <strong>Error:</strong> {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                {% if user.is_authenticated %}
+                <div class="alert alert-warning" style="margin-bottom: 20px; font-size: 14px; text-align: center;">
+                    <strong>Warning:</strong> You are authenticated as {{ user.username }}, but are not authorized to access this page. Would you like to login to a different account?
+                </div>
+                {% endif %}
+
+                <div class="form">
+                    <div class="inputBox">
+                        <input type="text" name="username" id="id_username" required placeholder=" " autofocus>
+                        <label>Username</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="id_password" name="password" required placeholder=" ">
+                        <label>Password</label>
+                        <span class="toggle-password" id="togglePassword">
+                            <i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>
+                        </span>
+                        <script>
+                            (function() {
+                                var passwordInput = document.getElementById("id_password");
+                                var toggleBtn = document.getElementById("togglePassword");
+                                if (passwordInput && toggleBtn) {
+                                    toggleBtn.addEventListener("click", function() {
+                                        if (passwordInput.type === "password") {
+                                            passwordInput.type = "text";
+                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash toggle-password-icon" id="togglePasswordIcon"></i>';
+                                        } else {
+                                            passwordInput.type = "password";
+                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>';
+                                        }
+                                    });
+                                }
+                            })();
+                        </script>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Log in" formmethod="post">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+{% endblock content %}

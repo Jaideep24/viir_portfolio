@@ -48,6 +48,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 # Application definition
 CRISPY_TEMPLATE_PACK='bootstrap4'
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'viir_folio.middleware.ContentSecurityPolicyMiddleware',
+    'viir_folio.middleware.AnalyticsMiddleware',
 ]
 
 SESSION_COOKIE_HTTPONLY = True
@@ -82,6 +84,45 @@ SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 # Always-on security headers (do not require HTTPS)
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Viir Phuria Admin",
+    "site_header": "Viir Phuria",
+    "site_brand": "Viir Phuria",
+    "site_logo": "assets/viir_logo_192.png",
+    "custom_css": "css/admin_custom.css",
+    "custom_js": "js/admin_custom.js",
+    "welcome_sign": "Welcome to Viir Portfolio Management",
+    "copyright": "Viir Phuria",
+    "show_ui_builder": False,
+    "changeform_format": "single",
+    "topmenu_links": [],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "viir_folio.About": "fas fa-user-circle",
+        "viir_folio.Education": "fas fa-graduation-cap",
+        "viir_folio.Experience": "fas fa-briefcase",
+        "viir_folio.Skill": "fas fa-code",
+        "viir_folio.Project": "fas fa-project-diagram",
+        "viir_folio.Contact": "fas fa-envelope",
+        "viir_folio.Article": "fas fa-newspaper",
+        "viir_folio.Comment": "fas fa-comments",
+        "viir_folio.cv": "fas fa-file-pdf",
+        "viir_folio.certificate": "fas fa-award",
+        "viir_folio.maincertificate": "fas fa-certificate",
+        "viir_folio.subscriber": "fas fa-bell",
+        "viir_folio.Publication": "fas fa-book",
+        "viir_folio.Logger": "fas fa-user-secret",
+        "viir_folio.Visitor": "fas fa-users-viewfinder",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
+    "dark_mode_theme": "cyborg",
+}
 
 # Production-only HTTPS/HSTS settings
 if not DEBUG:
