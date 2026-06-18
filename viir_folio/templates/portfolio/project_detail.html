@@ -3,6 +3,10 @@
 
 {% block title %}{{ project.title }} | Project by Viir Phuria{% endblock %}
 
+{% block navbar %}
+    {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' %}
+{% endblock %}
+
 {% block meta %}
   {% if project %}
     {% if project.image %}
@@ -16,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="padding-tb-80">
+<section class="padding-tb-80" style="padding-top: 120px !important;">
   <div class="container">
     <div class="row">
       <div class="col-md-8 mx-auto">

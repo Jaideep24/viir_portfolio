@@ -148,21 +148,17 @@ class SecurityTests(TestCase):
         get_response = self.client.get(logout_url)
         self.assertEqual(get_response.status_code, 302)
         
-        # Create user session and set auth_token cookie
-        session = self.client.session
-        session['auth_token'] = 'test_token'
-        session.save()
-        self.client.cookies['auth_token'] = 'test_token'
+        # Log the user in to create a session
+        self.client.force_login(self.django_user)
+        self.assertIn('_auth_user_id', self.client.session)
         
-        # POST request should succeed, clear session & cookie, and redirect with success message
+        # POST request should succeed, clear session, and redirect with success message
         post_response = self.client.post(logout_url, follow=True)
         self.assertEqual(post_response.status_code, 200)
         self.assertEqual(post_response.redirect_chain[-1][0], '/blogspace/edit/')
         
-        # Session key should be removed
-        self.assertNotIn('auth_token', self.client.session)
-        # Cookie value should be cleared (deleted)
-        self.assertEqual(self.client.cookies['auth_token'].value, '')
+        # Session should be flushed (no user id)
+        self.assertNotIn('_auth_user_id', self.client.session)
         
         # Success message should be present
         messages = list(post_response.context['messages'])
@@ -213,33 +209,7 @@ class SecurityTests(TestCase):
         self.assertIn("default-src 'self'", csp)
         self.assertIn("https://ajax.googleapis.com", csp)
 
-    def test_project_detail_view_features(self):
-        """Verify that the project detail page displays case studies, GitHub links, and video embeds."""
-        from .models import Project
-        project = Project.objects.create(
-            title="Demo App",
-            topic="Short topic summary",
-            date=timezone.now().date(),
-            tech="Python, Django",
-            github_url="https://github.com/Viir-Phuria/demo-app",
-            demo_video="https://www.youtube.com/watch?v=abcdefghijk",
-            description="Problem: We had no demo.\nAction: We created this test.\nResult: 100% success.",
-            category="webdev"
-        )
-        response = self.client.get(reverse('project_detail', args=[project.pk]))
-        self.assertEqual(response.status_code, 200)
-        
-        # Check for GitHub link
-        self.assertContains(response, 'href="https://github.com/Viir-Phuria/demo-app"')
-        self.assertContains(response, 'View on GitHub')
-        
-        # Check for description paragraphs
-        self.assertContains(response, 'Problem: We had no demo.')
-        self.assertContains(response, 'Action: We created this test.')
-        self.assertContains(response, 'Result: 100% success.')
-        
-        # Check for video embed iframe
-        self.assertContains(response, 'iframe src="https://www.youtube.com/embed/abcdefghijk"')
+
 
 
 

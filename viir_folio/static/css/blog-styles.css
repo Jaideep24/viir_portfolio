@@ -384,6 +384,14 @@ body.light .blogspace-card {
     border-color: rgba(148, 163, 184, 0.22);
 }
 
+body.light .blogspace-card .card-title {
+    color: #0f172a;
+}
+
+body.light .blogspace-excerpt {
+    color: #334155;
+}
+
 body.light .blogspace-hero h1 {
     color: #132238;
 }

@@ -68,10 +68,7 @@
 }
 
 @media (max-width: 700px) {
-    #headish {
-        font-size: 16px !important;
-        white-space: nowrap;
-    }
+
 
     #headno {
         left: 8px !important;

@@ -95,14 +95,12 @@
     /*--------------------- on click to scroll next section -------------------------------- */
     $(document).ready(function () {
         $('.scroll-next').on("click", function (e) {
-
-            var targetHref = $(this).attr('data-scroll');
-
-            $('html, body').animate({
-                scrollTop: $('#' + targetHref).offset().top
-            }, 100);
-
             e.preventDefault();
+            var targetHref = $(this).attr('data-scroll');
+            var target = document.getElementById(targetHref);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
@@ -263,15 +261,7 @@
         });
 
     // Bind click handler to menu items
-    // so we can get a fancy scroll animation
-    menuItems.click(function (e) {
-        var href = $(this).attr("href"),
-            offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
-        $('html, body').stop().animate({
-            scrollTop: offsetTop
-        }, 300);
-        e.preventDefault();
-    });
+    // Native CSS scroll-behavior: smooth now handles the scrolling.
 
     // Bind to scroll
     $(window).scroll(function () {

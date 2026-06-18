@@ -44,7 +44,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&family=Poppins:wght@300..700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300&display=swap"
         rel="stylesheet">
@@ -55,13 +55,14 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}?v=1.0">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.2">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3.5">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=1.3">
-
-    <!-- CSS: Custom Styles -->
-    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=1.4">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=1.46">
+    
+    <!-- Shared Architecture Styles -->
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=3.1">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=3.1">
     <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
 
@@ -105,7 +106,9 @@
         </div>
     </div>
 
+    {% block navbar %}
     {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' %}
+    {% endblock %}
 
     {% block content %}
 
@@ -157,15 +160,15 @@
     <!-- ============================================================ -->
     <!-- ABOUT SECTION -->
     <!-- ============================================================ -->
-    <section id="about" class="br-about padding-tb-80 sec-bg vanish">
+    <section id="about" class="br-about padding-tb-80 sec-bg">
         <div class="container">
             <div class="row">
                 {% for object in about %}
-                <div class="section-title">
+                <div class="section-title reveal-up">
                     <h2>About<span> Me</span></h2>
                     <span class="ligh-title">About</span>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 reveal-right">
                     <div class="br-skill-progress m-b-991">
                         <div class="br-hero-img">
                             <div class="br-card" data-tilt="" style="position: relative; display: inline-block;">
@@ -187,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 reveal-left">
                     <div class="br-about-detail">
                         <div class="about-modern-info" style="display: flex; flex-direction: column; width: 100%;">
                             <h3 style="color: #ff6f6f; font-weight: 700; margin-bottom: 8px; font-size: 1.8rem;">{{ object.current_role }}</h3>
@@ -252,16 +255,16 @@
     <!-- ============================================================ -->
     <!-- TIMELINE SECTION (Experience & Education) -->
     <!-- ============================================================ -->
-    <section id="experience" class="br-experience padding-tb-80 vanish">
+    <section id="experience" class="br-experience padding-tb-80">
         <div class="container">
             <div class="row">
-                <div class="section-title">
+                <div class="section-title reveal-up">
                     <h2>My <span>Timeline</span></h2>
                     <span class="ligh-title">Timeline</span>
                 </div>
 
                 <!-- Academics -->
-                <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-12 col-sm-12 reveal-right">
                     <div class="education br-ex-box m-b-991">
                         <div class="timeline">
                             <h3 class="timeline-section-title">Academics</h3>
@@ -285,7 +288,7 @@
                 </div>
 
                 <!-- Career Path -->
-                <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-12 col-sm-12 reveal-left">
                     <div class="experiense br-ex-box">
                         <div class="timeline">
                             <h3 class="timeline-section-title">Career Path</h3>
@@ -324,9 +327,9 @@
     <!-- ============================================================ -->
     <!-- SKILLS SECTION -->
     <!-- ============================================================ -->
-    <section id="skills" class="br-portfolio padding-tb-80 vanish">
+    <section id="skills" class="br-portfolio padding-tb-80">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal-up">
                 <h2>My <span>Skills</span></h2>
                 <span class="ligh-title">Skills</span>
             </div>
@@ -413,9 +416,9 @@
     <!-- ============================================================ -->
     <!-- PROJECTS SECTION -->
     <!-- ============================================================ -->
-    <section id="project" class="br-portfolio padding-tb-80 vanish">
+    <section id="project" class="br-portfolio padding-tb-80">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal-up">
                 <h2>My <span>Projects</span></h2>
                 <span class="ligh-title">Projects</span>
             </div>
@@ -439,9 +442,9 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="portfolio-content-items">
-                                    <div class="row m-b-minus-30px" id="project-items-container">
+                                    <div class="row m-b-minus-30px reveal-stagger" id="project-items-container">
                                         {% for object in projects %}
-                                        <div class="col-lg-6 col-md-6 col-12 mix project-item {{ object.category|join:' ' }}">
+                                        <div class="col-lg-6 col-md-6 col-12 mix project-item {{ object.category|join:' ' }} reveal-stagger-child">
                                             <div class="br-project-box">
                                                 <h3>{{ object.title }}</h3>
                                                 <div class="links">
@@ -499,10 +502,10 @@
     <!-- ============================================================ -->
     <!-- CERTIFICATES SECTION (Carousel) -->
     <!-- ============================================================ -->
-    <section id="certificate" class="br-experience padding-tb-80 vanish">
+    <section id="certificate" class="br-experience padding-tb-80">
         <div class="container">
             <div class="row">
-                <div class="section-title">
+                <div class="section-title reveal-up">
                     <h2>My <span>Certificates</span></h2>
                     <span class="ligh-title">Certificates</span>
                 </div>
@@ -547,18 +550,18 @@
     <!-- ============================================================ -->
     <!-- PUBLICATIONS SECTION -->
     <!-- ============================================================ -->
-    <section id="publications" class="br-portfolio padding-tb-80 vanish">
+    <section id="publications" class="br-portfolio padding-tb-80">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal-up">
                 <h2>My <span>Publications</span></h2>
                 <span class="ligh-title">Publications</span>
             </div>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
             </div>
-            <div class="pub-list" id="pubList">
+            <div class="pub-list reveal-stagger" id="pubList">
                 {% for object in publications %}
-                <div class="pub-card">
+                <div class="pub-card reveal-stagger-child">
                     <div class="pub-date">{{ object.date }}</div>
                     <div class="pub-title">{{ object.title }}</div>
                     <div class="pub-authors">
@@ -585,36 +588,35 @@
     <!-- ============================================================ -->
     <!-- BLOG SECTION -->
     <!-- ============================================================ -->
-    <section id="blog" class="br-portfolio padding-tb-80 vanish">
+    <section id="blog" class="br-portfolio padding-tb-80">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal-up">
                 <h2>My <span>Blogs</span></h2>
                 <span class="ligh-title">Blogs</span>
             </div>
-            <div class="container">
-                <div class="blogs-grid" id="blogsGrid">
-                    {% for object in article %}
-                    <a class="blog-link" href="{% url 'detail_blog' object.slug %}">
-                        <div class="blog-card fade-in-up blog-card-visible">
-                            <div class="blog-card-image" data-bg="{{ object.image.url }}"></div>
-                            <div class="blog-card-content">
-                                <h3>{{ object.title }}</h3>
-                                <p class="blog-excerpt">{{ object.content|striptags|truncatechars:120 }}</p>
-                                <div class="blog-meta">
-                                    <div class="author-info">
-                                        {% if object.likes == 1 %}
-                                        <span>{{ object.likes }} person likes this post</span>
-                                        {% else %}
-                                        <span>{{ object.likes }} people like this post</span>
-                                        {% endif %}
-                                    </div>
-                                    <span>{{ object.date }}</span>
+            <!-- Dynamic grid of latest 3 blogs -->
+            <div class="blogs-grid reveal-stagger" id="blogsGrid">
+                {% for blog in article|slice:":3" %}
+                <a href="{% url 'detail_blog' blog.slug %}" class="blog-card-link">
+                    <div class="blog-card reveal-stagger-child blog-card-visible">
+                        <div class="blog-card-image" data-bg="{{ blog.image.url }}"></div>
+                        <div class="blog-card-content">
+                            <h3>{{ blog.title }}</h3>
+                            <p class="blog-excerpt">{{ blog.content|striptags|truncatechars:120 }}</p>
+                            <div class="blog-meta">
+                                <div class="author-info">
+                                    {% if blog.likes == 1 %}
+                                    <span>{{ blog.likes }} person likes this post</span>
+                                    {% else %}
+                                    <span>{{ blog.likes }} people like this post</span>
+                                    {% endif %}
                                 </div>
+                                <span>{{ blog.date }}</span>
                             </div>
                         </div>
-                    </a>
-                    {% endfor %}
-                </div>
+                    </div>
+                </a>
+                {% endfor %}
             </div>
             <div class="text-center">
                 <a href="{% url 'blogspace' %}" class="capsule-btn">
@@ -628,10 +630,10 @@
     <!-- ============================================================ -->
     <!-- CONTACT SECTION -->
     <!-- ============================================================ -->
-    <section id="contact" class="br-contact padding-tb-80 sec-bg vanish">
+    <section id="contact" class="br-contact padding-tb-80 sec-bg">
         {% for object in about %}
         <div class="container d-block">
-            <div class="section-title">
+            <div class="section-title reveal-up">
                 <h2>Get in <span>Touch</span></h2>
                 <span class="ligh-title">Contact</span>
             </div>
@@ -738,12 +740,14 @@
     <script src="{% static 'js/slick.min.js' %}"></script>
     <script src="{% static 'js/grid.js' %}"></script>
     <script src="{% static 'js/tweenmax.min.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script.js' %}?v=2.0"></script>
+    <!-- Custom script for interactions -->
 
-    <!-- Custom JS (all page logic) -->
-    <script src="{% static 'js/site-navbar.js' %}?v=1.1"></script>
-    <script src="{% static 'js/index.js' %}?v=1.2"></script>
-    <script src="{% static 'js/custom-cursor.js' %}?v=1.1"></script>
+    <script src="{% static 'js/site-navbar.js' %}?v=2.0"></script>
+    <script src="{% static 'js/index.js' %}?v=2.0"></script>
+    <script src="{% static 'js/custom-cursor.js' %}?v=2.0"></script>
+    <script src="{% static 'js/scroll-anim.js' %}?v=2.0"></script>
+</body>
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}

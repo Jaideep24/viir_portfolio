@@ -309,9 +309,6 @@ document.addEventListener('scroll', function () {
             const id = section.getAttribute('id');
             const navLink = document.querySelector(`a[href="#${id}"]`);
             if (navLink) navLink.parentNode.classList.add('active');
-            if (section.classList.contains('vanish')) {
-                section.classList.toggle('vanish');
-            }
         } else {
             const id = section.getAttribute('id');
             const navLink = document.querySelector(`a[href="#${id}"]`);

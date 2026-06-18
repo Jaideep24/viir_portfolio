@@ -7,8 +7,12 @@
     {% include 'includes/meta.html' with meta_title='Certificates & Credentials — Viir Phuria' meta_description='Professional certificates and credentials earned by Viir Phuria from Coursera, Google, and other leading platforms in web development, cyber security, ML/AI, and more.' meta_keywords='Viir Phuria certificates, credentials, Coursera, Google, cyber security certification, web development certificate, machine learning' og_type='website' %}
 {% endblock %}
 
+{% block navbar %}
+    {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' navbar_subtitle='Certificates' %}
+{% endblock %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/certificate.css' %}?v=1.4">
+<link rel="stylesheet" href="{% static 'css/certificate.css' %}?v=1.5">
 <style>
     html,
     body {
@@ -28,11 +32,6 @@
         animation: none !important;
     }
 
-    @media (max-width: 700px) {
-        #headish {
-            opacity: 0;
-        }
-    }
 
 
     /* Certificate Cards Styling */
@@ -50,6 +49,7 @@
         flex: 1 0 auto;
         display: flex;
         flex-direction: column;
+        padding-top: 120px !important; /* Clear fixed navbar */
     }
 
     section.br-experience .container,
@@ -212,7 +212,7 @@
 
 </style>
 
-<section class="br-experience padding-tb-80">
+<section class="br-experience padding-tb-80" id="certificate" style="padding-top: 120px !important;">
     <div class="container">
         <div class="row">
             <div class="section-title">
