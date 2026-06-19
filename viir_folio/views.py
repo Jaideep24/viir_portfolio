@@ -39,12 +39,21 @@ def index(request):
     languages = []
     frameworks = []
     tools_dbs = []
+    security_tools = []
     
+    SECURITY_TOOL_NAMES = [
+        'burp suite', 'burpsuite', 'wireshark', 'nmap', 'kali', 'kali linux',
+        'metasploit', 'owasp', 'owasp zap', 'nessus', 'sqlmap', 'aircrack',
+        'hashcat', 'john the ripper', 'hydra', 'nikto', 'maltego', 'shodan'
+    ]
+
     for s in skills:
         lang_lower = s.language.lower()
-        if lang_lower in ['python', 'javascript', 'js', 'dart', 'html', 'html5', 'css', 'css3', 'c++', 'c', 'java', 'sql', 'typescript']:
+        if any(sec in lang_lower for sec in SECURITY_TOOL_NAMES):
+            security_tools.append(s)
+        elif lang_lower in ['python', 'javascript', 'js', 'dart', 'html', 'html5', 'css', 'css3', 'c++', 'c', 'java', 'sql', 'typescript', 'go', 'golang']:
             languages.append(s)
-        elif lang_lower in ['django', 'flutter', 'react', 'bootstrap', 'tailwind', 'express', 'node', 'nodejs', 'nextjs', 'vue']:
+        elif lang_lower in ['django', 'flutter', 'react', 'bootstrap', 'tailwind', 'express', 'node', 'nodejs', 'nextjs', 'vue', 'fastapi']:
             frameworks.append(s)
         else:
             tools_dbs.append(s)
@@ -59,6 +68,7 @@ def index(request):
         "languages": languages,
         "frameworks": frameworks,
         "tools_dbs": tools_dbs,
+        "security_tools": security_tools,
         'article': Article.objects.all().order_by('-date')[:3],
         'cv': cv.objects.all(),
         'certificate': certificate.objects.all(),

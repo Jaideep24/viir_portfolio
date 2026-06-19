@@ -7,13 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <title>{% block title %}Viir Phuria - Full-Stack Developer, ML/AI & Cyber Security | Portfolio{% endblock %}</title>
+    <title>{% block title %}Viir Phuria{% endblock %}</title>
 
     <link rel="preload" href="{% static 'assets/hoodie-guy.png' %}" as="image">
 
     {% block meta %}
     {# Primary SEO for Portfolio Home #}
-    {% include 'includes/meta.html' with meta_title='Viir Phuria — Full-Stack Developer, ML/AI &amp; Cyber Security' meta_description='Portfolio of Viir Phuria — Full-Stack Developer, ML/AI Engineer, and Cyber Security enthusiast from Mumbai. Explore projects, publications, certifications, and blog posts.' meta_keywords='Viir Phuria, portfolio, full stack developer, Django, Flutter, cyber security, ML AI, IoT, web development, Mumbai, Python, publications, certificates' og_type='website' %}
+    {% include 'includes/meta.html' with meta_title='Viir Phuria — Cybersecurity Engineer & Full-Stack Developer | Portfolio' meta_description='Portfolio of Viir Phuria — Cybersecurity Engineer, Full-Stack Developer, ML/AI enthusiast, and IEEE Researcher. Explore projects, publications, and certifications.' meta_keywords='Viir Phuria, portfolio, cybersecurity engineer, full-stack developer, application security, machine learning, AI engineer, IEEE researcher, Python, Django, Go, Flutter, React, OSCP, CEH, Sec+, Mumbai' og_type='website' %}
     {% endblock %}
 
     {# WebSite structured data with SearchAction for Google Sitelinks Searchbox #}
@@ -24,7 +24,7 @@
       "@id": "{{ site_url }}/#website",
       "name": "Viir Phuria Portfolio",
       "url": "{{ site_url }}/",
-      "description": "Portfolio of Viir Phuria — Full-Stack Developer, ML/AI Engineer, and Cyber Security enthusiast.",
+      "description": "Portfolio of Viir Phuria — Cybersecurity Engineer, Application Security Specialist, and IEEE Researcher.",
       "author": {
         "@type": "Person",
         "@id": "{{ site_url }}/#person",
@@ -41,12 +41,10 @@
     <meta name="msapplication-TileImage" content="{% static 'assets/viir_logo.png' %}">
 
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts — consolidated into one request for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&family=Poppins:wght@300..700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300&display=swap"
         rel="stylesheet">
 
 
@@ -57,12 +55,12 @@
     <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}?v=1.0">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3.5">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2.1">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=1.3">
     
     <!-- Shared Architecture Styles -->
     <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=3.1">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=3.1">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=2.1">
     <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
 
@@ -336,52 +334,70 @@
             <div class="row">
                 {% if languages or frameworks or tools_dbs %}
                 <!-- Render Categorized Skills Dynamically from DB -->
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
                         <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Languages</h3>
                         <div class="skill-chips-wrap">
                             {% for s in languages %}
-                            <span class="skill-chip" title="Proficiency: {{ s.percentage }}%">{{ s.language }}</span>
+                            <span class="skill-chip">{{ s.language }}</span>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
                         <h3 class="skill-category-title"><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
                         <div class="skill-chips-wrap">
                             {% for s in frameworks %}
-                            <span class="skill-chip" title="Proficiency: {{ s.percentage }}%">{{ s.language }}</span>
+                            <span class="skill-chip">{{ s.language }}</span>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
-                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools &amp; Databases</h3>
+                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools & Cloud</h3>
                         <div class="skill-chips-wrap">
                             {% for s in tools_dbs %}
-                            <span class="skill-chip" title="Proficiency: {{ s.percentage }}%">{{ s.language }}</span>
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-shield-halved"></i> Security Tools</h3>
+                        <div class="skill-chips-wrap">
+                            {% for s in security_tools %}
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% empty %}
+                            <span class="skill-chip">Burp Suite</span>
+                            <span class="skill-chip">Wireshark</span>
+                            <span class="skill-chip">Nmap</span>
+                            <span class="skill-chip">Kali Linux</span>
+                            <span class="skill-chip">OWASP ZAP</span>
+                            <span class="skill-chip">Metasploit</span>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
                 {% else %}
                 <!-- Recruiter-Vetted Hardcoded Fallbacks (Safe Mode) -->
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
                         <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Languages</h3>
                         <div class="skill-chips-wrap">
                             <span class="skill-chip">Python</span>
+                            <span class="skill-chip">Go</span>
                             <span class="skill-chip">JavaScript (ES6+)</span>
                             <span class="skill-chip">Dart</span>
                             <span class="skill-chip">HTML5 / CSS3</span>
                             <span class="skill-chip">SQL</span>
-                            <span class="skill-chip">C++</span>
+                            <span class="skill-chip">C</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
                         <h3 class="skill-category-title"><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
                         <div class="skill-chips-wrap">
@@ -394,9 +410,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="skill-category-card">
-                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools &amp; Cloud</h3>
+                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools & Cloud</h3>
                         <div class="skill-chips-wrap">
                             <span class="skill-chip">Git / GitHub</span>
                             <span class="skill-chip">PostgreSQL / MySQL</span>
@@ -404,6 +420,19 @@
                             <span class="skill-chip">Linux / Bash</span>
                             <span class="skill-chip">Docker</span>
                             <span class="skill-chip">Gunicorn / Nginx</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-shield-halved"></i> Security Tools</h3>
+                        <div class="skill-chips-wrap">
+                            <span class="skill-chip">Burp Suite</span>
+                            <span class="skill-chip">Wireshark</span>
+                            <span class="skill-chip">Nmap</span>
+                            <span class="skill-chip">Kali Linux</span>
+                            <span class="skill-chip">OWASP ZAP</span>
+                            <span class="skill-chip">Metasploit</span>
                         </div>
                     </div>
                 </div>
@@ -561,6 +590,8 @@
             </div>
             <div class="pub-list reveal-stagger" id="pubList">
                 {% for object in publications %}
+                {# Skip dummy/test entries — only show if title is meaningful (>5 chars, not all lowercase gibberish) #}
+                {% if object.title|length > 10 %}
                 <div class="pub-card reveal-stagger-child">
                     <div class="pub-date">{{ object.date }}</div>
                     <div class="pub-title">{{ object.title }}</div>
@@ -579,6 +610,7 @@
                     <a href="{{ object.url }}" class="capsule-btn" target="_blank" rel="noopener noreferrer"><span class="text">View
                             Publication</span></a>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -661,8 +693,13 @@
                             <div class="info">
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
                                 <p class="mb-0">
-                                    <a class="contact-link" href="tel:+919819185865"
-                                        target="_blank" rel="noopener noreferrer">+91 9819185865</a>
+                                    {% if object.phone_no %}
+                                    <a class="contact-link" href="tel:{{ object.phone_no }}"
+                                        target="_blank" rel="noopener noreferrer">{{ object.phone_no }}</a>
+                                    {% elif object.whatsapp_no %}
+                                    <a class="contact-link" href="https://wa.me/{{ object.whatsapp_no }}"
+                                        target="_blank" rel="noopener noreferrer">+{{ object.whatsapp_no }}</a>
+                                    {% endif %}
                                 </p>
                             </div>
                         </div>
@@ -673,11 +710,9 @@
                         <div class="detail">
                             <div class="icon"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: #ff6f6f;"></i></div>
                             <div class="info">
-                                <h3 class="title">Address</h3>
+                                <h3 class="title">Location</h3>
                                 <p class="mb-0">
-                                    <a class="contact-link"
-                                        href="https://www.google.com/maps/dir//Techno+Graphix,+Classique+Building,+Sai+Baba+Park,+Malad,+Evershine+Nagar,+Malad+West,+Mumbai,+Maharashtra+400064/@19.1834173,72.8399872,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be7b72e2cf5a19d:0xbe3acd83444503!2m2!1d72.8321877!2d19.1917348?entry=ttu"
-                                        target="_blank" rel="noopener noreferrer">Techno Graphix, Malad West, Mumbai</a>
+                                    <span class="contact-link">{{ object.location }}, India</span>
                                 </p>
                             </div>
                         </div>
@@ -745,8 +780,8 @@
 
     <script src="{% static 'js/site-navbar.js' %}?v=2.0"></script>
     <script src="{% static 'js/index.js' %}?v=2.0"></script>
-    <script src="{% static 'js/custom-cursor.js' %}?v=2.0"></script>
-    <script src="{% static 'js/scroll-anim.js' %}?v=2.0"></script>
+    <script src="{% static 'js/custom-cursor.js' %}?v=2.1"></script>
+    <script src="{% static 'js/scroll-anim.js' %}?v=1.1"></script>
 </body>
 
     <!-- Structured Data: Projects List -->

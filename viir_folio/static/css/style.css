@@ -105,7 +105,7 @@ body.light .section-title h2 {
   color: #f5f5f5;
   line-height: 60px;
   text-shadow: 5px -5px 10px #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-  opacity: 0.12;
+  opacity: 0.20;
   transform: translateY(-100%);
   pointer-events: none;
   z-index: 1;
@@ -113,12 +113,12 @@ body.light .section-title h2 {
 
 body.dark .section-title .ligh-title {
   color: #202337;
-  opacity: 0.12;
+  opacity: 0.20;
 }
 
 body.light .section-title .ligh-title {
   color: #EEEEEE;
-  opacity: 0.05;
+  opacity: 0.08;
 }
 
 @media (max-width: 768px) {

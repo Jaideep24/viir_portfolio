@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     staggerContainers.forEach(container => {
         const children = container.children;
         Array.from(children).forEach((child, index) => {
-            child.style.transitionDelay = `${index * 150}ms`;
+            child.style.transitionDelay = `${index * 50}ms`;
             child.classList.add('reveal-stagger-child');
         });
     });

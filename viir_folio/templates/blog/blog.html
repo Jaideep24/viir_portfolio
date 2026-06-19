@@ -1,9 +1,9 @@
 {% extends 'blog/blog-base.html' %}
 
-{% block page_title %}{{ article.title }} | Viir Phuria Blog{% endblock %}
+{% block page_title %}{{ article.title }} - Viir Phuria{% endblock %}
 
 {% block meta %}
-    {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:155 meta_image=article.image.url meta_keywords='Viir Phuria blog, web development, cyber security, ML AI, Django, portfolio' og_type='article' article_published_time=article.date|date:'c' article_modified_time=article.updated_at|date:'c' %}
+    {% include 'includes/meta.html' with meta_title=article.title meta_description=article.content|striptags|truncatechars:155 meta_image=article.image.url meta_keywords='Viir Phuria blog, cybersecurity engineer, full-stack developer, machine learning, AI, web development, Django, Python' og_type='article' article_published_time=article.date|date:'c' article_modified_time=article.updated_at|date:'c' %}
     <meta property="article:author" content="Viir Phuria">
     <script type="application/ld+json">
     {
