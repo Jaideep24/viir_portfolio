@@ -1,0 +1,137 @@
+<!-- ============================================================ -->
+    <!-- CONTACT SECTION -->
+    <!-- ============================================================ -->
+    <section id="contact" class="br-contact padding-tb-80 sec-bg">
+        {% for object in about %}
+        <div class="container d-block">
+            <div class="section-title reveal-up">
+                <h2>Get in <span>Touch</span></h2>
+                <span class="ligh-title">Contact</span>
+            </div>
+            <div class="row m-b-minus-30px">
+                <div class="col-lg-5 col-md-5 col-12 m-b-991-20">
+                    <!-- Email -->
+                    <div class="br-box">
+                        <div class="detail">
+                            <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info">
+                                <h3 class="title mb-1" style="font-size: 1.1rem;">Mail</h3>
+                                <p class="mb-0">
+                                    <a class="contact-link" href="mailto:{{ object.email }}"
+                                        target="_blank" rel="noopener noreferrer">{{object.email }}</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div>
+                    <!-- Phone -->
+                    <div class="br-box">
+                        <div class="detail">
+                            <div class="icon"><i class="fa-solid fa-mobile-screen-button"></i>
+                            </div>
+                            <div class="info">
+                                <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
+                                <p class="mb-0">
+                                    {% if object.phone_no %}
+                                    <a class="contact-link" href="tel:{{ object.phone_no }}"
+                                        target="_blank" rel="noopener noreferrer">{{ object.phone_no }}</a>
+                                    {% elif object.whatsapp_no %}
+                                    <a class="contact-link" href="https://wa.me/{{ object.whatsapp_no }}"
+                                        target="_blank" rel="noopener noreferrer">+{{ object.whatsapp_no }}</a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div>
+                    <!-- Address -->
+                    <div class="br-box">
+                        <div class="detail">
+                            <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="info">
+                                <h3 class="title">Location</h3>
+                                <p class="mb-0">
+                                    <span class="contact-link">{{ object.location }}, India</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Contact Form -->
+                <div class="col-lg-7 col-md-7 col-12">
+                    <form id="contactForm" method="post">
+                        {% csrf_token %}
+                        {# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control modern-input" id="fname" name="name" placeholder="Full Name" required maxlength="100">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="email" class="form-control modern-input" id="umail" name="email" placeholder="Email" required maxlength="254">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="tel" class="form-control modern-input" id="phone" name="number" placeholder="Phone (optional)" maxlength="20">
+                        </div>
+                        <div class="form-group mb-4">
+                            <textarea class="form-control modern-input" id="contactMessage" name="message" placeholder="Message" required maxlength="2000" style="height: 120px"></textarea>
+                        </div>
+                        <button type="submit" class="capsule-btn" id="submitBtn">
+                            <span class="text">Send Message</span>
+                        </button>
+                        <div id="formMessage" style="margin-top: 15px; display: none;" class="alert" role="alert"></div>
+                    </form>
+                </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const msgDiv = document.getElementById('formMessage');
+    const btn = document.getElementById('submitBtn');
+
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btn.querySelector('.text').innerText = 'Sending...';
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if(response.ok) {
+                    msgDiv.className = 'alert alert-success';
+                    msgDiv.innerHTML = '<b>Message Sent Successfully!</b>';
+                    msgDiv.style.display = 'block';
+                    form.reset();
+                } else {
+                    msgDiv.className = 'alert alert-danger';
+                    msgDiv.innerHTML = '<b>Something went wrong. Please try again.</b>';
+                    msgDiv.style.display = 'block';
+                }
+            })
+            .catch(err => {
+                msgDiv.className = 'alert alert-danger';
+                msgDiv.innerHTML = '<b>Network error. Please try again.</b>';
+                msgDiv.style.display = 'block';
+            })
+            .finally(() => {
+                btn.querySelector('.text').innerText = 'Send Message';
+                btn.disabled = false;
+                setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
+            });
+        });
+    }
+});
+</script>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->

@@ -15,7 +15,7 @@ function generateBackgroundSpans() {
     // Remove all existing background spans
     section.querySelectorAll('span.bg-span').forEach(span => span.remove());
 
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     
     // Sync with CSS media queries responsive columns
     let cols = 16;
@@ -47,7 +47,7 @@ function generateBackgroundSpans() {
 }
 
 function initBlogBase() {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     document.body.classList.toggle("light", !isDarkMode);
     document.body.classList.toggle("dark", isDarkMode);
     document.body.classList.toggle('darkmode', isDarkMode);

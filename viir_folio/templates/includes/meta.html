@@ -1,6 +1,6 @@
 {% load static %}
 {# Shared SEO meta include. Accepts: meta_title, meta_description, meta_image, meta_url, og_type, meta_robots, meta_keywords, article_published_time, article_modified_time. #}
-{% static 'assets/viir_logo.png' as default_image %}
+{% static 'assets/viir_logo.webp' as default_image %}
 {% with resolved_site_name=site_name|default:"Viir Phuria" resolved_author=site_author|default:"Viir Phuria" resolved_desc=site_description|default:"Portfolio of Viir Phuria — Cybersecurity Engineer, Full-Stack Developer, and IEEE Researcher from Mumbai. Specializing in Application Security, Machine Learning, and Secure Web Development." resolved_keywords=site_keywords|default:"Viir Phuria, portfolio, cybersecurity engineer, full-stack developer, application security, penetration tester, machine learning, AI engineer, IEEE researcher, Python, Django, Go, Flutter, React, Mumbai" %}
 
 {% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}">
@@ -67,32 +67,46 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "{{ site_url|default:'https://viirportfolio.pythonanywhere.com' }}/#person",
-  "name": "{{ resolved_author|escapejs }}",
-  "alternateName": "Viir",
-  "description": "{{ resolved_desc|escapejs }}",
-  "url": "{{ site_url|default:'https://viirportfolio.pythonanywhere.com' }}/",
-  "sameAs": [{% for url in social_profile_urls %}"{{ url|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
-  "image": "{% if site_url %}{{ site_url }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{{ default_image }}",
-  "jobTitle": "Cybersecurity Engineer & Full-Stack Developer",
-  "knowsAbout": [
-    "Application Security",
-    "Cybersecurity",
-    "Penetration Testing",
-    "Threat Detection",
-    "Secure Software Development",
-    "Machine Learning",
-    "Python",
-    "Django",
-    "Go"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Mumbai",
-    "addressRegion": "Maharashtra",
-    "addressCountry": "IN"
-  }
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ site_url|default:'https://viir.tech' }}/#person",
+      "name": "{{ resolved_author|escapejs }}",
+      "alternateName": "Viir",
+      "description": "{{ resolved_desc|escapejs }}",
+      "url": "{{ site_url|default:'https://viir.tech' }}/",
+      "sameAs": [{% for url in social_profile_urls %}"{{ url|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+      "image": "{% if site_url %}{{ site_url }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{{ default_image }}",
+      "jobTitle": "Cybersecurity Engineer & Full-Stack Developer",
+      "knowsAbout": [
+        "Application Security",
+        "Cybersecurity",
+        "Penetration Testing",
+        "Threat Detection",
+        "Secure Software Development",
+        "Machine Learning",
+        "Python",
+        "Django",
+        "Go"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site_url|default:'https://viir.tech' }}/#website",
+      "url": "{{ site_url|default:'https://viir.tech' }}/",
+      "name": "{{ resolved_site_name|escapejs }}",
+      "description": "{{ resolved_desc|escapejs }}",
+      "publisher": {
+        "@id": "{{ site_url|default:'https://viir.tech' }}/#person"
+      }
+    }
+  ]
 }
 </script>
 {% endwith %}

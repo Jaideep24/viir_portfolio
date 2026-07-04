@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load custom_filters %}
+{% load compress %}
 <html lang="en">
 
 <head>
@@ -9,7 +10,7 @@
 
     <title>{% block title %}Viir Phuria{% endblock %}</title>
 
-    <link rel="preload" href="{% static 'assets/hoodie-guy.png' %}" as="image">
+    <link rel="preload" href="{% static 'assets/hoodie-guy.webp' %}" as="image">
 
     {% block meta %}
     {# Primary SEO for Portfolio Home #}
@@ -36,33 +37,33 @@
     </script>
 
     <!-- Site Favicon -->
-    <link rel="icon" href="{% static 'assets/viir_logo.png' %}" sizes="32x32">
-    <link rel="apple-touch-icon" href="{% static 'assets/viir_logo.png' %}">
-    <meta name="msapplication-TileImage" content="{% static 'assets/viir_logo.png' %}">
+    <link rel="icon" href="{% static 'assets/viir_logo.webp' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'assets/viir_logo.webp' %}">
+    <meta name="msapplication-TileImage" content="{% static 'assets/viir_logo.webp' %}">
 
 
     <!-- Google Fonts — consolidated into one request for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&family=Poppins:wght@300..700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
     <!-- CSS: Vendor Stylesheets -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}?v=1.0">
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2.1">
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=1.3">
+    <!-- Removed Fancybox and Slick CSS for lighter payload -->
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/refactored.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     
     <!-- Shared Architecture Styles -->
-    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=3.1">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=2.1">
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
+    {% endcompress %}
 
     <script>
         window.__indexSidebar = true;
@@ -71,19 +72,24 @@
     <!-- Theme Initialization -->
     <script>
         (function () {
-            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            const isDarkMode = localStorage.getItem('darkMode') !== 'false';
             window.__theme = isDarkMode ? 'dark' : 'light';
             window.__isDarkMode = isDarkMode;
         })();
     </script>
+  <style>
+    /* Prevent FOUC transition flash */
+    .preload * {
+      transition: none !important;
+    }
+  </style>
 </head>
 
-<body class="body-default">
-    <!-- Apply theme class immediately -->
-    <script>
-        document.body.classList.remove("body-default");
-        document.body.classList.add(window.__theme || 'dark');
-    </script>
+<body class="preload {% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
+  <script>
+    document.body.classList.add(window.__theme || 'dark');
+    setTimeout(function() { document.body.classList.remove('preload'); }, 50);
+  </script>
 
     <!-- Grid Canvas Background -->
     <canvas id="gridCanvas"></canvas>
@@ -134,24 +140,29 @@
                     <span class="circle-icon circle-icon-14"><img src="{% static 'assets/icons/Firebase-Dark.svg' %}" alt="Firebase" height="75px"></span>
                     <span class="circle-icon circle-icon-15"><img src="{% static 'assets/icons/Github-Dark.svg' %}" alt="GitHub" height="75px"></span>
                 </div>
-                <div class="hoodie-guy" data-bg="{% static 'assets/hoodie-guy.png' %}"></div>
+                <div class="hoodie-guy" data-bg="{% static 'assets/hoodie-guy.webp' %}"></div>
             </div>
         </div>
     </section>
 
     <!-- Intro Text -->
+    <main id="main-content">
     <div class="text-center" style="text-align: center;">
         <div class="footer-text">
             <h1 class="hero-title">Hello I'm Viir Phuria</h1>
             <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle" data-texts="{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}"></h2>
         </div>
-        {% for object in cv %}
         <div class="hero-cta-buttons" style="margin-top: 25px; display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap;">
+            {% for object in cv %}
             <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn hero-btn download-cv-btn" style="min-width: 150px; margin: 0 auto;">
                 <span class="text">View CV</span>
             </a>
+            {% empty %}
+            <a href="#contact" class="capsule-btn hero-btn" style="min-width: 150px; margin: 0 auto;">
+                <span class="text">Contact Me</span>
+            </a>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
     <!-- Hero End -->
 
@@ -205,21 +216,21 @@
                             </div>
                             {% endif %}
 
-                            <p style="margin-bottom: 25px; line-height: 1.8; color: var(--text-color); opacity: 0.9; font-size: 1.05rem;">{{ object.content }}</p>
+                            <p style="margin-bottom: 25px; line-height: 1.8; color: var(--text-secondary); opacity: 0.9; font-size: 1.05rem;">{{ object.content }}</p>
 
                             <!-- Quick Stats Row (Manual Text Fields) -->
                             <div class="quick-stats" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 25px 35px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
                                 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                                     <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.projects_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Projects Built</span>
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Projects Built</span>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                                     <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.research_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Research Papers</span>
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Research Papers</span>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                                     <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.certifications_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Certifications</span>
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Certifications</span>
                                 </div>
                             </div>
 
@@ -231,13 +242,13 @@
                                 {% endfor %}
                                 
                                 <div style="display: flex; gap: 18px; margin-left: auto; align-items: center;">
-                                    <span style="color: var(--text-color); font-size: 1.1rem; opacity: 0.8; font-weight: 500;"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
-                                    <a href="mailto:{{ object.email }}" style="color: var(--text-color); font-size: 1.3rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
+                                    <span style="color: var(--text-secondary); font-size: 1.1rem; opacity: 0.8; font-weight: 500;"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
+                                    <a href="mailto:{{ object.email }}" style="color: var(--text-secondary); font-size: 1.3rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
                                     {% if object.github_url %}
-                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-color); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="GitHub"><i class="fa-brands fa-github"></i></a>
                                     {% endif %}
                                     {% if object.linkedin_url %}
-                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-color); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-color)'; this.style.opacity='0.8'" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -481,7 +492,7 @@
                                                 </div>
 
                                                 {% if object.description %}
-                                                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-color); opacity: 0.9;">{{ object.description|safe }}</p>
+                                                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary); opacity: 0.9;">{{ object.description|safe }}</p>
                                                 {% endif %}
                                                 <div class="br-info">
                                                      <div class="portfolio-img">
@@ -662,99 +673,9 @@
     <!-- ============================================================ -->
     <!-- CONTACT SECTION -->
     <!-- ============================================================ -->
-    <section id="contact" class="br-contact padding-tb-80 sec-bg">
-        {% for object in about %}
-        <div class="container d-block">
-            <div class="section-title reveal-up">
-                <h2>Get in <span>Touch</span></h2>
-                <span class="ligh-title">Contact</span>
-            </div>
-            <div class="row m-b-minus-30px">
-                <div class="col-lg-5 col-md-5 col-12 m-b-991-20">
-                    <!-- Email -->
-                    <div class="br-box">
-                        <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-envelope" aria-hidden="true" style="color: #ff6f6f;"></i></div>
-                            <div class="info">
-                                <h3 class="title mb-1" style="font-size: 1.1rem;">Mail</h3>
-                                <p class="mb-0">
-                                    <a class="contact-link" href="mailto:{{ object.email }}"
-                                        target="_blank" rel="noopener noreferrer">{{object.email }}</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="space"></div>
-                    </div>
-                    <!-- Phone -->
-                    <div class="br-box">
-                        <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true" style="font-size: 24px; color: #ff6f6f;"></i>
-                            </div>
-                            <div class="info">
-                                <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
-                                <p class="mb-0">
-                                    {% if object.phone_no %}
-                                    <a class="contact-link" href="tel:{{ object.phone_no }}"
-                                        target="_blank" rel="noopener noreferrer">{{ object.phone_no }}</a>
-                                    {% elif object.whatsapp_no %}
-                                    <a class="contact-link" href="https://wa.me/{{ object.whatsapp_no }}"
-                                        target="_blank" rel="noopener noreferrer">+{{ object.whatsapp_no }}</a>
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="space"></div>
-                    </div>
-                    <!-- Address -->
-                    <div class="br-box">
-                        <div class="detail">
-                            <div class="icon"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: #ff6f6f;"></i></div>
-                            <div class="info">
-                                <h3 class="title">Location</h3>
-                                <p class="mb-0">
-                                    <span class="contact-link">{{ object.location }}, India</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="space"></div>
-                    </div>
-                </div>
-                {% endfor %}
-
-                <!-- Contact Form -->
-                <div class="col-lg-7 col-md-7 col-12">
-                    <form method="post">
-                        {% csrf_token %}
-                        {# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
-                        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="fname" name="name" placeholder="Full Name" required maxlength="100">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="umail" name="email" placeholder="Email" required maxlength="254">
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" id="phone" name="number" placeholder="Phone (optional)" maxlength="20">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="contactMessage" name="message" rows="4"
-                                placeholder="Message" required maxlength="2000"></textarea>
-                        </div>
-                        <button type="submit" class="capsule-btn">
-                            <span class="text">Submit</span>
-                        </button>
-                    </form>
-                    {% if success %}
-                    <br>
-                    <div class="btn btn-success">
-                        <b>Form Submitted Successfully</b>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'portfolio/sections/contact.html' %}
     <!-- Contact Section End -->
+    </main>
 
     {% endblock %}
 
@@ -767,22 +688,25 @@
     <!-- ============================================================ -->
     <!-- VENDOR JS -->
     <!-- ============================================================ -->
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    {% compress js %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/tilt.jquery.js' %}"></script>
+    {% endcompress %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <script src="{% static 'js/mixitup.min.js' %}"></script>
-    <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.4.1/index.min.js"></script>
+    {% compress js %}
     <script src="{% static 'js/grid.js' %}"></script>
+    {% endcompress %}
     <script src="{% static 'js/tweenmax.min.js' %}"></script>
-    <script src="{% static 'js/script.js' %}?v=2.0"></script>
+    {% compress js %}
+    <script src="{% static 'js/script.js' %}"></script>
     <!-- Custom script for interactions -->
 
-    <script src="{% static 'js/site-navbar.js' %}?v=2.0"></script>
-    <script src="{% static 'js/index.js' %}?v=2.0"></script>
-    <script src="{% static 'js/custom-cursor.js' %}?v=2.1"></script>
-    <script src="{% static 'js/scroll-anim.js' %}?v=1.1"></script>
-</body>
+    <script src="{% static 'js/site-navbar.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/custom-cursor.js' %}"></script>
+    <script src="{% static 'js/scroll-anim.js' %}"></script>
+    {% endcompress %}
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}
@@ -791,5 +715,4 @@
     {% include 'includes/sd_publications.html' with publications=publications %}
 
 </body>
-
 </html>

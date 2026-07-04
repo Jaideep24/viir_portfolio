@@ -4,6 +4,9 @@
    ========================================================================== */
 
 const canvas = document.getElementById('gridCanvas');
+if (canvas) {
+    canvas.style.willChange = 'transform';
+}
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -149,15 +152,19 @@ const particles = Array(config.particleCount).fill().map(() => new Particle());
 function animate() {
     createGrid();
     
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isLoginPage = document.body.classList.contains('login-page');
-    if (!isLoginPage) {
+    
+    if (!isLoginPage && !prefersReducedMotion) {
         particles.forEach(particle => {
             particle.update();
             particle.draw();
         });
     }
     
-    requestAnimationFrame(animate);
+    if (!prefersReducedMotion) {
+        requestAnimationFrame(animate);
+    }
 }
     
 // Handle window resize
@@ -166,17 +173,27 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
     
     particles.forEach(particle => particle.reset());
+    
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        createGrid();
+    }
 });
 
 // Initialize on load
-document.addEventListener('DOMContentLoaded', () => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+(function() {
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     updateConfig(isDarkMode);
     animate();
-});
+})();
 
 // Export function to update grid when theme changes
 window.updateGridTheme = function(isDarkMode) {
     updateConfig(isDarkMode);
     particles.forEach(particle => particle.reset());
+    
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        createGrid();
+    }
 };

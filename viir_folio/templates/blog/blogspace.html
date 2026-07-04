@@ -9,150 +9,10 @@
 {% block content %}
 {% load static %}
 
-<style>
-    section.blog-experience {
-        flex: 1 0 auto;
-        display: flex;
-        flex-direction: column;
-        padding-top: 120px !important; /* Match Certificates page padding for navbar spacing */
-        height: auto !important; /* Override blog-base.css 100vh section height */
-        overflow: visible !important; /* Override blog-base.css hidden overflow */
-    }
 
-    section.blog-experience .container,
-    section.blog-experience .row {
-        flex: 1 0 auto;
-        width: 100%;
-    }
 
-    /* Exact layout and styles replicated from certificate.html / style.css default */
-    section.blog-experience .section-title {
-        position: relative !important;
-        text-align: center !important;
-        width: 100% !important;
-        margin-bottom: 0px !important;
-    }
-
-    section.blog-experience .section-title h2 {
-        position: relative !important;
-        z-index: 2 !important;
-        margin: 0 !important;
-        margin-bottom: 40px !important; /* Exact margin from style.css */
-        padding: 0 !important;
-        font-family: 'Playfair Display', serif !important;
-        font-size: 36px !important;
-        line-height: 29px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.02rem !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-    }
-
-    section.blog-experience .section-title h2 span {
-        color: #ff6f6f !important;
-    }
-
-    body.dark section.blog-experience .section-title h2 {
-        color: #EEEEEE !important;
-    }
-
-    body.light section.blog-experience .section-title h2 {
-        color: #000000 !important;
-    }
-
-    section.blog-experience .section-title .ligh-title {
-        margin: auto !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 0 !important;
-        width: 100% !important;
-        text-align: center !important;
-        font-family: 'Quicksand', 'Poppins', sans-serif !important;
-        font-size: 130px !important;
-        font-weight: 700 !important;
-        line-height: 60px !important;
-        text-shadow: 5px -5px 10px #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000 !important;
-        transform: translateY(-100%) !important; /* Match translateY(-100%) from certificate.html */
-        pointer-events: none !important;
-        z-index: 1 !important;
-    }
-
-    body.dark section.blog-experience .section-title .ligh-title {
-        color: #202337 !important;
-        opacity: 0.12 !important;
-    }
-
-    body.light section.blog-experience .section-title .ligh-title {
-        color: #EEEEEE !important;
-        opacity: 0.05 !important;
-    }
-
-    /* Responsive overrides matching homepage responsive.css */
-    @media (max-width: 1199px) {
-        section.blog-experience .section-title h2 {
-            font-size: 34px !important;
-            padding: 33px 0 !important; /* Equal top and bottom padding to maintain centering */
-        }
-        section.blog-experience .section-title .ligh-title {
-            font-size: 90px !important;
-            transform: translateY(-100%) !important;
-        }
-    }
-
-    @media (max-width: 991px) {
-        section.blog-experience .section-title h2 {
-            font-size: 32px !important;
-            margin-bottom: 30px !important;
-        }
-    }
-
-    @media (max-width: 767px) {
-        section.blog-experience .section-title {
-            height: auto !important;
-            margin-bottom: 20px !important;
-        }
-        section.blog-experience .section-title h2 {
-            position: relative !important;
-            top: 0 !important;
-            left: 0 !important;
-            transform: none !important;
-            font-size: 28px !important;
-            padding: 0 0 10px 0 !important;
-        }
-        section.blog-experience .section-title .ligh-title {
-            display: none !important; /* Hide background title on mobile as on homepage */
-        }
-    }
-
-    @media (max-width: 575px) {
-        section.blog-experience .section-title h2 {
-            font-size: 28px !important;
-            margin-bottom: 20px !important;
-        }
-    }
-
-    @media (max-width: 420px) {
-        section.blog-experience .section-title h2 {
-            font-size: 26px !important;
-        }
-    }
-
-    @media (max-width: 360px) {
-        section.blog-experience .section-title h2 {
-            font-size: 24px !important;
-        }
-    }
-
-    @media (max-width: 320px) {
-        section.blog-experience .section-title h2 {
-            font-size: 22px !important;
-            line-height: 24px !important;
-        }
-    }
-</style>
-
-<section class="blog-experience padding-tb-80" id="blogspace">
+<main id="main-content">
+<section id="blogspace-page" class="blog-experience">
 	<div class="container blogspace-shell">
 		<div class="row flex-column">
 			<div class="section-title reveal-up">
@@ -190,10 +50,49 @@
 		</a>
 	{% endfor %}
 		</div>
+
+		<!-- Pagination Section -->
+		{% if is_paginated %}
+		<div class="pagination-wrapper mt-5 d-flex justify-content-center">
+			<ul class="pagination">
+				{% if page_obj.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				{% else %}
+				<li class="page-item disabled">
+					<span class="page-link" aria-hidden="true">&laquo;</span>
+				</li>
+				{% endif %}
+
+				{% for i in paginator.page_range %}
+					{% if page_obj.number == i %}
+					<li class="page-item active" aria-current="page"><span class="page-link">{{ i }}</span></li>
+					{% else %}
+					<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+					{% endif %}
+				{% endfor %}
+
+				{% if page_obj.has_next %}
+				<li class="page-item">
+					<a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				{% else %}
+				<li class="page-item disabled">
+					<span class="page-link" aria-hidden="true">&raquo;</span>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+		{% endif %}
 	</div>
 </section>
 
-<div class="blogspace-subscribe-section reveal-up">
+<div class="blogspace-subscribe-section reveal-up text-center">
 	<div class="container">
 		{% if info %}
 		<div class="subscribe-info-alert">
@@ -214,16 +113,16 @@
 			<form action="" method="post" class="blogspace-subscribe-form">
 				{% csrf_token %}
 				{# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
-				<input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+				<input type="text" name="website" tabindex="-1" autocomplete="off" class="honeypot-field" aria-hidden="true">
 				<div class="subscribe-form-wrapper">
 					<div class="subscribe-input-group">
-						<i class="fas fa-envelope subscribe-icon"></i>
+						<i class="fas fa-envelope subscribe-icon" aria-hidden="true"></i>
 						<input type="email" class="subscribe-input" id="umail" name="email"
 							placeholder="Enter your email address..." required>
 					</div>
-					<button type="submit" class="subscribe-btn">
+					<button type="submit" class="subscribe-btn" aria-label="Subscribe to newsletter">
 						<span>Subscribe</span>
-						<i class="fas fa-arrow-right"></i>
+						<i class="fas fa-arrow-right" aria-hidden="true"></i>
 					</button>
 				</div>
 			</form>
@@ -232,6 +131,7 @@
 	</div>
 </div>
 
+</main>
 {% endblock content %}
 
 {# Blog Structured Data for Google #}

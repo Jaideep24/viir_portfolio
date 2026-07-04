@@ -16,6 +16,9 @@ from django.core.mail import EmailMessage
 from django.core import signing
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
+import uuid
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 
@@ -28,7 +31,7 @@ def is_ajax(request):
 
 @ratelimit(key='ip', rate='3/5m', method='POST', block=False)
 def index(request):
-    active_item = certificate.objects.filter(show=True).first()
+    active_item = Certificate.objects.filter(show=True).first()
     # Experience now has start_date and end_date as DateField
     experiences = Experience.objects.all().order_by('-start_date')
     # Education now has start_date and end_date as integer fields
@@ -70,9 +73,9 @@ def index(request):
         "tools_dbs": tools_dbs,
         "security_tools": security_tools,
         'article': Article.objects.all().order_by('-date')[:3],
-        'cv': cv.objects.all(),
-        'certificate': certificate.objects.all(),
-        'maincertificate': maincertificate.objects.all(),
+        'cv': CV.objects.all(),
+        'certificate': Certificate.objects.all(),
+        'maincertificate': MainCertificate.objects.all(),
         'publications': Publication.objects.all(),
         'active_item': active_item,
         'success': request.session.pop('contact_success', False)
@@ -136,7 +139,7 @@ def index(request):
     return render(request, "portfolio/index.html", context)
     
 def certificate_view(request):
-    return render(request, 'portfolio/certificate.html', {'certificate': certificate.objects.all().order_by('-date'), 'certi': True})
+    return render(request, 'portfolio/certificate.html', {'certificate': Certificate.objects.all().order_by('-date'), 'certi': True})
 
 def is_verified_user(request):
     return request.user.is_authenticated
@@ -188,6 +191,7 @@ class Blogspace(ListView):
     template_name = 'blog/blogspace.html'
     # context_object_name intentionally not set — template uses 'object_list' throughout
     ordering = ['-date']
+    paginate_by = 6
     
     def get_context_data(self, **kwargs):
         context = super(Blogspace, self).get_context_data(**kwargs)
@@ -226,11 +230,11 @@ class Blogspace(ListView):
         # Create and save model instance
         try:
             # Check if email already exists
-            if subscriber.objects.filter(email=email).exists():
+            if Subscriber.objects.filter(email=email).exists():
                 request.session['subscription_info'] = 'This email is already subscribed. You\'re all set!'
                 return HttpResponseRedirect(request.path_info)
             
-            new_subscriber = subscriber(email=email)
+            new_subscriber = Subscriber(email=email)
             new_subscriber.save()
             
             subject = 'Welcome to Our Blog Community'
@@ -279,6 +283,11 @@ class DetailArticleView(DetailView):
         context = super(DetailArticleView, self).get_context_data(**kwargs)
         context['comment_form'] = CommentForm(initial={'article': self.object})
         context['comment'] = Comment.objects.filter(article=self.object)
+        
+        # Check if the user has already liked this article in this session
+        liked_key = f'liked_article_{self.object.pk}'
+        context['already_liked'] = self.request.session.get(liked_key, False)
+        
         return context
     
     def post(self, request, **kwargs):
@@ -405,3 +414,19 @@ class UpdateBlogView(UpdateView):
 def custom_404(request, exception=None):
     """Custom 404 error page — rendered when DEBUG=False in production."""
     return render(request, '404.html', status=404)
+
+@login_required
+def upload_image(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        image_file = request.FILES['image']
+        ext = image_file.name.split('.')[-1]
+        filename = f"{uuid.uuid4().hex}.{ext}"
+        
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'blog_uploads'))
+        saved_name = fs.save(filename, image_file)
+        
+        file_url = f"{settings.MEDIA_URL}blog_uploads/{saved_name}"
+        
+        return JsonResponse({'success': True, 'url': file_url})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request or no image provided.'}, status=400)

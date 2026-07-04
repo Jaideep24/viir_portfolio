@@ -124,7 +124,7 @@ class About(models.Model):
             return [f.strip() for f in self.current_focus.split(',') if f.strip()]
         return []
 
-class contact(models.Model):
+class Contact(models.Model):
     name=encrypt(models.CharField(max_length=100))
     email=encrypt(models.EmailField())
     number=encrypt(PhoneNumberField(blank=True,null=True, region='IN'))
@@ -152,13 +152,13 @@ class Skill(models.Model):
     def __str__(self):
         return self.language
 
-class cv(models.Model):
+class CV(models.Model):
     pdf=models.FileField(validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 
     def __str__(self):
         return f"CV #{self.pk}"
 
-class certificate(models.Model):
+class Certificate(models.Model):
     title=models.CharField(max_length=100)
     url=models.URLField()
     date=models.DateField()
@@ -171,13 +171,13 @@ class certificate(models.Model):
     class Meta:
         ordering = ['-date']
 
-class maincertificate(models.Model):
+class MainCertificate(models.Model):
     title=models.CharField(max_length=100)
     image=models.ImageField(default="image.png")    
     def __str__(self):
         return self.title
 
-class subscriber(models.Model):
+class Subscriber(models.Model):
     # unique=True enforces DB-level deduplication; view also checks before saving
     email=models.EmailField(unique=True)
     def __str__(self):
@@ -238,11 +238,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-date']
-
-class Logger(models.Model):
-    user_name = models.CharField(max_length=25)
-    # max_length=300 to safely accommodate Argon2/bcrypt hashes (pbkdf2_sha256 ~77 chars, argon2 ~97+ chars)
-    password = models.CharField(max_length=300)
 
 class Publication(models.Model):
     title = models.CharField(max_length=199)

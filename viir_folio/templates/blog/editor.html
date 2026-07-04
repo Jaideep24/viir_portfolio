@@ -38,31 +38,32 @@
                 <div class="form-group">
                     <label for="contentEditor">Content</label>
                     <div class="editor-toolbar">
-                        <button type="button" class="toolbar-btn" onclick="formatText('bold')">
+                        <button type="button" class="toolbar-btn" data-command="bold">
                             <i class="fas fa-bold"></i>
                         </button>
-                        <button type="button" class="toolbar-btn" onclick="formatText('italic')">
+                        <button type="button" class="toolbar-btn" data-command="italic">
                             <i class="fas fa-italic"></i>
                         </button>
-                        <button type="button" class="toolbar-btn" onclick="formatText('underline')">
+                        <button type="button" class="toolbar-btn" data-command="underline">
                             <i class="fas fa-underline"></i>
                         </button>
                         <span class="toolbar-separator"></span>
-                        <button type="button" class="toolbar-btn" onclick="formatText('insertUnorderedList')">
+                        <button type="button" class="toolbar-btn" data-command="insertUnorderedList">
                             <i class="fas fa-list-ul"></i>
                         </button>
-                        <button type="button" class="toolbar-btn" onclick="formatText('insertOrderedList')">
+                        <button type="button" class="toolbar-btn" data-command="insertOrderedList">
                             <i class="fas fa-list-ol"></i>
                         </button>
                         <span class="toolbar-separator"></span>
-                        <button type="button" class="toolbar-btn" onclick="insertLink()">
+                        <button type="button" class="toolbar-btn" data-action="insertLink">
                             <i class="fas fa-link"></i>
                         </button>
-                        <button type="button" class="toolbar-btn" onclick="insertImage()">
+                        <button type="button" class="toolbar-btn" data-action="insertImage">
                             <i class="fas fa-image"></i>
                         </button>
                     </div>
                     <div class="content-editor" id="contentEditor" contenteditable="true"
+                        style="min-height: 400px;"
                         data-placeholder="Start writing your blog content here..."></div>
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>Publish</button>

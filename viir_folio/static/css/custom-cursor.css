@@ -9,7 +9,7 @@
     width: 26px;
     height: 26px;
     pointer-events: none;
-    z-index: 999999;
+    z-index: 9999999;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;

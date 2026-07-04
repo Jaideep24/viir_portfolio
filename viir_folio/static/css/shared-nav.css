@@ -64,7 +64,7 @@
 }
 
 .site-nav__link--active {
-    color: #fff !important;
+    color: #f8fafc !important;
     background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
     box-shadow:
         0 0 0 2px rgba(159, 120, 255, 0.35),
@@ -109,7 +109,7 @@
 }
 
 .site-nav--light .site-nav__link--active {
-    color: #fff !important;
+    color: #f8fafc !important;
 }
 
 body.light .site-nav {
@@ -130,14 +130,14 @@ body.light .site-nav__link:hover {
 }
 
 body.light .site-nav__link--active {
-    color: #fff !important;
+    color: #f8fafc !important;
 }
 
 @keyframes site-nav-icon-pulse {
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 0px #fff);
+        filter: drop-shadow(0 0 0px #f8fafc);
     }
 
     50% {

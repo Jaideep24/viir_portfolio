@@ -144,7 +144,7 @@ body.light .toggle-slider {
 }
 
 body.light .toggle-pill {
-    background: #ffffff;
+    background: #f8fafc;
     border: none;
     box-shadow: 0 3px 8px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
 }
@@ -156,7 +156,7 @@ body.light .toggle-pill {
 }
 
 .navbar-title {
-    color: white;
+    color: #f8fafc;
     font-size: 24px;
     font-family: 'Playfair Display', serif;
     font-weight: 500;
@@ -174,7 +174,7 @@ body.light .toggle-pill {
 body.light .navbar-title,
 body.light #headish,
 body.light #headno {
-    color: #111827 !important;
+    color: #1e293b !important;
 }
 
 .sidebar-toggle-btn {
@@ -302,7 +302,7 @@ body.light #headno {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
+    color: #f8fafc;
     text-decoration: none;
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
@@ -327,7 +327,7 @@ body.light #headno {
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link {
     display: inline-flex;
     gap: 16px;
-    color: #ffffff;
+    color: #f8fafc;
     font-size: 1.08rem;
     text-decoration: none !important;
     line-height: 1.45;
@@ -355,7 +355,7 @@ body.light #headno {
     height: 10px;
     flex: 0 0 10px;
     border-radius: 50%;
-    background: #ffffff;
+    background: #f8fafc;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
     transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -416,7 +416,7 @@ body.light .br-sidebar {
 }
 
 body.light .br-sidebar .menu-list .nav-link {
-    color: #111827;
+    color: #1e293b;
 }
 
 body.light .br-sidebar .menu-list .nav-link:hover {
@@ -428,11 +428,11 @@ body.light .br-sidebar .menu-list .nav-link.active {
 }
 
 body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link {
-    color: #111827;
+    color: #1e293b;
 }
 
 body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link::before {
-    background: #111827;
+    background: #1e293b;
     box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.12);
 }
 

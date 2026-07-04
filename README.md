@@ -224,7 +224,7 @@ This project is developed as a personal portfolio. Feel free to use it as inspir
 
 **Viir Phuria**
 - Email: virvphuria@gmail.com
-- Portfolio: viirportfolio.pythonanywhere.com
+- Portfolio: viir.tech
 
 ## Acknowledgments
 

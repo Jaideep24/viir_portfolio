@@ -52,7 +52,7 @@ body.light {
     padding: 8px 16px;
     border-radius: 999px;
     background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%);
-    color: #ffffff;
+    color: #f8fafc;
     text-decoration: none;
     font-family: 'Quicksand', 'Roboto', sans-serif;
     font-size: 14px;
@@ -81,7 +81,7 @@ body.light {
 }
 
 body.light .cert-home-btn {
-    color: #ffffff;
+    color: #f8fafc;
 }
 
 /* Grid Canvas Background */
@@ -260,7 +260,7 @@ body.light .cert-home-btn {
 
 /* ── Active tab — glowing gradient pill ─────────────────────── */
 .cert-nav__link--active {
-    color: #fff !important;
+    color: #f8fafc;
     background: linear-gradient(135deg, #7c5bff 0%, #b57bff 50%, #e07fff 100%);
     box-shadow:
         0 0 0 2.5px rgba(140, 111, 255, 0.35),
@@ -279,7 +279,7 @@ body.light .cert-home-btn {
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 0px #fff);
+        filter: drop-shadow(0 0 0px #f8fafc);
     }
 
     50% {
@@ -333,7 +333,7 @@ body.light .cert-nav__link:hover {
 }
 
 body.light .cert-nav__link--active {
-    color: #fff !important;
+    color: #f8fafc;
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
@@ -383,8 +383,8 @@ body.light .cert-nav__link--active {
 /* Sidebar is hidden by default with translateX(100%) in style.css */
 /* This class is toggled to show the sidebar */
 .br-sidebar-open {
-    -webkit-transform: translateX(0) !important;
-    transform: translateX(0) !important;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
 }
 
 
@@ -506,11 +506,11 @@ body.light .cert-nav__link--active {
     font-size: 2.5rem;
     font-weight: 700;
     display: inline;
-    color: var(--text-color, #ffffff);
+    color: var(--text-color, #f8fafc);
 }
 
 body.light .hero-title {
-    color: #000000;
+    color: #1e293b;
 }
 
 .hero-subtitle {
@@ -544,9 +544,9 @@ body.light .hero-title {
 .view-cv-btn:hover {
     background: linear-gradient(#8c6fff);
     border-color: transparent;
-    color: #fff;
+    color: #f8fafc;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+    box-shadow: var(--shadow-md);
 }
 
 .view-cv-btn .text {
@@ -637,7 +637,7 @@ body.light .hero-title {
     border-radius: 50%;
     background: #8c6fff;
     transform: translateX(-50%);
-    box-shadow: 0 0 0 4px rgba(140, 111, 255, 0.2);
+    box-shadow: var(--shadow-md);
     z-index: 1;
 }
 
@@ -664,9 +664,9 @@ body.light .hero-title {
 .timeline-component.timeline-content {
     margin: 0 0 0 290px; /* Push to the right of the line */
     padding: 24px;
-    background: #ffffff;
+    background: #f8fafc;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
     border: 1px solid #e5e7eb;
     text-align: left;
@@ -685,10 +685,10 @@ body.light .hero-title {
     padding: 6px 14px;
     border-radius: 20px;
     background: linear-gradient(135deg, #8c6fff, #a78bfa);
-    color: #fff;
+    color: #f8fafc;
     white-space: nowrap; /* Keep dates on one line */
     text-align: right;
-    box-shadow: 0 2px 8px rgba(140, 111, 255, 0.3);
+    box-shadow: var(--shadow-md);
 }
 
 /* Ongoing / Pursuing / Present badge */
@@ -699,16 +699,16 @@ body.light .hero-title {
     padding: 2px 10px;
     border-radius: 20px;
     background: linear-gradient(135deg, #059669, #10b981);
-    color: #fff;
+    color: #f8fafc;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+    box-shadow: var(--shadow-md);
     vertical-align: middle;
     margin-left: 2px;
     text-transform: uppercase;
 }
 
 .timeline-content:hover {
-    box-shadow: 0 8px 30px rgba(140, 111, 255, 0.15);
+    box-shadow: var(--shadow-md);
     transform: translateY(-4px);
     border-color: #8c6fff;
 }
@@ -747,7 +747,7 @@ body.light .hero-title {
 .timeline-bullets li {
     margin-bottom: 4px;
     font-size: 14px;
-    color: #555;
+    color: var(--text-secondary);
     line-height: 1.4;
 }
 
@@ -778,11 +778,11 @@ body.dark .experiense h4 {
 body.dark .timeline-content {
     background: #1e293b;
     border-color: #334155;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-md);
 }
 
 body.dark .timeline-content:hover {
-    box-shadow: 0 8px 30px rgba(140, 111, 255, 0.25);
+    box-shadow: var(--shadow-md);
     border-color: #8c6fff;
 }
 
@@ -907,17 +907,17 @@ body.light .timeline-tech-badge {
     
     /* Force bullet points to stay compact on tablets and phones */
     .timeline-bullets li {
-        margin-bottom: 4px !important;
-        line-height: 1.4 !important;
-        padding-bottom: 0 !important;
-        padding-top: 0 !important;
+        margin-bottom: 4px;
+        line-height: 1.4;
+        padding-bottom: 0;
+        padding-top: 0;
     }
 }
 
 /* Expand the container slightly on large screens to give timeline cards more space */
 @media (min-width: 1024px) {
     .br-experience .container {
-        max-width: 100% !important;
+        max-width: 100%;
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -925,13 +925,13 @@ body.light .timeline-tech-badge {
 
 @media (min-width: 1100px) {
     .br-experience .container {
-        max-width: 1080px !important;
+        max-width: 1080px;
     }
 }
 
 @media (min-width: 1200px) {
     .br-experience .container {
-        max-width: 1240px !important;
+        max-width: 1240px;
     }
 }
 
@@ -956,7 +956,7 @@ body.light .timeline-tech-badge {
     display: block;
     width: 100%;
     padding: 3px; /* Creates the border thickness */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-md);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 1;
 }
@@ -974,7 +974,7 @@ body.light .timeline-tech-badge {
     z-index: -1;
 }
 
-/* Black border for light theme on normal state */
+/* #0f172a border for light theme on normal state */
 body.light .br-about .br-card::before {
     background: rgba(0, 0, 0, 0.65);
 }
@@ -994,7 +994,7 @@ body.light .br-about .br-card::before {
 }
 
 .br-about .about-img {
-    border-radius: 17px !important; /* Matches card inner radius perfectly */
+    border-radius: 17px; /* Matches card inner radius perfectly */
     display: block;
     width: 100%;
     height: auto;
@@ -1027,7 +1027,7 @@ body.light .br-about .br-card::before {
 
 /* Ensure glare container (if any is injected) is hidden or matches border radius */
 .br-about .js-tilt-glare {
-    display: none !important;
+    display: none;
 }
 
 .about-link {
@@ -1061,9 +1061,9 @@ body.light .br-about .br-card::before {
 .download-cv-btn:hover {
     background: linear-gradient(#8c6fff);
     border-color: transparent;
-    color: #fff;
+    color: #f8fafc;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+    box-shadow: var(--shadow-md);
 }
 
 .download-cv-btn .text {
@@ -1093,9 +1093,9 @@ body.light .br-about .br-card::before {
 .capsule-btn:hover {
     background: linear-gradient(#8c6fff);
     border-color: transparent;
-    color: #fff;
+    color: #f8fafc;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(140, 111, 255, 0.35);
+    box-shadow: var(--shadow-md);
 }
 
 .capsule-btn .text {
@@ -1107,14 +1107,14 @@ body.light .br-about .br-card::before {
 .br-detail ul li .view-project-btn {
     margin-top: 4px;
     list-style: none;
-    color: #d0d0d0 !important;
+    color: #d0d0d0;
     font-size: 10px;
     padding: 5px 12px;
     letter-spacing: 0.3px;
 }
 
 .br-detail ul li .view-project-btn:hover {
-    color: #fff !important;
+    color: #f8fafc;
 }
 
 
@@ -1132,17 +1132,17 @@ body.light .br-about .br-card::before {
     --text: #e0e0e0;
     --card-bg: #1e1e2f;
     --title: #a48fff;
-    --border: #333;
+    --border: var(--text-primary);
     --link: #7aa9ff;
     --badge: #9f78ff;
     --button-bg: transparent;
     --button-border: #aaa;
-    --button-text: #fff;
+    --button-text: #f8fafc;
     --hover-bg: #2b2b3c;
 }
 
 body.light {
-    --text: #222;
+    --text: var(--text-primary);
     --card-bg: #f8fafc;
     --border: #ccc;
     --link: #0047ab;
@@ -1195,7 +1195,7 @@ body.light {
     background: var(--card-bg);
     border-radius: 14px;
     padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
     position: relative;
     transition: background 0.3s ease, transform 0.2s ease;
 }
@@ -1209,12 +1209,12 @@ body.light {
     top: -14px;
     left: 20px;
     background: var(--badge);
-    color: #fff;
+    color: #f8fafc;
     padding: 6px 14px;
     font-size: 0.75rem;
     border-radius: 999px;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 .pub-title {
@@ -1264,14 +1264,14 @@ body.light {
 
 .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
 }
 
 .blog-card {
     background: var(--card-bg);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
@@ -1288,7 +1288,7 @@ body.light {
     top: 1rem;
     left: 1rem;
     background: #4f46e5;
-    color: white;
+    color: #f8fafc;
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.75rem;
@@ -1396,7 +1396,7 @@ body.light {
    -------------------------------------------------------------------------- */
 
 .carousel-btn-icon {
-    background-color: #000000;
+    background-color: #0f172a;
     opacity: 0.8;
     border-radius: 50%;
 }
@@ -1406,6 +1406,16 @@ body.light {
     max-height: 80vh;
     height: auto;
     object-fit: contain;
+}
+
+.carousel-item h3 {
+    color: #1e293b;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+body.dark .carousel-item h3 {
+    color: #f8fafc;
 }
 
 .certificate-carousel-controls {
@@ -1422,7 +1432,7 @@ body.light {
     width: auto;
     height: auto;
     padding: 8px 6px;
-    border: none !important;
+    border: none;
     border-radius: 0;
     background: transparent;
     color: #8c6fff;
@@ -1430,7 +1440,6 @@ body.light {
     align-items: center;
     justify-content: center;
     box-shadow: none;
-    outline: none;
     transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
     pointer-events: auto;
     position: relative;
@@ -1462,7 +1471,6 @@ body.light {
     transform: translateY(-2px) scale(1.03);
     color: #6d28d9;
     opacity: 1;
-    outline: none;
 }
 
 .certificate-carousel-control-prev:hover,
@@ -1555,7 +1563,7 @@ body.light {
 @media screen and (max-width: 576px) {
     .certificate-carousel-control {
         padding: 0;
-        border: 0 !important;
+        border: 0;
         appearance: none;
         -webkit-appearance: none;
     }
@@ -1609,7 +1617,7 @@ body.light {
 
 @media screen and (max-width: 2562px) and (min-width: 1500px) {
     #date-container {
-        width: 10vw !important;
+        width: 10vw;
     }
 }
 
@@ -1698,7 +1706,7 @@ body.light {
     }
 
     iframe {
-        height: 100vh !important;
+        height: 100vh;
     }
 
     .br-experience .timeline li {
@@ -1755,12 +1763,12 @@ body.light {
     }
 
     #headish {
-        font-size: 18px !important;
+        font-size: 18px;
     }
 
     #headno {
-        font-size: 15px !important;
-        left: 150px !important;
+        font-size: 15px;
+        left: 150px;
     }
 }
 
@@ -1790,12 +1798,12 @@ button,
 .circle-icon,
 .br-nav,
 .br-sidebar-toggle {
-    cursor: none !important;
+    cursor: none;
 }
 
 input,
 textarea {
-    cursor: text !important;
+    cursor: text;
 }
 
 .custom-cursor {
@@ -1804,7 +1812,7 @@ textarea {
     left: 0;
     width: 32px;
     height: 32px;
-    background-color: white;
+    background-color: #f8fafc;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -1817,33 +1825,33 @@ textarea {
 .custom-cursor.hover {
     width: 75px;
     height: 75px;
-    background-color: white;
-    /* Maintain solid white so the difference blend works perfectly */
+    background-color: #f8fafc;
+    /* Maintain solid #f8fafc so the difference blend works perfectly */
 }
 
 /* ==========================================================================
    PREMIUM FOOTER STYLING
    ========================================================================== */
 footer {
-    background: #f8fafc !important;
-    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    background: #f8fafc;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
     transition: background 0.3s ease, border-color 0.3s ease;
-    padding: 30px 0 !important;
+    padding: 30px 0;
 }
 
 body.dark footer {
-    background: #0c0e22 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: #0c0e22;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 footer .br-footer-detail {
-    height: auto !important;
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-    color: #475569 !important;
+    color: #475569;
 }
 
 html {
@@ -1855,7 +1863,7 @@ html, body {
     /* overflow-x: hidden removed for AOS compatibility */
 }
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
     font-size: 14px;
     font-weight: 400;
     line-height: 1.6;
@@ -1863,7 +1871,7 @@ body {
 }
 
 body.dark footer .br-footer-detail {
-    color: rgba(255, 255, 255, 0.75) !important;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 /* Styled Name */
@@ -1873,7 +1881,7 @@ footer .br-footer-detail .footer-name {
 }
 
 body.dark footer .br-footer-detail .footer-name {
-    color: #ffffff;
+    color: #f8fafc;
 }
 
 /* Styled Separator */
@@ -1891,7 +1899,7 @@ body.dark footer .br-footer-detail .footer-separator {
 
 /* Styled Link */
 footer .br-footer-detail .footer-me-link {
-    color: #4f46e5 !important;
+    color: #4f46e5;
     font-weight: 600;
     text-decoration: none;
     position: relative;
@@ -1901,7 +1909,7 @@ footer .br-footer-detail .footer-me-link {
 }
 
 body.dark footer .br-footer-detail .footer-me-link {
-    color: #a48fff !important;
+    color: #a48fff;
     border-bottom-color: rgba(164, 143, 255, 0.25);
 }
 
@@ -1924,66 +1932,66 @@ footer .br-footer-detail .footer-me-link:hover::after {
 }
 
 footer .br-footer-detail .footer-me-link:hover {
-    color: #6366f1 !important;
+    color: #6366f1;
     border-bottom-color: transparent;
     text-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
 }
 
 body.dark footer .br-footer-detail .footer-me-link:hover {
-    color: #c0b3ff !important;
+    color: #c0b3ff;
     border-bottom-color: transparent;
     text-shadow: 0 0 12px rgba(164, 143, 255, 0.35);
 }
 
 /* ==========================================================================
-   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright White)
+   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright #f8fafc)
    ========================================================================== */
 body.light {
-    background-color: #eef1f6 !important;
-    --card-bg: #f5f7fa !important;
-    --button-bg: #f5f7fa !important;
-    --hover-bg: #e2e8f0 !important;
+    background-color: #eef1f6;
+    --card-bg: #f5f7fa;
+    --button-bg: #f5f7fa;
+    --hover-bg: #e2e8f0;
 }
 
 body.light footer {
-    background: #eef1f6 !important;
-    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    background: #eef1f6;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 body.light .navbar-fixed {
-    background-color: #eef1f6 !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
+    background-color: #eef1f6;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.22);
 }
 
 body.light .br-about .br-box {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 body.light .service-box .main-box .box-front,
 body.light .service-box .main-box .box-back {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 body.light .br-project-box {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 body.light .pub-card {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 body.light .blog-card {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 body.light .timeline-content {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
 }
 
 /* --------------------------------------------------------------------------
@@ -1997,7 +2005,7 @@ body.light .timeline-content {
     border-radius: 16px;
     padding: 25px;
     height: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -2042,15 +2050,15 @@ body.light .timeline-content {
 .skill-chip:hover {
     background: rgba(140, 111, 255, 0.22);
     border-color: #8c6fff;
-    color: #ffffff;
+    color: #f8fafc;
     transform: scale(1.03);
 }
 
 /* Light Mode support */
 body.light .skill-category-card {
-    background: #f5f7fa !important;
-    border-color: rgba(148, 163, 184, 0.2) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background: #f5f7fa;
+    border-color: rgba(148, 163, 184, 0.2);
+    box-shadow: var(--shadow-md);
 }
 
 body.light .skill-category-title {
@@ -2074,6 +2082,12 @@ body.light .skill-chip:hover {
 }
 /* Accessibility Focus States */
 .capsule-btn:focus-visible, .contact-link:focus-visible, a:focus-visible, button:focus-visible {
-    outline: 3px solid #ff6f6f !important;
+    outline: 3px solid #ff6f6f;
     outline-offset: 4px;
+}
+
+/* Global Accessibility Focus Ring */
+:focus-visible {
+    outline: 2px solid #a48fff;
+    outline-offset: 2px;
 }

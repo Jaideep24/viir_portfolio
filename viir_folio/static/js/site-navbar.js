@@ -55,6 +55,10 @@
         if (typeof window.applyDarkModeStyles === 'function') {
             window.applyDarkModeStyles(newMode);
         }
+
+        if (typeof window.updateGridTheme === 'function') {
+            window.updateGridTheme(newMode);
+        }
     };
 
     document.addEventListener('click', event => {
@@ -80,7 +84,7 @@
     });
 
     // Handle Active Link State dynamically
-    document.addEventListener('DOMContentLoaded', () => {
+    function initNavbarActiveState() {
         const navLinks = document.querySelectorAll('.br-sidebar .menu-list .nav-link');
         
         navLinks.forEach(link => {
@@ -95,13 +99,29 @@
         // Pre-set active state if URL has a hash on load
         const currentHash = window.location.hash;
         if (currentHash) {
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentHash || href === '/' + currentHash) {
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    link.classList.add('active');
+            navLinks.forEach(nav => {
+                if (nav.getAttribute('href').includes(currentHash)) {
+                    navLinks.forEach(n => n.classList.remove('active'));
+                    nav.classList.add('active');
                 }
             });
         }
-    });
+    }
+
+    function setupNavbarEvents() {
+        initNavbarActiveState();
+        
+        // CSP Compliant Event Listeners for Navbar
+        const menuBtns = document.querySelectorAll(".menu-trigger");
+        menuBtns.forEach(btn => btn.addEventListener("click", window.menu));
+        
+        const closeBtns = document.querySelectorAll(".close-sidebar-trigger");
+        closeBtns.forEach(btn => btn.addEventListener("click", window.closeSidebar));
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener('DOMContentLoaded', setupNavbarEvents);
+    } else {
+        setupNavbarEvents();
+    }
 })();

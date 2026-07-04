@@ -38,7 +38,7 @@
     border: 1.5px solid var(--capsule-border);
     background: transparent !important;
     background-image: none !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
     text-decoration: none !important;
     font-family: "Quicksand", "Poppins", sans-serif;
     font-weight: 600;
@@ -48,7 +48,7 @@
     transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Hover stays purple with white text in both themes */
+/* Hover stays purple with #f8fafc text in both themes */
 :is(
     button,
     .btn,
@@ -69,7 +69,7 @@
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):not(.btn-delete):hover {
-    color: #ffffff !important;
+    color: #f8fafc !important;
     background: var(--capsule-bg) !important;
     background-image: var(--capsule-bg) !important;
     filter: brightness(1.06) saturate(1.05);
@@ -101,8 +101,8 @@
     background: transparent !important;
     background-image: none !important;
     border-color: rgba(140, 111, 255, 0.62) !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 0 1px rgba(140, 111, 255, 0.34) !important;
+    color: #f8fafc !important;
+    box-shadow: var(--shadow-md);
     filter: none !important;
     transform: translateY(0) scale(0.98);
 }
@@ -127,7 +127,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):active {
-    color: #111827 !important;
+    color: #1e293b !important;
 }
 
 body.light :is(
@@ -150,7 +150,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):not(.btn-delete) {
-    color: #111827 !important;
+    color: #1e293b !important;
 }
 
 /* Some frameworks apply .active class instead of :active pseudo-state */
@@ -177,7 +177,7 @@ body.light :is(
     background: transparent !important;
     background-image: none !important;
     border-color: rgba(140, 111, 255, 0.62) !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
     filter: none !important;
 }
 
@@ -201,7 +201,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):not(.btn-delete):hover {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 body.light :is(
@@ -224,7 +224,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active {
-    color: #111827 !important;
+    color: #1e293b !important;
 }
 
 /* Neutralize bootstrap variant tokens so one system is applied */
@@ -364,7 +364,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active .text {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 /* Accessible focus: visible ring and subtle lift matching hover */
@@ -390,7 +390,7 @@ body.light :is(
 ):focus {
     outline: none;
     transform: translateY(-2px) scale(1.01);
-    box-shadow: var(--capsule-hover-shadow), 0 0 0 4px rgba(140,111,255,0.12);
+    box-shadow: var(--shadow-md);
 }
 
 :is(
@@ -414,12 +414,12 @@ body.light :is(
     input[type="reset"]
 ):focus-visible {
     outline: none;
-    box-shadow: var(--capsule-hover-shadow), 0 0 0 6px rgba(140,111,255,0.18) !important;
+    box-shadow: var(--shadow-md);
 }
 
 /* Ensure keyboard users see a clear focus ring for anchor-links that look like buttons */
 a[class*="btn"]:focus-visible {
-    box-shadow: 0 0 0 6px rgba(124,58,237,0.18) !important;
+    box-shadow: var(--shadow-md);
 }
 
 body.light :is(
@@ -502,7 +502,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active .text {
-    color: #111827 !important;
+    color: #1e293b !important;
 }
 
 /* Force Delete button to be red at all points, states, and themes */
@@ -515,8 +515,8 @@ body.dark .btn-delete.active {
     background: #ef4444 !important;
     background-image: none !important;
     border-color: #ef4444 !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3) !important;
+    color: #f8fafc !important;
+    box-shadow: var(--shadow-md);
 }
 
 .btn-delete:hover,
@@ -525,8 +525,8 @@ body.dark .btn-delete:hover {
     background: #dc2626 !important;
     background-image: none !important;
     border-color: #dc2626 !important;
-    color: #ffffff !important;
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45) !important;
+    color: #f8fafc !important;
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px) !important;
 }
 
@@ -536,6 +536,6 @@ body.dark .btn-delete:active {
     background: #b91c1c !important;
     background-image: none !important;
     border-color: #b91c1c !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
     transform: translateY(0) !important;
 }

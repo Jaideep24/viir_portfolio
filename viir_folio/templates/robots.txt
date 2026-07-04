@@ -33,4 +33,4 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
-Sitemap: https://viirportfolio.pythonanywhere.com/sitemap.xml
+Sitemap: https://viir.tech/sitemap.xml

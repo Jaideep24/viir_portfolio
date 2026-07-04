@@ -2,7 +2,7 @@
 <nav class="navbar-fixed">
     {% if not hide_sidebar %}
     <header>
-        <button type="button" class="br-sidebar-toggle sidebar-toggle-btn" onclick="menu(event)">
+        <button type="button" class="br-sidebar-toggle sidebar-toggle-btn menu-trigger">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="svg_img" alt="menu">
                 <path d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z" stroke="#8c6fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M6.46001 8.30989C7.81863 8.30989 8.92 7.20851 8.92 5.84989C8.92 4.49127 7.81863 3.38989 6.46001 3.38989C5.10139 3.38989 4 4.49127 4 5.84989C4 7.20851 5.10139 8.30989 6.46001 8.30989Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -38,22 +38,22 @@
         <div class="menu-list">
             <ul class="navbar-nav mb-2 ml-auto blog-sidebar-menu" id="top-menu">
                 {% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' or request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' or request.resolver_match.url_name == 'featured' %}
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}" href="{% url 'blogspace' %}" onclick="closeSidebar()">BlogSpace</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}" href="{% url 'login' %}" onclick="closeSidebar()">Write</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#blog" onclick="closeSidebar()">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}" href="{% url 'blogspace' %}">BlogSpace</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}" href="{% url 'login' %}">Write</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#blog">Home</a></li>
                 {% elif request.resolver_match.url_name == 'certificate' or certi %}
-                <li class="nav-item"><a class="nav-link br-nav active" href="/#certificate" onclick="closeSidebar()">Certificates</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#certificate" onclick="closeSidebar()">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" href="/#certificate">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#certificate">Home</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'index' %} active{% endif %}" href="/#home" onclick="closeSidebar()">Home</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#about" onclick="closeSidebar()">About</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#experience" onclick="closeSidebar()">Timeline</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#skills" onclick="closeSidebar()">Skills</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#project" onclick="closeSidebar()">Project</a></li>
-                <li class="nav-item"><a class="nav-link br-nav{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/#certificate" onclick="closeSidebar()">Certificates</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#publications" onclick="closeSidebar()">Publications</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#blog" onclick="closeSidebar()">Blog</a></li>
-                <li class="nav-item"><a class="nav-link br-nav" href="/#contact" onclick="closeSidebar()">Contacts</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'index' %} active{% endif %}" href="/#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#about">About</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#experience">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#project">Project</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/#certificate">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#publications">Publications</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#blog">Blog</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#contact">Contacts</a></li>
                 {% endif %}
             </ul>
         </div>

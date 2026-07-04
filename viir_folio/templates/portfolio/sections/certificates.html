@@ -1,0 +1,47 @@
+<!-- ============================================================ -->
+    <!-- CERTIFICATES SECTION (Carousel) -->
+    <!-- ============================================================ -->
+    <section id="certificate" class="br-experience padding-tb-80">
+        <div class="container">
+            <div class="row">
+                <div class="section-title reveal-up">
+                    <h2>My <span>Certificates</span></h2>
+                    <span class="ligh-title">Certificates</span>
+                </div>
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for object in maincertificate %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="text-center">
+                                <h3>{{ object.title }}</h3>
+                            </div>
+                            <div class="text-center"><img src="{{ object.image.url }}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="certificate-carousel-controls" aria-label="Certificate navigation">
+                        <button class="certificate-carousel-control certificate-carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="prev" aria-label="Previous certificate">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M15 5.5L8.75 12 15 18.5" />
+                            </svg>
+                        </button>
+                        <button class="certificate-carousel-control certificate-carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="next" aria-label="Next certificate">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M9 5.5L15.25 12 9 18.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="certificate-view-more-wrap">
+                <div class="text-center">
+                    <a href="{% url 'certificate' %}" class="capsule-btn">
+                        <span class="text">View More</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Certificates Section End -->

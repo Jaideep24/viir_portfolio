@@ -124,7 +124,7 @@ const darkModeColors = ['#00f7ff', '#a020f0', '#39ff14'];
 const lightModeColors = ['#4f46e5', '#1e293b', '#64748b'];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     // Remove the default class so body.dark / body.light CSS rules fully apply
     document.body.classList.remove("body-default");
     document.body.classList.toggle("light", !isDarkMode);
@@ -162,46 +162,9 @@ function applyDarkModeStyles(isDarkMode) {
         window.updateGridTheme(isDarkMode);
     }
 
-    const styles = [
-        { selector: "#myself", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: "h3", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: "p", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".br-learn-more-right", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".br-learn-more-right", property: "borderColor", dark: "#EEEEEE", light: "#000000" },
-        { selector: "h2", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".ligh-title", property: "color", dark: "#202337", light: "#EEEEEE" },
-        { selector: ".ligh-title", property: "opacity", dark: "0.12", light: "0.05" },
-        { selector: "li", property: "color", dark: "#a5a3b3", light: "#000000" },
-        { selector: ".title", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".br-box", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".br-box", property: "borderColor", dark: "#1b1d30", light: "#ccc" },
-        { selector: "h4", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".track", property: "stroke", dark: "#333754", light: "#ccc" },
-        { selector: ".margin-t-80", property: "backgroundColor", dark: "#202337", light: "#eef1f6" },
-        { selector: ".box-front", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".box-front", property: "borderColor", dark: "#353250", light: "#ccc" },
-        { selector: ".br-project-box", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".br-project-box", property: "borderColor", dark: "#353250", light: "#ccc" },
-        { selector: ".form-control", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".form-control", property: "borderColor", dark: "#353250", light: "#5f5757ff" },
-        { selector: ".form-control", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".card", property: "backgroundColor", dark: "#202337", light: "#f5f7fa" },
-        { selector: ".my-3", property: "color", dark: "#FFFFFF", light: "#000000" },
-        { selector: ".card-title", property: "color", dark: "#FFFFFF", light: "#000000" },
-        { selector: "#date", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".view-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".view-cv-btn", property: "borderColor", dark: "rgba(255, 255, 255, 0.4)", light: "rgba(0, 0, 0, 0.4)" },
-        { selector: ".download-cv-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".download-cv-btn", property: "borderColor", dark: "rgba(255, 255, 255, 1)", light: "rgba(0, 0, 0, 0.4)" },
-        { selector: ".capsule-btn", property: "color", dark: "#EEEEEE", light: "#000000" },
-        { selector: ".capsule-btn", property: "borderColor", dark: "rgba(255, 255, 255, 0.4)", light: "rgba(0, 0, 0, 0.4)" }
-    ];
 
-    styles.forEach(({ selector, property, dark, light }) => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.style[property] = isDarkMode ? dark : light;
-        });
-    });
+    // Legacy inline styles have been removed. 
+    // Theme is now fully controlled by CSS using body.dark and body.light classes.
 }
 
 
@@ -255,20 +218,28 @@ function design(event) {
    8. SIDEBAR MENU TOGGLE
    -------------------------------------------------------------------------- */
 
-function menu() {
+function menu(event) {
+    if (event) event.preventDefault();
     const sidebar = document.querySelector(".br-sidebar");
     const overlay = document.querySelector(".br-sidebar-overlay");
     const toggleBtn = document.querySelector(".sidebar-toggle-btn");
+    if (!sidebar) return;
     const isOpen = sidebar.classList.contains("br-sidebar-open");
 
     if (isOpen) {
         sidebar.classList.remove("br-sidebar-open", "br-open");
-        if (overlay) overlay.style.display = "none";
-        if (toggleBtn) toggleBtn.classList.remove("btn-open");
+        overlay.classList.remove("active");
+        if (toggleBtn) {
+            toggleBtn.classList.remove("open");
+            toggleBtn.setAttribute("aria-expanded", "false");
+        }
     } else {
         sidebar.classList.add("br-sidebar-open", "br-open");
-        if (overlay) overlay.style.display = "block";
-        if (toggleBtn) toggleBtn.classList.add("btn-open");
+        overlay.classList.add("active");
+        if (toggleBtn) {
+            toggleBtn.classList.add("open");
+            toggleBtn.setAttribute("aria-expanded", "true");
+        }
     }
 }
 
@@ -277,10 +248,24 @@ function closeSidebar() {
     const overlay = document.querySelector(".br-sidebar-overlay");
     const toggleBtn = document.querySelector(".sidebar-toggle-btn");
 
-    sidebar.classList.remove("br-sidebar-open", "br-open");
-    if (overlay) overlay.style.display = "none";
-    if (toggleBtn) toggleBtn.classList.remove("btn-open");
+    if (sidebar) sidebar.classList.remove("br-sidebar-open", "br-open");
+    if (overlay) overlay.classList.remove("active");
+    if (toggleBtn) {
+        toggleBtn.classList.remove("open");
+        toggleBtn.setAttribute("aria-expanded", "false");
+    }
 }
+
+// Bind event listeners for sidebar toggles (CSP compliant)
+document.addEventListener("DOMContentLoaded", function() {
+    const menuBtn = document.querySelector(".menu-trigger");
+    if (menuBtn) {
+        menuBtn.addEventListener("click", menu);
+    }
+    
+    const closeBtns = document.querySelectorAll(".close-sidebar-trigger");
+    closeBtns.forEach(btn => btn.addEventListener("click", closeSidebar));
+});
 
 document.addEventListener("click", function (event) {
     const targetDiv = document.querySelector(".br-sidebar");

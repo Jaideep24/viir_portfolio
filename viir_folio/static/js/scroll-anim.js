@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function initScrollAnim() {
     const observerOptions = {
         root: null,
         rootMargin: "0px",
@@ -30,4 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
             child.classList.add('reveal-stagger-child');
         });
     });
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initScrollAnim);
+} else {
+    initScrollAnim();
+}

@@ -1,0 +1,39 @@
+<!-- ============================================================ -->
+    <!-- BLOG SECTION -->
+    <!-- ============================================================ -->
+    <section id="blog" class="br-portfolio padding-tb-80">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>My <span>Blogs</span></h2>
+                <span class="ligh-title">Blogs</span>
+            </div>
+            <!-- Dynamic grid of latest 3 blogs -->
+            <div class="blogs-grid reveal-stagger" id="blogsGrid">
+                {% for blog in article|slice:":3" %}
+                <a href="{% url 'detail_blog' blog.slug %}" class="blog-card-link" itemscope itemtype="http://schema.org/BlogPosting">
+                    <meta itemprop="author" content="Viir Phuria">
+                    <meta itemprop="datePublished" content="{{ blog.date }}">
+                    <div class="blog-card reveal-stagger-child blog-card-visible">
+                        <div class="blog-card-image" data-bg="{{ blog.image.url }}" itemprop="image"></div>
+                        <div class="blog-card-content">
+                            <h3 itemprop="headline">{{ blog.title }}</h3>
+                            <p class="blog-excerpt" itemprop="description">{{ blog.content|striptags|truncatechars:120 }}</p>
+                            <div class="blog-meta">
+                                <div class="author-info">
+                                    <span style="color: #ff6f6f;"><i class="fa-regular fa-clock" aria-hidden="true"></i> ~4 min read</span>
+                                </div>
+                                <span>{{ blog.date }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a href="{% url 'blogspace' %}" class="capsule-btn">
+                    <span class="text">View More</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->

@@ -1,0 +1,119 @@
+<!-- ============================================================ -->
+    <!-- SKILLS SECTION -->
+    <!-- ============================================================ -->
+    <section id="skills" class="br-portfolio padding-tb-80">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>My <span>Skills</span></h2>
+                <span class="ligh-title">Skills</span>
+            </div>
+            <div class="row">
+                {% if languages or frameworks or tools_dbs %}
+                <!-- Render Categorized Skills Dynamically from DB -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Languages</h3>
+                        <div class="skill-chips-wrap">
+                            {% for s in languages %}
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
+                        <div class="skill-chips-wrap">
+                            {% for s in frameworks %}
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools & Cloud</h3>
+                        <div class="skill-chips-wrap">
+                            {% for s in tools_dbs %}
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-shield-halved"></i> Security Tools</h3>
+                        <div class="skill-chips-wrap">
+                            {% for s in security_tools %}
+                            <span class="skill-chip">{{ s.language }}</span>
+                            {% empty %}
+                            <span class="skill-chip">Burp Suite</span>
+                            <span class="skill-chip">Wireshark</span>
+                            <span class="skill-chip">Nmap</span>
+                            <span class="skill-chip">Kali Linux</span>
+                            <span class="skill-chip">OWASP ZAP</span>
+                            <span class="skill-chip">Metasploit</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <!-- Recruiter-Vetted Hardcoded Fallbacks (Safe Mode) -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-code"></i> Languages</h3>
+                        <div class="skill-chips-wrap">
+                            <span class="skill-chip">Python</span>
+                            <span class="skill-chip">Go</span>
+                            <span class="skill-chip">JavaScript (ES6+)</span>
+                            <span class="skill-chip">Dart</span>
+                            <span class="skill-chip">HTML5 / CSS3</span>
+                            <span class="skill-chip">SQL</span>
+                            <span class="skill-chip">C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
+                        <div class="skill-chips-wrap">
+                            <span class="skill-chip">Django</span>
+                            <span class="skill-chip">Flutter</span>
+                            <span class="skill-chip">React</span>
+                            <span class="skill-chip">Bootstrap</span>
+                            <span class="skill-chip">Tailwind CSS</span>
+                            <span class="skill-chip">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-toolbox"></i> Tools & Cloud</h3>
+                        <div class="skill-chips-wrap">
+                            <span class="skill-chip">Git / GitHub</span>
+                            <span class="skill-chip">PostgreSQL / MySQL</span>
+                            <span class="skill-chip">Firebase</span>
+                            <span class="skill-chip">Linux / Bash</span>
+                            <span class="skill-chip">Docker</span>
+                            <span class="skill-chip">Gunicorn / Nginx</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="skill-category-card">
+                        <h3 class="skill-category-title"><i class="fa-solid fa-shield-halved"></i> Security Tools</h3>
+                        <div class="skill-chips-wrap">
+                            <span class="skill-chip">Burp Suite</span>
+                            <span class="skill-chip">Wireshark</span>
+                            <span class="skill-chip">Nmap</span>
+                            <span class="skill-chip">Kali Linux</span>
+                            <span class="skill-chip">OWASP ZAP</span>
+                            <span class="skill-chip">Metasploit</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Skills Section End -->

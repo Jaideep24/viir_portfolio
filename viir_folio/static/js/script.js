@@ -1,36 +1,31 @@
-(function ($) {
+document.addEventListener('DOMContentLoaded', function() {
     "use strict";
 
     /*--------------------- Site Loader   --------------------*/
-    $(window).on("load", function () {
-        $(".br-loader").fadeOut("slow");
+    window.addEventListener('load', function() {
+        const loader = document.querySelector('.br-loader');
+        if (loader) {
+            loader.style.transition = 'opacity 0.5s ease';
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
     });
 
     /*--------------------- Skill progress (in about section) --------------------*/
-    var forEach = function (array, callback, scope) {
-        for (var i = 0; i < array.length; i++) {
-            callback.call(scope, i, array[i]);
-        }
-    };
-
-    var a = 0;
-    var b = 0;
-    var oTop = 0;
-    var progress = $('#about');
-    $(window).scroll(function () {
-        if (progress.length) {
-            var oTop = progress.offset().top - window.innerHeight;
-            if (b == 0 && $(window).scrollTop() > oTop) {
-
-                var max = -219.99078369140625;
-                forEach(document.querySelectorAll('.progress'), function (index, value) {
-                    var percent = value.getAttribute('data-progress');
-                    var fill = value.querySelector('.fill');
-                    var valueEl = value.querySelector('.value');
+    let b = 0;
+    const progress = document.getElementById('about');
+    window.addEventListener('scroll', function() {
+        if (progress) {
+            const oTop = progress.getBoundingClientRect().top + window.scrollY - window.innerHeight;
+            if (b === 0 && window.scrollY > oTop) {
+                const max = -219.99078369140625;
+                document.querySelectorAll('.progress').forEach(function(value) {
+                    const percent = value.getAttribute('data-progress');
+                    const fill = value.querySelector('.fill');
+                    const valueEl = value.querySelector('.value');
                     if (fill) fill.setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
                     if (valueEl) valueEl.innerHTML = percent + '%';
                 });
-
                 b = 1;
             }
         }
@@ -38,255 +33,153 @@
 
     /*----------------------------- Sidebar js | Shared pages only -----------------------------------*/
     if (!window.__indexSidebar) {
-        $(".br-sidebar-toggle").on("click", function () {
-            const $sidebar = $(".br-sidebar");
-            const $overlay = $(".br-sidebar-overlay");
-            const isOpen = $sidebar.hasClass("br-open");
+        const toggleBtn = document.querySelector('.br-sidebar-toggle');
+        const sidebar = document.querySelector('.br-sidebar');
+        const overlay = document.querySelector('.br-sidebar-overlay');
+        
+        if (toggleBtn && sidebar && overlay) {
+            toggleBtn.addEventListener('click', function() {
+                const isOpen = sidebar.classList.contains('br-open');
+                if (isOpen) {
+                    sidebar.classList.remove('br-open', 'br-sidebar-open');
+                    overlay.style.display = 'none';
+                } else {
+                    sidebar.classList.add('br-open', 'br-sidebar-open');
+                    overlay.style.display = 'block';
+                }
+            });
 
-            if (isOpen) {
-                $sidebar.removeClass("br-open br-sidebar-open");
-                $overlay.stop(true, true).fadeOut();
-            } else {
-                $sidebar.addClass("br-open br-sidebar-open");
-                $overlay.stop(true, true).fadeIn();
-            }
-        });
+            document.querySelectorAll('.close-sidebar, .nav-link.br-nav').forEach(el => {
+                el.addEventListener('click', function() {
+                    sidebar.classList.remove('br-open', 'br-sidebar-open');
+                    overlay.style.display = 'none';
+                });
+            });
 
-        $(".close-sidebar, .nav-link.br-nav").on("click", function () {
-            $(".br-sidebar").removeClass("br-open br-sidebar-open");
-            $(".br-sidebar-overlay").stop(true, true).fadeOut();
-        });
-
-        $(".br-sidebar-overlay").on("click", function () {
-            $(".br-sidebar").removeClass("br-open br-sidebar-open");
-            $(".br-sidebar-overlay").stop(true, true).fadeOut();
-        });
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('br-open', 'br-sidebar-open');
+                overlay.style.display = 'none';
+            });
+        }
     }
 
     /*-------------------- Potfolio for Mixit up --------------------*/
-    var portfolioContent = $('.portfolio-content');
-    portfolioContent.mixItUp();
+    const portfolioContent = document.querySelector('.portfolio-content');
+    if (portfolioContent && typeof mixitup !== 'undefined') {
+        mixitup(portfolioContent);
+    }
 
     /*--------------------- Replace all SVG images with inline SVG -------------------------------- */
-    $(document).ready(function () {
-        $('img.svg_img[src$=".svg"]').each(function () {
-            var $img = $(this);
-            var imgURL = $img.attr('src');
-            var attributes = $img.prop("attributes");
+    document.querySelectorAll('img.svg_img[src$=".svg"]').forEach(function(img) {
+        const imgID = img.id;
+        const imgClass = img.className;
+        const imgURL = img.src;
 
-            $.get(imgURL, function (data) {
-                // Get the SVG tag, ignore the rest
-                var $svg = $(data).find('svg');
-
-                // Remove any invalid XML tags
-                $svg = $svg.removeAttr('xmlns:a');
-
-                // Loop through IMG attributes and apply on SVG
-                $.each(attributes, function () {
-                    $svg.attr(this.name, this.value);
-                });
-
-                // Replace IMG with SVG
-                $img.replaceWith($svg);
-            }, 'xml');
-        });
+        fetch(imgURL)
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, 'text/xml');
+                let svg = xmlDoc.getElementsByTagName('svg')[0];
+                
+                if (svg) {
+                    if (typeof imgID !== 'undefined') {
+                        svg.setAttribute('id', imgID);
+                    }
+                    if (typeof imgClass !== 'undefined') {
+                        svg.setAttribute('class', imgClass + ' replaced-svg');
+                    }
+                    svg.removeAttribute('xmlns:a');
+                    img.replaceWith(svg);
+                }
+            });
     });
 
     /*--------------------- on click to scroll next section -------------------------------- */
-    $(document).ready(function () {
-        $('.scroll-next').on("click", function (e) {
+    document.querySelectorAll('.scroll-next').forEach(function(el) {
+        el.addEventListener('click', function(e) {
             e.preventDefault();
-            var targetHref = $(this).attr('data-scroll');
-            var target = document.getElementById(targetHref);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+            const targetHref = this.getAttribute('data-scroll');
+            if (targetHref) {
+                const target = document.getElementById(targetHref.replace('#', ''));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     });
 
-    /*--------------------- Scroll icon on hover mouse animation  -------------------------------- */
-    $('.menu').mousemove(function (e) {
+    /*--------------------- Scroll spy (Navbar active state) -------------------------------- */
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
-        var i = $(".circle"),
-            s = e.pageX - i.offset().left,
-            o = e.pageY - i.offset().top;
-
-        TweenMax.to($('.circle'), .3, {
-            x: (s - i.width() / 2) / i.width() * 50,
-            y: (o - i.height() / 2) / i.height() * 50,
-            scale: 1.2,
-            ease: Power2.easeOut
-        })
-
-        TweenMax.to($('.text'), .3, {
-            x: (s - i.width() / 2) / i.width() * 80,
-            y: (o - i.height() / 2) / i.height() * 80,
-            ease: Power2.easeOut
-        })
-
-    });
-
-    $('.menu').mouseleave(function (e) {
-
-        var i = $(".circle"),
-            s = e.pageX - i.offset().left,
-            o = e.pageY - i.offset().top;
-        TweenMax.to($('.circle'), .3, {
-            x: 0,
-            y: 0,
-            scale: 1,
-            ease: Power2.easeOut
-        })
-
-        TweenMax.to($('.text'), .3, {
-            x: 0,
-            y: 0,
-            ease: Power2.easeOut
-        })
-
-    });
-
-    /*--------------------- Image tilt animation -------------------------------- */
-    $(".br-card").tilt({
-        maxTilt: 15,
-        perspective: 1400,
-        easing: "cubic-bezier(.03,.98,.52,.99)",
-        speed: 1200,
-        glare: false,
-        maxGlare: 0.2,
-        scale: 1.04
-    });
-
-    /*--------------------- Blog Slider ---------------------- */
-    $('.news-carousel').slick({
-        dots: false,
-        infinite: true,
-        arrows: false,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        adaptiveHeight: true,
-        responsive: [
-            {
-                breakpoint: 1367,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                }
-            },
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                }
-            },
-            {
-                breakpoint: 575,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 0,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
             }
-        ]
-    });
-
-    /*----------------------------- Client Slider -------------------------------- */
-    $('#br-client-slider').slick({
-        rows: 1,
-        dots: false,
-        arrows: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    dots: false
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToScroll: 1,
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 575,
-                settings: {
-                    slidesToScroll: 1,
-                    slidesToShow: 2,
-                }
-            }
-        ]
-    });
-
-    /*--------------------- On click menu scroll section to section -------------------------------- */
-    // Cache selectors
-    var lastId,
-        topMenu = $(".navbar-nav"),
-        topMenuHeight = topMenu.outerHeight() + 0,
-        // All list items
-        menuItems = topMenu.find(".nav-link"),
-        // Anchors corresponding to menu items
-        scrollItems = menuItems.map(function () {
-            var item = $($(this).attr("href"));
-            if (item.length) { return item; }
         });
 
-    // Bind click handler to menu items
-    // Native CSS scroll-behavior: smooth now handles the scrolling.
-
-    // Bind to scroll
-    $(window).scroll(function () {
-        // Get container scroll position
-        var fromTop = $(this).scrollTop() + topMenuHeight;
-
-        // Get id of current scroll item
-        var cur = scrollItems.map(function () {
-            if ($(this).offset().top < fromTop)
-                return this;
+        navLinks.forEach(link => {
+            if (link.parentElement) {
+                link.parentElement.classList.remove('active');
+            }
+            if (link.getAttribute('href') === '#' + current && link.parentElement) {
+                link.parentElement.classList.add('active');
+            }
         });
-        // Get the id of the current element
-        cur = cur[cur.length - 1];
-        var id = cur && cur.length ? cur[0].id : "";
+    });
 
-        if (lastId !== id) {
-            lastId = id;
-            // Set/remove active class
-            menuItems
-                .parent().removeClass("active")
-                .end().filter("[href='#" + id + "']").parent().addClass("active");
-        }
-    });
-    /* For Directly Run */
-    $(window).on("load", function () {
-        // Production: Debug logging removed
-    });
-})(jQuery);
+    /*--------------------- Scroll icon on hover mouse animation (HERO) -------------------------------- */
+    // Keep TweenMax for Hero section since user requested no changes to Hero
+    const menu = document.querySelector('.menu');
+    const circle = document.querySelector('.circle');
+    const textEl = document.querySelector('.text');
+
+    if (menu && circle && typeof TweenMax !== 'undefined') {
+        menu.addEventListener('mousemove', function(e) {
+            const rect = circle.getBoundingClientRect();
+            // Account for scroll position
+            const circleLeft = rect.left + window.pageXOffset;
+            const circleTop = rect.top + window.pageYOffset;
+            
+            const s = e.pageX - circleLeft;
+            const o = e.pageY - circleTop;
+
+            TweenMax.to(circle, 0.3, {
+                x: (s - rect.width / 2) / rect.width * 50,
+                y: (o - rect.height / 2) / rect.height * 50,
+                scale: 1.2,
+                ease: Power2.easeOut
+            });
+
+            if (textEl) {
+                TweenMax.to(textEl, 0.3, {
+                    x: (s - rect.width / 2) / rect.width * 80,
+                    y: (o - rect.height / 2) / rect.height * 80,
+                    ease: Power2.easeOut
+                });
+            }
+        });
+
+        menu.addEventListener('mouseleave', function(e) {
+            TweenMax.to(circle, 0.3, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                ease: Power2.easeOut
+            });
+
+            if (textEl) {
+                TweenMax.to(textEl, 0.3, {
+                    x: 0,
+                    y: 0,
+                    ease: Power2.easeOut
+                });
+            }
+        });
+    }
+});

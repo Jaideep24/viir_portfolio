@@ -65,7 +65,7 @@
                         <input type="password" id="id_password" name="password" required placeholder=" ">
                         <label>Password</label>
                         <span class="toggle-password" id="togglePassword">
-                            <i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>
+                            <i class="toggle-password-icon fa-solid fa-eye"></i>
                         </span>
                         <script>
                             (function() {
@@ -75,10 +75,10 @@
                                     toggleBtn.addEventListener("click", function() {
                                         if (passwordInput.type === "password") {
                                             passwordInput.type = "text";
-                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash toggle-password-icon" id="togglePasswordIcon"></i>';
+                                            toggleBtn.innerHTML = '<i class="toggle-password-icon fa-solid fa-eye"></i>';
                                         } else {
                                             passwordInput.type = "password";
-                                            toggleBtn.innerHTML = '<i class="fa-solid fa-eye toggle-password-icon" id="togglePasswordIcon"></i>';
+                                            toggleBtn.innerHTML = '<i class="toggle-password-icon fa-solid fa-eye"></i>';
                                         }
                                     });
                                 }

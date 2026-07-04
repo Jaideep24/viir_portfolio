@@ -1,0 +1,41 @@
+<!-- ============================================================ -->
+    <!-- PUBLICATIONS SECTION -->
+    <!-- ============================================================ -->
+    <section id="publications" class="br-portfolio padding-tb-80">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>My <span>Publications</span></h2>
+                <span class="ligh-title">Publications</span>
+            </div>
+            <div class="search-bar">
+                <label for="searchInput" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">Search Publications</label>
+                <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
+            </div>
+            <div class="pub-list reveal-stagger" id="pubList">
+                {% for object in publications %}
+                {# Skip dummy/test entries — only show if title is meaningful (>5 chars, not all lowercase gibberish) #}
+                {% if object.title|length > 10 %}
+                <div class="pub-card reveal-stagger-child">
+                    <div class="pub-date">{{ object.date }}</div>
+                    <div class="pub-title">{{ object.title }}</div>
+                    <div class="pub-authors">
+                        {% for author in object.authors_list %}
+                            {% if author == "Viir Phuria" %}
+                                <strong>{{ author }}</strong>
+                            {% else %}
+                                {{ author }}
+                            {% endif %}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            {{ object.authors }}
+                        {% endfor %}
+                    </div>
+                    <div class="pub-meta">Published in: {{ object.place }}</div>
+                    <a href="{{ object.url }}" class="capsule-btn" target="_blank" rel="noopener noreferrer"><span class="text">View
+                            Publication</span></a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Publications Section End -->

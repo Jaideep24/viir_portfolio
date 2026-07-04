@@ -20,12 +20,12 @@ body.dark-mode .main-header,
 body.dark-mode .content-wrapper, 
 body.dark-mode .main-sidebar,
 body.dark-mode .brand-link {
-    background-color: #000000 !important; /* Pitch black for proper dark mode */
+    background-color: #0f172a !important; /* Pitch #0f172a for proper dark mode */
 }
 
 body.dark-mode .card,
 body.dark-mode .info-box {
-    background-color: #0a0a0a !important; /* Slightly elevated black for cards */
+    background-color: #0a0a0a !important; /* Slightly elevated #0f172a for cards */
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -36,28 +36,28 @@ body.dark-mode .main-sidebar {
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Navbar Text and Icons (White) */
+/* Navbar Text and Icons (#f8fafc) */
 body.dark-mode .main-header .nav-link,
 body.dark-mode .main-header .nav-link i,
 body.dark-mode .main-header .brand-text {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 body.dark-mode .main-header .nav-link:hover,
 body.dark-mode .main-header .nav-link:hover i {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
-/* Sidebar Text and Icons (White) */
+/* Sidebar Text and Icons (#f8fafc) */
 body.dark-mode .main-sidebar .nav-sidebar .nav-link p,
 body.dark-mode .main-sidebar .nav-sidebar .nav-link i,
 body.dark-mode .main-sidebar .brand-text {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 body.dark-mode .main-sidebar .nav-sidebar .nav-link:hover p,
 body.dark-mode .main-sidebar .nav-sidebar .nav-link:hover i,
 body.dark-mode .main-sidebar .nav-sidebar .nav-link.active p,
 body.dark-mode .main-sidebar .nav-sidebar .nav-link.active i {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 /* General Text and Icons */
@@ -73,12 +73,12 @@ body.dark-mode h6,
 body.dark-mode td,
 body.dark-mode label,
 body.dark-mode div.text-muted {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
-/* Links and buttons (White) */
+/* Links and buttons (#f8fafc) */
 body.dark-mode a {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 body.dark-mode a:hover {
     color: #f8f9fa !important;
@@ -95,10 +95,10 @@ body.dark-mode .btn-primary,
 body.dark-mode .bg-primary {
     background-color: #3b82f6 !important;
     border-color: #3b82f6 !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
-/* Dropdowns and Inputs (Dark Theme + White Text) */
+/* Dropdowns and Inputs (Dark Theme + #f8fafc Text) */
 body.dark-mode select,
 body.dark-mode select.form-control,
 body.dark-mode .custom-select,
@@ -109,13 +109,13 @@ body.dark-mode input[type="email"],
 body.dark-mode input[type="password"],
 body.dark-mode textarea {
     background-color: #0a0a0a !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 body.dark-mode select option {
     background-color: #0a0a0a !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 /* Select2 Custom Dropdowns */
@@ -127,7 +127,7 @@ body.dark-mode .select2-container--default .select2-selection--multiple {
 
 body.dark-mode .select2-container--default .select2-selection--single .select2-selection__rendered,
 body.dark-mode .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 body.dark-mode .select2-dropdown {
@@ -137,20 +137,20 @@ body.dark-mode .select2-dropdown {
 
 body.dark-mode .select2-container--default .select2-results__option {
     background-color: #0a0a0a !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 body.dark-mode .select2-container--default .select2-results__option[aria-selected=true] {
     background-color: #1f2937 !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 body.dark-mode .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #3b82f6 !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }
 
 body.dark-mode .select2-search__field {
     background-color: #0a0a0a !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
 }

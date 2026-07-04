@@ -18,21 +18,28 @@
   <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}">
   <link rel="stylesheet" href="{% static 'css/blog-base.css' %}?v=3.1">
   <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
-  <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=1.5">
+  <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=1.6">
   <link rel="stylesheet" href="{% static 'css/button-system.css' %}?v=20260527">
 
   <script>
     (function () {
-      const isDarkMode = localStorage.getItem('darkMode') === 'true';
+      const isDarkMode = localStorage.getItem('darkMode') !== 'false';
       window.__theme = isDarkMode ? 'dark' : 'light';
       window.__isDarkMode = isDarkMode;
     })();
   </script>
+  <style>
+    /* Prevent FOUC transition flash */
+    .preload * {
+      transition: none !important;
+    }
+  </style>
 </head>
 
-<body>
+<body class="preload {% if request.resolver_match.url_name == 'login' and not user.is_authenticated %}login-page{% endif %}">
   <script>
     document.body.classList.add(window.__theme || 'dark');
+    setTimeout(function() { document.body.classList.remove('preload'); }, 50);
   </script>
 
   <canvas id="gridCanvas"></canvas>
@@ -47,7 +54,6 @@
   <script src="{% static 'js/grid.js' %}"></script>
   <script src="{% static 'js/blog-index2.js' %}"></script>
   <script src="{% static 'js/blog-base.js' %}?v=20260526c"></script>
-  <script src="{% static 'js/blog-script.js' %}?v=20260526c"></script>
   <script src="{% static 'js/custom-cursor.js' %}?v=1.1"></script>
 
   {% include 'includes/site-footer.html' %}

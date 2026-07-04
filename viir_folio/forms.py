@@ -8,7 +8,7 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'required': True, 'style': 'max-width: 100%; width: auto;'}))
 
     class Meta:
-        model = contact
+        model = Contact
         fields = ['name', 'email', 'number', 'message']
 
 class ArticleForm(forms.ModelForm):

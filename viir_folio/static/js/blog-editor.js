@@ -99,29 +99,283 @@ function formatText(command, value = null) {
     updateToolbarButtons();
 }
 
+// Custom Theme-Aware Link Prompt
+function showLinkPrompt(defaultText, callback) {
+    const overlay = document.createElement('div');
+    overlay.className = 'custom-prompt-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'custom-prompt-modal';
+    
+    modal.innerHTML = `
+        <h3>Insert Link</h3>
+        <input type="text" id="link-url-input" placeholder="https://example.com (Link URL)" style="margin-bottom: 12px;">
+        <input type="text" id="link-text-input" placeholder="Display Text" value="${defaultText || ''}">
+        <div class="custom-prompt-actions" style="margin-top: 16px;">
+            <button class="custom-prompt-btn-cancel">Cancel</button>
+            <button class="custom-prompt-btn-confirm">Insert</button>
+        </div>
+    `;
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    const urlInput = modal.querySelector('#link-url-input');
+    const textInput = modal.querySelector('#link-text-input');
+    const btnCancel = modal.querySelector('.custom-prompt-btn-cancel');
+    const btnConfirm = modal.querySelector('.custom-prompt-btn-confirm');
+    
+    // Animate in
+    requestAnimationFrame(() => overlay.classList.add('show'));
+    urlInput.focus();
+    
+    const close = (result) => {
+        overlay.classList.remove('show');
+        setTimeout(() => overlay.remove(), 200);
+        callback(result);
+    };
+    
+    btnCancel.onclick = () => close(null);
+    btnConfirm.onclick = () => {
+        close({
+            url: urlInput.value,
+            text: textInput.value
+        });
+    };
+    
+    // Focus Trap
+    const focusableElements = [urlInput, textInput, btnCancel, btnConfirm];
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    modal.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                }
+            }
+        }
+        if (e.key === 'Escape') {
+            btnCancel.click();
+        }
+    });
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            btnConfirm.click();
+        }
+    };
+
+    urlInput.addEventListener('keydown', handleEnter);
+    textInput.addEventListener('keydown', handleEnter);
+}
+
 // Insert link
 function insertLink() {
-    const url = prompt('Enter the URL:');
-    if (url) {
-        const selection = window.getSelection().toString();
-        const linkText = selection || prompt('Enter link text:') || url;
+    // Save selection before modal steals focus
+    const selection = window.getSelection();
+    let range = null;
+    let selectedText = selection.toString();
+    if (selection.rangeCount > 0) {
+        range = selection.getRangeAt(0);
+    }
+    
+    showLinkPrompt(selectedText, (result) => {
+        if (!result || !result.url) {
+            if (contentEditor) contentEditor.focus();
+            return;
+        }
         
-        if (linkText) {
-            const link = `<a href="${url}" target="_blank">${linkText}</a>`;
-            document.execCommand('insertHTML', false, link);
+        // Restore selection
+        const newSelection = window.getSelection();
+        newSelection.removeAllRanges();
+        if (range) newSelection.addRange(range);
+        
+        const url = result.url;
+        const linkText = result.text || url;
+        
+        const link = `<a href="${url}" target="_blank">${linkText}</a>`;
+        document.execCommand('insertHTML', false, link);
+        if (contentEditor) contentEditor.focus();
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
     }
-    if (contentEditor) contentEditor.focus();
+    return cookieValue;
+}
+
+function showImagePrompt(callback) {
+    const overlay = document.createElement('div');
+    overlay.className = 'custom-prompt-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'custom-prompt-modal';
+    
+    modal.innerHTML = `
+        <h3>Insert Image</h3>
+        <div class="custom-prompt-tabs">
+            <button class="custom-prompt-tab active" data-tab="url">Add Link</button>
+            <button class="custom-prompt-tab" data-tab="upload">Upload</button>
+        </div>
+        
+        <div class="custom-prompt-tab-content active" id="tab-url">
+            <input type="text" id="img-url-input" placeholder="https://example.com/image.jpg">
+        </div>
+        
+        <div class="custom-prompt-tab-content" id="tab-upload">
+            <div class="file-upload-wrapper" id="file-upload-zone">
+                <span class="file-upload-text">Click to browse or drag image here</span>
+                <input type="file" id="img-file-input" accept="image/*">
+            </div>
+            <p id="upload-status" style="font-size: 12px; margin-bottom: 10px; display: none;"></p>
+        </div>
+        
+        <div class="custom-prompt-actions">
+            <button class="custom-prompt-btn-cancel">Cancel</button>
+            <button class="custom-prompt-btn-confirm" id="btn-img-confirm">Insert</button>
+        </div>
+    `;
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        overlay.classList.add('show');
+        const urlInput = document.getElementById('img-url-input');
+        if (urlInput) urlInput.focus();
+    }, 10);
+    
+    const close = (value) => {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            if (document.body.contains(overlay)) {
+                document.body.removeChild(overlay);
+            }
+            callback(value);
+        }, 200);
+    };
+    
+    const btnCancel = modal.querySelector('.custom-prompt-btn-cancel');
+    const btnConfirm = document.getElementById('btn-img-confirm');
+    const tabs = modal.querySelectorAll('.custom-prompt-tab');
+    const contents = modal.querySelectorAll('.custom-prompt-tab-content');
+    
+    // Tab Switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            if(tab.dataset.tab === 'url') document.getElementById('img-url-input').focus();
+        });
+    });
+    
+    // Handle File Selection Text
+    const fileInput = document.getElementById('img-file-input');
+    const fileText = modal.querySelector('.file-upload-text');
+    if(fileInput && fileText) {
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileText.textContent = fileInput.files[0].name;
+            } else {
+                fileText.textContent = 'Click to browse or drag image here';
+            }
+        });
+    }
+    
+    // Escape to close
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close(null);
+    });
+
+    btnCancel.onclick = () => close(null);
+    
+    btnConfirm.onclick = () => {
+        const activeTab = modal.querySelector('.custom-prompt-tab.active').dataset.tab;
+        
+        if (activeTab === 'url') {
+            const url = document.getElementById('img-url-input').value;
+            close(url);
+        } else {
+            if (fileInput.files.length === 0) {
+                alert('Please select an image to upload.');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            const status = document.getElementById('upload-status');
+            status.style.display = 'block';
+            status.style.color = 'var(--text-color, #333)';
+            status.textContent = 'Uploading...';
+            btnConfirm.disabled = true;
+            
+            fetch('/blogspace/upload-image/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    close(data.url);
+                } else {
+                    status.style.color = 'red';
+                    status.textContent = data.error || 'Upload failed.';
+                    btnConfirm.disabled = false;
+                }
+            })
+            .catch(error => {
+                status.style.color = 'red';
+                status.textContent = 'An error occurred during upload.';
+                btnConfirm.disabled = false;
+            });
+        }
+    };
 }
 
 // Insert image
 function insertImage() {
-    const url = prompt('Enter image URL:');
-    if (url) {
-        const img = `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; margin: 1rem 0;">`;
-        document.execCommand('insertHTML', false, img);
+    const selection = window.getSelection();
+    let range = null;
+    if (selection.rangeCount > 0) {
+        range = selection.getRangeAt(0);
     }
-    if (contentEditor) contentEditor.focus();
+    
+    showImagePrompt((url) => {
+        if (url) {
+            const newSelection = window.getSelection();
+            newSelection.removeAllRanges();
+            if (range) newSelection.addRange(range);
+            
+            const img = `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; margin: 1rem 0;">`;
+            document.execCommand('insertHTML', false, img);
+        }
+        if (contentEditor) contentEditor.focus();
+    });
 }
 
 // Update toolbar button states
@@ -373,6 +627,26 @@ function showNotification(message, type = 'success') {
 
 // Setup event listeners
 function setupEventListeners() {
+    // Toolbar Event Delegation (CSP Compliant)
+    const toolbar = document.querySelector(".editor-toolbar");
+    if (toolbar) {
+        toolbar.addEventListener("click", (e) => {
+            const btn = e.target.closest(".toolbar-btn");
+            if (!btn) return;
+            e.preventDefault();
+            const cmd = btn.getAttribute("data-command");
+            const action = btn.getAttribute("data-action");
+            
+            if (cmd) {
+                formatText(cmd);
+            } else if (action === "insertLink") {
+                insertLink();
+            } else if (action === "insertImage") {
+                insertImage();
+            }
+        });
+    }
+
     // Image URL input change
     if (imageUrlInput) {
         imageUrlInput.addEventListener('input', function() {
@@ -410,7 +684,7 @@ function setupEventListeners() {
     // Prevent form submission on Enter key
     if (blogForm) {
         blogForm.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && !e.target.isContentEditable) {
                 e.preventDefault();
             }
         });

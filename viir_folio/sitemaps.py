@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
-from .models import Article, Project, certificate
+from .models import Article, Project, Certificate
 
 
 class StaticViewSitemap(Sitemap):
@@ -55,13 +55,13 @@ class CertificateSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        # One item = the certificates listing page
+        # One item = the Certificates listing page
         return ['certificate']
 
     def location(self, item):
         return reverse(item)
 
     def lastmod(self, item):
-        # Use the date of the most recent certificate
-        latest = certificate.objects.order_by('-date').first()
+        # Use the date of the most recent Certificate
+        latest = Certificate.objects.order_by('-date').first()
         return latest.date if latest else timezone.now().date()

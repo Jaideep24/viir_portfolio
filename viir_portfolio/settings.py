@@ -32,7 +32,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,viirportfolio.pythonanywhere.com').split(',')
+    for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,viir.tech').split(',')
     if host.strip()
 ]
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'compressor',
     'viir_folio',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -109,12 +110,11 @@ JAZZMIN_SETTINGS = {
         "viir_folio.Contact": "fas fa-envelope",
         "viir_folio.Article": "fas fa-newspaper",
         "viir_folio.Comment": "fas fa-comments",
-        "viir_folio.cv": "fas fa-file-pdf",
-        "viir_folio.certificate": "fas fa-award",
-        "viir_folio.maincertificate": "fas fa-certificate",
-        "viir_folio.subscriber": "fas fa-bell",
+        "viir_folio.CV": "fas fa-file-pdf",
+        "viir_folio.Certificate": "fas fa-award",
+        "viir_folio.MainCertificate": "fas fa-certificate",
+        "viir_folio.Subscriber": "fas fa-bell",
         "viir_folio.Publication": "fas fa-book",
-        "viir_folio.Logger": "fas fa-user-secret",
         "viir_folio.Visitor": "fas fa-users-viewfinder",
     },
 }
@@ -138,7 +138,7 @@ CSRF_TRUSTED_ORIGINS = [
     host.strip()
     for host in os.getenv(
         'CSRF_TRUSTED_ORIGINS',
-        'https://viirportfolio.pythonanywhere.com'
+        'https://viir.tech'
     ).split(',')
     if host.strip()
 ]
@@ -268,6 +268,7 @@ STATIC_ROOT = BASE_DIR / 'viir_folio' / 'static'
 
 # Static file serving for production (CompressedStaticFilesStorage won't crash on missing files)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WHITENOISE_MANIFEST_STRICT = False # Reverted due to broken admin font references
 
 # Media files
 MEDIA_URL = "/media/"
@@ -277,3 +278,25 @@ os.makedirs(MEDIA_ROOT, exist_ok=True)  # Auto-create media/ if missing
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+# Caching Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Django Compressor Settings
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)

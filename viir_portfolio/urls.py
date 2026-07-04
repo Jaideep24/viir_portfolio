@@ -55,6 +55,7 @@ urlpatterns = [
     path('blogspace/create/', CreateBlogView.as_view(), name='create_blog'),
     path('blogspace/edit/', login_view, name='login'),
     path('blogspace/logout/', logout_view, name='logout'),
+    path('blogspace/upload-image/', upload_image, name='upload_image'),
     path('certificate/', certificate_view, name='certificate'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),

@@ -1,0 +1,71 @@
+<!-- ============================================================ -->
+    <!-- TIMELINE SECTION (Experience & Education) -->
+    <!-- ============================================================ -->
+    <section id="experience" class="br-experience padding-tb-80">
+        <div class="container">
+            <div class="row">
+                <div class="section-title reveal-up">
+                    <h2>My <span>Timeline</span></h2>
+                    <span class="ligh-title">Timeline</span>
+                </div>
+
+                <!-- Academics -->
+                <div class="col-lg-6 col-md-12 col-sm-12 reveal-right">
+                    <div class="education br-ex-box m-b-991">
+                        <div class="timeline">
+                            <h3 class="timeline-section-title">Academics</h3>
+                            {% for object in education %}
+                            <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
+                                <div class="timeline-component timeline-date-container">
+                                    <time class="timeline-date" datetime="{{ object.start_date }}">{{ object.start_date }} &ndash; {% if object.is_ongoing or not object.end_date %}Pursuing{% else %}{{ object.end_date }}{% endif %}</time>
+                                </div>
+                                <div class="timeline-middle">
+                                    <div class="timeline-circle"></div>
+                                </div>
+                                <div class="timeline-component timeline-content">
+                                    <h4>{{ object.title }}</h4>
+                                    <span class="sub">{{ object.institute_name }}</span>
+                                    <p class="timeline-subject">{{ object.subject }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Career Path -->
+                <div class="col-lg-6 col-md-12 col-sm-12 reveal-left">
+                    <div class="experiense br-ex-box">
+                        <div class="timeline">
+                            <h3 class="timeline-section-title">Career Path</h3>
+                            {% for object in experience %}
+                            <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
+                                <div class="timeline-component timeline-date-container-career">
+                                    <time class="timeline-date-career" datetime="{{ object.start_date|date:'Y-m-d' }}">{{ object.start_date|date:"F Y" }} &ndash; {% if object.is_ongoing or not object.end_date %}Present{% else %}{{ object.end_date|date:"F Y" }}{% endif %}</time>
+                                </div>
+                                <div class="timeline-middle">
+                                    <div class="timeline-circle"></div>
+                                </div>
+                                <div class="timeline-component timeline-content">
+                                    <h4>{{ object.role }}</h4>
+                                    <span class="sub">{{ object.company_name }}</span>
+                                    {% if object.get_bullet_points %}
+                                    <ul class="timeline-bullets">
+                                        {% for point in object.get_bullet_points %}<li>{{ point }}</li>{% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% if object.get_tech_list %}
+                                    <div class="timeline-tech-tags">
+                                        {% for tech in object.get_tech_list %}<span class="timeline-tech-badge">{{ tech }}</span>{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Timeline Section End -->

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load compress %}
 <html lang="en">
 
 <head>
@@ -9,31 +10,43 @@
   {% block meta %}
     {% include 'includes/meta.html' with meta_title='BlogSpace — Viir Phuria' meta_description='Articles, tutorials, and insights by Viir Phuria on Cybersecurity, Full-Stack Web Development, Machine Learning, and AI.' %}
   {% endblock %}
+  {% compress css %}
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  {% endcompress %}
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  {% compress css %}
   <link rel="stylesheet" href="{% static 'css/site-theme.css' %}">
+  {% endcompress %}
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Quicksand:wght@300..700&family=Poppins:wght@300..700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=1.4">
-  <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}?v=2.4">
-  <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}?v=1.1">
-  <link rel="stylesheet" href="{% static 'css/blog-base.css' %}?v=3.1">
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog-styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog-index2.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog-base.css' %}">
   <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
-  <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
-  <link rel="stylesheet" href="{% static 'css/button-system.css' %}?v=20260527">
-  <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}?v=1.0">
+  <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v=1.6">
+  <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
+  <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}">
+  {% endcompress %}
 
   <script>
     (function () {
-      const isDarkMode = localStorage.getItem('darkMode') === 'true';
+      const isDarkMode = localStorage.getItem('darkMode') !== 'false';
       window.__theme = isDarkMode ? 'dark' : 'light';
       window.__isDarkMode = isDarkMode;
     })();
   </script>
+  <style>
+    /* Prevent FOUC transition flash */
+    .preload * {
+      transition: none !important;
+    }
+  </style>
 </head>
 
-<body class="{% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
+<body class="preload {% if request.resolver_match.url_name == 'login' and not user.is_authenticated %}login-page{% endif %}">
   <script>
     document.body.classList.add(window.__theme || 'dark');
   </script>
@@ -50,22 +63,24 @@
   {% include 'includes/site-footer.html' %}
   {% endif %}
 
-  <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+  {% compress js %}
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/grid.js' %}"></script>
-  <script src="{% static 'js/tilt.jquery.js' %}"></script>
-  <script src="{% static 'js/mixitup.min.js' %}"></script>
-  <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-  <script src="{% static 'js/slick.min.js' %}"></script>
+  <!-- jQuery, tilt, and fancybox removed for CSP and performance compliance -->
+  {% endcompress %}
 
+  {% compress js %}
   <script src="{% static 'js/site-navbar.js' %}"></script>
   <script src="{% static 'js/blog-index2.js' %}"></script>
-  <script src="{% static 'js/blog-base.js' %}?v=20260526c"></script>
-  <script src="{% static 'js/blog-script.js' %}?v=20260526c"></script>
-  <script src="{% static 'js/custom-cursor.js' %}?v=1.1"></script>
-  <script src="{% static 'js/scroll-anim.js' %}?v=1.0"></script>
+  <script src="{% static 'js/blog-base.js' %}"></script>
+  <script src="{% static 'js/custom-cursor.js' %}"></script>
+  <script src="{% static 'js/scroll-anim.js' %}"></script>
+  {% endcompress %}
   
   {% block extra_scripts %}{% endblock %}
+  <script>
+    setTimeout(function() { document.body.classList.remove('preload'); }, 50);
+  </script>
 </body>
 
 </html>

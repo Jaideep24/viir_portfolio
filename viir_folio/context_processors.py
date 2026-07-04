@@ -6,7 +6,7 @@ def site_meta(request):
     Set environment variables `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION`
     in production (or in your .env) to have the meta tags automatically injected.
     """
-    site_url = os.getenv('SITE_URL', 'https://viirportfolio.pythonanywhere.com').rstrip('/')
+    site_url = os.getenv('SITE_URL', 'https://viir.tech').rstrip('/')
     social_urls = [
         os.getenv('SOCIAL_GITHUB', 'https://github.com/Viir-Phuria'),
         os.getenv('SOCIAL_LINKEDIN', 'https://www.linkedin.com/in/viir-phuria/'),
