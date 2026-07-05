@@ -180,6 +180,7 @@ class MainCertificate(models.Model):
 class Subscriber(models.Model):
     # unique=True enforces DB-level deduplication; view also checks before saving
     email=models.EmailField(unique=True)
+    subscribed_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.email
 

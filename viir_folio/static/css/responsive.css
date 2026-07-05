@@ -41,9 +41,6 @@
     padding: 33px 0;
     font-size: 34px;
   }
-  .section-title .ligh-title {
-    font-size: 90px;
-  }
   .br-about .br-box:after {
     right: -53%;
   }
@@ -268,9 +265,6 @@
 @media only screen and (max-width: 767px) {
   .section-title h2 {
     padding: 0 0 10px 0;
-  }
-  .section-title .ligh-title {
-    display: none;
   }
   .br-hero .hero-content .br-hero-detail .br-hero-title {
     margin: 0 0 10px 0;

@@ -1007,8 +1007,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
 }
 
 /* Beat Bootstrap .form-control and site-theme line-height: */
-input.form-control.comment-input,
-textarea.form-control.comment-textarea {
+input.form-control.comment-input {
     height: 42px;
     min-height: 42px;
     line-height: 42px;
@@ -1023,9 +1022,23 @@ textarea.form-control.comment-textarea {
     width: 100%;
     box-sizing: border-box;
     display: block;
-    resize: none;
 }
+
 textarea.form-control.comment-textarea {
+    height: 42px;
+    min-height: 42px;
+    line-height: 1.5;
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--comment-border);
+    background: var(--comment-bg);
+    color: var(--comment-color);
+    font-size: 0.93rem;
+    font-family: inherit;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
     resize: vertical;
 }
 

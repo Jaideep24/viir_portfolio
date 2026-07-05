@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var commentBtn = e.target.closest(".comment-btn");
         if (commentBtn) {
             e.preventDefault();
-            var commentsSection = document.getElementById("comments");
-            if (commentsSection) {
-                commentsSection.scrollIntoView({ behavior: 'smooth' });
+            var commentForm = document.getElementById("commentFormWrapper");
+            if (commentForm) {
+                commentForm.scrollIntoView({ behavior: 'smooth' });
             }
         }
 

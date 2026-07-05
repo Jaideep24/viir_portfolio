@@ -293,10 +293,22 @@ CACHES = {
 }
 
 # Django Compressor Settings
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = not DEBUG
+COMPRESS_OFFLINE = not DEBUG
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+# --- Python 3.12+ Compatibility for Django 3.2 EmailBackend ---
+import smtplib
+_original_starttls = smtplib.SMTP.starttls
+
+def _patched_starttls(self, keyfile=None, certfile=None, context=None):
+    # In Python 3.12+, keyfile and certfile are removed from starttls().
+    # Django 3.2 still passes them, which raises a TypeError.
+    # We ignore them here to maintain compatibility.
+    return _original_starttls(self, context=context)
+
+smtplib.SMTP.starttls = _patched_starttls

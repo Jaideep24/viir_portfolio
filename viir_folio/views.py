@@ -366,7 +366,7 @@ class CreateBlogView(View):
             blog.save()
             
             # Get all unique subscriber emails from database (SQLite-safe distinct).
-            subscriber_emails = list(subscriber.objects.values_list('email', flat=True).distinct())
+            subscriber_emails = list(Subscriber.objects.values_list('email', flat=True).distinct())
             
             if subscriber_emails:
                 subject = f'New Article: {form.cleaned_data["title"]}'

@@ -1130,7 +1130,7 @@ body.light .br-about .br-card::before {
 
 :root {
     --text: #e0e0e0;
-    --card-bg: #1e1e2f;
+    --card-bg: #1e293b;
     --title: #a48fff;
     --border: var(--text-primary);
     --link: #7aa9ff;
