@@ -18,6 +18,10 @@ body {
   background-blend-mode: overlay;
 }
 
+/* Offset for fixed navbar anchor scrolling */
+section[id] {
+  scroll-margin-top: -30px;
+}
 .row {
   margin-right: -15px;
   margin-left: -15px;
@@ -68,6 +72,7 @@ p {
 .section-title {
   position: relative;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .section-title h2 {
@@ -2201,3 +2206,8 @@ footer .br-footer-detail .br-social ul li a:hover {
 .card {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Dark Theme Fixes */
+body.dark .blog-card h3, body.dark .blogspace-card h3, body.dark .blogspace-card .card-title, body.dark .br-project-box h3 { color: #f8fafc !important; }
+body.dark .blog-card p, body.dark .br-project-box p { color: #cbd5e1 !important; }
+body.dark .br-project-box .links { color: #94a3b8 !important; }

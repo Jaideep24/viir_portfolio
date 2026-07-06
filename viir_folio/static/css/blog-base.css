@@ -17,6 +17,11 @@
     --brand-shadow-hover: var(--card-shadow-hover, 0 12px 32px rgba(15, 15, 15, 0.12));
 }
 
+/* Offset for fixed navbar anchor scrolling */
+section[id] {
+  scroll-margin-top: -30px;
+}
+
 body.dark {
     --badge: #9f78ff;
     --title: #a48fff;
@@ -882,6 +887,7 @@ section {
 .section-title {
   position: relative;
   text-align: center;
+  margin-bottom: 30px;
 }
 .section-title h2 {
   display: none;
@@ -1186,3 +1192,8 @@ body.light footer {
     background: #eef1f6;
     border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
+
+/* Dark Theme Fixes */
+body.dark .blog-card h3, body.dark .blogspace-card h3, body.dark .blogspace-card .card-title, body.dark .br-project-box h3 { color: #f8fafc !important; }
+body.dark .blog-card p, body.dark .br-project-box p { color: #cbd5e1 !important; }
+body.dark .br-project-box .links { color: #94a3b8 !important; }

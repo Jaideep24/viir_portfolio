@@ -40,20 +40,20 @@
                 {% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' or request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' or request.resolver_match.url_name == 'featured' %}
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}" href="{% url 'blogspace' %}">BlogSpace</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}" href="{% url 'login' %}">Write</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#blog">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#insights">Home</a></li>
                 {% elif request.resolver_match.url_name == 'certificate' or certi %}
-                <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" href="/#certificate">Certificates</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#certificate">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" href="/#credentials">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#credentials">Home</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'index' %} active{% endif %}" href="/#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#about">About</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#experience">Timeline</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#project">Project</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/#certificate">Certificates</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#publications">Publications</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#blog">Blog</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#contact">Contacts</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#profile">Profile</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#background">Background</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#expertise">Expertise</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#engineering">Engineering</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}" href="/#credentials">Credentials</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#research">Research</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#insights">Insights</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#connect">Connect</a></li>
                 {% endif %}
             </ul>
         </div>

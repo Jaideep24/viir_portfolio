@@ -159,7 +159,7 @@
                 <span class="text">View CV</span>
             </a>
             {% empty %}
-            <a href="#contact" class="capsule-btn hero-btn" style="min-width: 150px; margin: 0 auto;">
+            <a href="#connect" class="capsule-btn hero-btn" style="min-width: 150px; margin: 0 auto;">
                 <span class="text">Contact Me</span>
             </a>
             {% endfor %}
@@ -170,13 +170,13 @@
     <!-- ============================================================ -->
     <!-- ABOUT SECTION -->
     <!-- ============================================================ -->
-    <section id="about" class="br-about padding-tb-80 sec-bg">
+    <section id="profile" class="br-about padding-tb-80 sec-bg">
         <div class="container">
             <div class="row">
                 {% for object in about %}
                 <div class="section-title reveal-up">
 
-                    <span class="ligh-title">About</span>
+                    <span class="ligh-title">Profile</span>
                 </div>
                 <div class="col-lg-6 reveal-right">
                     <div class="br-skill-progress m-b-991">
@@ -265,19 +265,19 @@
     <!-- ============================================================ -->
     <!-- TIMELINE SECTION (Experience & Education) -->
     <!-- ============================================================ -->
-    <section id="experience" class="br-experience padding-tb-80">
+    <section id="background" class="br-experience padding-tb-80">
         <div class="container">
             <div class="row">
                 <div class="section-title reveal-up">
 
-                    <span class="ligh-title">Timeline</span>
+                    <span class="ligh-title">Background</span>
                 </div>
 
-                <!-- Academics -->
+                <!-- Education -->
                 <div class="col-lg-6 col-md-12 col-sm-12 reveal-right">
                     <div class="education br-ex-box m-b-991">
                         <div class="timeline">
-                            <h3 class="timeline-section-title">Academics</h3>
+                            <h3 class="timeline-section-title">Education</h3>
                             {% for object in education %}
                             <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
                                 <div class="timeline-component timeline-date-container">
@@ -297,11 +297,11 @@
                     </div>
                 </div>
 
-                <!-- Career Path -->
+                <!-- Experience -->
                 <div class="col-lg-6 col-md-12 col-sm-12 reveal-left">
                     <div class="experiense br-ex-box">
                         <div class="timeline">
-                            <h3 class="timeline-section-title">Career Path</h3>
+                            <h3 class="timeline-section-title">Experience</h3>
                             {% for object in experience %}
                             <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
                                 <div class="timeline-component timeline-date-container-career">
@@ -337,11 +337,11 @@
     <!-- ============================================================ -->
     <!-- SKILLS SECTION -->
     <!-- ============================================================ -->
-    <section id="skills" class="br-portfolio padding-tb-80">
+    <section id="expertise" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
 
-                <span class="ligh-title">Skills</span>
+                <span class="ligh-title">Expertise</span>
             </div>
             <div class="row">
                 {% if languages or frameworks or tools_dbs %}
@@ -457,11 +457,11 @@
     <!-- ============================================================ -->
     <!-- PROJECTS SECTION -->
     <!-- ============================================================ -->
-    <section id="project" class="br-portfolio padding-tb-80">
+    <section id="engineering" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
 
-                <span class="ligh-title">Projects</span>
+                <span class="ligh-title">Engineering</span>
             </div>
             <div class="row m-b-minus-24px">
                 <div class="portfolio-content" id="MixItUp11665E">
@@ -543,12 +543,12 @@
     <!-- ============================================================ -->
     <!-- CERTIFICATES SECTION (Carousel) -->
     <!-- ============================================================ -->
-    <section id="certificate" class="br-experience padding-tb-80">
+    <section id="credentials" class="br-experience padding-tb-80">
         <div class="container">
             <div class="row">
                 <div class="section-title reveal-up">
 
-                    <span class="ligh-title">Certificates</span>
+                    <span class="ligh-title">Credentials</span>
                 </div>
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -591,11 +591,11 @@
     <!-- ============================================================ -->
     <!-- PUBLICATIONS SECTION -->
     <!-- ============================================================ -->
-    <section id="publications" class="br-portfolio padding-tb-80">
+    <section id="research" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
 
-                <span class="ligh-title">Publications</span>
+                <span class="ligh-title">Research</span>
             </div>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
@@ -632,11 +632,11 @@
     <!-- ============================================================ -->
     <!-- BLOG SECTION -->
     <!-- ============================================================ -->
-    <section id="blog" class="br-portfolio padding-tb-80">
+    <section id="insights" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
 
-                <span class="ligh-title">Blogs</span>
+                <span class="ligh-title">Insights</span>
             </div>
             <!-- Dynamic grid of latest 3 blogs -->
             <div class="blogs-grid reveal-stagger" id="blogsGrid">
