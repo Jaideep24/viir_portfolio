@@ -82,8 +82,12 @@ def index(request):
     }
     
     if request.method == 'POST':
+        is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        
         # Rate-limiting: max 3 messages per 5 minutes per IP
         if getattr(request, 'limited', False):
+            if is_ajax:
+                return JsonResponse({'success': False, 'message': 'Too many messages sent. Please wait.'}, status=429)
             messages.error(request, "Too many messages sent. Please wait a few minutes before sending another.")
             return redirect(f'{request.path}#contact')
 
@@ -93,6 +97,8 @@ def index(request):
         # Silently discard and redirect as success so bots get no feedback.
         if request.POST.get('website'):
             logger.warning('Honeypot triggered on contact form — bot submission discarded')
+            if is_ajax:
+                return JsonResponse({'success': True})
             request.session['contact_success'] = True
             return redirect(f'{request.path}#contact')
         
@@ -130,9 +136,14 @@ def index(request):
             except Exception:
                 logger.exception('Contact form email failed to send — data saved to DB')
             
+            if is_ajax:
+                return JsonResponse({'success': True})
+                
             request.session['contact_success'] = True
             return redirect(f'{request.path}#contact')
         else:
+            if is_ajax:
+                return JsonResponse({'success': False, 'errors': form.errors}, status=400)
             # Form validation failed - return with context
             return render(request, 'portfolio/index.html', context)
     

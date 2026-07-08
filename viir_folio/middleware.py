@@ -51,21 +51,21 @@ class AnalyticsMiddleware:
                 user_agent = request.META.get('HTTP_USER_AGENT', '')
                 session_key = request.session.session_key
                 
-                # Get or create visitor group
-                from .models import Visitor, PageVisit
-                visitor, created = Visitor.objects.get_or_create(
-                    session_key=session_key,
-                    defaults={'ip_address': ip, 'user_agent': user_agent}
-                )
-                
-                # If visitor exists but IP changed or last visit was old, we just append to the visitor
-                # get_or_create does not update last_visit automatically if not saving, but auto_now=True will handle it on save()
-                visitor.save()
-                
-                # Log the specific page hit
-                PageVisit.objects.create(
-                    visitor=visitor,
-                    path=path
-                )
+                # Offload to background thread to prevent blocking main request cycle
+                import threading
+                def track_visit(session_key, ip, user_agent, path):
+                    from .models import Visitor, PageVisit
+                    visitor, _ = Visitor.objects.get_or_create(
+                        session_key=session_key,
+                        defaults={'ip_address': ip, 'user_agent': user_agent}
+                    )
+                    visitor.save()
+                    PageVisit.objects.create(visitor=visitor, path=path)
+
+                threading.Thread(
+                    target=track_visit, 
+                    args=(session_key, ip, user_agent, path),
+                    daemon=True
+                ).start()
                 
         return response

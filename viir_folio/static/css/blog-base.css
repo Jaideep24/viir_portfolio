@@ -1194,6 +1194,16 @@ body.light footer {
 }
 
 /* Dark Theme Fixes */
-body.dark .blog-card h3, body.dark .blogspace-card h3, body.dark .blogspace-card .card-title, body.dark .br-project-box h3 { color: #f8fafc !important; }
-body.dark .blog-card p, body.dark .br-project-box p { color: #cbd5e1 !important; }
-body.dark .br-project-box .links { color: #94a3b8 !important; }
+html body.dark .blog-card h3, 
+html body.dark .blogspace-card h3, 
+html body.dark .blogspace-card .card-title, 
+html body.dark .br-project-box h3 { 
+    color: var(--text-light, #f8fafc); 
+}
+html body.dark .blog-card p, 
+html body.dark .br-project-box p { 
+    color: #cbd5e1; 
+}
+html body.dark .br-project-box .links { 
+    color: #94a3b8; 
+}
