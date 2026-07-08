@@ -39,7 +39,7 @@ class ArticleSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return Article.objects.all().order_by('-date')
+        return Article.objects.defer('content').order_by('-date')
 
     def lastmod(self, obj):
         return obj.date

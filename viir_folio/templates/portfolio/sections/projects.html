@@ -1,12 +1,10 @@
+{% load static %}
 {% load custom_filters %}
-<!-- ============================================================ -->
-    <!-- PROJECTS SECTION -->
-    <!-- ============================================================ -->
-    <section id="project" class="br-portfolio padding-tb-80">
+    <section id="engineering" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
-                <h2>My <span>Projects</span></h2>
-                <span class="ligh-title">Projects</span>
+
+                <span class="ligh-title">Engineering</span>
             </div>
             <div class="row m-b-minus-24px">
                 <div class="portfolio-content" id="MixItUp11665E">
@@ -15,14 +13,14 @@
                             <div class="col-sm-12">
                                 <div class="portfolio-tabs">
                                     <ul>
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter mixitup-control-active" data-filter="all"
+                                        <li class="filter mixitup-control-active" data-filter="all"
                                             onclick="design(event)">ALL</li>
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter" data-filter=".webdev" onclick="design(event)">WEB DEV</li>
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter" data-filter=".appdev" onclick="design(event)">APP DEV</li>
+                                        <li class="filter" data-filter=".webdev" onclick="design(event)">WEB DEV</li>
+                                        <li class="filter" data-filter=".appdev" onclick="design(event)">APP DEV</li>
 
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
-                                        <li role="button" tabindex="0" aria-label="Filter by category" class="filter" data-filter=".cybersec" onclick="design(event)">CYBER SECURITY</li>
+                                        <li class="filter" data-filter=".mlai" onclick="design(event)">ML/AI</li>
+                                        <li class="filter" data-filter=".iot" onclick="design(event)">IoT</li>
+                                        <li class="filter" data-filter=".cybersec" onclick="design(event)">CYBER SECURITY</li>
                                     </ul>
                                 </div>
                             </div>
@@ -38,11 +36,11 @@
                                                 </div>
 
                                                 {% if object.description %}
-                                                <p class="project-desc-p">{{ object.description|safe }}</p>
+                                                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary); opacity: 0.9;">{{ object.description|safe }}</p>
                                                 {% endif %}
                                                 <div class="br-info">
                                                      <div class="portfolio-img">
-                                                         <img src="{{ object.image.url }}" alt="{{ object.title }} — project by Viir Phuria">
+                                                         <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.title }} — project by Viir Phuria">
                                                      </div>
                                                      <div class="br-detail">
                                                          <ul>
@@ -50,26 +48,23 @@
                                                              {% if object.client %}
                                                              <li>Client : {{ object.client }}</li>
                                                              {% endif %}
-                                                             <li>Tech : {{ object.tech }}</li>
+                                                             <li>Tech : {% for t in object.tech_m2m.all %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
                                                          </ul>
-                                                         <div class="project-actions project-actions-flex">
-                                                             {% if forloop.first %}
-                                                                 <button type="button" onclick="document.getElementById('arch-modal').showModal()" class="capsule-btn view-project-btn project-btn-full project-btn-arch"><span class="text text-highlight margin-auto">View Architecture</span></button>
-                                                                 {% endif %}
+                                                         <div class="project-actions" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
                                                              {% if object.github_url %}
                                                              <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style" aria-label="View project details"><span
-                                                                         class="text margin-auto">GitHub</span></a>
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">GitHub</span></a>
                                                              {% endif %}
                                                              {% if object.url %}
                                                              <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style" aria-label="View project details"><span
-                                                                         class="text margin-auto">Visit Project</span></a>
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">Visit Project</span></a>
                                                              {% endif %}
                                                              {% if object.demo_video %}
                                                              <a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style" aria-label="View project details"><span
-                                                                         class="text margin-auto">Demo Video</span></a>
+                                                                     class="capsule-btn view-project-btn" style="flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px;"><span
+                                                                         class="text" style="margin: 0 auto;">Demo Video</span></a>
                                                              {% endif %}
                                                          </div>
                                                     </div>

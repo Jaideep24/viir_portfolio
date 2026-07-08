@@ -58,32 +58,18 @@
 
                 <div class="form">
                     <div class="inputBox">
+                        <label for="id_username" class="visually-hidden">Username</label>
                         <input type="text" name="username" id="id_username" required placeholder=" " autofocus>
                         <label>Username</label>
                     </div>
                     <div class="inputBox">
+                        <label for="id_password" class="visually-hidden">Password</label>
                         <input type="password" id="id_password" name="password" required placeholder=" ">
                         <label>Password</label>
-                        <span class="toggle-password" id="togglePassword">
+                        <span class="toggle-password" id="togglePassword" tabindex="0" role="button" aria-label="Toggle password visibility">
                             <i class="toggle-password-icon fa-solid fa-eye"></i>
                         </span>
-                        <script>
-                            (function() {
-                                var passwordInput = document.getElementById("id_password");
-                                var toggleBtn = document.getElementById("togglePassword");
-                                if (passwordInput && toggleBtn) {
-                                    toggleBtn.addEventListener("click", function() {
-                                        if (passwordInput.type === "password") {
-                                            passwordInput.type = "text";
-                                            toggleBtn.innerHTML = '<i class="toggle-password-icon fa-solid fa-eye"></i>';
-                                        } else {
-                                            passwordInput.type = "password";
-                                            toggleBtn.innerHTML = '<i class="toggle-password-icon fa-solid fa-eye"></i>';
-                                        }
-                                    });
-                                }
-                            })();
-                        </script>
+
                     </div>
                     <div class="inputBox">
                         <input type="submit" value="Log in" formmethod="post">
@@ -94,3 +80,4 @@
     </section>
 </form>
 {% endblock content %}
+

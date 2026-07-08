@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 from .models import (
     About, Education, Experience, Skill, Project, Contact,
     Article, Comment, CV, Certificate, MainCertificate, Subscriber,
-    Publication,  PageVisit, Visitor
+    Publication,  PageVisit, Visitor, TechSkill, ExperienceBullet, Author
 )
 
 # Register your models here.
@@ -35,10 +35,14 @@ class EducationAdmin(admin.ModelAdmin):
     )
     ordering = ('-start_date',)
 
+class ExperienceBulletInline(admin.TabularInline):
+    model = ExperienceBullet
+    extra = 1
+
 class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('role', 'company_name', 'start_date', 'end_date', 'is_ongoing', 'tech_stack')
+    list_display = ('role', 'company_name', 'start_date', 'end_date', 'is_ongoing')
     list_filter = ('start_date', 'end_date', 'is_ongoing', 'company_name')
-    search_fields = ('role', 'company_name', 'tech_stack')
+    search_fields = ('role', 'company_name')
     fieldsets = (
         ('Job Overview', {
             'fields': ('role', 'company_name')
@@ -47,10 +51,12 @@ class ExperienceAdmin(admin.ModelAdmin):
             'fields': ('start_date', 'end_date', 'is_ongoing')
         }),
         ('Responsibilities & Skills', {
-            'fields': ('bullet_points', 'tech_stack'),
+            'fields': ('tech_stack_m2m',),
         }),
     )
+    inlines = [ExperienceBulletInline]
     ordering = ('-start_date',)
+    filter_horizontal = ('tech_stack_m2m',)
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'number', 'submitted_date')
@@ -62,9 +68,10 @@ class SkillAdmin(admin.ModelAdmin):
     search_fields = ('language',)
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'client', 'tech')
+    filter_horizontal = ('tech_m2m',)
+    list_display = ('title', 'date', 'client')
     list_filter = ('date', 'client')
-    search_fields = ('title', 'tech', 'client')
+    search_fields = ('title', 'client')
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'likes')
@@ -100,15 +107,19 @@ class SubscriberAdmin(admin.ModelAdmin):
     search_fields = ('email',)
 
 class PublicationAdmin(admin.ModelAdmin):
+    filter_horizontal = ('authors_m2m',)
     list_display = ('title', 'date', 'place')
     list_filter = ('date', 'place')
-    search_fields = ('title', 'authors')
+    search_fields = ('title',)
 
 admin.site.register(CV)
 admin.site.register(Certificate, CertificateAdmin)
 admin.site.register(MainCertificate, MainCertificateAdmin)
 admin.site.register(Subscriber, SubscriberAdmin)
 admin.site.register(Publication, PublicationAdmin)
+admin.site.register(TechSkill)
+admin.site.register(Author)
+
 
 class PageVisitInline(admin.TabularInline):
     model = PageVisit

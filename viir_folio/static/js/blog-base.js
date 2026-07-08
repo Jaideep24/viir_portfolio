@@ -25,6 +25,7 @@ function generateBackgroundSpans() {
         cols = 10;
     }
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { cols = 2; }
     const spanSize = window.innerWidth / cols;
     const rows = Math.ceil(window.innerHeight / spanSize) + 4; // Add extra rows to ensure full coverage
     const totalSpans = cols * rows;
@@ -124,10 +125,16 @@ function darktheme() {
    3. PASSWORD TOGGLE
    -------------------------------------------------------------------------- */
 
-function myFunction() {
-    var x = document.getElementById("password");
+function myFunction(e) {
+    if (e) e.preventDefault();
     var toggleBtn = document.getElementById("togglePassword");
-    if (!x || !toggleBtn) return;
+    if (!toggleBtn) return;
+
+    var container = toggleBtn.closest(".inputBox");
+    if (!container) return;
+
+    var x = container.querySelector("input[type='password'], input[type='text']");
+    if (!x) return;
 
     if (x.type === "password") {
         x.type = "text";

@@ -12,14 +12,15 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Configuration object
+
 let config = {
-    gridSize: 40,
+    gridSize: window.innerWidth < 768 ? 60 : 40,
     gridColor: '#334155',
-    particleCount: 60,
+    particleCount: window.innerWidth < 768 ? 30 : 60,
     particleSpeedMin: 0.5,
     particleSpeedMax: 5,
     particleColors: ['#ffffff', '#64748b', '#94a3b8'],
-    trailLength: 100,
+    trailLength: window.innerWidth < 768 ? 50 : 100,
     backgroundColor: '#0f172a'
 };
 
@@ -149,10 +150,26 @@ class Particle {
 
 const particles = Array(config.particleCount).fill().map(() => new Particle());
 
+
+let isCanvasVisible = true;
+const observer = new IntersectionObserver((entries) => {
+    isCanvasVisible = entries[0].isIntersecting;
+}, { threshold: 0 });
+
+const heroSection = document.querySelector('#home') || document.querySelector('.hero') || document.body;
+if (heroSection !== document.body) {
+    observer.observe(heroSection);
+}
+
 function animate() {
+    if (!isCanvasVisible) {
+        requestAnimationFrame(animate);
+        return;
+    }
     createGrid();
     
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const isLoginPage = document.body.classList.contains('login-page');
     
     if (!isLoginPage && !prefersReducedMotion) {
@@ -192,8 +209,11 @@ window.updateGridTheme = function(isDarkMode) {
     updateConfig(isDarkMode);
     particles.forEach(particle => particle.reset());
     
+    // Always draw once immediately to update background colors even if animation is paused
+    createGrid();
+    
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-        createGrid();
+    if (!prefersReducedMotion) {
+        particles.forEach(particle => particle.draw());
     }
 };

@@ -57,41 +57,19 @@
                 {% endif %}
                 <div class="form">
                     <div class="inputBox">
-                        <input type="text" name="username" required placeholder=" ">
+                        <label for="username" class="visually-hidden">Username</label>
+                        <input type="text" id="username" name="username" required placeholder=" ">
                         <label>Username</label>
                     </div>
                     <div class="inputBox">
+                        <label for="password" class="visually-hidden">Password</label>
                         <input type="password" id="password" name="password" required placeholder=" ">
                         <label>Password</label>
-                        <span class="toggle-password" id="togglePassword" style="cursor: pointer; z-index: 10000; position: absolute; pointer-events: auto;">
+                        <span class="toggle-password" id="togglePassword" tabindex="0" role="button" aria-label="Toggle password visibility" style="cursor: pointer; z-index: 10000; position: absolute; pointer-events: auto;">
                             <i class="fa-solid fa-eye toggle-password-icon" id="iconShow" style="pointer-events: none;"></i>
                             <i class="fa-solid fa-eye-slash toggle-password-icon" id="iconHide" style="display: none; pointer-events: none;"></i>
                         </span>
-                        <script>
-                            (function() {
-                                document.addEventListener("click", function(e) {
-                                    var toggleBtn = e.target.closest("#togglePassword");
-                                    if (!toggleBtn) return;
-                                    
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    
-                                    var passwordInput = document.getElementById("password");
-                                    var iconShow = document.getElementById("iconShow");
-                                    var iconHide = document.getElementById("iconHide");
-                                    
-                                    if (passwordInput && passwordInput.type === "password") {
-                                        passwordInput.type = "text";
-                                        if (iconShow) iconShow.style.display = "none";
-                                        if (iconHide) iconHide.style.display = "";
-                                    } else if (passwordInput) {
-                                        passwordInput.type = "password";
-                                        if (iconShow) iconShow.style.display = "";
-                                        if (iconHide) iconHide.style.display = "none";
-                                    }
-                                });
-                            })();
-                        </script>
+
                     </div>
                     <div class="inputBox">
                         <input type="submit" value="Login" formmethod="post">

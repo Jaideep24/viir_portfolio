@@ -40,7 +40,7 @@ admin.site.index_title = "Welcome to Viir Portfolio Management"
 
 urlpatterns = [
     path('dashboard/', admin.site.urls),
-    path('', index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('blogspace/', Blogspace.as_view(), name='blogspace'),
     # Numeric article URLs FIRST for backward compatibility (redirects to slug)
     path('blog/<int:pk>/', redirect_article_numeric_to_slug, name='detail_blog_numeric'),
@@ -71,3 +71,4 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Custom 404 handler (active when DEBUG=False in production)
 handler404 = 'viir_folio.views.custom_404'
+

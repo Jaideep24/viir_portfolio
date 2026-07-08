@@ -8,11 +8,10 @@ function initScrollAnim() {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add the 'visible' class to trigger CSS transitions
                 entry.target.classList.add('is-visible');
-                
-                // Optional: stop observing if we only want it to animate once
-                // observer.unobserve(entry.target);
+            } else {
+                // Remove the class so it animates again when scrolling back
+                entry.target.classList.remove('is-visible');
             }
         });
     }, observerOptions);

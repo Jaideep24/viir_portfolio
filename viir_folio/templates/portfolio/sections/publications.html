@@ -1,14 +1,11 @@
-<!-- ============================================================ -->
-    <!-- PUBLICATIONS SECTION -->
-    <!-- ============================================================ -->
-    <section id="publications" class="br-portfolio padding-tb-80">
+    <section id="research" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
-                <h2>My <span>Publications</span></h2>
-                <span class="ligh-title">Publications</span>
+
+                <span class="ligh-title">Research</span>
             </div>
             <div class="search-bar">
-                <label for="searchInput" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">Search Publications</label>
+                <label for="searchInput" class="visually-hidden">Search</label>
                 <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
             </div>
             <div class="pub-list reveal-stagger" id="pubList">
@@ -19,11 +16,11 @@
                     <div class="pub-date">{{ object.date }}</div>
                     <div class="pub-title">{{ object.title }}</div>
                     <div class="pub-authors">
-                        {% for author in object.authors_list %}
-                            {% if author == "Viir Phuria" %}
-                                <strong>{{ author }}</strong>
+                        {% for author in object.authors_m2m.all %}
+                            {% if author.name == "Viir Phuria" %}
+                                <strong>{{ author.name }}</strong>
                             {% else %}
-                                {{ author }}
+                                {{ author.name }}
                             {% endif %}{% if not forloop.last %}, {% endif %}
                         {% empty %}
                             {{ object.authors }}

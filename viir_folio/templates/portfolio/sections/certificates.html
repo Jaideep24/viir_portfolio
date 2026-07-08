@@ -1,12 +1,10 @@
-<!-- ============================================================ -->
-    <!-- CERTIFICATES SECTION (Carousel) -->
-    <!-- ============================================================ -->
-    <section id="certificate" class="br-experience padding-tb-80">
+{% load static %}
+    <section id="credentials" class="br-experience padding-tb-80">
         <div class="container">
             <div class="row">
                 <div class="section-title reveal-up">
-                    <h2>My <span>Certificates</span></h2>
-                    <span class="ligh-title">Certificates</span>
+
+                    <span class="ligh-title">Credentials</span>
                 </div>
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -15,7 +13,7 @@
                             <div class="text-center">
                                 <h3>{{ object.title }}</h3>
                             </div>
-                            <div class="text-center"><img src="{{ object.image.url }}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate"></div>
+                            <div class="text-center"><img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate"></div>
                         </div>
                         {% endfor %}
                     </div>

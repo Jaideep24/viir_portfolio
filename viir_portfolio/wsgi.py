@@ -21,7 +21,7 @@ try:
         duplicate.dicts = self.dicts[:]
         return duplicate
     django.template.context.BaseContext.__copy__ = patch_copy
-except Exception:
+except (ImportError, AttributeError):
     pass
 
 application = get_wsgi_application()

@@ -20,7 +20,7 @@
       "item": {
         "@type": "ScholarlyArticle",
         "name": "{{ pub.title|escapejs }}",
-        "author": [{% for author in pub.authors_list %}{"@type": "Person", "name": "{{ author|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "author": [{% for author in pub.authors_m2m.all %}{"@type": "Person", "name": "{{ author.name|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}],
         "datePublished": "{{ pub.date|date:'Y-m-d' }}",
         "publisher": {
           "@type": "Organization",

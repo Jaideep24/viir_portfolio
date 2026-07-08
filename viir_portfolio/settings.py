@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'compressor',
+    'axes',
     'viir_folio',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'viir_folio.middleware.ContentSecurityPolicyMiddleware',
@@ -78,9 +80,9 @@ MIDDLEWARE = [
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Strict'
 # SESSION_COOKIE_SECURE: always True unless explicitly disabled (e.g. local HTTP dev)
-SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True') == 'True'
+SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True') == 'True'
+CSRF_COOKIE_SECURE = not DEBUG
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 # Always-on security headers (do not require HTTPS)
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -268,6 +270,7 @@ STATIC_ROOT = BASE_DIR / 'viir_folio' / 'static'
 
 # Static file serving for production (CompressedStaticFilesStorage won't crash on missing files)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+WHITENOISE_MAX_AGE = 31536000  # Cache forever (1 year)
 # WHITENOISE_MANIFEST_STRICT = False # Reverted due to broken admin font references
 
 # Media files
@@ -285,12 +288,25 @@ STATICFILES_FINDERS = (
 )
 
 # Caching Configuration
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
+
+if DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+        }
     }
-}
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379/1",
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            }
+        }
+    }
+
 
 # Django Compressor Settings
 COMPRESS_ENABLED = not DEBUG
@@ -312,3 +328,13 @@ def _patched_starttls(self, keyfile=None, certfile=None, context=None):
     return _original_starttls(self, context=context)
 
 smtplib.SMTP.starttls = _patched_starttls
+
+# Axes Security config
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1
+AXES_RESET_ON_SUCCESS = True
+AXES_LOCKOUT_TEMPLATE = '403_lockout.html'

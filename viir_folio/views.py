@@ -1,5 +1,7 @@
+import threading
 import os
 import logging
+import smtplib
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
@@ -29,62 +31,66 @@ logger = logging.getLogger(__name__)
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
-@ratelimit(key='ip', rate='3/5m', method='POST', block=False)
-def index(request):
-    active_item = Certificate.objects.filter(show=True).first()
-    # Experience now has start_date and end_date as DateField
-    experiences = Experience.objects.all().order_by('-start_date')
-    # Education now has start_date and end_date as integer fields
-    education = Education.objects.all().order_by('-start_date')
-    
-    skills = Skill.objects.all()
-    # Categorize skills for the recruiter chip grid
-    languages = []
-    frameworks = []
-    tools_dbs = []
-    security_tools = []
-    
-    SECURITY_TOOL_NAMES = [
-        'burp suite', 'burpsuite', 'wireshark', 'nmap', 'kali', 'kali linux',
-        'metasploit', 'owasp', 'owasp zap', 'nessus', 'sqlmap', 'aircrack',
-        'hashcat', 'john the ripper', 'hydra', 'nikto', 'maltego', 'shodan'
-    ]
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
-    for s in skills:
-        lang_lower = s.language.lower()
-        if any(sec in lang_lower for sec in SECURITY_TOOL_NAMES):
-            security_tools.append(s)
-        elif lang_lower in ['python', 'javascript', 'js', 'dart', 'html', 'html5', 'css', 'css3', 'c++', 'c', 'java', 'sql', 'typescript', 'go', 'golang']:
-            languages.append(s)
-        elif lang_lower in ['django', 'flutter', 'react', 'bootstrap', 'tailwind', 'express', 'node', 'nodejs', 'nextjs', 'vue', 'fastapi']:
-            frameworks.append(s)
-        else:
-            tools_dbs.append(s)
-            
-    context = {
-        "education": education,
-        "experience": experiences,
-        "projects": Project.objects.all(),
-        "about": About.objects.all(),
-        "about_global": About.objects.first(),
-        "skill": skills,
-        "languages": languages,
-        "frameworks": frameworks,
-        "tools_dbs": tools_dbs,
-        "security_tools": security_tools,
-        'article': Article.objects.all().order_by('-date')[:3],
-        'cv': CV.objects.all(),
-        'certificate': Certificate.objects.all(),
-        'maincertificate': MainCertificate.objects.all(),
-        'publications': Publication.objects.all(),
-        'active_item': active_item,
-        'success': request.session.pop('contact_success', False)
-    }
-    
-    if request.method == 'POST':
+class IndexView(TemplateView):
+    template_name = 'portfolio/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_item = Certificate.objects.filter(show=True).first()
+        experiences = Experience.objects.all().order_by('-start_date')
+        education = Education.objects.all().order_by('-start_date')
+        skills = Skill.objects.all()
+        
+        languages = []
+        frameworks = []
+        tools_dbs = []
+        security_tools = []
+        
+        SECURITY_TOOL_NAMES = [
+            'burp suite', 'burpsuite', 'wireshark', 'nmap', 'kali', 'kali linux',
+            'metasploit', 'owasp', 'owasp zap', 'nessus', 'sqlmap', 'aircrack',
+            'hashcat', 'john the ripper', 'hydra', 'nikto', 'maltego', 'shodan'
+        ]
+
+        for s in skills:
+            lang_lower = s.language.lower()
+            if any(sec in lang_lower for sec in SECURITY_TOOL_NAMES):
+                security_tools.append(s)
+            elif lang_lower in ['python', 'javascript', 'js', 'dart', 'html', 'html5', 'css', 'css3', 'c++', 'c', 'java', 'sql', 'typescript', 'go', 'golang']:
+                languages.append(s)
+            elif lang_lower in ['django', 'flutter', 'react', 'bootstrap', 'tailwind', 'express', 'node', 'nodejs', 'nextjs', 'vue', 'fastapi']:
+                frameworks.append(s)
+            else:
+                tools_dbs.append(s)
+                
+        context.update({
+            "education": education,
+            "experience": experiences,
+            "projects": Project.objects.all(),
+            "about": About.objects.all(),
+            "about_global": About.objects.first(),
+            "skill": skills,
+            "languages": languages,
+            "frameworks": frameworks,
+            "tools_dbs": tools_dbs,
+            "security_tools": security_tools,
+            'article': Article.objects.defer('content').order_by('-date')[:3],
+            'cv': CV.objects.all(),
+            'certificate': Certificate.objects.all(),
+            'maincertificate': MainCertificate.objects.all(),
+            'publications': Publication.objects.all(),
+            'active_item': active_item,
+            'success': self.request.session.pop('contact_success', False)
+        })
+        return context
+
+    @method_decorator(ratelimit(key='ip', rate='3/5m', method='POST', block=False))
+    def post(self, request, *args, **kwargs):
         is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
         
-        # Rate-limiting: max 3 messages per 5 minutes per IP
         if getattr(request, 'limited', False):
             if is_ajax:
                 return JsonResponse({'success': False, 'message': 'Too many messages sent. Please wait.'}, status=429)
@@ -93,8 +99,6 @@ def index(request):
 
         form = ContactForm(request.POST)
         
-        # Honeypot check — if 'website' field is filled, this is a bot submission.
-        # Silently discard and redirect as success so bots get no feedback.
         if request.POST.get('website'):
             logger.warning('Honeypot triggered on contact form — bot submission discarded')
             if is_ajax:
@@ -104,12 +108,9 @@ def index(request):
         
         if form.is_valid():
             form.save()
-            # Raise loudly if recipient is not configured — silent fallback means missed contacts
             recipient_email = os.getenv('EMAIL_RECIPIENT_EMAIL')
             if not recipient_email:
-                raise ImproperlyConfigured(
-                    'EMAIL_RECIPIENT_EMAIL must be set in .env — contact form submissions will not be emailed without it.'
-                )
+                raise ImproperlyConfigured('EMAIL_RECIPIENT_EMAIL must be set in .env — contact form submissions will not be emailed without it.')
             subject = 'Portfolio contact'
             submission_date = (
                 form.instance.submitted_date.strftime('%d/%m/%Y %H:%M')
@@ -125,15 +126,10 @@ def index(request):
             from_email = settings.EMAIL_HOST_USER
             reply_to_email = form.cleaned_data['email']
 
-            # Send email — form data already saved; log failures instead of crashing
-            email_msg = EmailMessage(
-                subject, message, from_email,
-                to=[recipient_email],
-                reply_to=[reply_to_email]
-            )
+            email_msg = EmailMessage(subject, message, from_email, to=[recipient_email], reply_to=[reply_to_email])
             try:
-                email_msg.send(fail_silently=False)
-            except Exception:
+                threading.Thread(target=email_msg.send, kwargs={"fail_silently": False}).start()
+            except smtplib.SMTPException as e:
                 logger.exception('Contact form email failed to send — data saved to DB')
             
             if is_ajax:
@@ -144,10 +140,12 @@ def index(request):
         else:
             if is_ajax:
                 return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-            # Form validation failed - return with context
-            return render(request, 'portfolio/index.html', context)
-    
-    return render(request, "portfolio/index.html", context)
+            messages.error(request, "Please correct the errors below.")
+            context = self.get_context_data(**kwargs)
+            return render(request, self.template_name, context)
+
+
+
     
 def certificate_view(request):
     return render(request, 'portfolio/certificate.html', {'certificate': Certificate.objects.all().order_by('-date'), 'certi': True})
@@ -159,7 +157,7 @@ def is_verified_user(request):
 def login_view(request):
     # Check if already logged in and verified (auto-bypass)
     if is_verified_user(request):
-        return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+        return render(request, 'blog/view_blog.html', {"article": Article.objects.defer("content").order_by("-date")})
 
     if request.method == "POST":
         # ── Rate-limit check ──────────────────────────────────────────────────
@@ -176,7 +174,7 @@ def login_view(request):
             if user is not None:
                 # Successful login — log user in
                 auth_login(request, user)
-                return render(request, 'blog/view_blog.html', {"article": Article.objects.all()})
+                return render(request, 'blog/view_blog.html', {"article": Article.objects.defer("content").order_by("-date")})
             else:
                 messages.error(request, "Email or password incorrect")
                 return redirect('login')
@@ -261,8 +259,9 @@ Viir Phuria"""
 
             # Send confirmation email to the new subscriber
             try:
-                EmailMessage(subject, message, from_email, to=[email]).send()
-            except Exception:
+                msg = EmailMessage(subject, message, from_email, to=[email])
+                threading.Thread(target=msg.send).start()
+            except smtplib.SMTPException as e:
                 logger.exception('Subscriber confirmation email failed — subscriber saved to DB')
             request.session['subscription_success'] = True
             return HttpResponseRedirect(request.path_info)
@@ -334,6 +333,14 @@ class DetailArticleView(DetailView):
         # Handle comment form submission
         form = CommentForm(request.POST)
         if form.is_valid():
+            import time
+            now = time.time()
+            last_comment = request.session.get('last_comment_time', 0)
+            if now - last_comment < 60:
+                messages.error(request, "Please wait 60 seconds before posting another comment.")
+                return HttpResponseRedirect(self.request.path_info)
+                
+            request.session['last_comment_time'] = now
             comment = form.save(commit=False)
             comment.article = self.object
             comment.save()
@@ -400,8 +407,9 @@ Viir Phuria"""
 
                 # Send notification to all subscribers (using BCC to hide recipient list)
                 try:
-                    EmailMessage(subject, message, from_email, bcc=subscriber_emails).send()
-                except Exception:
+                    msg = EmailMessage(subject, message, from_email, bcc=subscriber_emails)
+                    threading.Thread(target=msg.send).start()
+                except smtplib.SMTPException as e:
                     logger.exception('New article subscriber email failed to send')
             return redirect('blogspace')
         

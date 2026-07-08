@@ -1,4 +1,5 @@
 import os
+from django.db.utils import OperationalError, ProgrammingError
 
 def site_meta(request):
     """Expose site-level SEO settings to templates.
@@ -36,7 +37,7 @@ def site_meta(request):
     try:
         from .models import About
         context['about_global'] = About.objects.first()
-    except Exception:
+    except (OperationalError, ProgrammingError):
         context['about_global'] = None
 
     return context

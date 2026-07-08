@@ -29,7 +29,7 @@
         "@id": "{{ site_url }}/#person",
         "name": "Viir Phuria"
       }{% if article.image %},
-      "image": "{{ site_url }}{{ article.image.url }}"
+      "image": "{{ site_url }}{% if article.image %}{{ article.image.url }}{% else %}{% static 'img/default-blog-image.png' %}{% endif %}"
       {% endif %}
     }
     </script>
@@ -43,7 +43,7 @@
                 <h1 class="blog-title" id="blogTitle">{{ article.title }}</h1>
             </div>
             <div class="blog-image">
-                <img id="blogImage" src="{{ article.image.url }}" alt="{{ article.title }} &mdash; cover image">
+                <img id="blogImage" src="{% if article.image %}{{ article.image.url }}{% else %}{% static 'img/default-blog-image.png' %}{% endif %}" alt="{{ article.title }} &mdash; cover image" fetchpriority="high" decoding="async" width="1200" height="630" style="object-fit: cover;">
             </div>
             <div class="blog-content" id="blogContent">
                 {{ article.content|safe }}

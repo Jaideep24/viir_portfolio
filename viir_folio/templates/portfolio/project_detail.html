@@ -10,9 +10,9 @@
 {% block meta %}
   {% if project %}
     {% if project.image %}
-      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords=project.tech|add:', Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
     {% else %}
-      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic og_type='website' meta_keywords=project.tech|add:', Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
     {% endif %}
     <!-- Project structured data -->
     {% include 'includes/sd_project.html' with project=project %}
@@ -35,10 +35,10 @@
         <p><strong>Client:</strong> {{ project.client }}</p>
         {% endif %}
         <p><strong>Date:</strong> {{ project.date }}</p>
-        <p><strong>Tech Stack:</strong> {{ project.tech }}</p>
+        <p><strong>Tech Stack:</strong> {% for t in project.tech_m2m.all %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
         <div class="project-image text-center my-3">
           {% if project.image %}
-          <img src="{{ project.image.url }}" alt="{{ project.title }} — project by Viir Phuria" style="max-width:100%;height:auto;border-radius:12px;"/>
+          <img src="{% if project.image %}{{ project.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ project.title }} — project by Viir Phuria" style="max-width:100%;height:auto;border-radius:12px;"/>
           {% endif %}
         </div>
         <div class="project-topic mb-4">

@@ -1,7 +1,44 @@
+body.dark {
+  --bg-light: #07091c;
+  --bg-dark: #f8fafc;
+  --text-main: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #333333;
+  --gray-800: #f8fafc;
+  --gray-600: #cbd5e1;
+  --gray-500: #94a3b8;
+  --gray-400: #6b7280;
+  --gray-300: #333333;
+  --gray-200: #1e293b;
+  --gray-100: #0f172a;
+  --gray-50: #07091c;
+}
+
 :root{
-  --accent: #8b5cf6;
-  --accent-600: #7c3aed;
-  --muted: #6b7280;
+
+
+
+  --text-main: #0f172a;
+  --text-secondary: #1e293b;
+  --bg-dark: #07091c;
+  --bg-light: #f8fafc;
+  --border-color: #cbd5e1;
+  --danger: #ff6f6f;
+  --accent-light: #8c6fff;
+  --accent-lighter: #a48fff;
+  --gray-800: #333333;
+  --gray-600: #555555;
+  --gray-500: #777777;
+  --gray-400: #999999;
+  --gray-300: #dfdfdf;
+  --gray-200: #EEEEEE;
+  --gray-100: #f6f6f6;
+  --gray-50: #f9f9f9;
+
+  --navbar-height: 70px;
+  --accent: var(--accent);
+  --accent-600: var(--accent-600);
+  --muted: var(--muted);
   --base-line-height: 1.35;
   --radius: 12px;
   --card-shadow: 0 8px 24px rgba(15,15,15,0.08);
@@ -14,7 +51,7 @@
 body{
   font-family: var(--body-font), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   line-height: var(--base-line-height);
-  color: #0f172a;
+  color: var(--text-main);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
@@ -50,7 +87,7 @@ p{line-height:var(--base-line-height);color:var(--muted)}
 /* Admin / Editor and Login panels */
 .admin-panel{background:transparent}
 .admin-header .create-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1.5px solid rgba(15,23,42,0.06);background:transparent;color:var(--accent-600);font-weight:600}
-.admin-header .create-btn:hover{background:var(--accent);color:#f8fafc;border-color:transparent}
+.admin-header .create-btn:hover{background:var(--accent);color:var(--bg-light);border-color:transparent}
 
 /* Buttons and form fields */
 input,textarea,select{border-radius: var(--radius-md);border:1px solid rgba(15,23,42,0.06);padding:10px 12px}
@@ -58,7 +95,7 @@ button{border-radius:999px}
 .btn{transition:all .12s ease}
 .capsule-btn{border-radius:999px;padding:8px 18px;border:1px solid rgba(15,23,42,0.08)}
 .capsule-btn.view-project-btn{background:transparent;border:1px solid rgba(15,23,42,0.06)}
-.capsule-btn.view-project-btn:hover{background:var(--accent);color:#f8fafc;border-color:var(--accent)}
+.capsule-btn.view-project-btn:hover{background:var(--accent);color:var(--bg-light);border-color:var(--accent)}
 
 /* Small utilities to match portfolio spacing */
 .margin-t-80{margin-top:80px}
@@ -117,9 +154,30 @@ a:focus, button:focus, .btn:focus, input[type="submit"]:focus, input:focus {
 }
 
 :root{
-  --accent: #8b5cf6;
-  --accent-600: #7c3aed;
-  --muted: #6b7280;
+
+
+
+  --text-main: #0f172a;
+  --text-secondary: #1e293b;
+  --bg-dark: #07091c;
+  --bg-light: #f8fafc;
+  --border-color: #cbd5e1;
+  --danger: #ff6f6f;
+  --accent-light: #8c6fff;
+  --accent-lighter: #a48fff;
+  --gray-800: #333333;
+  --gray-600: #555555;
+  --gray-500: #777777;
+  --gray-400: #999999;
+  --gray-300: #dfdfdf;
+  --gray-200: #EEEEEE;
+  --gray-100: #f6f6f6;
+  --gray-50: #f9f9f9;
+
+  --navbar-height: 70px;
+  --accent: var(--accent);
+  --accent-600: var(--accent-600);
+  --muted: var(--muted);
   --base-line-height: 1.35;
   --radius: 12px;
   --card-shadow: 0 8px 24px rgba(15,15,15,0.08);
@@ -132,7 +190,7 @@ a:focus, button:focus, .btn:focus, input[type="submit"]:focus, input:focus {
 body{
   font-family: var(--body-font), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   line-height: var(--base-line-height);
-  color: #0f172a;
+  color: var(--text-main);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
@@ -168,7 +226,7 @@ p{line-height:var(--base-line-height);color:var(--muted)}
 /* Admin / Editor and Login panels */
 .admin-panel{background:transparent}
 .admin-header .create-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1.5px solid rgba(15,23,42,0.06);background:transparent;color:var(--accent-600);font-weight:600}
-.admin-header .create-btn:hover{background:var(--accent);color:#f8fafc;border-color:transparent}
+.admin-header .create-btn:hover{background:var(--accent);color:var(--bg-light);border-color:transparent}
 
 /* Buttons and form fields */
 input,textarea,select{border-radius: var(--radius-md);border:1px solid rgba(15,23,42,0.06);padding:10px 12px}
@@ -176,7 +234,7 @@ button{border-radius:999px}
 .btn{transition:all .12s ease}
 .capsule-btn{border-radius:999px;padding:8px 18px;border:1px solid rgba(15,23,42,0.08)}
 .capsule-btn.view-project-btn{background:transparent;border:1px solid rgba(15,23,42,0.06)}
-.capsule-btn.view-project-btn:hover{background:var(--accent);color:#f8fafc;border-color:var(--accent)}
+.capsule-btn.view-project-btn:hover{background:var(--accent);color:var(--bg-light);border-color:var(--accent)}
 
 /* Small utilities to match portfolio spacing */
 .margin-t-80{margin-top:80px}
@@ -236,6 +294,31 @@ a:focus, button:focus, .btn:focus, input[type="submit"]:focus, input:focus {
 
 /* Global Accessibility Focus Ring */
 :focus-visible {
-    outline: 2px solid #a48fff !important;
+    outline: 2px solid var(--accent-lighter) !important;
     outline-offset: 2px !important;
+}
+
+.pt-navbar-offset {
+  padding-top: calc(var(--navbar-height) + 10px);
+}
+
+/* Premium Scroll Animations (Stripe/Vercel style cubic-bezier) */
+.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger-child {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(40px); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-scale { transform: scale(0.92); }
+
+.is-visible.reveal-up,
+.is-visible.reveal-left,
+.is-visible.reveal-right,
+.is-visible.reveal-scale,
+.is-visible.reveal-stagger-child,
+.is-visible .reveal-stagger-child {
+  opacity: 1;
+  transform: translate(0) scale(1) !important;
 }

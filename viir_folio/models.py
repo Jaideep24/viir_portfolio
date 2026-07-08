@@ -10,6 +10,28 @@ from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 
+class TechSkill(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    def __str__(self):
+        return self.name
+
+class ExperienceBullet(models.Model):
+    experience = models.ForeignKey('Experience', on_delete=models.CASCADE, related_name='bullets')
+    text = models.CharField(max_length=500)
+    order = models.PositiveIntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order', 'id']
+        
+    def __str__(self):
+        return self.text[:50]
+
+class Author(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    def __str__(self):
+        return self.name
+
+
 
 class Education(models.Model):
     start_date = models.IntegerField(help_text="Start year (YYYY)")
@@ -33,8 +55,10 @@ class Experience(models.Model):
     is_ongoing = models.BooleanField(default=False, help_text="Check if currently working here")
     company_name = models.CharField(max_length=200, help_text="Company/Organization name")
     role = models.CharField(max_length=200, help_text="Job title/Role")
-    bullet_points = models.TextField(blank=True, help_text="Work description (comma-separated bullet points)")
-    tech_stack = models.CharField(max_length=500, blank=True, help_text="Tech stack (comma-separated)")
+    bullet_points = models.TextField(blank=True, help_text="Work description (comma-separated bullet points)") # DEPRECATED
+    # bullet_points is now replaced by ExperienceBullet relation
+    tech_stack = models.CharField(max_length=500, blank=True, help_text="Tech stack (comma-separated)") # DEPRECATED
+    tech_stack_m2m = models.ManyToManyField(TechSkill, blank=True, related_name="experiences", help_text="Tech stack")
     
     def __str__(self):
         end = "Present" if self.is_ongoing else (self.end_date.strftime('%d/%m/%Y') if self.end_date else "No end date")
@@ -61,13 +85,14 @@ class Project(models.Model):
 
     date=models.DateField()
     client=models.CharField(max_length=100, blank=True, null=True)
-    tech=models.CharField(max_length=100)
+    tech=models.CharField(max_length=100) # DEPRECATED
+    tech_m2m = models.ManyToManyField(TechSkill, blank=True, related_name="projects")
     url=models.URLField(blank=True, null=True)
     demo_video=models.URLField(blank=True, null=True)
     github_url=models.URLField(blank=True, null=True, help_text="GitHub repository URL")
     description=models.TextField(blank=True, help_text="Detailed project case study using the PAR method (Problem, Action, Results).")
     category=MultiSelectField(max_length=100, choices=(("webdev","Web Dev"),("appdev", "App Dev"), ("mlai","ML/AI"),("iot","IoT")), default="webdev", max_choices=5)
-    image=models.ImageField(default="image.png")
+    image=models.ImageField(blank=True, null=True)
     def __str__(self):
         return self.title
     
@@ -173,7 +198,7 @@ class Certificate(models.Model):
 
 class MainCertificate(models.Model):
     title=models.CharField(max_length=100)
-    image=models.ImageField(default="image.png")    
+    image=models.ImageField(blank=True, null=True)    
     def __str__(self):
         return self.title
 
@@ -196,7 +221,7 @@ class Article(models.Model):
     content = HTMLField()
     date = models.DateField(db_index=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(default="default-blog-image.png")
+    image = models.ImageField(blank=True, null=True)
     likes = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
@@ -242,7 +267,8 @@ class Comment(models.Model):
 
 class Publication(models.Model):
     title = models.CharField(max_length=199)
-    authors = models.CharField(max_length=300)
+    authors = models.CharField(max_length=300) # DEPRECATED
+    authors_m2m = models.ManyToManyField(Author, blank=True, related_name="publications")
     date = models.DateField()
     place = models.CharField(max_length=300)
     url = models.URLField()

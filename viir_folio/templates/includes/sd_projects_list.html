@@ -28,7 +28,7 @@
           "name": "Viir Phuria"
         },
         "dateCreated": "{{ proj.date|date:'Y-m-d' }}",
-        "keywords": "{{ proj.tech|escapejs }}",
+        "keywords": "{% for t in proj.tech_m2m.all %}{{ t.name|escapejs }}{% if not forloop.last %}, {% endif %}{% endfor %}",
         "url": "{{ site_url }}/project/{{ proj.pk }}/"
       }
     }{% if not forloop.last %},{% endif %}

@@ -183,3 +183,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+// UX-003: Precise Scroll Restoration
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('scrollPosition', window.scrollY);
+});
+
+window.addEventListener('load', () => {
+    const scrollPos = sessionStorage.getItem('scrollPosition');
+    if (scrollPos !== null) {
+        // Wait for fonts and async resources to stabilize layout
+        setTimeout(() => {
+            window.scrollTo({ top: parseInt(scrollPos, 10), behavior: 'auto' });
+            sessionStorage.removeItem('scrollPosition');
+        }, 50);
+    }
+});
