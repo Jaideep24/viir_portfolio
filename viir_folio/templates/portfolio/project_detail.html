@@ -10,7 +10,11 @@
 {% block meta %}
   {% if project %}
     {% if project.image %}
-      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+      {% if project.image %}
+    {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+{% else %}
+    {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic  og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+{% endif %}
     {% else %}
       {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
     {% endif %}

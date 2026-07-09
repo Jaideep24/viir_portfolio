@@ -6,16 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0004_auto_20240730_1358'),
+        ("viir_folio", "0004_auto_20240730_1358"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Languages',
+            name="Languages",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('language', models.CharField(max_length=100)),
-                ('percentage', models.PositiveIntegerField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("language", models.CharField(max_length=100)),
+                ("percentage", models.PositiveIntegerField()),
             ],
         ),
     ]

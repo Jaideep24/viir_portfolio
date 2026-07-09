@@ -7,21 +7,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0036_add_cybersec_category'),
+        ("viir_folio", "0036_add_cybersec_category"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Expertise',
+            name="Expertise",
         ),
         migrations.AlterField(
-            model_name='project',
-            name='category',
-            field=multiselectfield.db.fields.MultiSelectField(choices=[('webdev', 'Web Dev'), ('appdev', 'App Dev'), ('graphic', 'Graphics'), ('mlai', 'ML/AI'), ('iot', 'IoT')], default='webdev', max_length=100),
+            model_name="project",
+            name="category",
+            field=multiselectfield.db.fields.MultiSelectField(
+                choices=[
+                    ("webdev", "Web Dev"),
+                    ("appdev", "App Dev"),
+                    ("graphic", "Graphics"),
+                    ("mlai", "ML/AI"),
+                    ("iot", "IoT"),
+                ],
+                default="webdev",
+                max_length=100,
+            ),
         ),
         migrations.AlterField(
-            model_name='subscriber',
-            name='email',
+            model_name="subscriber",
+            name="email",
             field=models.EmailField(max_length=254),
         ),
     ]

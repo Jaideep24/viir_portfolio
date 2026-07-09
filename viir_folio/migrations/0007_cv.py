@@ -6,15 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0006_article_comment_logger'),
+        ("viir_folio", "0006_article_comment_logger"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='cv',
+            name="cv",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pdf', models.FileField(upload_to='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("pdf", models.FileField(upload_to="")),
             ],
         ),
     ]

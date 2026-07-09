@@ -6,45 +6,57 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0044_auto_20260611_0142'),
+        ("viir_folio", "0044_auto_20260611_0142"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='about',
-            name='name',
+            model_name="about",
+            name="name",
         ),
         migrations.RemoveField(
-            model_name='about',
-            name='phone_no',
+            model_name="about",
+            name="phone_no",
         ),
         migrations.RemoveField(
-            model_name='about',
-            name='spoken_languages',
+            model_name="about",
+            name="spoken_languages",
         ),
         migrations.AddField(
-            model_name='about',
-            name='core_competencies',
-            field=models.CharField(default='Python, Django, React, AWS', help_text='Comma-separated tech stack', max_length=500),
+            model_name="about",
+            name="core_competencies",
+            field=models.CharField(
+                default="Python, Django, React, AWS",
+                help_text="Comma-separated tech stack",
+                max_length=500,
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='current_role',
-            field=models.CharField(default='Software Engineer', help_text='e.g., Full-Stack Engineer & ML Specialist', max_length=150),
+            model_name="about",
+            name="current_role",
+            field=models.CharField(
+                default="Software Engineer",
+                help_text="e.g., Full-Stack Engineer & ML Specialist",
+                max_length=150,
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='github_url',
-            field=models.URLField(blank=True, help_text='Direct link to your GitHub', null=True),
+            model_name="about",
+            name="github_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your GitHub", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='linkedin_url',
-            field=models.URLField(blank=True, help_text='Direct link to your LinkedIn', null=True),
+            model_name="about",
+            name="linkedin_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your LinkedIn", null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='about',
-            name='content',
-            field=models.TextField(help_text='Your professional bio/elevator pitch'),
+            model_name="about",
+            name="content",
+            field=models.TextField(help_text="Your professional bio/elevator pitch"),
         ),
     ]

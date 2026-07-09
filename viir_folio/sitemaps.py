@@ -1,18 +1,19 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
-from .models import Article, Project, Certificate
+from .models import Article, Certificate
 
 
 class StaticViewSitemap(Sitemap):
     """Static pages that don't change based on model data."""
-    protocol = 'https'
+
+    protocol = "https"
 
     def items(self):
         # Each item is a tuple: (url_name, priority, changefreq)
         return [
-            ('index', 1.0, 'weekly'),
-            ('blogspace', 0.9, 'daily'),
+            ("index", 1.0, "weekly"),
+            ("blogspace", 0.9, "daily"),
         ]
 
     def location(self, item):
@@ -26,7 +27,7 @@ class StaticViewSitemap(Sitemap):
 
     def lastmod(self, item):
         # Use the most recently modified content date instead of always returning today
-        latest_article = Article.objects.order_by('-date').first()
+        latest_article = Article.objects.order_by("-date").first()
         if latest_article:
             return latest_article.date
         return timezone.now().date()
@@ -34,12 +35,13 @@ class StaticViewSitemap(Sitemap):
 
 class ArticleSitemap(Sitemap):
     """Blog article pages — highest content priority."""
-    protocol = 'https'
-    changefreq = 'monthly'
+
+    protocol = "https"
+    changefreq = "monthly"
     priority = 0.8
 
     def items(self):
-        return Article.objects.defer('content').order_by('-date')
+        return Article.objects.defer("content").order_by("-date")
 
     def lastmod(self, obj):
         return obj.date
@@ -50,18 +52,19 @@ class ArticleSitemap(Sitemap):
 
 class CertificateSitemap(Sitemap):
     """Certificate page — changes rarely."""
-    protocol = 'https'
-    changefreq = 'yearly'
+
+    protocol = "https"
+    changefreq = "yearly"
     priority = 0.5
 
     def items(self):
         # One item = the Certificates listing page
-        return ['certificate']
+        return ["certificate"]
 
     def location(self, item):
         return reverse(item)
 
     def lastmod(self, item):
         # Use the date of the most recent Certificate
-        latest = Certificate.objects.order_by('-date').first()
+        latest = Certificate.objects.order_by("-date").first()
         return latest.date if latest else timezone.now().date()

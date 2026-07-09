@@ -7,49 +7,89 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0062_subscriber_subscribed_at'),
+        ("viir_folio", "0062_subscriber_subscribed_at"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='TechSkill',
+            name="TechSkill",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='ExperienceBullet',
+            name="ExperienceBullet",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=500)),
-                ('order', models.PositiveIntegerField(default=0)),
-                ('experience', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bullets', to='viir_folio.experience')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.CharField(max_length=500)),
+                ("order", models.PositiveIntegerField(default=0)),
+                (
+                    "experience",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="bullets",
+                        to="viir_folio.experience",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['order', 'id'],
+                "ordering": ["order", "id"],
             },
         ),
         migrations.AddField(
-            model_name='experience',
-            name='tech_stack_m2m',
-            field=models.ManyToManyField(blank=True, help_text='Tech stack', related_name='experiences', to='viir_folio.TechSkill'),
+            model_name="experience",
+            name="tech_stack_m2m",
+            field=models.ManyToManyField(
+                blank=True,
+                help_text="Tech stack",
+                related_name="experiences",
+                to="viir_folio.TechSkill",
+            ),
         ),
         migrations.AddField(
-            model_name='project',
-            name='tech_m2m',
-            field=models.ManyToManyField(blank=True, related_name='projects', to='viir_folio.TechSkill'),
+            model_name="project",
+            name="tech_m2m",
+            field=models.ManyToManyField(
+                blank=True, related_name="projects", to="viir_folio.TechSkill"
+            ),
         ),
         migrations.AddField(
-            model_name='publication',
-            name='authors_m2m',
-            field=models.ManyToManyField(blank=True, related_name='publications', to='viir_folio.Author'),
+            model_name="publication",
+            name="authors_m2m",
+            field=models.ManyToManyField(
+                blank=True, related_name="publications", to="viir_folio.Author"
+            ),
         ),
     ]

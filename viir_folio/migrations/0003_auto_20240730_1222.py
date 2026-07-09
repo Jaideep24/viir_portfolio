@@ -7,47 +7,47 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0002_projects'),
+        ("viir_folio", "0002_projects"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='projects',
-            name='details',
+            model_name="projects",
+            name="details",
         ),
         migrations.AddField(
-            model_name='projects',
-            name='client',
-            field=models.CharField(default='something', max_length=100),
+            model_name="projects",
+            name="client",
+            field=models.CharField(default="something", max_length=100),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='projects',
-            name='date',
+            model_name="projects",
+            name="date",
             field=models.DateField(default=django.utils.timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='projects',
-            name='tech',
-            field=models.CharField(default='Some tech', max_length=100),
+            model_name="projects",
+            name="tech",
+            field=models.CharField(default="Some tech", max_length=100),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='projects',
-            name='type',
-            field=models.CharField(default='Sometype', max_length=100),
+            model_name="projects",
+            name="type",
+            field=models.CharField(default="Sometype", max_length=100),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='projects',
-            name='url',
-            field=models.URLField(default='www.google.com'),
+            model_name="projects",
+            name="url",
+            field=models.URLField(default="www.google.com"),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='skills',
-            name='icon',
+            model_name="skills",
+            name="icon",
             field=models.CharField(max_length=1000000),
         ),
     ]

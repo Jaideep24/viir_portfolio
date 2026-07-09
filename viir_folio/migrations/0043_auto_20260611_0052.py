@@ -6,20 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0042_sitesettings'),
+        ("viir_folio", "0042_sitesettings"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='SiteSettings',
+            name="SiteSettings",
         ),
         migrations.RemoveField(
-            model_name='project',
-            name='topic',
+            model_name="project",
+            name="topic",
         ),
         migrations.AddField(
-            model_name='about',
-            name='hero_typed_text',
-            field=models.CharField(default='Full-Stack Developer, Cyber Security, ML/AI, IoT', help_text='Comma-separated strings for the hero typing animation', max_length=500),
+            model_name="about",
+            name="hero_typed_text",
+            field=models.CharField(
+                default="Full-Stack Developer, Cyber Security, ML/AI, IoT",
+                help_text="Comma-separated strings for the hero typing animation",
+                max_length=500,
+            ),
         ),
     ]

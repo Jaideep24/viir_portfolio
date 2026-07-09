@@ -6,19 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0024_rename_content_project_topic'),
+        ("viir_folio", "0024_rename_content_project_topic"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Publication',
+            name="Publication",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=199)),
-                ('authors', models.CharField(max_length=300)),
-                ('date', models.DateField(auto_now_add=True)),
-                ('place', models.CharField(max_length=300)),
-                ('url', models.URLField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=199)),
+                ("authors", models.CharField(max_length=300)),
+                ("date", models.DateField(auto_now_add=True)),
+                ("place", models.CharField(max_length=300)),
+                ("url", models.URLField()),
             ],
         ),
     ]

@@ -7,41 +7,58 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0059_pagevisit'),
+        ("viir_folio", "0059_pagevisit"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Visitor',
+            name="Visitor",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ip_address', models.GenericIPAddressField(blank=True, null=True)),
-                ('session_key', models.CharField(blank=True, max_length=40, null=True)),
-                ('user_agent', models.TextField(blank=True, null=True)),
-                ('first_visit', models.DateTimeField(auto_now_add=True)),
-                ('last_visit', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ip_address", models.GenericIPAddressField(blank=True, null=True)),
+                ("session_key", models.CharField(blank=True, max_length=40, null=True)),
+                ("user_agent", models.TextField(blank=True, null=True)),
+                ("first_visit", models.DateTimeField(auto_now_add=True)),
+                ("last_visit", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'verbose_name': 'Site Visitor',
-                'verbose_name_plural': 'Site Visitors',
-                'ordering': ['-last_visit'],
+                "verbose_name": "Site Visitor",
+                "verbose_name_plural": "Site Visitors",
+                "ordering": ["-last_visit"],
             },
         ),
         migrations.AlterModelOptions(
-            name='pagevisit',
-            options={'ordering': ['-timestamp'], 'verbose_name': 'Page Visit', 'verbose_name_plural': 'Page Visits'},
+            name="pagevisit",
+            options={
+                "ordering": ["-timestamp"],
+                "verbose_name": "Page Visit",
+                "verbose_name_plural": "Page Visits",
+            },
         ),
         migrations.RemoveField(
-            model_name='pagevisit',
-            name='ip_address',
+            model_name="pagevisit",
+            name="ip_address",
         ),
         migrations.RemoveField(
-            model_name='pagevisit',
-            name='user_agent',
+            model_name="pagevisit",
+            name="user_agent",
         ),
         migrations.AddField(
-            model_name='pagevisit',
-            name='visitor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='visits', to='viir_folio.visitor'),
+            model_name="pagevisit",
+            name="visitor",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="visits",
+                to="viir_folio.visitor",
+            ),
         ),
     ]

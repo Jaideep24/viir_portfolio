@@ -1,0 +1,18 @@
+[flake8]
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    env,
+    migrations,
+    settings.py
+ignore = 
+    # E501: line too long
+    E501,
+    # W503: line break before binary operator
+    W503,
+    # E266: too many leading '#' for block comment
+    E266,
+    # E203: whitespace before ':'
+    E203

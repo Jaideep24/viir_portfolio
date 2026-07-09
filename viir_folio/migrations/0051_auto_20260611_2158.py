@@ -6,33 +6,45 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0050_auto_20260611_1430'),
+        ("viir_folio", "0050_auto_20260611_1430"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='about',
-            name='devto_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Dev.to profile', null=True),
+            model_name="about",
+            name="devto_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Dev.to profile", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='hackthebox_url',
-            field=models.URLField(blank=True, help_text='Direct link to your HackTheBox profile', null=True),
+            model_name="about",
+            name="hackthebox_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Direct link to your HackTheBox profile",
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='hashnode_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Hashnode blog', null=True),
+            model_name="about",
+            name="hashnode_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Hashnode blog", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='medium_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Medium blog', null=True),
+            model_name="about",
+            name="medium_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Medium blog", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='tryhackme_url',
-            field=models.URLField(blank=True, help_text='Direct link to your TryHackMe profile', null=True),
+            model_name="about",
+            name="tryhackme_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your TryHackMe profile", null=True
+            ),
         ),
     ]

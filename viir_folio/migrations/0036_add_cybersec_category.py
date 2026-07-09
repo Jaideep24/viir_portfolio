@@ -7,13 +7,24 @@ import multiselectfield.db.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0035_remove_duplicate_subscribers'),
+        ("viir_folio", "0035_remove_duplicate_subscribers"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='project',
-            name='category',
-            field=multiselectfield.db.fields.MultiSelectField(choices=[('webdev', 'Web Dev'), ('appdev', 'App Dev'), ('graphic', 'Graphics'), ('mlai', 'ML/AI'), ('iot', 'IoT'), ('cybersec', 'Cyber Security')], default='webdev', max_length=120),
+            model_name="project",
+            name="category",
+            field=multiselectfield.db.fields.MultiSelectField(
+                choices=[
+                    ("webdev", "Web Dev"),
+                    ("appdev", "App Dev"),
+                    ("graphic", "Graphics"),
+                    ("mlai", "ML/AI"),
+                    ("iot", "IoT"),
+                    ("cybersec", "Cyber Security"),
+                ],
+                default="webdev",
+                max_length=120,
+            ),
         ),
     ]

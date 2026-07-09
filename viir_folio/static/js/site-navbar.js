@@ -87,12 +87,20 @@
     function initNavbarActiveState() {
         const navLinks = document.querySelectorAll('.br-sidebar .menu-list .nav-link');
         
+        function setActiveLink(activeNav) {
+            navLinks.forEach(nav => {
+                nav.classList.remove('active');
+                nav.removeAttribute('aria-current');
+            });
+            if (activeNav) {
+                activeNav.classList.add('active');
+                activeNav.setAttribute('aria-current', 'page');
+            }
+        }
+
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                // Remove active from all
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                // Add active to the clicked one
-                this.classList.add('active');
+                setActiveLink(this);
             });
         });
         
@@ -101,8 +109,7 @@
         if (currentHash) {
             navLinks.forEach(nav => {
                 if (nav.getAttribute('href').includes(currentHash)) {
-                    navLinks.forEach(n => n.classList.remove('active'));
-                    nav.classList.add('active');
+                    setActiveLink(nav);
                 }
             });
         }

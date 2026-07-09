@@ -9,33 +9,44 @@ import phonenumber_field.modelfields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0040_project_description_alter_article_date_and_more'),
+        ("viir_folio", "0040_project_description_alter_article_date_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contact',
-            name='email',
+            model_name="contact",
+            name="email",
             field=django_cryptography.fields.encrypt(models.EmailField(max_length=254)),
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='message',
+            model_name="contact",
+            name="message",
             field=django_cryptography.fields.encrypt(models.TextField()),
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='name',
+            model_name="contact",
+            name="name",
             field=django_cryptography.fields.encrypt(models.CharField(max_length=100)),
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='number',
-            field=django_cryptography.fields.encrypt(phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region='IN')),
+            model_name="contact",
+            name="number",
+            field=django_cryptography.fields.encrypt(
+                phonenumber_field.modelfields.PhoneNumberField(
+                    blank=True, max_length=128, null=True, region="IN"
+                )
+            ),
         ),
         migrations.AlterField(
-            model_name='cv',
-            name='pdf',
-            field=models.FileField(upload_to='', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['pdf'])]),
+            model_name="cv",
+            name="pdf",
+            field=models.FileField(
+                upload_to="",
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=["pdf"]
+                    )
+                ],
+            ),
         ),
     ]

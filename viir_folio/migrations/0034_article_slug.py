@@ -6,7 +6,7 @@ from django.utils.text import slugify
 
 def generate_slugs(apps, schema_editor):
     """Generate slugs from article titles"""
-    Article = apps.get_model('viir_folio', 'Article')
+    Article = apps.get_model("viir_folio", "Article")
     for article in Article.objects.all():
         if not article.slug:
             article.slug = slugify(article.title)
@@ -16,19 +16,19 @@ def generate_slugs(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0033_add_project_demo_video'),
+        ("viir_folio", "0033_add_project_demo_video"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='slug',
+            model_name="article",
+            name="slug",
             field=models.SlugField(blank=True, max_length=255, unique=False),
         ),
         migrations.RunPython(generate_slugs),
         migrations.AlterField(
-            model_name='article',
-            name='slug',
+            model_name="article",
+            name="slug",
             field=models.SlugField(blank=True, max_length=255, unique=True),
         ),
     ]

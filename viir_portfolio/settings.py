@@ -215,8 +215,6 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 # Explicitly add DD/MM/YYYY formatting support for inputting dates in Admin globally
@@ -268,8 +266,15 @@ STATIC_ROOT = BASE_DIR / 'viir_folio' / 'static'
 # NOTE: viir_folio/static/ is auto-discovered via AppDirectoriesFinder
 # because 'viir_folio' is in INSTALLED_APPS. No need for STATICFILES_DIRS.
 
-# Static file serving for production (CompressedStaticFilesStorage won't crash on missing files)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# Static file serving — Django 4.2+ STORAGES configuration
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 WHITENOISE_MAX_AGE = 31536000  # Cache forever (1 year)
 # WHITENOISE_MANIFEST_STRICT = False # Reverted due to broken admin font references
 

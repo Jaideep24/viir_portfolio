@@ -2,20 +2,22 @@
 
 import datetime
 from django.db import migrations, models
-from django.utils.timezone import utc
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0061_delete_logger'),
+        ("viir_folio", "0061_delete_logger"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='subscriber',
-            name='subscribed_at',
-            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2026, 7, 5, 18, 35, 4, 720719, tzinfo=utc)),
+            model_name="subscriber",
+            name="subscribed_at",
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=datetime.datetime(2026, 7, 5, 18, 35, 4, 720719, tzinfo=datetime.timezone.utc),
+            ),
             preserve_default=False,
         ),
     ]

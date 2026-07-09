@@ -7,37 +7,60 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Education',
+            name="Education",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.CharField(max_length=100)),
-                ('title', models.CharField(max_length=100)),
-                ('rank', models.CharField(max_length=100)),
-                ('subject', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.CharField(max_length=100)),
+                ("title", models.CharField(max_length=100)),
+                ("rank", models.CharField(max_length=100)),
+                ("subject", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Experience',
+            name="Experience",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.CharField(max_length=100)),
-                ('title', models.CharField(max_length=100)),
-                ('rank', models.CharField(max_length=100)),
-                ('subject', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.CharField(max_length=100)),
+                ("title", models.CharField(max_length=100)),
+                ("rank", models.CharField(max_length=100)),
+                ("subject", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Skills',
+            name="Skills",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('content', models.CharField(max_length=100)),
-                ('icon', models.ImageField(default='image.png', upload_to='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("content", models.CharField(max_length=100)),
+                ("icon", models.ImageField(default="image.png", upload_to="")),
             ],
         ),
     ]

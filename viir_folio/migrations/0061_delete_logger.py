@@ -6,11 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0060_auto_20260615_0156'),
+        ("viir_folio", "0060_auto_20260615_0156"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Logger',
+            name="Logger",
         ),
     ]

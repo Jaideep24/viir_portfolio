@@ -6,22 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0026_comment_date_alter_article_date_and_more'),
+        ("viir_folio", "0026_comment_date_alter_article_date_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='about',
-            name='age',
+            model_name="about",
+            name="age",
         ),
         migrations.AddField(
-            model_name='about',
-            name='birthdate',
-            field=models.DateField(default='2005-08-27'),
+            model_name="about",
+            name="birthdate",
+            field=models.DateField(default="2005-08-27"),
         ),
         migrations.AddField(
-            model_name='contact',
-            name='submitted_date',
+            model_name="contact",
+            name="submitted_date",
             field=models.DateField(auto_now_add=True, null=True),
         ),
     ]

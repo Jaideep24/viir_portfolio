@@ -6,23 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0039_migrate_logger_to_django_user'),
+        ("viir_folio", "0039_migrate_logger_to_django_user"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='description',
-            field=models.TextField(blank=True, help_text='Detailed project case study using the PAR method (Problem, Action, Results).'),
+            model_name="project",
+            name="description",
+            field=models.TextField(
+                blank=True,
+                help_text="Detailed project case study using the PAR method (Problem, Action, Results).",
+            ),
         ),
         migrations.AlterField(
-            model_name='article',
-            name='date',
+            model_name="article",
+            name="date",
             field=models.DateField(db_index=True),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='start_date',
-            field=models.DateField(db_index=True, help_text='Start date'),
+            model_name="experience",
+            name="start_date",
+            field=models.DateField(db_index=True, help_text="Start date"),
         ),
     ]

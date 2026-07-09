@@ -6,32 +6,32 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0056_remove_experience_company_logo'),
+        ("viir_folio", "0056_remove_experience_company_logo"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='article',
-            options={'ordering': ['-date']},
+            name="article",
+            options={"ordering": ["-date"]},
         ),
         migrations.AlterModelOptions(
-            name='certificate',
-            options={'ordering': ['-date']},
+            name="certificate",
+            options={"ordering": ["-date"]},
         ),
         migrations.AlterModelOptions(
-            name='comment',
-            options={'ordering': ['-date']},
+            name="comment",
+            options={"ordering": ["-date"]},
         ),
         migrations.AlterModelOptions(
-            name='contact',
-            options={'ordering': ['-submitted_date']},
+            name="contact",
+            options={"ordering": ["-submitted_date"]},
         ),
         migrations.AlterModelOptions(
-            name='project',
-            options={'ordering': ['-date']},
+            name="project",
+            options={"ordering": ["-date"]},
         ),
         migrations.AlterModelOptions(
-            name='publication',
-            options={'ordering': ['-date']},
+            name="publication",
+            options={"ordering": ["-date"]},
         ),
     ]

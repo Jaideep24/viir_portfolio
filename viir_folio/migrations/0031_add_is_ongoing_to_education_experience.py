@@ -6,53 +6,71 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0030_project_url_optional'),
+        ("viir_folio", "0030_project_url_optional"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='education',
-            name='is_ongoing',
-            field=models.BooleanField(default=False, help_text='Check if still pursuing this degree'),
+            model_name="education",
+            name="is_ongoing",
+            field=models.BooleanField(
+                default=False, help_text="Check if still pursuing this degree"
+            ),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='is_ongoing',
-            field=models.BooleanField(default=False, help_text='Check if currently working here'),
+            model_name="experience",
+            name="is_ongoing",
+            field=models.BooleanField(
+                default=False, help_text="Check if currently working here"
+            ),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='end_date',
-            field=models.IntegerField(blank=True, help_text='End year (YYYY) — leave blank if ongoing', null=True),
+            model_name="education",
+            name="end_date",
+            field=models.IntegerField(
+                blank=True,
+                help_text="End year (YYYY) — leave blank if ongoing",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='bullet_points',
-            field=models.TextField(blank=True, help_text='Work description (comma-separated bullet points)'),
+            model_name="experience",
+            name="bullet_points",
+            field=models.TextField(
+                blank=True, help_text="Work description (comma-separated bullet points)"
+            ),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='company_name',
-            field=models.CharField(help_text='Company/Organization name', max_length=200),
+            model_name="experience",
+            name="company_name",
+            field=models.CharField(
+                help_text="Company/Organization name", max_length=200
+            ),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='end_date',
-            field=models.DateField(blank=True, help_text='End date — leave blank if currently working here', null=True),
+            model_name="experience",
+            name="end_date",
+            field=models.DateField(
+                blank=True,
+                help_text="End date — leave blank if currently working here",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='role',
-            field=models.CharField(help_text='Job title/Role', max_length=200),
+            model_name="experience",
+            name="role",
+            field=models.CharField(help_text="Job title/Role", max_length=200),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='start_date',
-            field=models.DateField(help_text='Start date'),
+            model_name="experience",
+            name="start_date",
+            field=models.DateField(help_text="Start date"),
         ),
         migrations.AlterField(
-            model_name='experience',
-            name='tech_stack',
-            field=models.CharField(blank=True, help_text='Tech stack (comma-separated)', max_length=500),
+            model_name="experience",
+            name="tech_stack",
+            field=models.CharField(
+                blank=True, help_text="Tech stack (comma-separated)", max_length=500
+            ),
         ),
     ]

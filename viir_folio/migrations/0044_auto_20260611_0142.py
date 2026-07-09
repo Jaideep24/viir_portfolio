@@ -6,22 +6,22 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0043_auto_20260611_0052'),
+        ("viir_folio", "0043_auto_20260611_0052"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='about',
-            old_name='address',
-            new_name='location',
+            model_name="about",
+            old_name="address",
+            new_name="location",
         ),
         migrations.RenameField(
-            model_name='about',
-            old_name='language',
-            new_name='spoken_languages',
+            model_name="about",
+            old_name="language",
+            new_name="spoken_languages",
         ),
         migrations.RemoveField(
-            model_name='about',
-            name='birthdate',
+            model_name="about",
+            name="birthdate",
         ),
     ]

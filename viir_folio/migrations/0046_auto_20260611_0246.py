@@ -6,28 +6,42 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0045_auto_20260611_0151'),
+        ("viir_folio", "0045_auto_20260611_0151"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='about',
-            name='availability',
-            field=models.CharField(default='Open to Opportunities', help_text='e.g., Open to Internships', max_length=100),
+            model_name="about",
+            name="availability",
+            field=models.CharField(
+                default="Open to Opportunities",
+                help_text="e.g., Open to Internships",
+                max_length=100,
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='education_summary',
-            field=models.CharField(default='Final Year Engineering Student', help_text='e.g., B.Tech in IT', max_length=150),
+            model_name="about",
+            name="education_summary",
+            field=models.CharField(
+                default="Final Year Engineering Student",
+                help_text="e.g., B.Tech in IT",
+                max_length=150,
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='experience_years',
-            field=models.CharField(default='Fresher', help_text='e.g., Fresher, 1+ Years', max_length=50),
+            model_name="about",
+            name="experience_years",
+            field=models.CharField(
+                default="Fresher", help_text="e.g., Fresher, 1+ Years", max_length=50
+            ),
         ),
         migrations.AlterField(
-            model_name='about',
-            name='current_role',
-            field=models.CharField(default='Cyber Security Enthusiast', help_text='e.g., Full-Stack Engineer & ML Specialist', max_length=150),
+            model_name="about",
+            name="current_role",
+            field=models.CharField(
+                default="Cyber Security Enthusiast",
+                help_text="e.g., Full-Stack Engineer & ML Specialist",
+                max_length=150,
+            ),
         ),
     ]

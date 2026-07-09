@@ -6,28 +6,39 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0049_auto_20260611_0406'),
+        ("viir_folio", "0049_auto_20260611_0406"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='about',
-            name='facebook_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Facebook', null=True),
+            model_name="about",
+            name="facebook_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Facebook", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='instagram_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Instagram', null=True),
+            model_name="about",
+            name="instagram_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Instagram", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='phone_no',
-            field=models.CharField(blank=True, help_text='e.g., +919819185865', max_length=20, null=True),
+            model_name="about",
+            name="phone_no",
+            field=models.CharField(
+                blank=True, help_text="e.g., +919819185865", max_length=20, null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='whatsapp_no',
-            field=models.CharField(blank=True, help_text='e.g., 919819185865 (without +)', max_length=20, null=True),
+            model_name="about",
+            name="whatsapp_no",
+            field=models.CharField(
+                blank=True,
+                help_text="e.g., 919819185865 (without +)",
+                max_length=20,
+                null=True,
+            ),
         ),
     ]

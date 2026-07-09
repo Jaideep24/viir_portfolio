@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0052_auto_20260611_2209'),
+        ("viir_folio", "0052_auto_20260611_2209"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='about',
-            name='instagram_url',
-            field=models.URLField(blank=True, help_text='Direct link to your Instagram', null=True),
+            model_name="about",
+            name="instagram_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your Instagram", null=True
+            ),
         ),
         migrations.AddField(
-            model_name='about',
-            name='leetcode_url',
-            field=models.URLField(blank=True, help_text='Direct link to your LeetCode profile', null=True),
+            model_name="about",
+            name="leetcode_url",
+            field=models.URLField(
+                blank=True, help_text="Direct link to your LeetCode profile", null=True
+            ),
         ),
     ]

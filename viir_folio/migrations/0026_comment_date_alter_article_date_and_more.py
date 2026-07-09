@@ -7,24 +7,26 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0025_publication'),
+        ("viir_folio", "0025_publication"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='date',
-            field=models.DateField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="comment",
+            name="date",
+            field=models.DateField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='article',
-            name='date',
+            model_name="article",
+            name="date",
             field=models.DateField(),
         ),
         migrations.AlterField(
-            model_name='publication',
-            name='date',
+            model_name="publication",
+            name="date",
             field=models.DateField(),
         ),
     ]

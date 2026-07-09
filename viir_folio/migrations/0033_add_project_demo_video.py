@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0032_alter_project_client'),
+        ("viir_folio", "0032_alter_project_client"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='demo_video',
+            model_name="project",
+            name="demo_video",
             field=models.URLField(blank=True, null=True),
         ),
     ]

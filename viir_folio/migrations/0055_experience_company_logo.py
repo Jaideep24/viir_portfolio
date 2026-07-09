@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0054_auto_20260612_0157'),
+        ("viir_folio", "0054_auto_20260612_0157"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='experience',
-            name='company_logo',
-            field=models.ImageField(blank=True, help_text='Company logo for the timeline circle', null=True, upload_to='company_logos/'),
+            model_name="experience",
+            name="company_logo",
+            field=models.ImageField(
+                blank=True,
+                help_text="Company logo for the timeline circle",
+                null=True,
+                upload_to="company_logos/",
+            ),
         ),
     ]

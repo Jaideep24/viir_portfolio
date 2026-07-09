@@ -7,13 +7,22 @@ import multiselectfield.db.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0057_auto_20260614_0221'),
+        ("viir_folio", "0057_auto_20260614_0221"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='project',
-            name='category',
-            field=multiselectfield.db.fields.MultiSelectField(choices=[('webdev', 'Web Dev'), ('appdev', 'App Dev'), ('mlai', 'ML/AI'), ('iot', 'IoT')], default='webdev', max_length=100),
+            model_name="project",
+            name="category",
+            field=multiselectfield.db.fields.MultiSelectField(
+                choices=[
+                    ("webdev", "Web Dev"),
+                    ("appdev", "App Dev"),
+                    ("mlai", "ML/AI"),
+                    ("iot", "IoT"),
+                ],
+                default="webdev",
+                max_length=100,
+            ),
         ),
     ]

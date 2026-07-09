@@ -6,83 +6,102 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0028_alter_education_options_remove_education_date_and_more'),
+        ("viir_folio", "0028_alter_education_options_remove_education_date_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='experience',
-            options={'ordering': ['-start_date'], 'verbose_name_plural': 'Experience'},
+            name="experience",
+            options={"ordering": ["-start_date"], "verbose_name_plural": "Experience"},
         ),
         migrations.RemoveField(
-            model_name='experience',
-            name='date',
+            model_name="experience",
+            name="date",
         ),
         migrations.RemoveField(
-            model_name='experience',
-            name='rank',
+            model_name="experience",
+            name="rank",
         ),
         migrations.RemoveField(
-            model_name='experience',
-            name='subject',
+            model_name="experience",
+            name="subject",
         ),
         migrations.RemoveField(
-            model_name='experience',
-            name='title',
+            model_name="experience",
+            name="title",
         ),
         migrations.AddField(
-            model_name='experience',
-            name='bullet_points',
-            field=models.TextField(blank=True, default='', help_text='Work description (comma-separated bullet points)'),
+            model_name="experience",
+            name="bullet_points",
+            field=models.TextField(
+                blank=True,
+                default="",
+                help_text="Work description (comma-separated bullet points)",
+            ),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='company_name',
-            field=models.CharField(default='', help_text='Company/Organization name', max_length=200),
+            model_name="experience",
+            name="company_name",
+            field=models.CharField(
+                default="", help_text="Company/Organization name", max_length=200
+            ),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='end_date',
-            field=models.DateField(default='2024-01-01', help_text='End date (or expected end date)'),
+            model_name="experience",
+            name="end_date",
+            field=models.DateField(
+                default="2024-01-01", help_text="End date (or expected end date)"
+            ),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='role',
-            field=models.CharField(default='', help_text='Job title/Role', max_length=200),
+            model_name="experience",
+            name="role",
+            field=models.CharField(
+                default="", help_text="Job title/Role", max_length=200
+            ),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='start_date',
-            field=models.DateField(default='2020-01-01', help_text='Start date'),
+            model_name="experience",
+            name="start_date",
+            field=models.DateField(default="2020-01-01", help_text="Start date"),
         ),
         migrations.AddField(
-            model_name='experience',
-            name='tech_stack',
-            field=models.CharField(blank=True, default='', help_text='Tech stack (comma-separated)', max_length=500),
+            model_name="experience",
+            name="tech_stack",
+            field=models.CharField(
+                blank=True,
+                default="",
+                help_text="Tech stack (comma-separated)",
+                max_length=500,
+            ),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='end_date',
-            field=models.IntegerField(help_text='End year (YYYY)'),
+            model_name="education",
+            name="end_date",
+            field=models.IntegerField(help_text="End year (YYYY)"),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='institute_name',
-            field=models.CharField(help_text='Name of institute/university', max_length=100),
+            model_name="education",
+            name="institute_name",
+            field=models.CharField(
+                help_text="Name of institute/university", max_length=100
+            ),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='start_date',
-            field=models.IntegerField(help_text='Start year (YYYY)'),
+            model_name="education",
+            name="start_date",
+            field=models.IntegerField(help_text="Start year (YYYY)"),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='subject',
-            field=models.CharField(help_text='Subject/Field of study', max_length=100),
+            model_name="education",
+            name="subject",
+            field=models.CharField(help_text="Subject/Field of study", max_length=100),
         ),
         migrations.AlterField(
-            model_name='education',
-            name='title',
-            field=models.CharField(help_text='Degree/Qualification title', max_length=100),
+            model_name="education",
+            name="title",
+            field=models.CharField(
+                help_text="Degree/Qualification title", max_length=100
+            ),
         ),
     ]

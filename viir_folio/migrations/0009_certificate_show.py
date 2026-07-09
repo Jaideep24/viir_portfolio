@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0008_certificate'),
+        ("viir_folio", "0008_certificate"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='certificate',
-            name='show',
+            model_name="certificate",
+            name="show",
             field=models.BooleanField(default=False),
         ),
     ]

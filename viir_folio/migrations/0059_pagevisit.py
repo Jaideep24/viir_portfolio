@@ -6,23 +6,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0058_alter_project_category'),
+        ("viir_folio", "0058_alter_project_category"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PageVisit',
+            name="PageVisit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('path', models.CharField(max_length=255)),
-                ('ip_address', models.GenericIPAddressField(blank=True, null=True)),
-                ('user_agent', models.TextField(blank=True, null=True)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("path", models.CharField(max_length=255)),
+                ("ip_address", models.GenericIPAddressField(blank=True, null=True)),
+                ("user_agent", models.TextField(blank=True, null=True)),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'verbose_name': 'Site Analytic',
-                'verbose_name_plural': 'Site Analytics',
-                'ordering': ['-timestamp'],
+                "verbose_name": "Site Analytic",
+                "verbose_name_plural": "Site Analytics",
+                "ordering": ["-timestamp"],
             },
         ),
     ]

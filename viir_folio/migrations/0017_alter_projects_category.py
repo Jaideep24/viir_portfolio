@@ -6,13 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0016_alter_projects_category'),
+        ("viir_folio", "0016_alter_projects_category"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='projects',
-            name='category',
-            field=models.CharField(choices=[('webdev', 'webdev'), ('appdev', 'appdev'), ('graphic', 'graphic'), ('mlai', 'mlai'), ('iot', 'iot')], default='webdev', max_length=100),
+            model_name="projects",
+            name="category",
+            field=models.CharField(
+                choices=[
+                    ("webdev", "webdev"),
+                    ("appdev", "appdev"),
+                    ("graphic", "graphic"),
+                    ("mlai", "mlai"),
+                    ("iot", "iot"),
+                ],
+                default="webdev",
+                max_length=100,
+            ),
         ),
     ]

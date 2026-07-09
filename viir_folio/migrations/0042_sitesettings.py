@@ -6,21 +6,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('viir_folio', '0041_auto_20260610_2338'),
+        ("viir_folio", "0041_auto_20260610_2338"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SiteSettings',
+            name="SiteSettings",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hero_greeting', models.CharField(default="Hello I'm Viir Phuria", max_length=100)),
-                ('hero_typed_text', models.CharField(default='Full-Stack Developer, Cyber Security, ML/AI, IoT', help_text='Comma-separated strings for the hero typing animation', max_length=500)),
-                ('footer_text', models.CharField(default='Designed, Developed & Secured by Me', max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "hero_greeting",
+                    models.CharField(default="Hello I'm Viir Phuria", max_length=100),
+                ),
+                (
+                    "hero_typed_text",
+                    models.CharField(
+                        default="Full-Stack Developer, Cyber Security, ML/AI, IoT",
+                        help_text="Comma-separated strings for the hero typing animation",
+                        max_length=500,
+                    ),
+                ),
+                (
+                    "footer_text",
+                    models.CharField(
+                        default="Designed, Developed & Secured by Me", max_length=200
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Site Settings',
-                'verbose_name_plural': 'Site Settings',
+                "verbose_name": "Site Settings",
+                "verbose_name_plural": "Site Settings",
             },
         ),
     ]
