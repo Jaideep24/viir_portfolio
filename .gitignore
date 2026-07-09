@@ -86,8 +86,8 @@ build/
 # ============================================================
 # Media Files (uploaded user content)
 # ============================================================
-# Uncomment to ignore all media files in production
-# media/
+media/
+staticfiles/
 
 # ============================================================
 # Documentation Generated Files

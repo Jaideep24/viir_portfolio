@@ -1667,7 +1667,7 @@ body.dark .carousel-item h3 {
 
     .hoodie-guy {
         position: absolute;
-        background: url("{% static 'assets/hoodie-guy.png' %}");
+        background: url("../assets/hoodie-guy.webp");
         top: 5%;
         height: 50vw;
         width: 50vw;
