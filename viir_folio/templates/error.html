@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ error_code|default:"404" }} — {{ error_title|default:"Page Not Found" }} | Viir Phuria</title>
+    {% include 'includes/meta.html' with meta_title='{{ error_code|default:"404" }} — {{ error_title|default:"Page Not Found" }} | Viir Phuria' meta_description='An error occurred while processing your request.' meta_robots='noindex,follow' %}
+    
+    <link rel="icon" href="{% static 'assets/viir_logo.webp' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'assets/viir_logo.webp' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}">
+
+    <!-- Theme Initialization -->
+    <script>
+        (function () {
+            const isDarkMode = localStorage.getItem('darkMode') !== 'false';
+            window.__theme = isDarkMode ? 'dark' : 'light';
+            window.__isDarkMode = isDarkMode;
+        })();
+    </script>
+    <style>
+        .preload * { transition: none !important; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-primary, #0d0d1f);
+            color: var(--text-primary, #fff);
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .error-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            padding-top: 80px; /* navbar spacing */
+        }
+
+        /* Background Grid */
+        .error-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(140, 111, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(140, 111, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glowing orb */
+        .error-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(140, 111, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 700px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-code {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(6rem, 18vw, 12rem);
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--secondary-accent, #8c6fff) 0%, #c084fc 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.2rem;
+            letter-spacing: -4px;
+            filter: drop-shadow(0 0 20px rgba(140, 111, 255, 0.2));
+        }
+
+        .error-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-primary, #1e293b);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .error-description {
+            font-size: 1rem;
+            color: var(--text-secondary, #475569);
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .error-description span {
+            color: var(--secondary-accent, #8c6fff);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            background: var(--secondary-accent, #8c6fff);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(140, 111, 255, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(140, 111, 255, 0.5);
+            color: #fff;
+        }
+
+        /* floating particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(140, 111, 255, 0.6);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-20px) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body class="preload">
+    <script>
+        document.body.classList.add(window.__theme || 'dark');
+        setTimeout(function() { document.body.classList.remove('preload'); }, 50);
+    </script>
+
+    {% include 'includes/site-navbar.html' with navbar_title='Viir Phuria' %}
+
+    <div class="error-wrapper">
+        <div class="particles" id="particles"></div>
+
+        <div class="error-container">
+            <div class="error-code">{{ error_code|default:"404" }}</div>
+            <h1 class="error-title">{{ error_title|default:"Page Not Found" }}</h1>
+            <p class="error-description">
+                {{ error_description|default:"The page you're looking for has wandered off into the cosmos.<br>Maybe it never existed, or perhaps it moved to <span>a new address</span>."|safe }}
+            </p>
+            <div class="action-buttons">
+                <a href="/" class="btn-home">
+                    <i class="fa-solid fa-house"></i> Go Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating particles
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (8 + Math.random() * 12) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+            p.style.opacity = (0.2 + Math.random() * 0.4).toString();
+            container.appendChild(p);
+        }
+    </script>
+    <script src="{% static 'js/site-navbar.js' %}"></script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@ This repository has been engineered to meet FAANG-level observability, security,
 
 ## Architecture Overview
 
-`mermaid
+```mermaid
 graph TD
     Client[Client / Browser] --> Cloudflare[Cloudflare DNS / CDN]
     Cloudflare --> Proxy[Nginx / PythonAnywhere Router]
@@ -12,16 +12,17 @@ graph TD
     Proxy --> Gunicorn[WSGI: Gunicorn/uWSGI]
     Gunicorn --> Django[Django Application]
     Django --> SQLite[(SQLite / PostgreSQL)]
-`
+```
 
 ## Security Prerequisites
 
 Before deploying, ensure you have generated a new, cryptographically secure SECRET_KEY.
 
 1. Generate a production key:
-   \\ash
+   ```bash
    python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
-   \2. Create your production .env file based on .env.example.
+   ```
+2. Create your production .env file based on .env.example.
 
 ## 1. PythonAnywhere Deployment (Recommended)
 
@@ -29,24 +30,28 @@ This portfolio is heavily optimized for PythonAnywhere (PaaS) utilizing the nati
 
 ### Steps
 1. **Clone the Repository**: Open a Bash console in PythonAnywhere and clone your repository.
-   \\ash
+   ```bash
    git clone <your-repo-url> ~/viir_portfolio
-   \2. **Setup Virtual Environment**:
-   \\ash
-   mkvirtualenv --python=/usr/bin/python3.10 viir_venv
+   ```
+2. **Setup Virtual Environment**:
+   ```bash
+   mkvirtualenv --python=/usr/bin/python3.11 viir_venv
    pip install -r ~/viir_portfolio/requirements.txt
-   \3. **Configure Environment Variables**:
-   \\ash
+   ```
+3. **Configure Environment Variables**:
+   ```bash
    nano ~/viir_portfolio/.env
    # Set DEBUG=False
    # Set ALLOWED_HOSTS=viir.pythonanywhere.com,viir.tech
    # Set SECRET_KEY
-   \4. **Collect Static Assets**:
-   \\ash
+   ```
+4. **Collect Static Assets**:
+   ```bash
    cd ~/viir_portfolio
    python manage.py collectstatic --noinput
-   \5. **Configure WSGI (/var/www/viir_pythonanywhere_com_wsgi.py)**:
-   \\python
+   ```
+5. **Configure WSGI (/var/www/viir_pythonanywhere_com_wsgi.py)**:
+   ```python
    import os
    import sys
    
@@ -58,7 +63,8 @@ This portfolio is heavily optimized for PythonAnywhere (PaaS) utilizing the nati
    
    from django.core.wsgi import get_wsgi_application
    application = get_wsgi_application()
-   \
+   ```
+
 ## Post-Deployment Validation
 
 After the server goes live, run the following verifications:

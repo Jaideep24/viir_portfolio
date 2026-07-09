@@ -586,10 +586,40 @@ class UpdateBlogView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-def custom_404(request, exception=None):
-    """Custom 404 error page — rendered when DEBUG=False in production."""
-    return render(request, "404.html", status=404)
+def custom_400(request, exception=None):
+    context = {
+        "error_code": "400",
+        "error_title": "Bad Request",
+        "error_description": "The server could not understand the request due to invalid syntax."
+    }
+    return render(request, "error.html", context, status=400)
 
+
+def custom_403(request, exception=None):
+    context = {
+        "error_code": "403",
+        "error_title": "Forbidden",
+        "error_description": "You don't have permission to access this resource.<br>If you believe this is an error, please contact the administrator."
+    }
+    return render(request, "error.html", context, status=403)
+
+
+def custom_404(request, exception=None):
+    context = {
+        "error_code": "404",
+        "error_title": "Page Not Found",
+        "error_description": "The page you're looking for has wandered off into the cosmos.<br>Maybe it never existed, or perhaps it moved to <span>a new address</span>."
+    }
+    return render(request, "error.html", context, status=404)
+
+
+def custom_500(request):
+    context = {
+        "error_code": "500",
+        "error_title": "Internal Server Error",
+        "error_description": "The server encountered an unexpected condition that prevented it from fulfilling the request.<br>Our engineering team has been notified."
+    }
+    return render(request, "error.html", context, status=500)
 
 @login_required
 def upload_image(request):

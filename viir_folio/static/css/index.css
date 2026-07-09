@@ -1311,12 +1311,12 @@ body.light {
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--bg-slate);
+    color: var(--text-primary);
     line-height: 1.4;
 }
 
 .blog-excerpt {
-    color: #64748b;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.6;
 }
@@ -1326,7 +1326,7 @@ body.light {
     justify-content: space-between;
     align-items: center;
     font-size: 0.875rem;
-    color: #64748b;
+    color: var(--text-secondary);
 }
 
 .blogs-grid {

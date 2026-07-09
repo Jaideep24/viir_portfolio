@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Explicitly point to the .env file in the project root
+# Explicitly point to the .env file in the project root and override system variables
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -79,10 +79,10 @@ MIDDLEWARE = [
 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Strict'
-# SESSION_COOKIE_SECURE: always True unless explicitly disabled (e.g. local HTTP dev)
-SESSION_COOKIE_SECURE = not DEBUG
+# SESSION_COOKIE_SECURE and CSRF_COOKIE_SECURE are explicitly controlled via .env
+SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'False') == 'True'
 CSRF_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'False') == 'True'
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 # Always-on security headers (do not require HTTPS)
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -127,9 +127,9 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 # Production-only HTTPS/HSTS settings
-if not DEBUG:
-    # NOTE: On PythonAnywhere, SSL is handled by their proxy.
-    SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True') == 'True'
+# NOTE: On PythonAnywhere, SSL is handled by their proxy.
+SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False') == 'True'
+if SECURE_SSL_REDIRECT:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -140,7 +140,7 @@ CSRF_TRUSTED_ORIGINS = [
     host.strip()
     for host in os.getenv(
         'CSRF_TRUSTED_ORIGINS',
-        'https://viir.tech'
+        'https://viir.tech,https://viir.pythonanywhere.com,https://viirportfolio.pythonanywhere.com'
     ).split(',')
     if host.strip()
 ]
@@ -294,7 +294,8 @@ STATICFILES_FINDERS = (
 
 # Caching Configuration
 
-if DEBUG:
+USE_REDIS = os.getenv('USE_REDIS', 'False') == 'True'
+if not USE_REDIS:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -305,7 +306,7 @@ else:
     CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://127.0.0.1:6379/1",
+            "LOCATION": os.getenv('REDIS_URL', 'redis://127.0.0.1:6379/1'),
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
             }
@@ -314,8 +315,8 @@ else:
 
 
 # Django Compressor Settings
-COMPRESS_ENABLED = not DEBUG
-COMPRESS_OFFLINE = not DEBUG
+COMPRESS_ENABLED = os.getenv('COMPRESS_ENABLED', 'False') == 'True'
+COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE', 'False') == 'True'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

@@ -62,13 +62,18 @@ urlpatterns = [
     path('manifest.json', TemplateView.as_view(template_name="manifest.json", content_type='application/json'), name='manifest'),
 ]
 
-# Only expose 404 preview in local development (not in production)
-if settings.DEBUG:
-    urlpatterns += [path('404-preview/', custom_404)]
+from django.urls import re_path
+from django.views.static import serve
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Explicitly serve static and media files locally even when DEBUG=False
+# (In production, PythonAnywhere will bypass Django and serve these directly)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+]
 
-# Custom 404 handler (active when DEBUG=False in production)
+# Custom Error Handlers (active when DEBUG=False)
+handler400 = 'viir_folio.views.custom_400'
+handler403 = 'viir_folio.views.custom_403'
 handler404 = 'viir_folio.views.custom_404'
-
+handler500 = 'viir_folio.views.custom_500'

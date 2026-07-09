@@ -31,7 +31,7 @@ graph TD
 
 ## 🛠️ Tech Stack
 
-*   **Backend**: Python 3.9+, Django 3.2.25, SQLite (Production optimized via PythonAnywhere)
+*   **Backend**: Python 3.11+, Django 4.2.x, SQLite (Production optimized for PythonAnywhere)
 *   **Frontend**: HTML5, CSS3 (CSS Variables, Dark/Light theme), Vanilla JS, Bootstrap 5
 *   **DevOps**: GitHub Actions CI/CD (Flake8, Black, Pytest)
 
@@ -64,11 +64,11 @@ graph TD
 
 ## 📚 Documentation
 
-*   [Deployment Guide](DEPLOYMENT.md) - Detailed instructions for production deployment on PythonAnywhere and Docker.
+*   [Deployment Guide](DEPLOYMENT.md) - Detailed instructions for production deployment on PythonAnywhere.
 
 ## 🛡️ Security
 
-This repository is maintained with strict security practices. Sensitive operations like contact forms and comment submissions are rate-limited. Administrator login paths are protected against brute-force attacks via `django-axes`.
+This repository is maintained with strict security practices. Sensitive operations like contact forms and comment submissions are rate-limited. Administrator login paths are protected against brute-force attacks via `django-ratelimit`.
 
 ---
 <div align="center">

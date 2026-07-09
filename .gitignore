@@ -10,6 +10,9 @@ __pycache__/
 # Django
 # ============================================================
 db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+*.sqlite3-journal
 *.log
 logs/
 
@@ -83,6 +86,11 @@ build/
 *.egg-info/
 *.gz
 *.zip
+*.br
+viir_folio/static/CACHE/
+viir_folio/static/admin/
+viir_folio/static/jazzmin/
+viir_folio/static/vendor/
 # ============================================================
 # Media Files (uploaded user content)
 # ============================================================

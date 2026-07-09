@@ -1,5 +1,5 @@
 # Django Framework
-Django>=3.2,<4.0
+Django>=4.2,<5.0
 django-jazzmin>=2.6.2
 
 # Environment Variables
@@ -32,6 +32,9 @@ nh3>=0.2.14  # Switched to nh3 for stronger XSS protection
 
 # Rate Limiting (recommended for login + contact form protection)
 django-ratelimit>=4.0.0
+
+# Brute-force protection for admin
+django-axes>=6.0.0
 
 # Password Hashing (Argon2)
 argon2-cffi>=23.1.0

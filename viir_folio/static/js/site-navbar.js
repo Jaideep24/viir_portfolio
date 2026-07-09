@@ -124,6 +124,13 @@
         
         const closeBtns = document.querySelectorAll(".close-sidebar-trigger");
         closeBtns.forEach(btn => btn.addEventListener("click", window.closeSidebar));
+
+        // Initialize Theme Toggle Checkbox State
+        const isDarkMode = localStorage.getItem('darkMode') !== 'false';
+        const toggleCheckbox = document.getElementById('toggle');
+        if (toggleCheckbox) {
+            toggleCheckbox.checked = isDarkMode;
+        }
     }
 
     if (document.readyState === "loading") {
