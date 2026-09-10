@@ -164,7 +164,7 @@ class IndexView(TemplateView):
 
         form = ContactForm(request.POST)
 
-        if request.POST.get("website"):
+        if request.POST.get("verify_bot_field"):
             logger.warning(
                 "Honeypot triggered on contact form — bot submission discarded"
             )
@@ -345,7 +345,7 @@ class Blogspace(ListView):
         request.session["subscribe_submissions"] = submissions
 
         # Honeypot check — silently discard bot submissions
-        if request.POST.get("website"):
+        if request.POST.get("verify_bot_field"):
             logger.warning(
                 "Honeypot triggered on subscribe form — bot submission discarded"
             )
@@ -417,7 +417,7 @@ class DetailArticleView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailArticleView, self).get_context_data(**kwargs)
         context["comment_form"] = CommentForm(initial={"article": self.object})
-        context["comment"] = Comment.objects.filter(article=self.object)
+        context["comment"] = Comment.objects.filter(article=self.object, is_approved=True)
 
         # Check if the user has already liked this article in this session
         liked_key = f"liked_article_{self.object.pk}"
@@ -475,6 +475,11 @@ class DetailArticleView(DetailView):
             )
 
         # Handle comment form submission
+        # Honeypot check — silently discard bot submissions
+        if request.POST.get("verify_bot_field"):
+            logger.warning("Honeypot triggered on comment form — bot submission discarded")
+            return HttpResponseRedirect(self.request.path_info)
+
         form = CommentForm(request.POST)
         if form.is_valid():
             import time

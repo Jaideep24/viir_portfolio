@@ -11,6 +11,7 @@
   --text-secondary: #475569; /* Slate 600 */
   --text-tertiary: #64748b; /* Slate 500 */
   --text-inverse: #f8fafc;
+  --text-color: #333333;
 
   /* Accents */
   --primary-accent: #ff6f6f; /* Original Red/Coral Accent */
@@ -56,6 +57,7 @@ body.dark {
   --text-secondary: #cbd5e1; /* Slate 300 */
   --text-tertiary: #94a3b8; /* Slate 400 */
   --text-inverse: #0f172a;
+  --text-color: #e0e0e0;
 
   /* Borders & Dividers - Dark Mode */
   --border-light: #334155; /* Slate 700 */

@@ -15,7 +15,7 @@
 body {
   font-size: 14px;
   color: var(--gray-500);
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   top: 0;
   background-size: cover;

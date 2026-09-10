@@ -40,7 +40,7 @@
                                                 {% endif %}
                                                 <div class="br-info">
                                                      <div class="portfolio-img">
-                                                         <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.title }} — project by Viir Phuria">
+                                                         <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.title }} — project by Viir Phuria" loading="lazy">
                                                      </div>
                                                      <div class="br-detail">
                                                          <ul>

@@ -77,7 +77,7 @@ const birthDate = new Date(2005, 8, 27); // September 27, 2005
 function calculateAge(birth) {
     const today = new Date();
     let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth() + 1;
+    const monthDiff = today.getMonth() - birth.getMonth();
     const dayDiff = today.getDate() - birth.getDate();
     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
         age--;

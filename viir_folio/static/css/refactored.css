@@ -265,3 +265,33 @@ body.light .modern-input::placeholder {
 body.light .modern-input:focus {
     background-color: #f8fafc !important; /* Slightly off-white on focus in light mode */
 }
+
+/* Light mode overrides for contact form */
+body.light .modern-input {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #333 !important;
+}
+
+body.light .modern-input:focus {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light .form-floating > label {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body.light .form-floating > .modern-input:focus ~ label,
+body.light .form-floating > .modern-input:not(:placeholder-shown) ~ label {
+    color: #ff6f6f;
+}
+
+/* P1-010: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

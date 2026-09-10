@@ -113,7 +113,7 @@
 			<form action="" method="post" class="blogspace-subscribe-form">
 				{% csrf_token %}
 				{# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
-				<input type="text" name="website" tabindex="-1" autocomplete="off" class="honeypot-field" aria-hidden="true">
+				<input type="text" name="verify_bot_field" tabindex="-1" autocomplete="off" class="honeypot-field" aria-hidden="true">
 				<div class="subscribe-form-wrapper">
 					<div class="subscribe-input-group">
 						<i class="fas fa-envelope subscribe-icon" aria-hidden="true"></i>

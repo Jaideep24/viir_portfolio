@@ -75,7 +75,7 @@ class ViewFunctionalTests(TestCase):
             "name": "Bot",
             "email": "bot@example.com",
             "message": "Spam",
-            "website": "http://spam.com",
+            "verify_bot_field": "http://spam.com",
         }
         response = self.client.post(
             reverse("index"), data, HTTP_X_REQUESTED_WITH="XMLHttpRequest"

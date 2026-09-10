@@ -28,7 +28,7 @@ body.dark {
 }
 
 body.light {
-    background-color: #0c0e22;
+    background-color: #f8fafc;
 }
 
 body.dark,
@@ -435,7 +435,7 @@ body.light .cert-nav__link--active {
     height: 50vw;
     max-width: 500px;
     max-height: 500px;
-    z-index: 1;
+    z-index: 0;
     box-shadow: 0 0 20px #00000080;
 }
 
@@ -447,7 +447,7 @@ body.light .cert-nav__link--active {
     max-width: 500px;
     max-height: 500px;
     background-size: cover;
-    z-index: 0;
+    z-index: 2;
 }
 
 .circle {
@@ -461,7 +461,7 @@ body.light .cert-nav__link--active {
     max-height: 110px;
     transform-style: preserve-3d;
     animation: animateCircle 40s linear infinite;
-    z-index: 2;
+    z-index: 3;
 }
 
 @keyframes animateCircle {

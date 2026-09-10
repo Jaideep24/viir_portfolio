@@ -246,6 +246,7 @@ class Contact(models.Model):
     email = encrypt(models.EmailField())
     number = encrypt(PhoneNumberField(blank=True, null=True, region="IN"))
     message = encrypt(models.TextField())
+    inquiry_type = models.CharField(max_length=50, blank=True, null=True)
     submitted_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
@@ -358,6 +359,7 @@ class Article(models.Model):
 class Comment(models.Model):
     name = models.TextField(blank=False, default=" ")
     comment = models.TextField()
+    is_approved = models.BooleanField(default=True)
     date = models.DateField(auto_now_add=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 

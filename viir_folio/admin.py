@@ -104,8 +104,8 @@ class ExperienceAdmin(admin.ModelAdmin):
 
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "number", "submitted_date")
-    list_filter = ("submitted_date",)
+    list_display = ("name", "email", "number", "inquiry_type", "submitted_date")
+    list_filter = ("submitted_date", "inquiry_type")
     readonly_fields = ("submitted_date",)
 
 
@@ -129,8 +129,8 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("name", "article", "date")
-    list_filter = ("date",)
+    list_display = ("name", "article", "date", "is_approved")
+    list_filter = ("date", "is_approved")
     search_fields = ("name", "comment")
 
 
