@@ -25,12 +25,12 @@
 
 body.dark #contentEditor,
 body.dark .content-editor {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 body.dark #contentEditor *,
 body.dark .content-editor * {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 
@@ -62,7 +62,7 @@ body.dark .content-editor * {
 
 body.dark #contentEditor ul li,
 body.dark #contentEditor ol li {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 #contentEditor p {
@@ -71,7 +71,7 @@ body.dark #contentEditor ol li {
 }
 
 body.dark #contentEditor p {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 #contentEditor strong {
@@ -80,7 +80,7 @@ body.dark #contentEditor p {
 }
 
 body.dark #contentEditor strong {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 #contentEditor em {
@@ -89,7 +89,7 @@ body.dark #contentEditor strong {
 }
 
 body.dark #contentEditor em {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 #contentEditor u {
@@ -98,7 +98,7 @@ body.dark #contentEditor em {
 }
 
 body.dark #contentEditor u {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 
@@ -108,7 +108,7 @@ body.dark #contentEditor u {
 
 .btn-primary {
     background: var(--brand-accent) !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     border: none;
     padding: 12px 24px;
     border-radius: var(--brand-pill-radius);
@@ -132,7 +132,7 @@ body.dark #contentEditor u {
 
 .btn-secondary {
     background: var(--brand-accent) !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     border: none;
     padding: 12px 24px;
     border-radius: var(--brand-pill-radius);
@@ -191,7 +191,7 @@ body.dark #contentEditor u {
     gap: 0.5rem;
     padding: 12px 30px;
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     border: none;
     border-radius: var(--brand-pill-radius);
     font-weight: 600;
@@ -207,7 +207,7 @@ body.dark #contentEditor u {
     background: var(--brand-accent-strong);
     transform: translateY(-2px);
     box-shadow: var(--brand-shadow-hover);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .create-btn i {
@@ -293,7 +293,7 @@ body.dark #contentEditor u {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    color: #f8fafc;
+    color: var(--bg-primary);
     white-space: nowrap;
     flex: 1;
 }
@@ -306,7 +306,7 @@ body.dark #contentEditor u {
     background: var(--brand-accent-strong) !important;
     transform: translateY(-2px);
     box-shadow: var(--brand-shadow);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .btn-delete {
@@ -317,7 +317,7 @@ body.dark #contentEditor u {
     background: #ff0000 !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 51, 51, 0.4);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .action-btn i {
@@ -509,18 +509,18 @@ body.light .toolbar-btn i {
 body.light .toolbar-btn:hover,
 body.light .toolbar-btn:hover i {
     background: rgba(0, 0, 0, 0.08) !important;
-    color: var(--brand-accent-strong, #8c6fff) !important;
+    color: var(--brand-accent-strong, var(--secondary-accent)) !important;
     border-color: transparent !important;
 }
 
-/* Active state: Solid purple with #f8fafc icon/text in both themes */
+/* Active state: Solid purple with var(--bg-primary) icon/text in both themes */
 .toolbar-btn.active,
 .toolbar-btn.active i,
 body.light .toolbar-btn.active,
 body.light .toolbar-btn.active i {
-    background: #8c6fff !important;
-    color: #f8fafc !important;
-    border-color: #8c6fff !important;
+    background: var(--secondary-accent) !important;
+    color: var(--bg-primary) !important;
+    border-color: var(--secondary-accent) !important;
 }
 
 body.light .content-editor:empty:before {
@@ -576,7 +576,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 body.light input[type="file"]::file-selector-button,
 body.light input[type="file"]::-webkit-file-upload-button {
     background: rgba(140, 111, 255, 0.1) !important;
-    color: #8c6fff !important;
+    color: var(--secondary-accent) !important;
     border: 1px solid rgba(140, 111, 255, 0.25) !important;
 }
 

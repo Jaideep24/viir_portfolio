@@ -29,7 +29,7 @@ body.dark {
     background-image: none;
     
     /* Login Page Variables */
-    --login-bg: #0f172a;
+    --login-bg: var(--bg-inverse);
     --login-cell: #080a10;
     --login-sweep: rgba(139, 92, 246, 0.65);
     --login-card: rgba(15, 23, 42, 0.85);
@@ -37,7 +37,7 @@ body.dark {
     --login-border: rgba(139, 92, 246, 0.2);
     --login-input-bg: rgba(255, 255, 255, 0.04);
     --login-input-border: rgba(139, 92, 246, 0.3);
-    --login-input-color: #f8fafc;
+    --login-input-color: var(--bg-primary);
     --login-label-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -50,12 +50,12 @@ body.light {
     
     /* Login Page Variables */
     --login-bg: #f0f4f8;
-    --login-cell: #f8fafc;
+    --login-cell: var(--bg-primary);
     --login-sweep: rgba(139, 92, 246, 0.85);
     --login-card: rgba(255, 255, 255, 0.95);
     --login-text: #1e293b;
     --login-border: rgba(139, 92, 246, 0.25);
-    --login-input-bg: #f8fafc;
+    --login-input-bg: var(--bg-primary);
     --login-input-border: rgba(139, 92, 246, 0.4);
     --login-input-color: #1e293b;
     --login-label-color: rgba(30, 41, 59, 0.65);
@@ -110,8 +110,8 @@ footer {
 }
 
 .darkmode {
-    background-color: #0f172a;
-    color: #f8fafc;
+    background-color: var(--bg-inverse);
+    color: var(--bg-primary);
 }
 
 
@@ -266,7 +266,7 @@ section .signin {
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 400px;
-    background: var(--card-bg, #f8fafc);
+    background: var(--card-bg, var(--bg-primary));
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -324,7 +324,7 @@ section .signin .content .form .inputBox input[type="text"] {
     outline: none;
     padding: 24px 14px 8px;
     border-radius: var(--brand-radius);
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 500;
     font-size: 15px;
     transition: all 0.3s ease;
@@ -338,7 +338,7 @@ section .signin .content .form .inputBox input[type="password"] {
     outline: none;
     padding: 24px 40px 8px 14px;
     border-radius: var(--brand-radius);
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 500;
     font-size: 15px;
     transition: all 0.3s ease;
@@ -386,7 +386,7 @@ section .signin .content .form .inputBox .toggle-password {
 }
 
 section .signin .content .form .inputBox .toggle-password:hover {
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .signin .content .form .links {
@@ -397,7 +397,7 @@ section .signin .content .form .inputBox .toggle-password:hover {
 }
 
 .signin .content .form .links a {
-    color: #f8fafc;
+    color: var(--bg-primary);
     text-decoration: none;
 }
 
@@ -410,7 +410,7 @@ section .signin .content .form .inputBox .toggle-password:hover {
     width: 100%;
     padding: 12px;
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 600;
     font-size: 1.1em;
     letter-spacing: 0.05em;
@@ -459,7 +459,7 @@ input[type="submit"].enabled {
 }
 
 .blog-header-title {
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-size: 24px;
     font-family: Arial, sans-serif;
     font-weight: 900;
@@ -471,14 +471,14 @@ input[type="submit"].enabled {
 
 .logo {
     opacity: 0;
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-size: 24px;
     font-family: Arial, sans-serif;
     font-weight: 900;
 }
 
 .logo span {
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 @media (max-width: 500px) {
@@ -504,11 +504,11 @@ input[type="submit"].enabled {
    -------------------------------------------------------------------------- */
 
 .blog-nav-brand {
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 
 .blog-nav-link {
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 
 
@@ -563,7 +563,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 .subscribe-btn {
     padding: 10px;
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     border: none;
     cursor: pointer;
     width: auto;
@@ -670,7 +670,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 
 /* ── Hover ──────────────────────────────────────────── */
 .blog-nav__link:hover {
-    color: #f8fafc;
+    color: var(--bg-primary);
     background: rgba(159, 120, 255, 0.16);
     transform: translateY(-1px);
     text-decoration: none;
@@ -684,8 +684,8 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 
 /* ── Active tab — glowing purple gradient ───────────── */
 .blog-nav__link--active {
-    color: #f8fafc;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    color: var(--bg-primary);
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
     box-shadow:
         0 0 0 2px rgba(159, 120, 255, 0.35),
         0 4px 20px rgba(140, 111, 255, 0.5),
@@ -705,7 +705,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 0px #f8fafc);
+        filter: drop-shadow(0 0 0px var(--bg-primary));
     }
 
     50% {
@@ -720,7 +720,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
     position: absolute;
     inset: -3px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #8c6fff, #a48fff);
+    background: linear-gradient(135deg, var(--secondary-accent), #a48fff);
     opacity: 0;
     z-index: -1;
     animation: blog-ring-pulse 2.5s ease-in-out infinite;
@@ -770,7 +770,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 }
 
 body.light .darkmode {
-    background-color: #f8fafc;
+    background-color: var(--bg-primary);
     color: #1e293b;
 }
 
@@ -838,7 +838,7 @@ body.light section .signin .content .form .inputBox .toggle-password:hover {
 }
 
 body.light section .signin .content .form .links a:nth-child(2) {
-    color: var(--brand-accent-strong, #8c6fff);
+    color: var(--brand-accent-strong, var(--secondary-accent));
 }
 
 body.light section .signin .content .form .inputBox input[type="submit"],
@@ -901,7 +901,7 @@ section {
   color: #EEEEEE;
 }
 .section-title h2 span {
-  color: #ff6f6f;
+  color: var(--primary-accent);
 }
 body.dark .section-title h2 {
   color: #EEEEEE;
@@ -916,7 +916,7 @@ body.light .section-title h2 {
   font-family: 'Playfair Display', serif;
   font-size: 48px;
   font-weight: 700;
-  color: #ff6f6f;
+  color: var(--primary-accent);
   line-height: 1.2;
   opacity: 0.45;
   z-index: 1;
@@ -956,7 +956,7 @@ body.light .section-title h2 {
 }
 
 /* A11y: Global Focus Rings */
-*:focus-visible { outline: 2px solid var(--brand-accent, #8c6fff) !important; outline-offset: 2px !important; }
+*:focus-visible { outline: 2px solid var(--brand-accent, var(--secondary-accent)) !important; outline-offset: 2px !important; }
 
 /* Custom Prompt Modal */
 .custom-prompt-overlay {
@@ -996,7 +996,7 @@ body.dark .custom-prompt-modal {
   color: #1e293b;
 }
 body.dark .custom-prompt-modal h3 {
-  color: #f8fafc;
+  color: var(--bg-primary);
 }
 .custom-prompt-modal input {
   width: 100%;
@@ -1007,12 +1007,12 @@ body.dark .custom-prompt-modal h3 {
   color: #1e293b;
   margin-bottom: 20px;
   outline: none;
-  caret-color: #8c6fff !important;
+  caret-color: var(--secondary-accent) !important;
   user-select: auto !important;
   -webkit-user-select: auto !important;
 }
 body.dark .custom-prompt-modal input {
-  color: #f8fafc;
+  color: var(--bg-primary);
 }
 .custom-prompt-modal input::placeholder {
   color: rgba(15, 23, 42, 0.45);
@@ -1021,7 +1021,7 @@ body.dark .custom-prompt-modal input::placeholder {
   color: rgba(255, 255, 255, 0.45);
 }
 .custom-prompt-modal input:focus {
-  border-color: #8c6fff;
+  border-color: var(--secondary-accent);
 }
 .custom-prompt-actions {
   display: flex;
@@ -1042,10 +1042,10 @@ body.dark .custom-prompt-modal input::placeholder {
 }
 body.dark .custom-prompt-btn-cancel {
   background: rgba(255,255,255,0.1);
-  color: #f8fafc;
+  color: var(--bg-primary);
 }
 .custom-prompt-btn-confirm {
-  background: #8c6fff;
+  background: var(--secondary-accent);
   color: #fff;
 }
 
@@ -1067,14 +1067,14 @@ body.dark .custom-prompt-btn-cancel {
   transition: all 0.2s ease;
 }
 body.dark .custom-prompt-tab {
-  color: #f8fafc;
+  color: var(--bg-primary);
 }
 .custom-prompt-tab.active {
-  border-bottom-color: #8c6fff;
-  color: #8c6fff;
+  border-bottom-color: var(--secondary-accent);
+  color: var(--secondary-accent);
 }
 body.dark .custom-prompt-tab.active {
-  color: #8c6fff;
+  color: var(--secondary-accent);
 }
 .custom-prompt-tab-content {
   display: none;
@@ -1097,7 +1097,7 @@ body.dark .custom-prompt-tab.active {
 }
 .file-upload-wrapper:hover {
   background: rgba(140, 111, 255, 0.05);
-  border-color: #8c6fff;
+  border-color: var(--secondary-accent);
 }
 .file-upload-wrapper input[type="file"] {
   position: absolute;
@@ -1110,7 +1110,7 @@ body.dark .custom-prompt-tab.active {
    PREMIUM FOOTER STYLING
    ========================================================================== */
 footer {
-    background: #f8fafc;
+    background: var(--bg-primary);
     border-top: 1px solid rgba(15, 23, 42, 0.08);
     transition: background 0.3s ease, border-color 0.3s ease;
     padding: 30px 0;
@@ -1133,13 +1133,13 @@ body.dark footer .br-footer-detail {
 }
 footer .br-footer-detail .footer-name {
     font-weight: 600;
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 body.dark footer .br-footer-detail .footer-name {
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 footer .br-footer-detail .footer-separator {
-    color: #8c6fff;
+    color: var(--secondary-accent);
     font-weight: bold;
     margin: 0 6px;
     opacity: 0.8;
@@ -1198,7 +1198,7 @@ html body.dark .blog-card h3,
 html body.dark .blogspace-card h3, 
 html body.dark .blogspace-card .card-title, 
 html body.dark .br-project-box h3 { 
-    color: var(--text-light, #f8fafc); 
+    color: var(--text-light, var(--bg-primary)); 
 }
 html body.dark .blog-card p, 
 html body.dark .br-project-box p { 

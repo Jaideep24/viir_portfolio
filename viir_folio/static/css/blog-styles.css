@@ -17,7 +17,7 @@
 :root {
     --comment-bg: rgba(15, 23, 42, 0.45);
     --comment-border: rgba(148, 163, 184, 0.18);
-    --comment-color: #f8fafc;
+    --comment-color: var(--bg-primary);
     --comment-radius: 14px;
     --comment-focus-border: rgba(159, 120, 255, 0.65);
     --comment-focus-shadow: 0 0 0 4px rgba(159, 120, 255, 0.12);
@@ -99,7 +99,7 @@ ul{
 
 .nav-link {
     text-decoration: none;
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
@@ -140,7 +140,7 @@ ul{
     background:
         radial-gradient(circle at top right, rgba(159, 120, 255, 0.22), transparent 32%),
         linear-gradient(135deg, #0b1020 0%, #12102a 48%, #1b1733 100%);
-    color: #f8fafc;
+    color: var(--bg-primary);
     padding: 1rem 0;
     text-align: center;
     height:15vh;
@@ -188,8 +188,8 @@ ul{
 
 .cta-button {
     display: inline-block;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
-    color: #f8fafc;
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
+    color: var(--bg-primary);
     padding: 1rem 2rem;
     text-decoration: none;
     border-radius: 50px;
@@ -277,7 +277,7 @@ ul{
 .filter-btn.active {
     border-color: var(--brand-accent);
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .blogs-grid {
@@ -399,7 +399,7 @@ body.light .blogspace-card {
 }
 
 body.light .blogspace-card .card-title {
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 
 body.light .blogspace-excerpt {
@@ -419,7 +419,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
     top: 1rem;
     left: 1rem;
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     padding: 0.25rem 0.75rem;
     border-radius: var(--brand-radius);
     font-size: 0.75rem;
@@ -467,8 +467,8 @@ body.light .blogspace-card-link:hover .blogspace-card {
 
 .load-more-btn {
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
-    color: #f8fafc;
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
+    color: var(--bg-primary);
     border: none;
     border-radius: 50px;
     font-weight: 600;
@@ -511,7 +511,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
 
 .category {
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     padding: 0.25rem 0.75rem;
     border-radius: var(--brand-pill-radius);
     font-size: 0.75rem;
@@ -545,7 +545,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
 .blog-title::selection,
 .blog-content::selection {
     background: rgba(159, 120, 255, 0.3);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .author-avatar {
@@ -718,7 +718,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
     height: 38px;
     border-radius: 50%;
     background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 700;
     font-size: 1rem;
     display: flex;
@@ -807,7 +807,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
 
 .action-btn:hover {
     border-color: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     background: var(--brand-accent);
 }
 
@@ -907,7 +907,7 @@ body.light .blogspace-card-link:hover .blogspace-card {
     gap: 0.5rem;
     padding: 0.75rem 1rem;
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     text-decoration: none;
     border-radius: var(--brand-pill-radius);
     font-weight: 500;
@@ -1067,7 +1067,7 @@ textarea.form-control.comment-textarea {
     border-radius: 999px;
     padding: 0.65rem 1.5rem;
     background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-    color: #f8fafc;
+    color: var(--bg-primary);
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
@@ -1210,7 +1210,7 @@ body.light .comment {
 
 .btn-primary {
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .btn-primary:hover {
@@ -1336,7 +1336,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 body.light input[type="file"]::file-selector-button,
 body.light input[type="file"]::-webkit-file-upload-button {
     background: rgba(140, 111, 255, 0.1);
-    color: #8c6fff;
+    color: var(--secondary-accent);
     border: 1px solid rgba(140, 111, 255, 0.25);
 }
 
@@ -1391,17 +1391,17 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .toolbar-btn:hover {
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .toolbar-btn.active {
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 .toolbar-separator {
@@ -1435,7 +1435,7 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
 /* Footer */
 .footer {
     background: #1e293b;
-    color: #f8fafc;
+    color: var(--bg-primary);
     text-align: center;
     padding: 2rem 0;
     margin-top: 4rem;
@@ -1570,7 +1570,7 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
 /* Dark mode support (optional) */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #0f172a;
+        --bg-color: var(--bg-inverse);
         --text-color: #e2e8f0;
         --card-bg: #1e293b;
     }
@@ -1646,24 +1646,24 @@ body.light .toolbar-btn i {
 body.light .toolbar-btn:hover,
 body.light .toolbar-btn:hover i {
     background: rgba(0, 0, 0, 0.08);
-    color: var(--brand-accent-strong, #8c6fff);
+    color: var(--brand-accent-strong, var(--secondary-accent));
     border-color: transparent;
 }
 
-/* Active state: Solid purple with #f8fafc icon/text in both themes */
+/* Active state: Solid purple with var(--bg-primary) icon/text in both themes */
 .toolbar-btn.active,
 .toolbar-btn.active i,
 body.light .toolbar-btn.active,
 body.light .toolbar-btn.active i {
-    background: #8c6fff;
-    color: #f8fafc;
-    border-color: #8c6fff;
+    background: var(--secondary-accent);
+    color: var(--bg-primary);
+    border-color: var(--secondary-accent);
 }
 
 body.light .filter-btn:hover,
 body.light .filter-btn.active {
     background: var(--brand-accent);
-    color: #f8fafc;
+    color: var(--bg-primary);
     border-color: var(--brand-accent);
 }
 
@@ -1676,7 +1676,7 @@ body.light .section-header {
 }
 
 body.light .editor-toolbar {
-    background: #f8fafc;
+    background: var(--bg-primary);
     border-color: rgba(148, 163, 184, 0.28);
     border-bottom: 1px solid rgba(148, 163, 184, 0.28);
 }
@@ -1837,7 +1837,7 @@ body.dark .blogspace-subscribe-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--bg-primary);
     margin-bottom: 12px;
     letter-spacing: -0.5px;
     line-height: 1.25;
@@ -1948,7 +1948,7 @@ body.light .subscribe-input-group:focus-within .subscribe-icon {
 body.dark .subscribe-input {
     background: rgba(10, 10, 25, 0.5);
     border: 1px solid rgba(140, 111, 255, 0.25);
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 body.dark .subscribe-input::placeholder {
@@ -1957,12 +1957,12 @@ body.dark .subscribe-input::placeholder {
 
 body.dark .subscribe-input:focus {
     background: rgba(10, 10, 25, 0.75);
-    border-color: #8c6fff;
+    border-color: var(--secondary-accent);
     box-shadow: 0 0 0 3px rgba(140, 111, 255, 0.25);
 }
 
 body.light .subscribe-input {
-    background: #f8fafc;
+    background: var(--bg-primary);
     border: 1px solid rgba(15, 23, 42, 0.15);
     color: #1e293b;
 }
@@ -1994,8 +1994,8 @@ body.light .subscribe-input:focus {
 }
 
 body.dark .blogspace-subscribe-section .subscribe-btn {
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
-    color: #f8fafc;
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
+    color: var(--bg-primary);
     box-shadow: 0 4px 15px rgba(140, 111, 255, 0.3);
 }
 
@@ -2012,7 +2012,7 @@ body.dark .blogspace-subscribe-section .subscribe-btn:active {
 
 body.light .blogspace-subscribe-section .subscribe-btn {
     background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-    color: #f8fafc;
+    color: var(--bg-primary);
     box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25);
 }
 
@@ -2094,7 +2094,7 @@ body.light .subscribe-info-alert {
    PREMIUM FOOTER STYLING
    ========================================================================== */
 footer {
-    background: #f8fafc;
+    background: var(--bg-primary);
     border-top: 1px solid rgba(15, 23, 42, 0.08);
     transition: background 0.3s ease, border-color 0.3s ease;
     padding: 30px 0;
@@ -2127,16 +2127,16 @@ body.dark footer .br-footer-detail {
 /* Styled Name */
 footer .br-footer-detail .footer-name {
     font-weight: 600;
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 
 body.dark footer .br-footer-detail .footer-name {
-    color: #f8fafc;
+    color: var(--bg-primary);
 }
 
 /* Styled Separator */
 footer .br-footer-detail .footer-separator {
-    color: #8c6fff;
+    color: var(--secondary-accent);
     font-weight: bold;
     margin: 0 6px;
     opacity: 0.8;
@@ -2194,7 +2194,7 @@ body.dark footer .br-footer-detail .footer-me-link:hover {
 }
 
 /* ==========================================================================
-   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright #f8fafc)
+   GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright var(--bg-primary))
    ========================================================================== */
 body.light {
     background: linear-gradient(180deg, #eef1f6 0%, #e9ecf0 44%, #e2e8f0 100%);

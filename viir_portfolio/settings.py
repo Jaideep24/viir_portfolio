@@ -211,11 +211,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_TZ = True
+
+# Append Time Zone explicitly whenever a datetime is rendered
+DATETIME_FORMAT = 'N j, Y, P T'
+SHORT_DATETIME_FORMAT = 'm/d/Y P T'
 
 # Explicitly add DD/MM/YYYY formatting support for inputting dates in Admin globally
 DATE_INPUT_FORMATS = [

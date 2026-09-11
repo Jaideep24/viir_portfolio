@@ -28,5 +28,5 @@ body.dark ::-webkit-scrollbar-track {
 }
 
 body.light ::-webkit-scrollbar-track {
-    background: #f8fafc;
+    background: var(--bg-primary);
 }

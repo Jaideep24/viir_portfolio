@@ -64,8 +64,8 @@
 }
 
 .site-nav__link--active {
-    color: #f8fafc !important;
-    background: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    color: var(--bg-primary) !important;
+    background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
     box-shadow:
         0 0 0 2px rgba(159, 120, 255, 0.35),
         0 4px 20px rgba(140, 111, 255, 0.5),
@@ -85,7 +85,7 @@
     position: absolute;
     inset: -3px;
     border-radius: 50px;
-    background: linear-gradient(135deg, #8c6fff, #a48fff);
+    background: linear-gradient(135deg, var(--secondary-accent), #a48fff);
     opacity: 0;
     z-index: -1;
     animation: site-nav-ring-pulse 2.5s ease-in-out infinite;
@@ -104,12 +104,12 @@
 }
 
 .site-nav--light .site-nav__link:hover {
-    color: #8c6fff;
+    color: var(--secondary-accent);
     background: rgba(140, 111, 255, 0.08);
 }
 
 .site-nav--light .site-nav__link--active {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 body.light .site-nav {
@@ -125,19 +125,19 @@ body.light .site-nav__link {
 }
 
 body.light .site-nav__link:hover {
-    color: #8c6fff;
+    color: var(--secondary-accent);
     background: rgba(140, 111, 255, 0.08);
 }
 
 body.light .site-nav__link--active {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 @keyframes site-nav-icon-pulse {
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 0px #f8fafc);
+        filter: drop-shadow(0 0 0px var(--bg-primary));
     }
 
     50% {

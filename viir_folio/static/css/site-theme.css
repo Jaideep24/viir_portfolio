@@ -1,16 +1,16 @@
 body.dark {
   --bg-light: #07091c;
-  --bg-dark: #f8fafc;
-  --text-main: #f8fafc;
+  --bg-dark: var(--bg-primary);
+  --text-main: var(--bg-primary);
   --text-secondary: #cbd5e1;
   --border-color: #333333;
-  --gray-800: #f8fafc;
+  --gray-800: var(--bg-primary);
   --gray-600: #cbd5e1;
   --gray-500: #94a3b8;
   --gray-400: #6b7280;
   --gray-300: #333333;
   --gray-200: #1e293b;
-  --gray-100: #0f172a;
+  --gray-100: var(--bg-inverse);
   --gray-50: #07091c;
 }
 
@@ -18,13 +18,13 @@ body.dark {
 
 
 
-  --text-main: #0f172a;
+  --text-main: var(--bg-inverse);
   --text-secondary: #1e293b;
   --bg-dark: #07091c;
-  --bg-light: #f8fafc;
+  --bg-light: var(--bg-primary);
   --border-color: #cbd5e1;
-  --danger: #ff6f6f;
-  --accent-light: #8c6fff;
+  --danger: var(--primary-accent);
+  --accent-light: var(--secondary-accent);
   --accent-lighter: #a48fff;
   --gray-800: #333333;
   --gray-600: #555555;
@@ -157,13 +157,13 @@ a:focus, button:focus, .btn:focus, input[type="submit"]:focus, input:focus {
 
 
 
-  --text-main: #0f172a;
+  --text-main: var(--bg-inverse);
   --text-secondary: #1e293b;
   --bg-dark: #07091c;
-  --bg-light: #f8fafc;
+  --bg-light: var(--bg-primary);
   --border-color: #cbd5e1;
-  --danger: #ff6f6f;
-  --accent-light: #8c6fff;
+  --danger: var(--primary-accent);
+  --accent-light: var(--secondary-accent);
   --accent-lighter: #a48fff;
   --gray-800: #333333;
   --gray-600: #555555;

@@ -1,7 +1,7 @@
 /* Global capsule button system aligned with existing project style */
 
 :root {
-    --capsule-bg: linear-gradient(135deg, #8c6fff 0%, #a48fff 100%);
+    --capsule-bg: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
     --capsule-border: rgba(140, 111, 255, 0.46);
     --capsule-shadow: 0 4px 14px rgba(2, 6, 23, 0.22);
     --capsule-hover-shadow: 0 8px 24px rgba(140, 111, 255, 0.42);
@@ -38,7 +38,7 @@
     border: 1.5px solid var(--capsule-border);
     background: transparent !important;
     background-image: none !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     text-decoration: none !important;
     font-family: "Quicksand", "Poppins", sans-serif;
     font-weight: 600;
@@ -48,7 +48,7 @@
     transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Hover stays purple with #f8fafc text in both themes */
+/* Hover stays purple with var(--bg-primary) text in both themes */
 :is(
     button,
     .btn,
@@ -69,7 +69,7 @@
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):not(.btn-delete):hover {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     background: var(--capsule-bg) !important;
     background-image: var(--capsule-bg) !important;
     filter: brightness(1.06) saturate(1.05);
@@ -101,7 +101,7 @@
     background: transparent !important;
     background-image: none !important;
     border-color: rgba(140, 111, 255, 0.62) !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     box-shadow: var(--shadow-md);
     filter: none !important;
     transform: translateY(0) scale(0.98);
@@ -177,7 +177,7 @@ body.light :is(
     background: transparent !important;
     background-image: none !important;
     border-color: rgba(140, 111, 255, 0.62) !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     filter: none !important;
 }
 
@@ -201,7 +201,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon):not(.like-btn):not(.btn-delete):hover {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 body.light :is(
@@ -364,7 +364,7 @@ body.light :is(
     input[type="button"],
     input[type="reset"]
 ):not(.sidebar-toggle-btn):not(.br-sidebar-toggle):not(.toolbar-btn):not(.carousel-control-prev):not(.carousel-control-next):not(.carousel-control-prev-icon):not(.carousel-control-next-icon).active .text {
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
 }
 
 /* Accessible focus: visible ring and subtle lift matching hover */
@@ -515,7 +515,7 @@ body.dark .btn-delete.active {
     background: #ef4444 !important;
     background-image: none !important;
     border-color: #ef4444 !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     box-shadow: var(--shadow-md);
 }
 
@@ -525,7 +525,7 @@ body.dark .btn-delete:hover {
     background: #dc2626 !important;
     background-image: none !important;
     border-color: #dc2626 !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     box-shadow: var(--shadow-md);
     transform: translateY(-2px) !important;
 }
@@ -536,6 +536,6 @@ body.dark .btn-delete:active {
     background: #b91c1c !important;
     background-image: none !important;
     border-color: #b91c1c !important;
-    color: #f8fafc !important;
+    color: var(--bg-primary) !important;
     transform: translateY(0) !important;
 }

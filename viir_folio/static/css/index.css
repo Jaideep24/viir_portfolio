@@ -1,7 +1,7 @@
 :root {
-    --brand-primary: #8c6fff;
-    --brand-secondary: #ff6f6f;
-    --text-light: #f8fafc;
+    --brand-primary: var(--secondary-accent);
+    --brand-secondary: var(--primary-accent);
+    --text-light: var(--bg-primary);
     --text-dark: #333333;
     --bg-slate: #1e293b;
 }
@@ -28,7 +28,7 @@ body.dark {
 }
 
 body.light {
-    background-color: #f8fafc;
+    background-color: var(--bg-primary);
 }
 
 body.dark,
@@ -981,7 +981,7 @@ body.light .timeline-tech-badge {
     z-index: -1;
 }
 
-/* #0f172a border for light theme on normal state */
+/* var(--bg-inverse) border for light theme on normal state */
 body.light .br-about .br-card::before {
     background: rgba(0, 0, 0, 0.65);
 }
@@ -1403,7 +1403,7 @@ body.light {
    -------------------------------------------------------------------------- */
 
 .carousel-btn-icon {
-    background-color: #0f172a;
+    background-color: var(--bg-inverse);
     opacity: 0.8;
     border-radius: 50%;
 }
@@ -1884,7 +1884,7 @@ body.dark footer .br-footer-detail {
 /* Styled Name */
 footer .br-footer-detail .footer-name {
     font-weight: 600;
-    color: #0f172a;
+    color: var(--bg-inverse);
 }
 
 body.dark footer .br-footer-detail .footer-name {

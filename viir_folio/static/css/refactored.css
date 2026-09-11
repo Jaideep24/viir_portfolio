@@ -10,18 +10,18 @@
     70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
     100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
 }
-.status-dot-text { color: #f8fafc; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.status-dot-text { color: var(--bg-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
 .about-modern-info-flex { display: flex; flex-direction: column; width: 100%; }
-.about-role-title { color: #ff6f6f; font-weight: 700; margin-bottom: 8px; font-size: 1.8rem; }
-.focus-container { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; padding: 14px 22px; margin-bottom: 25px; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 4px solid #ff6f6f; box-shadow: var(--shadow-md); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); width: fit-content; }
-.focus-label { color: #ff6f6f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+.about-role-title { color: var(--primary-accent); font-weight: 700; margin-bottom: 8px; font-size: 1.8rem; }
+.focus-container { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; padding: 14px 22px; margin-bottom: 25px; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 4px solid var(--primary-accent); box-shadow: var(--shadow-md); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); width: fit-content; }
+.focus-label { color: var(--primary-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
 .focus-items-container { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.95rem; font-weight: 600; }
-.focus-item-text { color: #8c6fff; }
-.focus-item-bullet { color: #8c6fff; opacity: 0.7; }
+.focus-item-text { color: var(--secondary-accent); }
+.focus-item-bullet { color: var(--secondary-accent); opacity: 0.7; }
 .about-content-text { margin-bottom: 25px; line-height: 1.8; color: var(--text-color); opacity: 0.9; font-size: 1.05rem; }
 .quick-stats-container { display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 25px 35px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-md); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.stat-number { font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1; }
+.stat-number { font-size: 2rem; font-weight: 800; color: var(--primary-accent); margin-bottom: 2px; line-height: 1; }
 .stat-label { font-size: 0.8rem; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
 .professional-actions-flex { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
 .resume-btn-style { display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600; }
@@ -29,19 +29,19 @@
 .social-icons-wrapper { display: flex; gap: 18px; margin-left: auto; align-items: center; }
 .location-text { color: var(--text-color); font-size: 1.1rem; opacity: 0.8; font-weight: 500; }
 .social-icon-link { color: var(--text-color); font-size: 1.3rem; transition: color 0.3s; opacity: 0.8; }
-.social-icon-link:hover { color: #ff6f6f; opacity: 1; }
+.social-icon-link:hover { color: var(--primary-accent); opacity: 1; }
 .project-desc-p { font-size: 0.95rem; margin-bottom: 15px; color: var(--text-color); opacity: 0.9; }
 .project-actions-flex { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
 .project-btn-style { flex: 1 1 calc(50% - 5px); justify-content: center; min-width: 120px; }
 .project-btn-full { flex: 1 1 calc(100% - 10px); justify-content: center; min-width: 120px; }
-.project-btn-arch { border-color: #ff6f6f; background: rgba(255, 111, 111, 0.05); }
-.text-highlight { color: #ff6f6f; }
+.project-btn-arch { border-color: var(--primary-accent); background: rgba(255, 111, 111, 0.05); }
+.text-highlight { color: var(--primary-accent); }
 
 /* Social Proof Classes for About */
 .social-proof-container { border-top: 1px solid rgba(255,255,255,0.05); margin-left: -15px; }
 .social-proof-title { color: var(--text-color); opacity: 0.5; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 25px; }
 .social-proof-logos { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%) contrast(120%); }
-.social-proof-logo { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #f8fafc; font-size: 1.5rem; }
+.social-proof-logo { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--bg-primary); font-size: 1.5rem; }
 
 
 /* Sleek Timeline Changelog Style */
@@ -194,7 +194,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .stat-item,
 .capsule-btn,
 .social-icon-link {
-    transition: all 0.5s var(--fluid-spring) !important;
+    transition: all 0.5s var(--fluid-spring);
 }
 
 /* ==========================================================================
@@ -211,12 +211,12 @@ body.dark .portfolio-tabs ul li {
    Contact Section Info Boxes & Inputs
    ========================================================================== */
 body.dark .br-contact .br-box {
-    background: #1e293b !important; /* Solid filled color for dark theme */
-    border-color: rgba(255, 255, 255, 0.08) !important;
+    background: #1e293b; /* Solid filled color for dark theme */
+    border-color: rgba(255, 255, 255, 0.08);
 }
 body.light .br-contact .br-box {
-    background: #f8fafc !important;
-    border-color: rgba(0, 0, 0, 0.08) !important;
+    background: var(--bg-primary);
+    border-color: rgba(0, 0, 0, 0.08);
 }
 body.dark .br-contact .br-box p {
     color: var(--text-secondary);
@@ -226,55 +226,55 @@ body.dark .br-contact .br-box .info h3 {
 }
 .br-contact .br-box .icon i,
 .br-contact .br-box .icon svg {
-    color: var(--primary-accent, #ff6f6f) !important;
+    color: var(--primary-accent, var(--primary-accent));
 }
 
 /* P1-001: Contact Form Modernization */
 .modern-input {
-    background-color: #1e293b !important; /* Solid dark slate for dark theme */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    color: #f8fafc !important; /* Explicit white text */
+    background-color: #1e293b; /* Solid dark slate for dark theme */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--bg-primary); /* Explicit white text */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: all 0.4s var(--fast-spring) !important;
+    transition: all 0.4s var(--fast-spring);
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .modern-input::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 body.light .modern-input {
-    background-color: #ffffff !important;
-    color: #333333 !important;
-    border-color: rgba(0, 0, 0, 0.1) !important;
+    background-color: #ffffff;
+    color: #333333;
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 body.light .modern-input::placeholder {
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .modern-input:focus {
-    background-color: #0f172a !important; /* Darker slate on focus */
-    border-color: #ff6f6f !important;
-    box-shadow: 0 0 0 4px rgba(255, 111, 111, 0.15), inset 0 2px 4px rgba(0,0,0,0.1) !important;
-    outline: none !important;
+    background-color: var(--bg-inverse); /* Darker slate on focus */
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 4px rgba(255, 111, 111, 0.15), inset 0 2px 4px rgba(0,0,0,0.1);
+    outline: none;
 }
 
 body.light .modern-input:focus {
-    background-color: #f8fafc !important; /* Slightly off-white on focus in light mode */
+    background-color: var(--bg-primary); /* Slightly off-white on focus in light mode */
 }
 
 /* Light mode overrides for contact form */
 body.light .modern-input {
-    background: rgba(0, 0, 0, 0.03) !important;
-    border-color: rgba(0, 0, 0, 0.15) !important;
-    color: #333 !important;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #333;
 }
 
 body.light .modern-input:focus {
-    background: rgba(0, 0, 0, 0.05) !important;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 body.light .form-floating > label {
@@ -283,7 +283,7 @@ body.light .form-floating > label {
 
 body.light .form-floating > .modern-input:focus ~ label,
 body.light .form-floating > .modern-input:not(:placeholder-shown) ~ label {
-    color: #ff6f6f;
+    color: var(--primary-accent);
 }
 
 /* P1-010: Respect user motion preferences */

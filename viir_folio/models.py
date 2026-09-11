@@ -246,7 +246,7 @@ class Contact(models.Model):
     email = encrypt(models.EmailField())
     number = encrypt(PhoneNumberField(blank=True, null=True, region="IN"))
     message = encrypt(models.TextField())
-    inquiry_type = models.CharField(max_length=50, blank=True, null=True)
+    inquiry_type = models.CharField(max_length=50, blank=True, null=False, default="General")
     submitted_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
