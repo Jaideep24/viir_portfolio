@@ -151,21 +151,7 @@ class Particle {
 const particles = Array(config.particleCount).fill().map(() => new Particle());
 
 
-let isCanvasVisible = true;
-const observer = new IntersectionObserver((entries) => {
-    isCanvasVisible = entries[0].isIntersecting;
-}, { threshold: 0 });
-
-const heroSection = document.querySelector('#home') || document.querySelector('.hero') || document.body;
-if (heroSection !== document.body) {
-    observer.observe(heroSection);
-}
-
 function animate() {
-    if (!isCanvasVisible) {
-        requestAnimationFrame(animate);
-        return;
-    }
     createGrid();
     
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

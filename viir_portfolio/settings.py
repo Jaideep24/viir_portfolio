@@ -44,6 +44,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 
+# Automatically email 500 errors to the developer when DEBUG=False
+SERVER_EMAIL = EMAIL_HOST_USER
+ADMINS = [
+    ('Site Admin', os.getenv('EMAIL_RECIPIENT_EMAIL', EMAIL_HOST_USER)),
+]
+
 
 # Application definition
 CRISPY_TEMPLATE_PACK='bootstrap4'
@@ -241,6 +247,11 @@ LOGGING = {
         },
     },
     'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',

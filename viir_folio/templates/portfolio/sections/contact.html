@@ -33,10 +33,10 @@
                                 <h3 class="title mb-1" style="font-size: 1.1rem;">Contact</h3>
                                 <p class="mb-0">
                                     {% if object.phone_no %}
-                                    <a class="contact-link" href="tel:{{ object.phone_no }}"
+                                    <a class="contact-link" href="https://wa.me/{{ object.phone_no|urlencode }}"
                                         target="_blank" rel="noopener noreferrer">{{ object.phone_no }}</a>
                                     {% elif object.whatsapp_no %}
-                                    <a class="contact-link" href="https://wa.me/{{ object.whatsapp_no }}"
+                                    <a class="contact-link" href="https://wa.me/{{ object.whatsapp_no|urlencode }}"
                                         target="_blank" rel="noopener noreferrer">+{{ object.whatsapp_no }}</a>
                                     {% endif %}
                                 </p>
@@ -109,7 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => {
+            .then(async response => {
+                let data = {};
+                try { data = await response.json(); } catch(e) {}
+                
                 if(response.ok) {
                     msgDiv.className = 'alert alert-success';
                     msgDiv.innerHTML = '<b>Message Sent Successfully!</b>';
@@ -117,7 +120,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     form.reset();
                 } else {
                     msgDiv.className = 'alert alert-danger';
-                    msgDiv.innerHTML = '<b>Something went wrong. Please try again.</b>';
+                    let errorMsg = '<b>Something went wrong. Please try again.</b>';
+                    
+                    if (data.errors) {
+                        let errorLines = [];
+                        for (let field in data.errors) {
+                            // Convert field name to title case (e.g., 'number' -> 'Number')
+                            let fieldName = field.charAt(0).toUpperCase() + field.slice(1);
+                            errorLines.push(fieldName + ': ' + data.errors[field].join(', '));
+                        }
+                        if (errorLines.length > 0) {
+                            errorMsg = '<b>Please correct the following:</b><br>' + errorLines.join('<br>');
+                        }
+                    } else if (data.message) {
+                        errorMsg = '<b>' + data.message + '</b>';
+                    }
+                    
+                    msgDiv.innerHTML = errorMsg;
                     msgDiv.style.display = 'block';
                 }
             })
@@ -129,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 btn.querySelector('.text').innerText = 'Send Message';
                 btn.disabled = false;
-                setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
+                setTimeout(() => { msgDiv.style.display = 'none'; }, 8000); // 8 seconds to read errors
             });
         });
     }

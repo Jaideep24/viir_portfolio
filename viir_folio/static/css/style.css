@@ -1787,46 +1787,7 @@ section {
   margin-bottom: 30px;
 }
 
-.br-contact form .form-group input,
-.br-contact form .form-group textarea {
-  padding: 15px;
-  border-color: var(--gray-300);
-  border-radius: 15px;
-  font-size: 15px;
-  color: var(--gray-600);
-}
-
-.br-contact form .form-group input:focus,
-.br-contact form .form-group textarea:focus {
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.br-contact form .form-group input::-webkit-input-placeholder,
-.br-contact form .form-group textarea::-webkit-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::-moz-placeholder,
-.br-contact form .form-group textarea::-moz-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input:-ms-input-placeholder,
-.br-contact form .form-group textarea:-ms-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::-ms-input-placeholder,
-.br-contact form .form-group textarea::-ms-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::placeholder,
-.br-contact form .form-group textarea::placeholder {
-  color: var(--gray-400);
-}
+/* Removed legacy input styles that conflict with .modern-input */
 
 .br-contact form button {
   height: auto;
@@ -1925,9 +1886,13 @@ section {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid var(--gray-300);
-  -webkit-animation: morphing-image 15s linear infinite forwards;
-  animation: morphing-image 15s linear infinite forwards;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  -webkit-animation: morphing-image 15s linear infinite forwards !important;
+  animation: morphing-image 15s linear infinite forwards !important;
+}
+
+body.dark .br-contact .br-box .icon {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .br-contact .br-box .icon i {

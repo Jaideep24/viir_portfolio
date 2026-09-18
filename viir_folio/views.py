@@ -11,6 +11,7 @@ from django.views.generic import ListView, DetailView, DeleteView, UpdateView, T
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils import timezone
+from django.utils.timezone import localtime
 from django.conf import settings
 from django.db.models import F
 from django.core.exceptions import ImproperlyConfigured
@@ -182,9 +183,9 @@ class IndexView(TemplateView):
                 )
             subject = "Portfolio contact"
             submission_date = (
-                form.instance.submitted_date.strftime("%d/%m/%Y %H:%M")
+                localtime(form.instance.submitted_date).strftime("%d/%m/%Y %I:%M %p IST")
                 if form.instance.submitted_date
-                else datetime.now().strftime("%d/%m/%Y %H:%M")
+                else localtime(timezone.now()).strftime("%d/%m/%Y %I:%M %p IST")
             )
             message = (
                 f"Name: {form.cleaned_data['name']}\n"
@@ -406,6 +407,9 @@ def redirect_article_numeric_to_slug(request, pk):
     except Article.DoesNotExist:
         return render(request, "404.html", status=404)
 
+
+def custom_500(request):
+    return render(request, "500.html", status=500)
 
 class DetailArticleView(DetailView):
     model = Article

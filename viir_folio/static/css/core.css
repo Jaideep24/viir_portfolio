@@ -1876,46 +1876,7 @@ section {
   margin-bottom: 30px;
 }
 
-.br-contact form .form-group input,
-.br-contact form .form-group textarea {
-  padding: 15px;
-  border-color: var(--gray-300);
-  border-radius: 15px;
-  font-size: 15px;
-  color: var(--gray-600);
-}
-
-.br-contact form .form-group input:focus,
-.br-contact form .form-group textarea:focus {
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.br-contact form .form-group input::-webkit-input-placeholder,
-.br-contact form .form-group textarea::-webkit-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::-moz-placeholder,
-.br-contact form .form-group textarea::-moz-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input:-ms-input-placeholder,
-.br-contact form .form-group textarea:-ms-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::-ms-input-placeholder,
-.br-contact form .form-group textarea::-ms-input-placeholder {
-  color: var(--gray-400);
-}
-
-.br-contact form .form-group input::placeholder,
-.br-contact form .form-group textarea::placeholder {
-  color: var(--gray-400);
-}
+/* Removed legacy input styles that conflict with .modern-input */
 
 .br-contact form button {
   height: auto;
@@ -2014,9 +1975,13 @@ section {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid var(--gray-300);
-  -webkit-animation: morphing-image 15s linear infinite forwards;
-  animation: morphing-image 15s linear infinite forwards;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  -webkit-animation: morphing-image 15s linear infinite forwards !important;
+  animation: morphing-image 15s linear infinite forwards !important;
+}
+
+body.dark .br-contact .br-box .icon {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .br-contact .br-box .icon i {
@@ -2549,8 +2514,9 @@ body.dark .br-contact .br-box {
     border-color: rgba(255, 255, 255, 0.08);
 }
 body.light .br-contact .br-box {
-    background: var(--bg-primary);
-    border-color: rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.03); /* Not sketch line */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Blended slight shadowish */
 }
 body.dark .br-contact .br-box p {
     color: var(--text-secondary);
@@ -2563,52 +2529,87 @@ body.dark .br-contact .br-box .info h3 {
     color: var(--primary-accent, var(--primary-accent));
 }
 
+/* Contact Links */
+.br-contact .contact-link {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.br-contact a.contact-link:hover {
+    color: var(--primary-accent);
+}
+
 /* P1-001: Contact Form Modernization */
 .modern-input {
     background-color: #1e293b; /* Solid dark slate for dark theme */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: var(--bg-primary); /* Explicit white text */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Visible grey-ish border */
+    border-radius: 15px !important; /* Legacy size */
+    padding: 15px !important; /* Legacy size */
+    font-size: 15px !important; /* Legacy size */
+    color: var(--text-primary) !important; /* Fix black text in dark mode */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: all 0.4s var(--fast-spring);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.03), inset 0 2px 4px rgba(0,0,0,0.1); /* Default shadow glow */
 }
 
 .modern-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-body.light .modern-input {
-    background-color: #ffffff;
-    color: #333333;
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-body.light .modern-input::placeholder {
-    color: rgba(0, 0, 0, 0.5);
+    color: #cbd5e1; /* off-whitish for dark mode */
+    opacity: 0.8;
 }
 
 .modern-input:focus {
-    background-color: var(--bg-inverse); /* Darker slate on focus */
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 4px rgba(255, 111, 111, 0.15), inset 0 2px 4px rgba(0,0,0,0.1);
-    outline: none;
+    background-color: #27364d !important; /* Differ slight not much */
+    border-color: var(--primary-accent) !important; /* brand red */
+    box-shadow: 0 0 0 4px rgba(255, 111, 111, 0.2), inset 0 2px 4px rgba(0,0,0,0.1) !important; /* Red shadow glow */
+    outline: none !important;
 }
 
-body.light .modern-input:focus {
-    background-color: var(--bg-primary); /* Slightly off-white on focus in light mode */
+/* Autofill fix for Dark Mode */
+.modern-input:-webkit-autofill,
+.modern-input:-webkit-autofill:hover, 
+.modern-input:-webkit-autofill:focus, 
+.modern-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Light mode overrides for contact form */
 body.light .modern-input {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.15);
-    color: #333;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15); /* Visible grey border */
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04), 0 4px 15px rgba(0, 0, 0, 0.04); /* Grey shadow glow */
+    color: #333 !important;
+}
+
+body.light .modern-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
 }
 
 body.light .modern-input:focus {
-    background: rgba(0, 0, 0, 0.05);
+    background: #ffffff !important;
+    border-color: var(--primary-accent) !important; /* brand red */
+    box-shadow: 0 0 0 4px rgba(255, 111, 111, 0.2), 0 4px 15px rgba(0, 0, 0, 0.04) !important; /* Red shadow glow */
+}
+
+/* Autofill fix for Light Mode */
+body.light .modern-input:-webkit-autofill,
+body.light .modern-input:-webkit-autofill:hover, 
+body.light .modern-input:-webkit-autofill:focus, 
+body.light .modern-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: #333 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Contact button solid backgrounds */
+.br-contact .capsule-btn {
+    background-color: #1e293b !important;
+}
+body.light .br-contact .capsule-btn {
+    background-color: #ffffff !important;
 }
 
 body.light .form-floating > label {
