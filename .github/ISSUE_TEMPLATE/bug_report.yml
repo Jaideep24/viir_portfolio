@@ -1,0 +1,69 @@
+name: Bug Report
+description: File a reproducible bug against the portfolio or CMS.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before filing**: confirm the bug is reproducible on `main`.
+        Do **not** include secrets, credentials, or personal data.
+
+  - type: input
+    id: summary
+    attributes:
+      label: One-line summary
+      placeholder: "e.g. Contact form returns 500 when subject is empty"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Exact, ordered steps. Include curl commands or test cases if applicable.
+      placeholder: |
+        1. Navigate to /#connect
+        2. Submit form with empty Subject field
+        3. Observe 500 Internal Server Error in browser console
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour (include traceback / logs)
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "e.g. 3.11.9"
+    validations:
+      required: true
+
+  - type: input
+    id: django-version
+    attributes:
+      label: Django version
+      placeholder: "e.g. 4.2.16"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: I have not included secrets, API keys, or personal data.
+          required: true

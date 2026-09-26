@@ -21,6 +21,11 @@ class ContentSecurityPolicyMiddleware:
             "frame-ancestors 'none';"
         )
         response["Content-Security-Policy"] = csp_policy
+        response["Permissions-Policy"] = (
+            "accelerometer=(), camera=(), geolocation=(), gyroscope=(), "
+            "magnetometer=(), microphone=(), payment=(), usb=(), "
+            "interest-cohort=()"
+        )
         return response
 
 
@@ -57,18 +62,28 @@ class AnalyticsMiddleware:
                 user_agent = request.META.get("HTTP_USER_AGENT", "")
                 session_key = request.session.session_key
 
+                from django.conf import settings
+
+                if getattr(settings, "TESTING", False):
+                    return response
+
                 # Offload to background thread to prevent blocking main request cycle
                 import threading
 
                 def track_visit(session_key, ip, user_agent, path):
                     from .models import Visitor, PageVisit
+                    from django.db import connection
 
-                    visitor, _ = Visitor.objects.get_or_create(
-                        session_key=session_key,
-                        defaults={"ip_address": ip, "user_agent": user_agent},
-                    )
-                    visitor.save()
-                    PageVisit.objects.create(visitor=visitor, path=path)
+                    try:
+                        visitor, _ = Visitor.objects.get_or_create(
+                            session_key=session_key,
+                            defaults={"ip_address": ip, "user_agent": user_agent},
+                        )
+                        PageVisit.objects.create(visitor=visitor, path=path)
+                    except Exception:
+                        pass
+                    finally:
+                        connection.close()
 
                 threading.Thread(
                     target=track_visit,

@@ -2,7 +2,7 @@
 
 <div align="center">
   <h3>Elite Staff Engineer Portfolio & CMS</h3>
-  <p>A production-ready Django 3.2 application architected for extreme performance, WCAG 2.1 AA accessibility, and enterprise-grade security.</p>
+  <p>A production-ready Django 4.2 application architected for extreme performance, WCAG 2.1 AA accessibility, and enterprise-grade security.</p>
 </div>
 
 ---
@@ -41,7 +41,7 @@ graph TD
    ```bash
    git clone <repo-url>
    python -m venv .venv
-   source .venv/bin/activate  # Or .venv\Scriptsctivate on Windows
+   source .venv/bin/activate  # Or .venv\\Scripts\\activate on Windows
    ```
 
 2. **Install Dependencies**

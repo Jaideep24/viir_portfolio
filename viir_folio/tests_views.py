@@ -1,13 +1,6 @@
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from unittest.mock import patch
-import sys
-import unittest
-
-# CPython 3.14 introduced a breaking change in copy.__copy__ that is incompatible
-# with Django 4.2 test client. Tests using assertTemplateUsed or response.context
-# are skipped on Python >=3.14 until upstream resolves the incompatibility.
-_SKIP_TEMPLATE_RENDER_TESTS = sys.version_info >= (3, 14)
 
 
 @override_settings(
@@ -25,10 +18,6 @@ class ViewFunctionalTests(TestCase):
     def setUp(self):
         self.client = Client()
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_index_view_get_returns_200(self):
         """Test that the index view renders successfully and returns 200 OK."""
         response = self.client.get(reverse("index"))
@@ -83,20 +72,12 @@ class ViewFunctionalTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"success": True})
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_custom_404_view(self):
         """Test that a non-existent URL returns a 404 status and custom template."""
         response = self.client.get("/this-url-does-not-exist/")
         self.assertEqual(response.status_code, 404)
-        self.assertTemplateUsed(response, "404.html")
+        self.assertTemplateUsed(response, "error.html")
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_login_view_get(self):
         """Test that the login view renders correctly."""
         response = self.client.get(reverse("login"))

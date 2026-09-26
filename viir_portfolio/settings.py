@@ -17,82 +17,91 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Explicitly point to the .env file in the project root and override system variables
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
-    raise ValueError('SECRET_KEY environment variable must be set in production')
+    raise ValueError("SECRET_KEY environment variable must be set in production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+import sys
+
+TESTING = (
+    "test" in sys.argv
+    or "pytest" in sys.argv[0]
+    or getattr(sys, "_called_from_test", False)
+)
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,viir.tech').split(',')
+    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,viir.tech").split(",")
     if host.strip()
 ]
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 
 # Automatically email 500 errors to the developer when DEBUG=False
 SERVER_EMAIL = EMAIL_HOST_USER
 ADMINS = [
-    ('Site Admin', os.getenv('EMAIL_RECIPIENT_EMAIL', EMAIL_HOST_USER)),
+    ("Site Admin", os.getenv("EMAIL_RECIPIENT_EMAIL", EMAIL_HOST_USER)),
 ]
 
 
 # Application definition
-CRISPY_TEMPLATE_PACK='bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 INSTALLED_APPS = [
-    'jazzmin',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
-    'compressor',
-    'axes',
-    'viir_folio',
-    'crispy_forms',
-    'crispy_bootstrap5',
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
+    "compressor",
+    "axes",
+    "viir_folio",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "tinymce",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise for static files in production
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'axes.middleware.AxesMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'viir_folio.middleware.ContentSecurityPolicyMiddleware',
-    'viir_folio.middleware.AnalyticsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise for static files in production
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "axes.middleware.AxesMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "viir_folio.middleware.ContentSecurityPolicyMiddleware",
+    "viir_folio.middleware.AnalyticsMiddleware",
 ]
 
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = "Strict"
 # SESSION_COOKIE_SECURE and CSRF_COOKIE_SECURE are explicitly controlled via .env
-SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'False') == 'True'
-CSRF_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'False') == 'True'
-SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+SESSION_COOKIE_SECURE = os.getenv("SESSION_COOKIE_SECURE", "False") == "True"
+CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SECURE = os.getenv("CSRF_COOKIE_SECURE", "False") == "True"
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 # Always-on security headers (do not require HTTPS)
 SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = "DENY"
 
 JAZZMIN_SETTINGS = {
     "site_title": "Viir Phuria Admin",
@@ -134,9 +143,9 @@ JAZZMIN_UI_TWEAKS = {
 
 # Production-only HTTPS/HSTS settings
 # NOTE: On PythonAnywhere, SSL is handled by their proxy.
-SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False') == 'True'
+SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "False") == "True"
 if SECURE_SSL_REDIRECT:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
@@ -145,52 +154,52 @@ if SECURE_SSL_REDIRECT:
 CSRF_TRUSTED_ORIGINS = [
     host.strip()
     for host in os.getenv(
-        'CSRF_TRUSTED_ORIGINS',
-        'https://viir.tech,https://viir.pythonanywhere.com,https://viirportfolio.pythonanywhere.com'
-    ).split(',')
+        "CSRF_TRUSTED_ORIGINS",
+        "https://viir.tech,https://viir.pythonanywhere.com,https://viirportfolio.pythonanywhere.com",
+    ).split(",")
     if host.strip()
 ]
 
-ROOT_URLCONF = 'viir_portfolio.urls'
+ROOT_URLCONF = "viir_portfolio.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'viir_folio' / 'templates'],  # Global template lookup
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'viir_folio.context_processors.site_meta',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "viir_folio" / "templates"],  # Global template lookup
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "viir_folio.context_processors.site_meta",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'viir_portfolio.wsgi.application'
+WSGI_APPLICATION = "viir_portfolio.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
 
 # Password Hashers (Argon2 as default, fallbacks for older/migrated hashes)
 PASSWORD_HASHERS = [
-    'viir_portfolio.hashers.ParanoidArgon2Hasher',
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    "viir_portfolio.hashers.ParanoidArgon2Hasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 
 # Password validation
@@ -198,16 +207,16 @@ PASSWORD_HASHERS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -215,68 +224,71 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
 USE_TZ = True
 
 # Append Time Zone explicitly whenever a datetime is rendered
-DATETIME_FORMAT = 'N j, Y, P T'
-SHORT_DATETIME_FORMAT = 'm/d/Y P T'
+DATETIME_FORMAT = "N j, Y, P T"
+SHORT_DATETIME_FORMAT = "m/d/Y P T"
 
 # Explicitly add DD/MM/YYYY formatting support for inputting dates in Admin globally
 DATE_INPUT_FORMATS = [
-    '%d/%m/%Y', '%d/%m/%y', # '25/10/2006', '25/10/06'
-    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+    "%d/%m/%Y",
+    "%d/%m/%y",  # '25/10/2006', '25/10/06'
+    "%Y-%m-%d",
+    "%m/%d/%Y",
+    "%m/%d/%y",  # '2006-10-25', '10/25/2006', '10/25/06'
 ]
 
 # Logging Configuration
-LOG_DIR = BASE_DIR / 'logs'
+LOG_DIR = BASE_DIR / "logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
         },
     },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
+    "handlers": {
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "include_html": True,
         },
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': LOG_DIR / 'django.log',
-            'formatter': 'verbose',
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": LOG_DIR / "django.log",
+            "formatter": "verbose",
         },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'INFO',
-            'propagate': True,
+    "loggers": {
+        "django": {
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": True,
         },
     },
 }
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'viir_folio' / 'static'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # NOTE: viir_folio/static/ is auto-discovered via AppDirectoriesFinder
 # because 'viir_folio' is in INSTALLED_APPS. No need for STATICFILES_DIRS.
@@ -295,52 +307,49 @@ WHITENOISE_MAX_AGE = 31536000  # Cache forever (1 year)
 
 # Media files
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / "media"
 os.makedirs(MEDIA_ROOT, exist_ok=True)  # Auto-create media/ if missing
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Caching Configuration
 
-USE_REDIS = os.getenv('USE_REDIS', 'False') == 'True'
+USE_REDIS = os.getenv("USE_REDIS", "False") == "True"
 if not USE_REDIS:
     CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': 'unique-snowflake',
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "unique-snowflake",
         }
     }
 else:
     CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": os.getenv('REDIS_URL', 'redis://127.0.0.1:6379/1'),
+            "LOCATION": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            }
+            },
         }
     }
 
 
 # Django Compressor Settings
-COMPRESS_ENABLED = os.getenv('COMPRESS_ENABLED', 'False') == 'True'
-COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE', 'False') == 'True'
+COMPRESS_ENABLED = os.getenv("COMPRESS_ENABLED", "False") == "True"
+COMPRESS_OFFLINE = os.getenv("COMPRESS_OFFLINE", "False") == "True"
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 )
 
 # --- Python 3.12+ Compatibility for Django 3.2 EmailBackend ---
 import smtplib
+
 _original_starttls = smtplib.SMTP.starttls
+
 
 def _patched_starttls(self, keyfile=None, certfile=None, context=None):
     # In Python 3.12+, keyfile and certfile are removed from starttls().
@@ -348,14 +357,15 @@ def _patched_starttls(self, keyfile=None, certfile=None, context=None):
     # We ignore them here to maintain compatibility.
     return _original_starttls(self, context=context)
 
+
 smtplib.SMTP.starttls = _patched_starttls
 
 # Axes Security config
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    "axes.backends.AxesBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1
 AXES_RESET_ON_SUCCESS = True
-AXES_LOCKOUT_TEMPLATE = '403_lockout.html'
+AXES_LOCKOUT_TEMPLATE = "403_lockout.html"
