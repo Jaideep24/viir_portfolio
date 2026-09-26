@@ -1,0 +1,12 @@
+{% extends 'error.html' %}
+
+{% block title %}Account Locked - Viir Phuria{% endblock %}
+{% block error_code %}403{% endblock %}
+{% block error_title %}Too Many Login Attempts{% endblock %}
+{% block error_desc %}Your account has been temporarily locked due to multiple failed login attempts. Please try again later or contact support if you need immediate assistance.{% endblock %}
+{% block error_action %}
+    <a href="{% url 'portfolio:index' %}" class="br-btn">
+        <span class="text"><i class="fa-solid fa-house m-r-10"></i> Back to Home</span>
+        <span class="br-btn-bg"></span>
+    </a>
+{% endblock %}
