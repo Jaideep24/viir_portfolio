@@ -156,7 +156,7 @@ body.light .toggle-pill {
 }
 
 .navbar-title {
-    color: var(--bg-primary);
+    color: var(--text-primary);
     font-size: 24px;
     font-family: 'Playfair Display', serif;
     font-weight: 500;
@@ -247,6 +247,10 @@ body.light #headno {
     z-index: 1000;
 }
 
+.br-sidebar-overlay.active {
+    display: block !important;
+}
+
 .br-sidebar {
     width: 240px;
     height: 100%;
@@ -265,7 +269,7 @@ body.light #headno {
     overflow-y: auto;
     overflow-x: hidden;
     opacity: 1;
-    z-index: 1001;
+    z-index: 20002;
     will-change: transform;
 }
 
@@ -302,7 +306,7 @@ body.light #headno {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--bg-primary);
+    color: var(--text-primary);
     text-decoration: none;
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
@@ -327,7 +331,7 @@ body.light #headno {
 .br-sidebar .menu-list .blog-sidebar-menu .nav-link {
     display: inline-flex;
     gap: 16px;
-    color: var(--bg-primary);
+    color: var(--text-primary);
     font-size: 1.08rem;
     text-decoration: none !important;
     line-height: 1.45;
@@ -355,7 +359,7 @@ body.light #headno {
     height: 10px;
     flex: 0 0 10px;
     border-radius: 50%;
-    background: var(--bg-primary);
+    background: var(--text-primary);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
     transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
