@@ -11,9 +11,19 @@
         sidebar.classList.toggle('br-sidebar-open', isOpen);
         sidebar.classList.toggle('br-open', isOpen);
         overlay.style.display = isOpen ? 'block' : 'none';
-        
+
         if (toggleBtn) {
             toggleBtn.classList.toggle('btn-open', isOpen);
+            // WCAG 2.2: update aria-expanded so screen readers announce state change
+            toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        // Trap/release focus: move focus into sidebar on open, return on close
+        if (isOpen) {
+            const firstLink = sidebar.querySelector('a, button');
+            if (firstLink) firstLink.focus();
+        } else {
+            if (toggleBtn) toggleBtn.focus();
         }
     }
 

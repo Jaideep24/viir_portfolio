@@ -13,17 +13,10 @@
                             <div class="br-card" data-tilt="" style="position: relative; display: inline-block;">
                                 <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.name }} — profile photo" class="about-img">
                                 {% if object.open_to_work %}
-                                <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.75); padding: 8px 18px; border-radius: 30px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10;">
-                                    <div style="width: 10px; height: 10px; background-color: #2ecc71; border-radius: 50%; animation: pulse-green 2s infinite;"></div>
-                                    <span style="color: white; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;">{{ object.status_text }}</span>
+                                <div class="about-status-badge">
+                                    <div class="about-status-dot"></div>
+                                    <span class="about-status-text">{{ object.status_text }}</span>
                                 </div>
-                                <style>
-                                @keyframes pulse-green {
-                                    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-                                    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-                                    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-                                }
-                                </style>
                                 {% endif %}
                             </div>
                         </div>
@@ -31,54 +24,54 @@
                 </div>
                 <div class="col-lg-6 reveal-left">
                     <div class="br-about-detail">
-                        <div class="about-modern-info" style="display: flex; flex-direction: column; width: 100%;">
-                            <h3 style="color: #ff6f6f; font-weight: 700; margin-bottom: 8px; font-size: 1.8rem;">{{ object.current_role }}</h3>
-                            
+                        <div class="about-modern-info">
+                            <h3 class="about-current-role">{{ object.current_role }}</h3>
+
                             {% if object.current_focus %}
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; padding: 14px 22px; margin-bottom: 25px; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 4px solid #ff6f6f; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); width: fit-content;">
-                                <span style="color: #ff6f6f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Focus:</span>
-                                <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.95rem; font-weight: 600;">
+                            <div class="about-focus-row">
+                                <span class="about-focus-label">Focus:</span>
+                                <div class="about-focus-items">
                                     {% for focus in object.get_focus_list %}
-                                        <span style="color: #8c6fff;">{{ focus }}</span>
-                                        {% if not forloop.last %}<span style="color: #8c6fff; opacity: 0.7;">&bull;</span>{% endif %}
+                                        <span class="about-focus-text">{{ focus }}</span>
+                                        {% if not forloop.last %}<span class="about-focus-bullet">&bull;</span>{% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                             {% endif %}
 
-                            <p style="margin-bottom: 25px; line-height: 1.8; color: var(--text-secondary); opacity: 0.9; font-size: 1.05rem;">{{ object.content }}</p>
+                            <p class="about-content-text">{{ object.content }}</p>
 
                             <!-- Quick Stats Row (Manual Text Fields) -->
-                            <div class="quick-stats" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 35px; padding: 25px 35px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
-                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.projects_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Projects Built</span>
+                            <div class="quick-stats about-stats-grid">
+                                <div class="about-stat-item">
+                                    <h4 class="about-stat-number">{{ object.projects_count }}</h4>
+                                    <span class="about-stat-label">Projects Built</span>
                                 </div>
-                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.research_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Research Papers</span>
+                                <div class="about-stat-item">
+                                    <h4 class="about-stat-number">{{ object.research_count }}</h4>
+                                    <span class="about-stat-label">Research Papers</span>
                                 </div>
-                                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                    <h4 style="font-size: 2rem; font-weight: 800; color: #ff6f6f; margin-bottom: 2px; line-height: 1;">{{ object.certifications_count }}</h4>
-                                    <span style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Certifications</span>
+                                <div class="about-stat-item">
+                                    <h4 class="about-stat-number">{{ object.certifications_count }}</h4>
+                                    <span class="about-stat-label">Certifications</span>
                                 </div>
                             </div>
 
-                            <div class="professional-actions" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+                            <div class="professional-actions about-actions-flex">
                                 {% for cv_item in cv %}
-                                <a class="capsule-btn hero-btn download-cv-btn" href="{{ cv_item.pdf.url }}" download style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; font-weight: 600;">
-                                     <span class="text" style="margin: 0 auto;"><i class="fa-solid fa-download m-r-10"></i> Download Resume</span>
+                                <a class="capsule-btn hero-btn download-cv-btn about-resume-btn" href="{{ cv_item.pdf.url }}" download>
+                                     <span class="text"><i class="fa-solid fa-download m-r-10"></i> Download Resume</span>
                                 </a>
                                 {% endfor %}
-                                
-                                <div style="display: flex; gap: 18px; margin-left: auto; align-items: center;">
-                                    <span style="color: var(--text-secondary); font-size: 1.1rem; opacity: 0.8; font-weight: 500;"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
-                                    <a href="mailto:{{ object.email }}" style="color: var(--text-secondary); font-size: 1.3rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
+
+                                <div class="about-social-row">
+                                    <span class="about-location-text"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
+                                    <a href="mailto:{{ object.email }}" class="about-social-icon" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
                                     {% if object.github_url %}
-                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
                                     {% endif %}
                                     {% if object.linkedin_url %}
-                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); font-size: 1.5rem; transition: color 0.3s; opacity: 0.8;" onmouseover="this.style.color='#ff6f6f'; this.style.opacity='1'" onmouseout="this.style.color='var(--text-secondary)'; this.style.opacity='0.8'" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                                     {% endif %}
                                 </div>
                             </div>

@@ -181,16 +181,21 @@ class SecurityTests(TestCase):
     def test_publication_first_author_bolding(self):
         """
         Verify that 'Viir Phuria' is bolded inside the rendered index page.
+        Author name is rendered via the authors_m2m relation; the template
+        specifically wraps the name in <strong> when it matches 'Viir Phuria'.
         """
-        from .models import Publication
+        from .models import Publication, Author
 
-        Publication.objects.create(
-            title="Bolding Test Publication",
+        author_viir = Author.objects.create(name="Viir Phuria")
+        author_jane = Author.objects.create(name="Jane Doe")
+        pub = Publication.objects.create(
+            title="Bolding Test Publication — Long Enough Title",
             authors="Viir Phuria, Jane Doe",
             date=timezone.now().date(),
             place="Mumbai",
             url="https://example.com",
         )
+        pub.authors_m2m.add(author_viir, author_jane)
         response = self.client.get(reverse("index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<strong>Viir Phuria</strong>")
