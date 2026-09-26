@@ -1,43 +1,49 @@
-import threading
-import os
 import logging
-import smtplib
+import os
+import time
 import uuid
-from datetime import datetime
 
-from django.shortcuts import render, redirect
-from django.views import View
-from django.views.generic import ListView, DetailView, DeleteView, UpdateView, TemplateView
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, JsonResponse
-from django.utils import timezone
-from django.utils.timezone import localtime
 from django.conf import settings
-from django.db.models import F
-from django.core.exceptions import ImproperlyConfigured
-from django.core.mail import EmailMessage
+from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ImproperlyConfigured
 from django.core.files.storage import FileSystemStorage
-from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.db.models import F
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.timezone import localtime
+from django.views import View
+from django.views.generic import (
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
 from django_ratelimit.decorators import ratelimit
+from PIL import Image
 
-from .forms import ContactForm, ArticleForm, CommentForm
+from .forms import ArticleForm, CommentForm, ContactForm
 from .models import (
+    About,
     Article,
+    Certificate,
     Comment,
     CV,
-    Project,
-    About,
-    Experience,
     Education,
-    Certificate,
+    Experience,
     MainCertificate,
+    Project,
     Publication,
     Skill,
     Subscriber,
 )
+from .utils import send_email_async
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +58,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         active_item = Certificate.objects.filter(show=True).first()
-        experiences = Experience.objects.prefetch_related("bullets", "tech_stack_m2m").order_by("-start_date")
+        experiences = Experience.objects.prefetch_related(
+            "bullets", "tech_stack_m2m"
+        ).order_by("-start_date")
         education = Education.objects.all().order_by("-start_date")
         skills = Skill.objects.all()
 
@@ -125,7 +133,7 @@ class IndexView(TemplateView):
             {
                 "education": education,
                 "experience": experiences,
-                "projects": Project.objects.all(),
+                "projects": Project.objects.prefetch_related("tech_m2m").all(),
                 "about": About.objects.all(),
                 "about_global": About.objects.first(),
                 "skill": skills,
@@ -137,7 +145,9 @@ class IndexView(TemplateView):
                 "cv": CV.objects.all(),
                 "certificate": Certificate.objects.all(),
                 "maincertificate": MainCertificate.objects.all(),
-                "publications": Publication.objects.all(),
+                "publications": Publication.objects.prefetch_related(
+                    "authors_m2m"
+                ).all(),
                 "active_item": active_item,
                 "success": self.request.session.pop("contact_success", False),
             }
@@ -183,7 +193,9 @@ class IndexView(TemplateView):
                 )
             subject = "Portfolio contact"
             submission_date = (
-                localtime(form.instance.submitted_date).strftime("%d/%m/%Y %I:%M %p IST")
+                localtime(form.instance.submitted_date).strftime(
+                    "%d/%m/%Y %I:%M %p IST"
+                )
                 if form.instance.submitted_date
                 else localtime(timezone.now()).strftime("%d/%m/%Y %I:%M %p IST")
             )
@@ -204,12 +216,7 @@ class IndexView(TemplateView):
                 to=[recipient_email],
                 reply_to=[reply_to_email],
             )
-            try:
-                threading.Thread(
-                    target=email_msg.send, kwargs={"fail_silently": False}
-                ).start()
-            except smtplib.SMTPException:
-                logger.exception("Contact form email failed to send — data saved to DB")
+            send_email_async(email_msg)
 
             if is_ajax:
                 return JsonResponse({"success": True})
@@ -266,13 +273,9 @@ def login_view(request):
                 request, username=username_input, password=password_input
             )
             if user is not None:
-                # Successful login — log user in
+                # Successful login — log user in and redirect (Post/Redirect/Get)
                 auth_login(request, user)
-                return render(
-                    request,
-                    "blog/view_blog.html",
-                    {"article": Article.objects.defer("content").order_by("-date")},
-                )
+                return redirect("login")
             else:
                 messages.error(request, "Email or password incorrect")
                 return redirect("login")
@@ -280,11 +283,6 @@ def login_view(request):
             messages.error(request, "Email or password incorrect")
             return redirect("login")
     return render(request, "blog/login.html")
-
-
-# Backward-compatible alias retained for existing imports/routes.
-def view(request):
-    return login_view(request)
 
 
 def logout_view(request):
@@ -331,8 +329,6 @@ class Blogspace(ListView):
         self.object_list = self.get_queryset()
 
         # Rate-limiting: max 3 subscription attempts per 5 minutes per session
-        import time
-
         now = time.time()
         submissions = request.session.get("subscribe_submissions", [])
         submissions = [t for t in submissions if now - t < 300]
@@ -383,13 +379,8 @@ Viir Phuria"""
             from_email = settings.EMAIL_HOST_USER
 
             # Send confirmation email to the new subscriber
-            try:
-                msg = EmailMessage(subject, message, from_email, to=[email])
-                threading.Thread(target=msg.send).start()
-            except smtplib.SMTPException:
-                logger.exception(
-                    "Subscriber confirmation email failed — subscriber saved to DB"
-                )
+            msg = EmailMessage(subject, message, from_email, to=[email])
+            send_email_async(msg)
             request.session["subscription_success"] = True
             return HttpResponseRedirect(request.path_info)
         except ValueError as exc:
@@ -405,11 +396,13 @@ def redirect_article_numeric_to_slug(request, pk):
         article = Article.objects.get(pk=pk)
         return redirect("detail_blog", slug=article.slug, permanent=True)
     except Article.DoesNotExist:
-        return render(request, "404.html", status=404)
+        context = {
+            "error_code": "404",
+            "error_title": "Article Not Found",
+            "error_description": "The article you're looking for doesn't exist or may have been removed.",
+        }
+        return render(request, "error.html", context, status=404)
 
-
-def custom_500(request):
-    return render(request, "500.html", status=500)
 
 class DetailArticleView(DetailView):
     model = Article
@@ -421,7 +414,9 @@ class DetailArticleView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailArticleView, self).get_context_data(**kwargs)
         context["comment_form"] = CommentForm(initial={"article": self.object})
-        context["comment"] = Comment.objects.filter(article=self.object, is_approved=True)
+        context["comment"] = Comment.objects.filter(
+            article=self.object, is_approved=True
+        )
 
         # Check if the user has already liked this article in this session
         liked_key = f"liked_article_{self.object.pk}"
@@ -481,13 +476,13 @@ class DetailArticleView(DetailView):
         # Handle comment form submission
         # Honeypot check — silently discard bot submissions
         if request.POST.get("verify_bot_field"):
-            logger.warning("Honeypot triggered on comment form — bot submission discarded")
+            logger.warning(
+                "Honeypot triggered on comment form — bot submission discarded"
+            )
             return HttpResponseRedirect(self.request.path_info)
 
         form = CommentForm(request.POST)
         if form.is_valid():
-            import time
-
             now = time.time()
             last_comment = request.session.get("last_comment_time", 0)
             if now - last_comment < 60:
@@ -568,13 +563,8 @@ Viir Phuria"""
                 from_email = settings.EMAIL_HOST_USER
 
                 # Send notification to all subscribers (using BCC to hide recipient list)
-                try:
-                    msg = EmailMessage(
-                        subject, message, from_email, bcc=subscriber_emails
-                    )
-                    threading.Thread(target=msg.send).start()
-                except smtplib.SMTPException:
-                    logger.exception("New article subscriber email failed to send")
+                msg = EmailMessage(subject, message, from_email, bcc=subscriber_emails)
+                send_email_async(msg)
             return redirect("blogspace")
 
         return render(request, self.template_name, {"form": form})
@@ -599,7 +589,7 @@ def custom_400(request, exception=None):
     context = {
         "error_code": "400",
         "error_title": "Bad Request",
-        "error_description": "The server could not understand the request due to invalid syntax."
+        "error_description": "The server could not understand the request due to invalid syntax.",
     }
     return render(request, "error.html", context, status=400)
 
@@ -608,7 +598,7 @@ def custom_403(request, exception=None):
     context = {
         "error_code": "403",
         "error_title": "Forbidden",
-        "error_description": "You don't have permission to access this resource.<br>If you believe this is an error, please contact the administrator."
+        "error_description": "You don't have permission to access this resource.<br>If you believe this is an error, please contact the administrator.",
     }
     return render(request, "error.html", context, status=403)
 
@@ -617,7 +607,7 @@ def custom_404(request, exception=None):
     context = {
         "error_code": "404",
         "error_title": "Page Not Found",
-        "error_description": "The page you're looking for has wandered off into the cosmos.<br>Maybe it never existed, or perhaps it moved to <span>a new address</span>."
+        "error_description": "The page you're looking for has wandered off into the cosmos.<br>Maybe it never existed, or perhaps it moved to <span>a new address</span>.",
     }
     return render(request, "error.html", context, status=404)
 
@@ -626,15 +616,49 @@ def custom_500(request):
     context = {
         "error_code": "500",
         "error_title": "Internal Server Error",
-        "error_description": "The server encountered an unexpected condition that prevented it from fulfilling the request.<br>Our engineering team has been notified."
+        "error_description": "The server encountered an unexpected condition that prevented it from fulfilling the request.<br>Our engineering team has been notified.",
     }
     return render(request, "error.html", context, status=500)
 
+
 @login_required
 def upload_image(request):
+    ALLOWED_IMAGE_EXTENSIONS = {"jpg", "jpeg", "png", "gif", "webp", "avif"}
+    MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10 MB
+
     if request.method == "POST" and request.FILES.get("image"):
         image_file = request.FILES["image"]
-        ext = image_file.name.split(".")[-1]
+
+        # Validate file size
+        if image_file.size > MAX_UPLOAD_SIZE:
+            return JsonResponse(
+                {"success": False, "error": "File too large. Maximum size is 10 MB."},
+                status=400,
+            )
+
+        # Validate file extension
+        _, dot_ext = os.path.splitext(image_file.name)
+        ext = dot_ext.lstrip(".").lower()
+        if ext not in ALLOWED_IMAGE_EXTENSIONS:
+            return JsonResponse(
+                {
+                    "success": False,
+                    "error": f"Invalid file type. Allowed: {', '.join(sorted(ALLOWED_IMAGE_EXTENSIONS))}",
+                },
+                status=400,
+            )
+
+        # Validate actual image content integrity via Pillow
+        try:
+            img = Image.open(image_file)
+            img.verify()
+            image_file.seek(0)
+        except Exception:
+            return JsonResponse(
+                {"success": False, "error": "Invalid or corrupted image content."},
+                status=400,
+            )
+
         filename = f"{uuid.uuid4().hex}.{ext}"
 
         fs = FileSystemStorage(

@@ -65,7 +65,7 @@
                     <form id="contactForm" method="post">
                         {% csrf_token %}
                         {# Honeypot field — bots fill it, humans don't. Hidden via CSS. #}
-                        <input type="text" name="verify_bot_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+                        <input type="text" name="verify_bot_field" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
                         <div class="form-group mb-3">
                             <label for="fname" class="visually-hidden">Full Name</label>
                             <input type="text" class="form-control modern-input" id="fname" name="name" placeholder="Full Name" required maxlength="100">
@@ -80,12 +80,12 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="contactMessage" class="visually-hidden">Message</label>
-                            <textarea class="form-control modern-input" id="contactMessage" name="message" placeholder="Message" required maxlength="2000" style="height: 120px"></textarea>
+                            <textarea class="form-control modern-input" id="contactMessage" name="message" placeholder="Message" required maxlength="2000" rows="5"></textarea>
                         </div>
                         <button type="submit" class="capsule-btn" id="submitBtn">
                             <span class="text">Send Message</span>
                         </button>
-                        <div id="formMessage" style="margin-top: 15px; display: none;" class="alert" role="alert"></div>
+                        <div id="formMessage" class="alert d-none mt-3" role="alert"></div>
                     </form>
                 </div>
 <script>

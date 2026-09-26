@@ -1,0 +1,49 @@
+name: Feature Request
+description: Propose a concrete improvement to the portfolio or CMS.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for **concrete, actionable** improvements.
+        Vague requests ("make it faster") will be closed without comment.
+
+  - type: input
+    id: title
+    attributes:
+      label: Feature title
+      placeholder: "e.g. Add pagination to BlogSpace listing page"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      description: What current behaviour or gap does this address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the implementation at a code/architecture level, not just the outcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches did you consider and why did you reject them?
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: This feature does not require external dependencies that introduce security risk.
+          required: true

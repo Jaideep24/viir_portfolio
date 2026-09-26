@@ -44,6 +44,8 @@ class ArticleSitemap(Sitemap):
         return Article.objects.defer("content").order_by("-date")
 
     def lastmod(self, obj):
+        if getattr(obj, "updated_at", None):
+            return obj.updated_at.date()
         return obj.date
 
     def location(self, obj):

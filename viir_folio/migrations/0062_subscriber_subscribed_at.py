@@ -16,7 +16,9 @@ class Migration(migrations.Migration):
             name="subscribed_at",
             field=models.DateTimeField(
                 auto_now_add=True,
-                default=datetime.datetime(2026, 7, 5, 18, 35, 4, 720719, tzinfo=datetime.timezone.utc),
+                default=datetime.datetime(
+                    2026, 7, 5, 18, 35, 4, 720719, tzinfo=datetime.timezone.utc
+                ),
             ),
             preserve_default=False,
         ),

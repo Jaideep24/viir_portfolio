@@ -3,7 +3,7 @@
     {% if not hide_sidebar %}
     <header>
         <button type="button" class="br-sidebar-toggle sidebar-toggle-btn menu-trigger" aria-label="Open navigation menu" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="svg_img" alt="menu" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="svg_img" aria-hidden="true">
                 <path d="M17.5399 8.30989C18.8986 8.30989 20 7.20851 20 5.84989C20 4.49127 18.8986 3.38989 17.5399 3.38989C16.1813 3.38989 15.08 4.49127 15.08 5.84989C15.08 7.20851 16.1813 8.30989 17.5399 8.30989Z" stroke="#8c6fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M6.46001 8.30989C7.81863 8.30989 8.92 7.20851 8.92 5.84989C8.92 4.49127 7.81863 3.38989 6.46001 3.38989C5.10139 3.38989 4 4.49127 4 5.84989C4 7.20851 5.10139 8.30989 6.46001 8.30989Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M17.5399 20.6099C18.8986 20.6099 20 19.5086 20 18.1499C20 16.7913 18.8986 15.6899 17.5399 15.6899C16.1813 15.6899 15.08 16.7913 15.08 18.1499C15.08 19.5086 16.1813 20.6099 17.5399 20.6099Z" stroke="#ff6f6f" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -13,13 +13,15 @@
     </header>
     {% endif %}
 
-    	<span id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
-		{{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&bull;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
-	</span>
+    <a href="/" class="navbar-brand-link" style="text-decoration: none; color: inherit;">
+        <span id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
+            {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&bull;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
+        </span>
+    </a>
 
     <div id="mytoggle" class="navbar-toggle-wrap">
         <label id="theme-toggle-button" title="Toggle Dark/Light Mode" for="toggle">
-            <input type="checkbox" id="toggle" onchange="toggleStyles(event)">
+            <input type="checkbox" id="toggle" aria-label="Toggle Dark/Light Mode" onchange="toggleStyles(event)">
             <div class="toggle-slider">
                 <div class="toggle-pill"></div>
                 <div class="toggle-icon toggle-sun">
@@ -38,19 +40,19 @@
         <div class="menu-list">
             <ul class="navbar-nav mb-2 ml-auto blog-sidebar-menu" id="top-menu">
                 {% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' or request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' or request.resolver_match.url_name == 'featured' %}
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}"{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} aria-current="page"{% endif %}{% if request.resolver_match.url_name == "blogspace" or request.resolver_match.url_name == "detail_blog" %} aria-current="page"{% endif %} href="{% url 'blogspace' %}">BlogSpace</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}"{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} aria-current="page"{% endif %}{% if request.resolver_match.url_name == "blogspace" or request.resolver_match.url_name == "detail_blog" %} aria-current="page"{% endif %} href="{% url 'login' %}">Write</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} active{% endif %}"{% if request.resolver_match.url_name == 'blogspace' or request.resolver_match.url_name == 'detail_blog' %} aria-current="page"{% endif %} href="{% url 'blogspace' %}">BlogSpace</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}"{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} aria-current="page"{% endif %} href="{% url 'login' %}">Write</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#insights">Home</a></li>
                 {% elif request.resolver_match.url_name == 'certificate' or certi %}
                 <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" aria-current="page" href="/#credentials">Certificates</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#credentials">Home</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'index' %} active{% endif %}"{% if request.resolver_match.url_name == 'index' %} aria-current="page"{% endif %}{% if request.resolver_match.url_name == "blogspace" or request.resolver_match.url_name == "detail_blog" %} aria-current="page"{% endif %} href="/#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'index' %} active{% endif %}"{% if request.resolver_match.url_name == 'index' %} aria-current="page"{% endif %} href="/#home">Home</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#background">Background</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#expertise">Expertise</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#engineering">Engineering</a></li>
-                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}"{% if request.resolver_match.url_name == 'certificate' %} aria-current="page"{% endif %}{% if request.resolver_match.url_name == "blogspace" or request.resolver_match.url_name == "detail_blog" %} aria-current="page"{% endif %} href="/#credentials">Credentials</a></li>
+                <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'certificate' %} active{% endif %}"{% if request.resolver_match.url_name == 'certificate' %} aria-current="page"{% endif %} href="/#credentials">Credentials</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#research">Research</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#insights">Insights</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#connect">Connect</a></li>

@@ -5,6 +5,11 @@ Disallow: /dashboard/
 Disallow: /blogspace/create/
 Disallow: /blogspace/edit/
 Disallow: /blogspace/logout/
+Disallow: /blogspace/upload-image/
+Disallow: /blog/*/delete
+Disallow: /blog/*/update
+Disallow: /blogspace/*/delete
+Disallow: /blogspace/*/update
 Crawl-delay: 2
 
 User-agent: Googlebot
@@ -14,6 +19,11 @@ Disallow: /dashboard/
 Disallow: /blogspace/create/
 Disallow: /blogspace/edit/
 Disallow: /blogspace/logout/
+Disallow: /blogspace/upload-image/
+Disallow: /blog/*/delete
+Disallow: /blog/*/update
+Disallow: /blogspace/*/delete
+Disallow: /blogspace/*/update
 
 User-agent: Googlebot-Image
 Allow: /media/
@@ -26,6 +36,11 @@ Disallow: /dashboard/
 Disallow: /blogspace/create/
 Disallow: /blogspace/edit/
 Disallow: /blogspace/logout/
+Disallow: /blogspace/upload-image/
+Disallow: /blog/*/delete
+Disallow: /blog/*/update
+Disallow: /blogspace/*/delete
+Disallow: /blogspace/*/update
 
 User-agent: Twitterbot
 Allow: /

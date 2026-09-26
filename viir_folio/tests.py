@@ -4,16 +4,9 @@ from django.utils import timezone
 from django.core import signing
 from django.conf import settings
 import os
-import sys
-import unittest
+
 from .models import Article, Comment, Contact
 from .utils import sanitize_html
-
-# CPython 3.14 introduced a breaking change in copy.__copy__ that is incompatible
-# with Django 4.2's template-context copy signal used by the test client.
-# Tests that perform template rendering via self.client are skipped on Python >=3.14
-# until Django 5.x resolves the incompatibility.
-_SKIP_TEMPLATE_RENDER_TESTS = sys.version_info >= (3, 14)
 
 
 class SecurityTests(TestCase):
@@ -42,8 +35,10 @@ class SecurityTests(TestCase):
         # SSL redirect on production
         self.assertIn("SECURE_SSL_REDIRECT", content)
         # Secure proxy header for PythonAnywhere
-        self.assertIn(
-            "SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')", content
+        self.assertTrue(
+            "SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')" in content
+            or 'SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")'
+            in content
         )
         # Session and CSRF cookies must be secured
         self.assertIn("SESSION_COOKIE_SECURE", content)
@@ -126,10 +121,6 @@ class SecurityTests(TestCase):
         self.assertTrue(check_password(raw, hashed))
         self.assertFalse(check_password("wrong_password", hashed))
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_route_authorization_protection(self):
         """
         Verify that creating/updating/deleting articles redirects unauthenticated users and adds message.
@@ -145,10 +136,6 @@ class SecurityTests(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), "Please login to access this page.")
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_secure_logout_post(self):
         """
         Verify that logout requires a POST request, deletes cookies/session, and redirects.
@@ -191,10 +178,6 @@ class SecurityTests(TestCase):
         )
         self.assertEqual(pub.authors_list, ["Viir Phuria", "John Doe", "Jane Smith"])
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_publication_first_author_bolding(self):
         """
         Verify that 'Viir Phuria' is bolded inside the rendered index page.
@@ -219,10 +202,6 @@ class SecurityTests(TestCase):
         hasher = get_hasher()
         self.assertEqual(hasher.algorithm, "argon2")
 
-    @unittest.skipIf(
-        _SKIP_TEMPLATE_RENDER_TESTS,
-        "Skipped on Python 3.14+: CPython copy() incompatibility with Django 4.2 test client",
-    )
     def test_csp_middleware_header_is_present(self):
         """Verify that the Content-Security-Policy HTTP header is set by middleware."""
         response = self.client.get(reverse("index"))

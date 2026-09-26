@@ -71,3 +71,30 @@ def sanitize_html(html_content):
         strip_comments=True,
         link_rel=None,
     )
+
+
+def send_email_async(email_msg):
+    """
+    Safely sends an EmailMessage in a background daemon thread, or synchronously
+    if testing or using the locmem backend. Catches and logs all delivery exceptions.
+    """
+    import logging
+    import threading
+    from django.conf import settings
+
+    logger = logging.getLogger("viir_folio.mail")
+
+    def _deliver():
+        try:
+            email_msg.send(fail_silently=False)
+        except Exception:
+            logger.exception("Background email delivery failed")
+
+    if (
+        getattr(settings, "TESTING", False)
+        or getattr(settings, "EMAIL_BACKEND", "")
+        == "django.core.mail.backends.locmem.EmailBackend"
+    ):
+        _deliver()
+    else:
+        threading.Thread(target=_deliver, daemon=True).start()
