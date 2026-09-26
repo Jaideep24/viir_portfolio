@@ -105,6 +105,15 @@ urlpatterns = [
 urlpatterns += [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
+<<<<<<< HEAD
+=======
+    
+    # --- TEMPORARY TEST ROUTES FOR ERROR PAGES ---
+    path("test-400/", custom_400),
+    path("test-403/", custom_403),
+    path("test-404/", custom_404),
+    path("test-500/", custom_500),
+>>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
 ]
 
 # Custom Error Handlers (active when DEBUG=False)
@@ -112,5 +121,8 @@ handler400 = custom_400
 handler403 = custom_403
 handler404 = custom_404
 handler500 = custom_500
+<<<<<<< HEAD
 
 # Trigger reload
+=======
+>>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad

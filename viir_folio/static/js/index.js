@@ -95,13 +95,33 @@ if (ageEl) ageEl.innerHTML = " <span class='title'>Age<b>:</b></span>" + calcula
 
 const searchInput = document.getElementById('searchInput');
 if (searchInput) {
+    let _searchTimer = null;
     searchInput.addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        const cards = document.querySelectorAll('.pub-card');
-        cards.forEach(card => {
-            const text = card.innerText.toLowerCase();
-            card.style.display = text.includes(query) ? 'block' : 'none';
-        });
+        clearTimeout(_searchTimer);
+        const raw = this.value;
+        _searchTimer = setTimeout(function () {
+            const query = raw.toLowerCase();
+            const cards = document.querySelectorAll('.pub-card');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const match = card.innerText.toLowerCase().includes(query);
+                card.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
+            });
+            // Announce result count to screen readers
+            let liveRegion = document.getElementById('pub-search-live');
+            if (!liveRegion) {
+                liveRegion = document.createElement('span');
+                liveRegion.id = 'pub-search-live';
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.className = 'visually-hidden';
+                document.body.appendChild(liveRegion);
+            }
+            liveRegion.textContent = query
+                ? `${visibleCount} publication${visibleCount !== 1 ? 's' : ''} found`
+                : '';
+        }, 300);
     });
 }
 

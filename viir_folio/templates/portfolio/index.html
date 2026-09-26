@@ -45,6 +45,8 @@
     <!-- Google Fonts — consolidated into one request for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
@@ -85,6 +87,7 @@
 </head>
 
 <body class="preload {% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <script>
     document.body.classList.add(window.__theme || 'dark');
     setTimeout(function() { document.body.classList.remove('preload'); }, 50);
@@ -115,6 +118,7 @@
     {% endblock %}
 
     {% block content %}
+    <main id="main-content">
 
     <!-- ============================================================ -->
     <!-- HERO SECTION -->
@@ -146,19 +150,18 @@
     </section>
 
     <!-- Intro Text -->
-    <main id="main-content">
-    <div class="text-center" style="text-align: center;">
+    <div class="text-center text-center-wrapper">
         <div class="footer-text">
             <h1 class="hero-title">Hello I'm Viir Phuria</h1>
-            <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle" data-texts="{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}"></h2>
+            <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle" data-texts="{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}">{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}</h2>
         </div>
-        <div class="hero-cta-buttons" style="margin-top: 25px; display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <div class="hero-cta-buttons hero-cta-buttons-wrapper">
             {% for object in cv %}
-            <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn hero-btn download-cv-btn" style="min-width: 150px; margin: 0 auto;">
+            <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn hero-btn download-cv-btn hero-btn-min-width">
                 <span class="text">View CV</span>
             </a>
             {% empty %}
-            <a href="#connect" class="capsule-btn hero-btn" style="min-width: 150px; margin: 0 auto;">
+            <a href="#connect" class="capsule-btn hero-btn hero-btn-min-width">
                 <span class="text">Contact Me</span>
             </a>
             {% endfor %}
@@ -219,19 +222,19 @@
     <!-- ============================================================ -->
     <!-- VENDOR JS -->
     <!-- ============================================================ -->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.4.1/index.min.js"></script>
-    <script src="{% static 'js/grid.js' %}?v=20260917"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.4.1/index.min.js" defer></script>
+    <script src="{% static 'js/grid.js' %}?v=20260917" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" defer></script>
+    <script src="{% static 'js/script.js' %}" defer></script>
     <!-- Custom script for interactions -->
 
-    <script src="{% static 'js/site-navbar.js' %}"></script>
-    <script src="{% static 'js/index.js' %}"></script>
-    <script src="{% static 'js/custom-cursor.js' %}"></script>
-    <script src="{% static 'js/scroll-anim.js' %}"></script>
+    <script src="{% static 'js/site-navbar.js' %}" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
+    <script src="{% static 'js/custom-cursor.js' %}" defer></script>
+    <script src="{% static 'js/scroll-anim.js' %}" defer></script>
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}
