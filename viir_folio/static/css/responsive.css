@@ -246,21 +246,8 @@
   .br-contact .br-box:hover:after {
     right: -15%;
   }
-  footer .br-footer-detail {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  footer .br-footer-detail .br-copy {
-    margin-bottom: 15px;
-  }
+  
+  
 }
 @media only screen and (max-width: 767px) {
   .section-title h2 {
@@ -420,13 +407,8 @@
   .br-contact .br-box .detail .info {
     text-align: center;
   }
-  footer .br-footer-detail {
-    height: 130px;
-  }
-  footer .br-footer-detail .br-copy {
-    margin-bottom: 14px;
-    text-align: center;
-  }
+  
+  
   .br-project-box p a {
     display: block;
   }

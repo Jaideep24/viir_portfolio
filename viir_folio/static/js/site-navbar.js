@@ -1,11 +1,16 @@
 (() => {
-    function setSidebarState(isOpen) {
+    function setSidebarState(isOpen, returnFocus = true) {
         const sidebar = document.querySelector('.br-sidebar');
         const overlay = document.querySelector('.br-sidebar-overlay');
         const toggleBtn = document.querySelector('.sidebar-toggle-btn');
 
         if (!sidebar || !overlay) {
             return;
+        }
+
+        const currentlyOpen = sidebar.classList.contains('br-sidebar-open');
+        if (currentlyOpen === isOpen) {
+            return; // Already in the desired state
         }
 
         sidebar.classList.toggle('br-sidebar-open', isOpen);
@@ -23,7 +28,7 @@
             const firstLink = sidebar.querySelector('a, button');
             if (firstLink) firstLink.focus();
         } else {
-            if (toggleBtn) toggleBtn.focus();
+            if (returnFocus && toggleBtn) toggleBtn.focus();
         }
     }
 
@@ -83,7 +88,9 @@
         const clickedToggle = toggle.contains(event.target);
 
         if (!clickedInsideSidebar && !clickedToggle) {
-            setSidebarState(false);
+            if (sidebar.classList.contains('br-sidebar-open')) {
+                setSidebarState(false, false);
+            }
         }
     });
 

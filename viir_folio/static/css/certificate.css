@@ -12,9 +12,12 @@
     position: relative;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+    color: var(--secondary-accent, #8c6fff);
+}
+
 .nav-link.active {
-    color: #4f46e5;
+    color: var(--primary-accent, #ff6f6f);
 }
 
 .certificate-row {

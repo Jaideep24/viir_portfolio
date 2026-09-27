@@ -33,6 +33,7 @@
     border-radius: 50%;
     background: var(--badge, #8b5cf6);
     box-shadow: 0 0 8px var(--badge, #8b5cf6), 0 0 14px rgba(139, 92, 246, 0.22);
+    pointer-events: none !important;
 }
 
 .cursor-ring {
@@ -46,6 +47,7 @@
     border-left: 1px solid transparent;
     box-shadow: 0 0 10px rgba(139, 92, 246, 0.1);
     animation: cursor-rotate 2.5s linear infinite, cursor-ring-pulse 1.8s ease-in-out infinite;
+    pointer-events: none !important;
 }
 
 .cursor.hover {

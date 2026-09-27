@@ -41,69 +41,31 @@ footer {
     background: #f9f9f9;
 }
 
-footer .br-footer-detail {
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #777;
-}
 
-footer .br-footer-detail a {
-    transition: all 0.3s ease-in-out;
-    color: var(--secondary-accent);
-}
 
-footer .br-footer-detail a:hover {
-    color: var(--primary-accent);
-}
 
-footer .br-footer-detail .br-social ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
 
-footer .br-footer-detail .br-social ul li {
-    margin-left: 5px;
-}
 
-footer .br-footer-detail .br-social ul li a {
-    width: 45px;
-    height: 45px;
-    margin-left: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--secondary-accent);
-    color: var(--bg-primary);
-    border-radius: 50px;
-}
+
+
+
+
+
+
 
 @media (max-width: 480px) {
-    footer .br-footer-detail .br-social ul li a {
-        width: 36px;
-        height: 36px;
-    }
+    
 }
 
 @media (max-width: 380px) {
-    footer .br-footer-detail .br-social ul li a {
-        width: 34px;
-        height: 34px;
-    }
+    
 }
 
 @media (max-width: 330px) {
-    footer .br-footer-detail .br-social ul li a {
-        width: 28px;
-        height: 28px;
-    }
+    
 }
 
-footer .br-footer-detail .br-social ul li a:hover {
-    background: var(--primary-accent);
-}
+
 
 /* --------------------------------------------------------------------------
    LOGO VISIBILITY
@@ -510,21 +472,13 @@ body.light footer {
     background: #eef1f6;
 }
 
-body.light footer .br-footer-detail {
-    color: #475569;
-}
 
-body.light footer .br-footer-detail a {
-    color: var(--brand-accent-strong, var(--secondary-accent));
-}
 
-body.light footer .br-footer-detail a:hover {
-    color: #ef4444;
-}
 
-body.light footer .br-footer-detail .br-social ul li a {
-    color: var(--bg-primary);
-}
+
+
+
+
 
 body.light .subscription-success {
     background: rgba(140, 111, 255, 0.1);

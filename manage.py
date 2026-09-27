@@ -4,6 +4,19 @@
 import os
 import sys
 
+import email.message
+import urllib.parse
+
+class DummyCGI:
+    def parse_header(self, line):
+        m = email.message.Message()
+        m['content-type'] = line
+        return m.get_content_type(), m.get_params() or {}
+    def parse_qsl(self, qs, keep_blank_values=0, strict_parsing=0):
+        return urllib.parse.parse_qsl(qs, keep_blank_values, strict_parsing)
+
+sys.modules['cgi'] = DummyCGI()
+
 
 def main():
     """Run administrative tasks."""

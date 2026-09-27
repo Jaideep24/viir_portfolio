@@ -2105,93 +2105,32 @@ body.dark footer {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-footer .br-footer-detail {
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    color: #475569;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: 0.3px;
-}
 
-body.dark footer .br-footer-detail {
-    color: rgba(255, 255, 255, 0.75);
-}
+
+
 
 /* Styled Name */
-footer .br-footer-detail .footer-name {
-    font-weight: 600;
-    color: var(--bg-inverse);
-}
 
-body.dark footer .br-footer-detail .footer-name {
-    color: var(--bg-primary);
-}
+
+
 
 /* Styled Separator */
-footer .br-footer-detail .footer-separator {
-    color: var(--secondary-accent);
-    font-weight: bold;
-    margin: 0 6px;
-    opacity: 0.8;
-}
 
-body.dark footer .br-footer-detail .footer-separator {
-    color: #a48fff;
-    text-shadow: 0 0 8px rgba(164, 143, 255, 0.4);
-}
+
+
 
 /* Styled Link */
-footer .br-footer-detail .footer-me-link {
-    color: #4f46e5;
-    font-weight: 600;
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 2px;
-    border-bottom: 1.5px solid rgba(79, 70, 229, 0.2);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-body.dark footer .br-footer-detail .footer-me-link {
-    color: #a48fff;
-    border-bottom-color: rgba(164, 143, 255, 0.25);
-}
 
-footer .br-footer-detail .footer-me-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 1.5px;
-    bottom: -1.5px;
-    left: 0;
-    background-color: currentColor;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-}
 
-footer .br-footer-detail .footer-me-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
 
-footer .br-footer-detail .footer-me-link:hover {
-    color: #6366f1;
-    border-bottom-color: transparent;
-    text-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
-}
 
-body.dark footer .br-footer-detail .footer-me-link:hover {
-    color: #c0b3ff;
-    border-bottom-color: transparent;
-    text-shadow: 0 0 12px rgba(164, 143, 255, 0.35);
-}
+
+
+
+
+
+
 
 /* ==========================================================================
    GLOBAL LIGHT THEME SOOTHING STYLING OVERRIDES (No Bright var(--bg-primary))

@@ -44,7 +44,7 @@
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} active{% endif %}"{% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'create_blog' or request.resolver_match.url_name == 'updateview' or request.resolver_match.url_name == 'delete_article' %} aria-current="page"{% endif %} href="{% url 'login' %}">Write</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#insights">Home</a></li>
                 {% elif request.resolver_match.url_name == 'certificate' or certi %}
-                <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" aria-current="page" href="/#credentials">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link br-nav active close-sidebar-trigger" aria-current="page" href="{% url 'certificate' %}">Certificates</a></li>
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger" href="/#credentials">Home</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link br-nav close-sidebar-trigger{% if request.resolver_match.url_name == 'index' %} active{% endif %}"{% if request.resolver_match.url_name == 'index' %} aria-current="page"{% endif %} href="/#home">Home</a></li>

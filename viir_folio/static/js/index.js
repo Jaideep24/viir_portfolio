@@ -54,7 +54,7 @@ function typeWriter() {
 
 function erase() {
     if (!textElement) return;
-    if (letterIndex >= 0) {
+    if (letterIndex > 0) {
         const currentText = textElement.textContent.slice(0, -1);
         textElement.textContent = currentText;
         letterIndex--;
@@ -65,7 +65,10 @@ function erase() {
     }
 }
 
-if (textElement) typeWriter();
+if (textElement) {
+    textElement.textContent = "";
+    typeWriter();
+}
 
 
 /* --------------------------------------------------------------------------
@@ -249,12 +252,18 @@ document.addEventListener('scroll', function () {
 
         if (scrollPosition >= sectionTop - 450 && scrollPosition < sectionTop + sectionHeight - 450) {
             const id = section.getAttribute('id');
-            const navLink = document.querySelector(`a[href="#${id}"]`);
-            if (navLink) navLink.parentNode.classList.add('active');
+            const navLink = document.querySelector(`a[href$="#${id}"]`);
+            if (navLink) {
+                navLink.parentNode.classList.add('active');
+                navLink.classList.add('active');
+            }
         } else {
             const id = section.getAttribute('id');
-            const navLink = document.querySelector(`a[href="#${id}"]`);
-            if (navLink) navLink.parentNode.classList.remove('active');
+            const navLink = document.querySelector(`a[href$="#${id}"]`);
+            if (navLink) {
+                navLink.parentNode.classList.remove('active');
+                navLink.classList.remove('active');
+            }
         }
     });
 });
@@ -262,3 +271,5 @@ document.addEventListener('scroll', function () {
 /* --------------------------------------------------------------------------
     10. LEGACY CUSTOM CURSOR REMOVED
     -------------------------------------------------------------------------- */
+
+
