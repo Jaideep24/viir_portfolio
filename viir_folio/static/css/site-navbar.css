@@ -213,7 +213,7 @@ body.light #headno {
     transition: transform 0.3s ease-in-out;
 }
 
-.sidebar-toggle-btn.btn-open svg {
+.sidebar-toggle-btn.open svg {
     transform: rotate(180deg);
 }
 

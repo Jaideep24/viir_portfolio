@@ -289,11 +289,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("click", function (event) {
     const targetDiv = document.querySelector(".br-sidebar");
-    const isClickInside = targetDiv.contains(event.target);
     const targetBtn = document.querySelector(".br-sidebar-toggle");
+    
+    if (!targetDiv || !targetBtn) return;
+    
+    const isClickInside = targetDiv.contains(event.target);
     const isClickButton = targetBtn.contains(event.target);
 
-    if (!isClickInside && !isClickButton) {
+    if (!isClickInside && !isClickButton && targetDiv.classList.contains("br-sidebar-open")) {
         closeSidebar();
     }
 });
