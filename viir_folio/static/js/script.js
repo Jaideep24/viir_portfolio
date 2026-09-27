@@ -31,37 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    /*----------------------------- Sidebar js | Shared pages only -----------------------------------*/
-    if (!window.__indexSidebar) {
-        const toggleBtn = document.querySelector('.br-sidebar-toggle');
-        const sidebar = document.querySelector('.br-sidebar');
-        const overlay = document.querySelector('.br-sidebar-overlay');
-        
-        if (toggleBtn && sidebar && overlay) {
-            toggleBtn.addEventListener('click', function() {
-                const isOpen = sidebar.classList.contains('br-open');
-                if (isOpen) {
-                    sidebar.classList.remove('br-open', 'br-sidebar-open');
-                    overlay.style.display = 'none';
-                } else {
-                    sidebar.classList.add('br-open', 'br-sidebar-open');
-                    overlay.style.display = 'block';
-                }
-            });
 
-            document.querySelectorAll('.close-sidebar, .nav-link.br-nav').forEach(el => {
-                el.addEventListener('click', function() {
-                    sidebar.classList.remove('br-open', 'br-sidebar-open');
-                    overlay.style.display = 'none';
-                });
-            });
-
-            overlay.addEventListener('click', function() {
-                sidebar.classList.remove('br-open', 'br-sidebar-open');
-                overlay.style.display = 'none';
-            });
-        }
-    }
 
     /*-------------------- Potfolio for Mixit up --------------------*/
     const portfolioContent = document.querySelector('.portfolio-content');
