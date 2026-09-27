@@ -4,28 +4,18 @@
             <div class="row">
                 {% for object in about %}
                 <div class="section-title reveal-up">
-<<<<<<< HEAD
                     <h2><span style="font-weight: 200;">About</span> Me</h2>
-=======
-                    <h2>About <span>Me</span></h2>
->>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
                     <span class="ligh-title">Profile</span>
                 </div>
                 <div class="col-lg-6 reveal-right">
                     <div class="br-skill-progress m-b-991">
                         <div class="br-hero-img">
-                            <div class="br-card br-card-relative">
+                            <div class="br-card" data-tilt="" style="position: relative; display: inline-block;">
                                 <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.name }} — profile photo" class="about-img">
                                 {% if object.open_to_work %}
-<<<<<<< HEAD
                                 <div class="about-status-badge">
                                     <div class="about-status-dot"></div>
                                     <span class="about-status-text">{{ object.status_text }}</span>
-=======
-                                <div class="status-dot-container">
-                                    <div class="status-dot-indicator"></div>
-                                    <span class="status-dot-text">{{ object.status_text }}</span>
->>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
                                 </div>
                                 {% endif %}
                             </div>
@@ -34,7 +24,6 @@
                 </div>
                 <div class="col-lg-6 reveal-left">
                     <div class="br-about-detail">
-<<<<<<< HEAD
                         <div class="about-modern-info">
                             <h3 class="about-current-role">{{ object.current_role }}</h3>
 
@@ -45,18 +34,6 @@
                                     {% for focus in object.get_focus_list %}
                                         <span class="about-focus-text">{{ focus }}</span>
                                         {% if not forloop.last %}<span class="about-focus-bullet">&bull;</span>{% endif %}
-=======
-                        <div class="about-modern-info about-modern-info-flex">
-                            <h3 class="about-role-title">{{ object.current_role }}</h3>
-                            
-                            {% if object.current_focus %}
-                            <div class="focus-container">
-                                <span class="focus-label">Focus:</span>
-                                <div class="focus-items-container">
-                                    {% for focus in object.get_focus_list %}
-                                        <span class="focus-item-text">{{ focus }}</span>
-                                        {% if not forloop.last %}<span class="focus-item-bullet">&bull;</span>{% endif %}
->>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
                                     {% endfor %}
                                 </div>
                             </div>
@@ -65,7 +42,6 @@
                             <p class="about-content-text">{{ object.content }}</p>
 
                             <!-- Quick Stats Row (Manual Text Fields) -->
-<<<<<<< HEAD
                             <div class="quick-stats about-stats-grid">
                                 <div class="about-stat-item">
                                     <h4 class="about-stat-number">{{ object.projects_count }}</h4>
@@ -96,38 +72,6 @@
                                     {% endif %}
                                     {% if object.linkedin_url %}
                                     <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-=======
-                            <div class="quick-stats quick-stats-container">
-                                <div class="stat-item">
-                                    <h4 class="stat-number">{{ object.projects_count }}</h4>
-                                    <span class="stat-label">Projects Built</span>
-                                </div>
-                                <div class="stat-item">
-                                    <h4 class="stat-number">{{ object.research_count }}</h4>
-                                    <span class="stat-label">Research Papers</span>
-                                </div>
-                                <div class="stat-item">
-                                    <h4 class="stat-number">{{ object.certifications_count }}</h4>
-                                    <span class="stat-label">Certifications</span>
-                                </div>
-                            </div>
-
-                            <div class="professional-actions professional-actions-flex">
-                                {% for cv_item in cv %}
-                                <a class="capsule-btn hero-btn download-cv-btn resume-btn-style" href="{{ cv_item.pdf.url }}" download>
-                                     <span class="text margin-auto"><i class="fa-solid fa-download m-r-10"></i> Download Resume</span>
-                                </a>
-                                {% endfor %}
-                                
-                                <div class="social-icons-wrapper">
-                                    <span class="location-text"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
-                                    <a href="mailto:{{ object.email }}" class="social-icon-link" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
-                                    {% if object.github_url %}
-                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                                    {% endif %}
-                                    {% if object.linkedin_url %}
-                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
->>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
                                     {% endif %}
                                 </div>
                             </div>

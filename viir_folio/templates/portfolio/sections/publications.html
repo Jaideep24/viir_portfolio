@@ -1,11 +1,7 @@
     <section id="research" class="br-portfolio padding-tb-80">
         <div class="container">
             <div class="section-title reveal-up">
-<<<<<<< HEAD
                 <h2>Published <span>Research</span></h2>
-=======
-                <h2>Academic <span>Research</span></h2>
->>>>>>> c4f79b64379ff0ebe9ab356ffc8aa463b58066ad
                 <span class="ligh-title">Research</span>
             </div>
             <div class="search-bar">
@@ -27,15 +23,7 @@
                                 {{ author.name }}
                             {% endif %}{% if not forloop.last %}, {% endif %}
                         {% empty %}
-                            {% for author in object.authors_list %}
-                                {% if author == "Viir Phuria" %}
-                                    <strong>{{ author }}</strong>
-                                {% else %}
-                                    {{ author }}
-                                {% endif %}{% if not forloop.last %}, {% endif %}
-                            {% empty %}
-                                {{ object.authors }}
-                            {% endfor %}
+                            {{ object.authors }}
                         {% endfor %}
                     </div>
                     <div class="pub-meta">Published in: {{ object.place }}</div>
