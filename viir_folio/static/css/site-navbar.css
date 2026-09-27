@@ -271,6 +271,7 @@ body.light #headno {
 
 .br-sidebar-open,
 .br-open {
+    -webkit-transform: translateX(0) !important;
     transform: translateX(0) !important;
 }
 

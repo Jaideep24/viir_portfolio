@@ -60,11 +60,11 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     
     <!-- Shared Architecture Styles -->
-    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
-    <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
-    <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v={% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v={% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/button-system.css' %}?v={% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}?v={% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}?v={% now 'U' %}">
 
     <script>
         window.__indexSidebar = true;
@@ -228,13 +228,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.4.1/index.min.js" defer></script>
     <script src="{% static 'js/grid.js' %}?v=20260917" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" defer></script>
-    <script src="{% static 'js/script.js' %}" defer></script>
+    <script src="{% static 'js/script.js' %}?v={% now 'U' %}" defer></script>
     <!-- Custom script for interactions -->
 
-    <script src="{% static 'js/site-navbar.js' %}" defer></script>
-    <script src="{% static 'js/index.js' %}" defer></script>
-    <script src="{% static 'js/custom-cursor.js' %}" defer></script>
-    <script src="{% static 'js/scroll-anim.js' %}" defer></script>
+    <script src="{% static 'js/site-navbar.js' %}?v={% now 'U' %}" defer></script>
+    <script src="{% static 'js/index.js' %}?v={% now 'U' %}" defer></script>
+    <script src="{% static 'js/custom-cursor.js' %}?v={% now 'U' %}" defer></script>
+    <script src="{% static 'js/scroll-anim.js' %}?v={% now 'U' %}" defer></script>
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}
