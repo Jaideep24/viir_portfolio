@@ -107,12 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     /*--------------------- Scroll icon on hover mouse animation (HERO) -------------------------------- */
-    // Keep TweenMax for Hero section since user requested no changes to Hero
     const menu = document.querySelector('.menu');
     const circle = document.querySelector('.circle');
     const textEl = document.querySelector('.text');
 
-    if (menu && circle && typeof TweenMax !== 'undefined') {
+    if (menu && circle && typeof gsap !== 'undefined') {
         menu.addEventListener('mousemove', function(e) {
             const rect = circle.getBoundingClientRect();
             // Account for scroll position
@@ -122,35 +121,39 @@ document.addEventListener('DOMContentLoaded', function() {
             const s = e.pageX - circleLeft;
             const o = e.pageY - circleTop;
 
-            TweenMax.to(circle, 0.3, {
+            gsap.to(circle, {
+                duration: 0.3,
                 x: (s - rect.width / 2) / rect.width * 50,
                 y: (o - rect.height / 2) / rect.height * 50,
                 scale: 1.2,
-                ease: Power2.easeOut
+                ease: "power2.out"
             });
 
             if (textEl) {
-                TweenMax.to(textEl, 0.3, {
+                gsap.to(textEl, {
+                    duration: 0.3,
                     x: (s - rect.width / 2) / rect.width * 80,
                     y: (o - rect.height / 2) / rect.height * 80,
-                    ease: Power2.easeOut
+                    ease: "power2.out"
                 });
             }
         });
 
         menu.addEventListener('mouseleave', function(e) {
-            TweenMax.to(circle, 0.3, {
+            gsap.to(circle, {
+                duration: 0.3,
                 x: 0,
                 y: 0,
                 scale: 1,
-                ease: Power2.easeOut
+                ease: "power2.out"
             });
 
             if (textEl) {
-                TweenMax.to(textEl, 0.3, {
+                gsap.to(textEl, {
+                    duration: 0.3,
                     x: 0,
                     y: 0,
-                    ease: Power2.easeOut
+                    ease: "power2.out"
                 });
             }
         });

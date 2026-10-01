@@ -54,11 +54,6 @@ class AnalyticsMiddleware:
 
                 # Extract IP Address
                 x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-                if x_forwarded_for:
-                    ip = x_forwarded_for.split(",")[0].strip()
-                else:
-                    ip = request.META.get("REMOTE_ADDR")
-
                 user_agent = request.META.get("HTTP_USER_AGENT", "")
                 session_key = request.session.session_key
 
@@ -67,28 +62,21 @@ class AnalyticsMiddleware:
                 if getattr(settings, "TESTING", False):
                     return response
 
-                # Offload to background thread to prevent blocking main request cycle
-                import threading
-
-                def track_visit(session_key, ip, user_agent, path):
+                # Execute synchronously. DB insert takes ~2ms. 
+                # Spawning daemon threads in WSGI leads to zombie threads and dropped analytics.
+                def track_visit(session_key, user_agent, path):
                     from .models import Visitor, PageVisit
-                    from django.db import connection
 
                     try:
                         visitor, _ = Visitor.objects.get_or_create(
                             session_key=session_key,
-                            defaults={"ip_address": ip, "user_agent": user_agent},
+                            defaults={"user_agent": user_agent},
                         )
                         PageVisit.objects.create(visitor=visitor, path=path)
                     except Exception:
                         pass
-                    finally:
-                        connection.close()
+                    # No need to manually close connection in synchronous cycle, Django handles it
 
-                threading.Thread(
-                    target=track_visit,
-                    args=(session_key, ip, user_agent, path),
-                    daemon=True,
-                ).start()
+                track_visit(session_key, user_agent, path)
 
         return response

@@ -412,15 +412,22 @@ class DetailArticleView(DetailView):
     slug_url_kwarg = "slug"
 
     def get_context_data(self, **kwargs):
+        from django.core.cache import cache
         context = super(DetailArticleView, self).get_context_data(**kwargs)
         context["comment_form"] = CommentForm(initial={"article": self.object})
         context["comment"] = Comment.objects.filter(
             article=self.object, is_approved=True
         )
 
-        # Check if the user has already liked this article in this session
-        liked_key = f"liked_article_{self.object.pk}"
-        context["already_liked"] = self.request.session.get(liked_key, False)
+        # Check if the user has already liked this article in this session or from this IP
+        x_forwarded_for = self.request.META.get("HTTP_X_FORWARDED_FOR")
+        # SEC-04: Parse rightmost IP to prevent spoofing from client-provided headers
+        ip = x_forwarded_for.split(",")[-1].strip() if x_forwarded_for else self.request.META.get("REMOTE_ADDR")
+        
+        session_liked_key = f"liked_article_{self.object.pk}"
+        ip_liked_key = f"ip_liked_{self.object.pk}_{ip}"
+        
+        context["already_liked"] = self.request.session.get(session_liked_key, False) or cache.get(ip_liked_key)
 
         return context
 
@@ -444,32 +451,40 @@ class DetailArticleView(DetailView):
 
         # Check if AJAX request for likes
         if is_ajax(request):
+            from django.core.cache import cache
             action = request.POST.get("action")
             # Reuse self.object to avoid a second DB query
             article_obj = self.object
 
-            # Session-based deduplication: each session can only like once per article
-            liked_key = f"liked_article_{article_obj.pk}"
-            already_liked = request.session.get(liked_key, False)
+            x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+            # SEC-04: Parse rightmost IP to prevent spoofing from client-provided headers
+            ip = x_forwarded_for.split(",")[-1].strip() if x_forwarded_for else request.META.get("REMOTE_ADDR")
+
+            session_liked_key = f"liked_article_{article_obj.pk}"
+            ip_liked_key = f"ip_liked_{article_obj.pk}_{ip}"
+            
+            already_liked = request.session.get(session_liked_key, False) or cache.get(ip_liked_key)
 
             if action == "like" and not already_liked:
                 # Atomic increment via F() expression — prevents race condition
                 Article.objects.filter(pk=article_obj.pk).update(likes=F("likes") + 1)
                 article_obj.refresh_from_db()
-                request.session[liked_key] = True
+                request.session[session_liked_key] = True
+                cache.set(ip_liked_key, True, timeout=60*60*24*30)  # 30 days lock
             elif action == "unlike" and already_liked:
                 # Atomic decrement, floor at 0
                 Article.objects.filter(pk=article_obj.pk, likes__gt=0).update(
                     likes=F("likes") - 1
                 )
                 article_obj.refresh_from_db()
-                request.session[liked_key] = False
+                request.session[session_liked_key] = False
+                cache.delete(ip_liked_key)
 
             return JsonResponse(
                 {
                     "success": True,
                     "likes": article_obj.likes,
-                    "liked": request.session.get(liked_key, False),
+                    "liked": request.session.get(session_liked_key, False),
                 }
             )
 
@@ -562,9 +577,12 @@ Best regards,
 Viir Phuria"""
                 from_email = settings.EMAIL_HOST_USER
 
-                # Send notification to all subscribers (using BCC to hide recipient list)
-                msg = EmailMessage(subject, message, from_email, bcc=subscriber_emails)
-                send_email_async(msg)
+                # Send notification to all subscribers in chunks of 50 (SMTP BCC limits)
+                chunk_size = 50
+                for i in range(0, len(subscriber_emails), chunk_size):
+                    chunk = subscriber_emails[i:i + chunk_size]
+                    msg = EmailMessage(subject, message, from_email, bcc=chunk)
+                    send_email_async(msg)
             return redirect("blogspace")
 
         return render(request, self.template_name, {"form": form})
@@ -648,11 +666,27 @@ def upload_image(request):
                 status=400,
             )
 
-        # Validate actual image content integrity via Pillow
+        # Re-encode the image to strip metadata and neutralize polyglots
         try:
             img = Image.open(image_file)
-            img.verify()
-            image_file.seek(0)
+            # Ensure it's fully loaded, not just verified
+            img.load()
+            
+            from io import BytesIO
+            from django.core.files.uploadedfile import InMemoryUploadedFile
+            import sys
+            
+            output = BytesIO()
+            img_format = img.format if img.format else 'JPEG'
+            if img_format.upper() == 'JPEG' and img.mode in ('RGBA', 'P'):
+                img = img.convert('RGB')
+                
+            img.save(output, format=img_format)
+            output.seek(0)
+            
+            image_file = InMemoryUploadedFile(
+                output, 'ImageField', image_file.name, image_file.content_type, sys.getsizeof(output), None
+            )
         except Exception:
             return JsonResponse(
                 {"success": False, "error": "Invalid or corrupted image content."},

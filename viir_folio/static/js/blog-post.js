@@ -85,9 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Toast notification helper
 function showNotification(msg) {
     const el = document.createElement('div');
+    el.setAttribute('role', 'alert');
+    el.setAttribute('aria-live', 'polite');
     el.textContent = msg;
     el.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#7c3aed;color:#f8fafc;' +
                        'padding:12px 20px;border-radius:8px;z-index:9999;font-size:14px;' +

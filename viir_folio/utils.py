@@ -34,26 +34,26 @@ ALLOWED_TAGS = {
 }
 
 ALLOWED_ATTRIBUTES = {
-    "a": {"href", "title", "target", "rel", "class", "style"},
-    "img": {"src", "alt", "title", "width", "height", "class", "style"},
-    "span": {"style", "class"},
-    "div": {"style", "class"},
-    "p": {"style", "class"},
-    "h1": {"style", "class"},
-    "h2": {"style", "class"},
-    "h3": {"style", "class"},
-    "h4": {"style", "class"},
-    "h5": {"style", "class"},
-    "h6": {"style", "class"},
-    "ul": {"style", "class"},
-    "ol": {"style", "class"},
-    "li": {"style", "class"},
-    "table": {"style", "class", "border"},
-    "tr": {"style", "class"},
-    "td": {"style", "class"},
-    "th": {"style", "class"},
-    "pre": {"style", "class"},
-    "code": {"style", "class"},
+    "a": {"href", "title", "target", "rel", "class"},
+    "img": {"src", "alt", "title", "width", "height", "class"},
+    "span": {"class"},
+    "div": {"class"},
+    "p": {"class"},
+    "h1": {"class"},
+    "h2": {"class"},
+    "h3": {"class"},
+    "h4": {"class"},
+    "h5": {"class"},
+    "h6": {"class"},
+    "ul": {"class"},
+    "ol": {"class"},
+    "li": {"class"},
+    "table": {"class", "border"},
+    "tr": {"class"},
+    "td": {"class"},
+    "th": {"class"},
+    "pre": {"class"},
+    "code": {"class"},
 }
 
 
@@ -90,11 +90,5 @@ def send_email_async(email_msg):
         except Exception:
             logger.exception("Background email delivery failed")
 
-    if (
-        getattr(settings, "TESTING", False)
-        or getattr(settings, "EMAIL_BACKEND", "")
-        == "django.core.mail.backends.locmem.EmailBackend"
-    ):
-        _deliver()
-    else:
-        threading.Thread(target=_deliver, daemon=True).start()
+    # Execute synchronously to prevent dropped tasks when WSGI workers recycle.
+    _deliver()

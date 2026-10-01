@@ -2077,6 +2077,8 @@ body.light .skill-chip:hover {
 
 
 /* Projects Section Filter Active State Fix */
+body.dark .portfolio-tabs ul li.mixitup-control-active,
+body.dark .portfolio-tabs ul li.active,
 .portfolio-tabs ul li.mixitup-control-active,
 .portfolio-tabs ul li.active,
 .portfolio-tabs ul li.current,

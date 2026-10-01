@@ -17,24 +17,7 @@
     {% include 'includes/meta.html' with meta_title='Viir Phuria — Cybersecurity Engineer & Full-Stack Developer | Portfolio' meta_description='Portfolio of Viir Phuria — Cybersecurity Engineer, Full-Stack Developer, ML/AI enthusiast, and IEEE Researcher. Explore projects, publications, and certifications.' meta_keywords='Viir Phuria, portfolio, cybersecurity engineer, full-stack developer, application security, machine learning, AI engineer, IEEE researcher, Python, Django, Go, Flutter, React, OSCP, CEH, Sec+, Mumbai' og_type='website' %}
     {% endblock %}
 
-    {# WebSite structured data with SearchAction for Google Sitelinks Searchbox #}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "{{ site_url }}/#website",
-      "name": "Viir Phuria Portfolio",
-      "url": "{{ site_url }}/",
-      "description": "Portfolio of Viir Phuria — Cybersecurity Engineer, Application Security Specialist, and IEEE Researcher.",
-      "author": {
-        "@type": "Person",
-        "@id": "{{ site_url }}/#person",
-        "name": "Viir Phuria"
-      },
-      "inLanguage": "en-IN",
-      "copyrightYear": "{% now "Y" %}"
-    }
-    </script>
+    <!-- WebSite structured data removed to prevent duplication with meta.html -->
 
     <!-- Site Favicon -->
     <link rel="icon" href="{% static 'assets/viir_logo.webp' %}" sizes="32x32">
@@ -52,20 +35,22 @@
 
     <!-- CSS: Vendor Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}?v={% now 'U' %}">
-    <!-- Removed Fancybox and Slick CSS for lighter payload -->
-    <link rel="stylesheet" href="{% static 'css/variables.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/refactored.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v={% now 'U' %}">
+    
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/refactored.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     
     <!-- Shared Architecture Styles -->
-    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/button-system.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}?v={% now 'U' %}">
-    <link rel="stylesheet" href="{% static 'css/site-footer.css' %}?v={% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/site-navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/button-system.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-cursor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site-footer.css' %}">
+    {% endcompress %}
 
     <script>
         window.__indexSidebar = true;
@@ -223,19 +208,22 @@
     <!-- ============================================================ -->
     <!-- VENDOR JS -->
     <!-- ============================================================ -->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.4.1/index.min.js" defer></script>
-    <script src="{% static 'js/grid.js' %}?v=20260917" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" defer></script>
-    <script src="{% static 'js/script.js' %}?v={% now 'U' %}" defer></script>
-    <!-- Custom script for interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 
-    <script src="{% static 'js/site-navbar.js' %}?v={% now 'U' %}" defer></script>
-    <script src="{% static 'js/index.js' %}?v={% now 'U' %}" defer></script>
-    <script src="{% static 'js/custom-cursor.js' %}?v={% now 'U' %}" defer></script>
-    <script src="{% static 'js/scroll-anim.js' %}?v={% now 'U' %}" defer></script>
+    {% compress js %}
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
+    <script src="{% static 'js/grid.js' %}" defer></script>
+    <script src="{% static 'js/script.js' %}" defer></script>
+    
+    <!-- Custom script for interactions -->
+    <script src="{% static 'js/site-navbar.js' %}" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
+    <script src="{% static 'js/custom-cursor.js' %}" defer></script>
+    <script src="{% static 'js/scroll-anim.js' %}" defer></script>
+    {% endcompress %}
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}
