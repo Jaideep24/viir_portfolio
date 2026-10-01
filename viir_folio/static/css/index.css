@@ -2042,3 +2042,44 @@ body.light .skill-chip:hover {
     outline: 2px solid #a48fff;
     outline-offset: 2px;
 }
+
+
+/* About Section Stats and Social Icons */
+.about-stat-number {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: var(--primary-accent) !important;
+  margin-bottom: 2px !important;
+  line-height: 1 !important;
+}
+
+.about-social-row a.about-social-icon {
+  color: #a0aec0 !important; /* Greyish base */
+  font-size: 1.6rem !important;
+  opacity: 0.9 !important;
+  transition: all var(--transition-fast) ease-in-out !important;
+  text-decoration: none !important;
+  display: inline-block !important; /* Needed for transform scale */
+}
+
+.about-social-row a.about-social-icon i,
+.about-social-row a.about-social-icon svg {
+  color: inherit !important;
+  font-size: inherit !important;
+  transition: color var(--transition-fast) ease-in-out !important;
+}
+
+.about-social-row a.about-social-icon:hover {
+  color: var(--primary-accent) !important; /* Brand red */
+  opacity: 1 !important;
+  transform: scale(1.25) !important; /* Make it a bit bigger in size */
+}
+
+
+/* Projects Section Filter Active State Fix */
+.portfolio-tabs ul li.mixitup-control-active,
+.portfolio-tabs ul li.active,
+.portfolio-tabs ul li.current,
+.portfolio-tabs ul li.selected {
+  color: #ff6f6f !important; /* Brand red for active tab */
+}

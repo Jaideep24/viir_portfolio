@@ -19,7 +19,7 @@
       "position": {{ forloop.counter }},
       "item": {
         "@type": "SoftwareApplication",
-        "@id": "{{ site_url }}/#engineering-{{ proj.pk }}",
+        "@id": "{{ site_url }}/#projects-{{ proj.pk }}",
         "name": "{{ proj.title|escapejs }}",
         "description": "{{ proj.topic|escapejs }}",
         "applicationCategory": "DeveloperApplication",
@@ -31,7 +31,7 @@
         },
         "dateCreated": "{{ proj.date|date:'Y-m-d' }}",
         "keywords": "{% for t in proj.tech_m2m.all %}{{ t.name|escapejs }}{% if not forloop.last %}, {% endif %}{% endfor %}",
-        "url": "{{ site_url }}/#engineering"
+        "url": "{{ site_url }}/#projects"
       }
     }{% if not forloop.last %},{% endif %}
     {% endfor %}

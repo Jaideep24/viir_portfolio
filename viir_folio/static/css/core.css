@@ -1462,8 +1462,8 @@ header button:hover {
   color: var(--brand-secondary);
 }
 
-li.mixitup-control-active {
-  color: var(--secondary-accent);
+.portfolio-tabs ul li.mixitup-control-active {
+  color: var(--primary-accent) !important;
 }
 
 .portfolio-img img {

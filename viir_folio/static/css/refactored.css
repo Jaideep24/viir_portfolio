@@ -207,6 +207,13 @@ body.dark .portfolio-tabs ul li {
     color: var(--text-primary);
 }
 
+body.dark .portfolio-tabs ul li.mixitup-control-active,
+body.dark .portfolio-tabs ul li.active,
+body.dark .portfolio-tabs ul li.current,
+body.dark .portfolio-tabs ul li.selected {
+    color: #ff6f6f !important;
+}
+
 /* ==========================================================================
    Contact Section Info Boxes & Inputs
    ========================================================================== */
