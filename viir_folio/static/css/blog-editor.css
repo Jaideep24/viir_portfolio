@@ -11,7 +11,7 @@
     --brand-accent-strong: var(--accent-600, #7c3aed);
     --brand-accent-soft: rgba(139, 92, 246, 0.16);
     --brand-heading: 'Playfair Display', serif;
-    --brand-body: var(--body-font, 'Quicksand'), 'Poppins', sans-serif;
+    --brand-body: var(--body-font, 'Manrope'), 'Manrope', sans-serif;
     --brand-radius: var(--radius, 12px);
     --brand-pill-radius: 999px;
     --brand-shadow: var(--card-shadow, 0 8px 24px rgba(15, 15, 15, 0.08));

@@ -6,7 +6,7 @@
     --brand-accent-strong: var(--accent-600, #7c3aed);
     --brand-accent-soft: rgba(139, 92, 246, 0.16);
     --brand-heading: 'Playfair Display', serif;
-    --brand-body: var(--body-font, 'Quicksand'), 'Poppins', sans-serif;
+    --brand-body: var(--body-font, 'Manrope'), 'Manrope', sans-serif;
     --brand-radius: var(--radius, 12px);
     --brand-pill-radius: 999px;
     --brand-shadow: var(--card-shadow, 0 8px 24px rgba(15, 15, 15, 0.08));
@@ -308,9 +308,12 @@ ul{
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--card-bg); /* same as index cards */
+    background: rgba(15, 23, 42, 0.75); /* Fixed dark background */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     overflow: hidden;
+    color: #f8fafc; /* Force light text in dark mode */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.10);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -352,7 +355,7 @@ ul{
     font-size: 1.25rem;
     font-weight: 700;
     font-family: var(--brand-heading);
-    color: var(--text, #eaf2ff);
+    color: #f1f5f9 !important;
 }
 
 .blogspace-excerpt {
@@ -399,11 +402,11 @@ body.light .blogspace-card {
 }
 
 body.light .blogspace-card .card-title {
-    color: var(--bg-inverse);
+    color: #1e293b !important;
 }
 
 body.light .blogspace-excerpt {
-    color: #334155;
+    color: #334155 !important;
 }
 
 body.light .blogspace-hero h1 {
@@ -1162,7 +1165,7 @@ body.light .comment {
 .comment-action {
     background: none;
     border: none;
-    color: #64748b;
+    color: #94a3b8;
     cursor: pointer;
     font-size: 0.875rem;
     padding: 0.25rem 0;
@@ -1851,7 +1854,7 @@ body.dark .blogspace-subscribe-content h2 span {
 body.dark .blogspace-subscribe-content p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
     margin-bottom: 30px;
 }
 
@@ -1879,7 +1882,7 @@ body.light .blogspace-subscribe-content h2 span {
 body.light .blogspace-subscribe-content p {
     color: rgba(17, 24, 39, 0.65);
     font-size: 1.05rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
     margin-bottom: 30px;
 }
 
@@ -1939,7 +1942,7 @@ body.light .subscribe-input-group:focus-within .subscribe-icon {
     width: 100%;
     padding: 13px 20px 13px 48px;
     border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -1980,7 +1983,7 @@ body.light .subscribe-input:focus {
 .blogspace-subscribe-section .subscribe-btn {
     padding: 13px 32px;
     border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -2037,7 +2040,7 @@ body.light .blogspace-subscribe-section .subscribe-btn:active {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 15px;
     font-weight: 500;
     text-align: left;

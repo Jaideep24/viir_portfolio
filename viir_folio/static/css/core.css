@@ -12,7 +12,7 @@
   /* Semantic Text */
   --text-primary: #0f172a; /* Slate 900 */
   --text-secondary: #475569; /* Slate 600 */
-  --text-tertiary: #64748b; /* Slate 500 */
+  --text-tertiary: #94a3b8; /* Slate 500 */
   --text-inverse: #f8fafc;
   --text-color: #333333;
 
@@ -42,8 +42,8 @@
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Manrope', sans-serif;
+  --font-serif: 'Manrope', system-ui, sans-serif;
   --font-mono: 'Fira Code', Consolas, monospace;
 }
 
@@ -104,7 +104,7 @@ body.dark {
 body {
   font-size: 14px;
   color: var(--gray-500);
-  font-family: "Poppins", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 400;
   top: 0;
   background-size: cover;
@@ -133,7 +133,7 @@ h2 {
   line-height: 60px;
   font-weight: 400;
   letter-spacing: 0.02rem;
-  font-family: "Quicksand";
+  font-family: "Manrope";
 }
 
 h1,
@@ -142,7 +142,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Quicksand";
+  font-family: "Manrope";
   position: relative;
   color: #222;
 }
@@ -187,11 +187,13 @@ p {
 }
 
 body.dark .section-title h2 {
-  color: var(--gray-200);
+  color: var(--primary-accent);
+  font-family: 'Playfair Display', serif;
 }
 
 body.light .section-title h2 {
-  color: var(--bg-slate);
+  color: var(--primary-accent);
+  font-family: 'Playfair Display', serif;
 }
 
 .section-title .ligh-title {
@@ -411,7 +413,7 @@ body.light .section-title h2 {
 }
 
 .br-learn-more-left .text {
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   font-style: italic;
   font-size: 14px;
   font-weight: 700;
@@ -816,7 +818,7 @@ header button:hover {
   text-align: center;
   margin-top: -9px;
   font-size: 14px;
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   text-transform: uppercase;
   background: var(--gray-100);
   line-height: 16px;
@@ -842,7 +844,7 @@ header button:hover {
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   color: var(--text-dark);
 }
 
@@ -850,7 +852,7 @@ header button:hover {
   margin-bottom: 15px;
   font-size: 16px;
   color: var(--gray-600);
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   font-weight: 400;
   line-height: 28px;
 }
@@ -876,7 +878,7 @@ header button:hover {
   font-size: 16px;
   line-height: 18px;
   color: var(--gray-600);
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1392,7 +1394,7 @@ header button:hover {
   font-size: 23px;
   line-height: 24px;
   font-weight: 700;
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   text-align: center;
 }
 
@@ -1707,7 +1709,7 @@ section {
   display: block;
   margin: 0 0 5px 0;
   padding: 0;
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   font-size: 50px;
   line-height: 55px;
   font-weight: 700;
@@ -1723,7 +1725,7 @@ section {
   padding: 0;
   font-size: 18px;
   color: var(--gray-600);
-  font-family: "Poppins, sans-serif";
+  font-family: "Manrope", sans-serif;
   font-weight: 400;
 }
 
@@ -2287,7 +2289,7 @@ input::-ms-clear {
 .social-proof-container { border-top: 1px solid rgba(255,255,255,0.05); margin-left: -15px; }
 .social-proof-title { color: var(--text-color); opacity: 0.5; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 25px; }
 .social-proof-logos { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%) contrast(120%); }
-.social-proof-logo { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--bg-primary); font-size: 1.5rem; }
+.social-proof-logo { margin: 0; font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--bg-primary); font-size: 1.5rem; }
 
 
 /* Sleek Timeline Changelog Style */
@@ -2622,7 +2624,7 @@ body.light .form-floating > .modern-input:not(:placeholder-shown) ~ label {
     background-image: none !important;
     color: var(--bg-primary) !important;
     text-decoration: none !important;
-    font-family: "Quicksand", "Poppins", sans-serif;
+    font-family: "Manrope", "Manrope", sans-serif;
     font-weight: 600;
     letter-spacing: 0.35px;
     line-height: 1;

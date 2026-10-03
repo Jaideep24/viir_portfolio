@@ -4,7 +4,7 @@
             <div class="row">
                 {% for object in about %}
                 <div class="section-title reveal-up">
-                    <h2><span class="fw-light">About</span> Me</h2>
+                    <h2><span class="fw-light">About</span></h2>
                     <span class="ligh-title">About</span>
                 </div>
                 <div class="col-lg-6 reveal-right">
@@ -39,7 +39,28 @@
                             </div>
                             {% endif %}
 
-                            <p class="about-content-text">{{ object.content }}</p>
+                            <!-- Terminal UI for About Text -->
+                            <div class="terminal-container">
+                                <div class="terminal-header">
+                                    <div class="terminal-buttons">
+                                        <span class="terminal-btn close"></span>
+                                        <span class="terminal-btn minimize"></span>
+                                        <span class="terminal-btn maximize"></span>
+                                    </div>
+                                    <div class="terminal-title">viir_phuria ~ bash</div>
+                                </div>
+                                <div class="terminal-body">
+                                    <div class="terminal-line">
+                                        <span class="terminal-prompt">viir:~$</span>
+                                        <span class="terminal-command">cat whoami.txt</span>
+                                    </div>
+                                    <div class="terminal-output typing-animation" style="text-align: left;">{{ object.content }}</div>
+                                    <div class="terminal-line" style="margin-top: 8px;">
+                                        <span class="terminal-prompt">viir:~$</span>
+                                        <span class="terminal-cursor"></span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Quick Stats Row (Manual Text Fields) -->
                             <div class="quick-stats about-stats-grid">

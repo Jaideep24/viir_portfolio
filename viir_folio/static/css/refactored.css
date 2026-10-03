@@ -41,7 +41,7 @@
 .social-proof-container { border-top: 1px solid rgba(255,255,255,0.05); margin-left: -15px; }
 .social-proof-title { color: var(--text-color); opacity: 0.5; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 25px; }
 .social-proof-logos { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%) contrast(120%); }
-.social-proof-logo { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--bg-primary); font-size: 1.5rem; }
+.social-proof-logo { margin: 0; font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--bg-primary); font-size: 1.5rem; }
 
 
 /* Sleek Timeline Changelog Style */

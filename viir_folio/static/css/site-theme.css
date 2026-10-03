@@ -44,7 +44,7 @@ body.dark {
   --card-shadow: 0 8px 24px rgba(15,15,15,0.08);
   --card-shadow-hover: 0 12px 32px rgba(15,15,15,0.12);
   --heading-font: 'Playfair Display', serif;
-  --body-font: 'Poppins', sans-serif;
+  --body-font: 'Manrope', sans-serif;
 }
 
 /* Base typography to match portfolio */
@@ -183,7 +183,7 @@ a:focus, button:focus, .btn:focus, input[type="submit"]:focus, input:focus {
   --card-shadow: 0 8px 24px rgba(15,15,15,0.08);
   --card-shadow-hover: 0 12px 32px rgba(15,15,15,0.12);
   --heading-font: 'Playfair Display', serif;
-  --body-font: 'Poppins', sans-serif;
+  --body-font: 'Manrope', sans-serif;
 }
 
 /* Base typography to match portfolio */

@@ -61,7 +61,7 @@ body.light {
     background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 50%, var(--brand-tertiary) 100%);
     color: var(--text-light);
     text-decoration: none;
-    font-family: 'Quicksand', 'Roboto', sans-serif;
+    font-family: 'Manrope', 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -233,7 +233,7 @@ body.light .cert-home-btn {
     border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
-    font-family: "Poppins", "Quicksand", sans-serif;
+    font-family: "Poppins", "Manrope", sans-serif;
     letter-spacing: 0.4px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.45);
@@ -430,7 +430,7 @@ body.light .cert-nav__link--active {
 }
 
 .background-circle {
-    background: #28292d;
+    background: var(--avatar-bg, #28292d);
     border-radius: 70%;
     width: 50vw;
     height: 50vw;
@@ -513,6 +513,7 @@ body.light .cert-nav__link--active {
 .hero-title {
     font-size: 2.5rem;
     font-weight: 700;
+    font-family: 'Playfair Display', serif;
     display: inline;
     color: var(--text-color, var(--text-light));
 }
@@ -524,6 +525,7 @@ body.light .hero-title {
 .hero-subtitle {
     font-size: 2.5rem;
     font-weight: 700;
+    font-family: 'Playfair Display', serif;
     display: inline;
     color: var(--brand-primary);
     margin-left: 8px;
@@ -535,7 +537,7 @@ body.light .hero-title {
     border: 1.5px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
     color: #d0d0d0;
-    font-family: "Quicksand", "Poppins", sans-serif;
+    font-family: "Manrope", "Manrope", sans-serif;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -1051,7 +1053,7 @@ body.light .br-about .br-card::before {
     border: 1.5px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
     color: #d0d0d0;
-    font-family: "Quicksand", "Poppins", sans-serif;
+    font-family: "Manrope", "Manrope", sans-serif;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -1084,7 +1086,7 @@ body.light .br-about .br-card::before {
     border: 1.5px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
     color: #d0d0d0;
-    font-family: "Quicksand", "Poppins", sans-serif;
+    font-family: "Manrope", "Manrope", sans-serif;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -1900,6 +1902,7 @@ body {
 body.light {
     background-color: #eef1f6;
     --card-bg: #f5f7fa;
+    --avatar-bg: transparent;
     --button-bg: #f5f7fa;
     --hover-bg: #e2e8f0;
 }
@@ -2084,5 +2087,130 @@ body.dark .portfolio-tabs ul li.active,
 .portfolio-tabs ul li.current,
 .portfolio-tabs ul li.selected {
   color: #ff6f6f !important; /* Brand red for active tab */
+}
+
+
+/* Terminal UI Component */
+.terminal-container {
+    background-color: #111827;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--font-mono, 'Fira Code', Consolas, monospace);
+    font-size: 0.95rem;
+}
+
+body.light .terminal-container {
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.terminal-header {
+    background-color: #1f2937;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+body.light .terminal-header {
+    background-color: #f1f5f9;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-btn.close { background-color: #ff5f56; }
+.terminal-btn.minimize { background-color: #ffbd2e; }
+.terminal-btn.maximize { background-color: #27c93f; }
+
+.terminal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+body.light .terminal-title {
+    color: #475569;
+}
+
+body.light .terminal-body {
+    color: #1e293b;
+}
+
+body.light .terminal-prompt {
+    color: #059669;
+}
+
+body.light .terminal-command {
+    color: #d97706;
+}
+
+body.light .terminal-output {
+    color: #334155;
+}
+
+body.light .terminal-cursor {
+    background-color: #1e293b;
+}
+
+.terminal-body {
+    padding: 20px;
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+.terminal-prompt {
+    color: #10b981;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.terminal-command {
+    color: #fbbf24;
+}
+
+.terminal-output {
+    margin-top: 10px;
+    color: #e2e8f0;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background-color: #e5e7eb;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Typing animation for output text */
+.typing-animation {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    white-space: pre-wrap; /* Keeps line breaks */
+    animation: typing 3s steps(150, end) forwards;
+    width: 100%;
 }
 

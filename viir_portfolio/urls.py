@@ -61,7 +61,7 @@ urlpatterns = [
     path("blogspace/", Blogspace.as_view(), name="blogspace"),
     # Numeric article URLs FIRST for backward compatibility (redirects to slug)
     path(
-        "blog/<int:pk>/", redirect_article_numeric_to_slug, name="detail_blog_numeric"
+        "blogspace/<int:pk>/", redirect_article_numeric_to_slug, name="detail_blog_numeric"
     ),
     path(
         "blogspace/<int:pk>/", redirect_article_numeric_to_slug, name="detail_blog_old"
@@ -77,9 +77,9 @@ urlpatterns = [
         name="updateview_old",
     ),
     # Slug-based article URLs (new) - AFTER numeric patterns
-    path("blog/<slug:slug>/", DetailArticleView.as_view(), name="detail_blog"),
-    path("blog/<slug:slug>/delete", DeleteArticleView.as_view(), name="delete_article"),
-    path("blog/<slug:slug>/update", UpdateBlogView.as_view(), name="updateview"),
+    path("blogspace/<slug:slug>/", DetailArticleView.as_view(), name="detail_blog"),
+    path("blogspace/<slug:slug>/delete", DeleteArticleView.as_view(), name="delete_article"),
+    path("blogspace/<slug:slug>/update", UpdateBlogView.as_view(), name="updateview"),
     # Other URLs
     path("blogspace/create/", CreateBlogView.as_view(), name="create_blog"),
     path("blogspace/edit/", login_view, name="login"),
