@@ -369,35 +369,3 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1
 AXES_RESET_ON_SUCCESS = True
 AXES_LOCKOUT_TEMPLATE = "403_lockout.html"
-
-# Trigger auto-reload
-
-# Trigger auto-reload 2
-
-# Trigger auto-reload 3
-
-# Trigger auto-reload 4
-
-# Trigger auto-reload 5
-
-# Trigger auto-reload 6
-
-# Trigger auto-reload 7
-
-# Trigger auto-reload 8
-
-# Trigger auto-reload 9
-
-# Trigger auto-reload 10
-
-# Trigger auto-reload 11
-
-# Trigger auto-reload 12
-
-# Trigger auto-reload 13
-
-# Trigger auto-reload 14
-
-# Trigger auto-reload 15
-
-# Trigger auto-reload 16

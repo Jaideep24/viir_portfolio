@@ -70,6 +70,7 @@
       transition: none !important;
     }
   </style>
+  {% block extra_css %}{% endblock %}
 </head>
 
 <body class="preload {% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
@@ -223,6 +224,7 @@
     <script src="{% static 'js/index.js' %}" defer></script>
     <script src="{% static 'js/custom-cursor.js' %}" defer></script>
     <script src="{% static 'js/scroll-anim.js' %}" defer></script>
+    <script src="{% static 'js/contact-form.js' %}" defer></script>
     {% endcompress %}
 
     <!-- Structured Data: Projects List -->

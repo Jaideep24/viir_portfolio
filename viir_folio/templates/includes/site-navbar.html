@@ -13,9 +13,9 @@
     </header>
     {% endif %}
 
-    <a href="/" class="navbar-brand-link" style="text-decoration: none; color: inherit;">
+    <a href="/" class="navbar-brand-link">
         <span id="headish" class="navbar-title{% if navbar_subtitle %} cert-page-title{% endif %}">
-            {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle" style="font-size: 0.8em; opacity: 0.85; vertical-align: middle;">&bull;&nbsp;{{ navbar_subtitle }}</span>{% endif %}
+            {{ navbar_title|default:"Viir Phuria" }}{% if navbar_subtitle %}&nbsp;<span class="cert-page-subtitle">• {{ navbar_subtitle }}</span>{% endif %}
         </span>
     </a>
 

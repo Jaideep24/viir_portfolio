@@ -465,3 +465,16 @@ body.light .br-sidebar .menu-list .blog-sidebar-menu .nav-link.active::after {
     outline: none !important;
     box-shadow: none !important;
 }
+
+/* Brand link — removes browser default link decoration without inline styles */
+.navbar-brand-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Subtitle separator beside cert page title */
+.cert-page-subtitle {
+    font-size: 0.8em;
+    opacity: 0.85;
+    vertical-align: middle;
+}

@@ -10,45 +10,78 @@
 {% block meta %}
   {% if project %}
     {% if project.image %}
-      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic meta_image=project.image.url og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+      {% include 'includes/meta.html' with meta_title=project.title|add:" | Project by Viir Phuria" meta_description=project.topic meta_image=project.image.url og_type='article' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
     {% else %}
-      {% include 'includes/meta.html' with meta_title=project.title meta_description=project.topic og_type='website' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
+      {% include 'includes/meta.html' with meta_title=project.title|add:" | Project by Viir Phuria" meta_description=project.topic og_type='article' meta_keywords='Viir Phuria project, cybersecurity, full-stack development, machine learning' %}
     {% endif %}
     <!-- Project structured data -->
     {% include 'includes/sd_project.html' with project=project %}
   {% endif %}
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/project-detail.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="padding-tb-80" style="padding-top: 120px !important;">
+<section class="padding-tb-80 project-detail-section">
   <div class="container">
     <div class="row">
       <div class="col-md-8 mx-auto">
+
+        <!-- Breadcrumb — improves SEO and UX navigation -->
+        <nav aria-label="Breadcrumb" class="mb-4">
+          <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+              <meta itemprop="position" content="1">
+            </li>
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a href="/#projects" itemprop="item"><span itemprop="name">Projects</span></a>
+              <meta itemprop="position" content="2">
+            </li>
+            <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <span itemprop="name">{{ project.title }}</span>
+              <meta itemprop="position" content="3">
+            </li>
+          </ol>
+        </nav>
+
         <h1>{{ project.title }}</h1>
+
         <p class="text-muted mb-1">
           <strong>Category:</strong>
           {% for cat in project.categories_list %}
-            <span class="badge" style="background:#7c3aed;color:#fff;border-radius:20px;padding:3px 10px;font-size:0.78rem;margin-right:4px;">{{ cat }}</span>
+            <span class="project-category-badge">{{ cat }}</span>
           {% endfor %}
         </p>
+
         {% if project.client %}
         <p><strong>Client:</strong> {{ project.client }}</p>
         {% endif %}
+
         <p><strong>Date:</strong> {{ project.date }}</p>
         <p><strong>Tech Stack:</strong> {% for t in project.tech_m2m.all %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+        {% if project.image %}
         <div class="project-image text-center my-3">
-          {% if project.image %}
-          <img src="{% if project.image %}{{ project.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ project.title }} — project by Viir Phuria" style="max-width:100%;height:auto;border-radius:12px;"/>
-          {% endif %}
+          <img
+            src="{{ project.image.url }}"
+            alt="{{ project.title }} — project built by Viir Phuria"
+            class="project-hero-img"
+            loading="lazy"
+          />
         </div>
+        {% endif %}
+
         <div class="project-topic mb-4">
           <p class="lead"><em>{{ project.topic }}</em></p>
         </div>
 
         {% if project.description %}
         <div class="project-description mb-4">
-          <h3 class="mb-3">Project Case Study</h3>
-          <div style="font-size: 1.05rem; line-height: 1.7; opacity: 0.95;">
+          <h2 class="mb-3">Project Case Study</h2>
+          <div class="project-description-body">
             {{ project.description|linebreaks }}
           </div>
         </div>
@@ -56,34 +89,50 @@
 
         {% if project.demo_video %}
         <div class="project-video mb-4">
-          <h3 class="mb-3">Project Demo</h3>
-          {% if "youtube.com" in project.demo_video or "youtu.be" in project.demo_video %}
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-              {% if "youtube.com/watch?v=" in project.demo_video %}
-                <iframe src="https://www.youtube.com/embed/{{ project.demo_video|cut:"https://www.youtube.com/watch?v=" }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-              {% elif "youtu.be/" in project.demo_video %}
-                <iframe src="https://www.youtube.com/embed/{{ project.demo_video|cut:"https://youtu.be/" }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-              {% else %}
-                <iframe src="{{ project.demo_video }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-              {% endif %}
-            </div>
-          {% else %}
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-              <iframe src="{{ project.demo_video }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-            </div>
-          {% endif %}
+          <h2 class="mb-3">Project Demo</h2>
+          <div class="video-embed-wrapper">
+            {% if "youtube.com/watch?v=" in project.demo_video %}
+              <iframe
+                src="https://www.youtube.com/embed/{{ project.demo_video|cut:'https://www.youtube.com/watch?v=' }}"
+                title="{{ project.title }} — demo video"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            {% elif "youtu.be/" in project.demo_video %}
+              <iframe
+                src="https://www.youtube.com/embed/{{ project.demo_video|cut:'https://youtu.be/' }}"
+                title="{{ project.title }} — demo video"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            {% else %}
+              <iframe
+                src="{{ project.demo_video }}"
+                title="{{ project.title }} — demo video"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            {% endif %}
+          </div>
         </div>
         {% endif %}
 
-        <div class="project-actions mt-5 d-flex flex-wrap gap-3 align-items-center" style="gap: 12px;">
+        <div class="project-actions mt-5 d-flex flex-wrap gap-3 align-items-center">
           {% if project.url %}
-          <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn"><span class="text">Visit Project</span></a>
+          <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">
+            <span class="text">Visit Live Project</span>
+          </a>
           {% endif %}
           {% if project.github_url %}
-          <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn"><span class="text">View on GitHub</span></a>
+          <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn">
+            <span class="text">View on GitHub</span>
+          </a>
           {% endif %}
-          <a href="/#project" class="capsule-btn"><span class="text">Back to Projects</span></a>
+          <a href="/#projects" class="capsule-btn">
+            <span class="text">← Back to Projects</span>
+          </a>
         </div>
+
       </div>
     </div>
   </div>

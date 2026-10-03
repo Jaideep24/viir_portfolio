@@ -28,7 +28,7 @@
 
         function updateAccent() {
             const styles = getComputedStyle(document.body);
-            const accent = styles.getPropertyValue('--badge').trim() || styles.getPropertyValue('--title').trim() || '#8b5cf6';
+            const accent = styles.getPropertyValue('--brand-primary').trim() || '#7c5bff';
             dot.style.background = accent;
             ring.style.borderTopColor = accent;
             trail.style.background = accent + '33';

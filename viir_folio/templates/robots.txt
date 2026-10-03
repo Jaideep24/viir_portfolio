@@ -48,4 +48,38 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
+# AI / LLM Crawlers — allow public portfolio and blog content for AI-search discoverability
+User-agent: GPTBot
+Allow: /
+Disallow: /dashboard/
+Disallow: /admin/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /dashboard/
+Disallow: /admin/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /dashboard/
+Disallow: /admin/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /dashboard/
+Disallow: /admin/
+
+# Block high-volume scraper bots that don't contribute search traffic
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
 Sitemap: https://viir.tech/sitemap.xml

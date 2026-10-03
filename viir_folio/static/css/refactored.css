@@ -337,3 +337,28 @@ body.light .form-floating > .modern-input:not(:placeholder-shown) ~ label {
         scroll-behavior: auto !important;
     }
 }
+
+/* ============================================================
+   Skip Navigation Link - WCAG 2.2 Level A Requirement
+   Must be the first focusable element; visible on keyboard focus
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 12px 24px;
+  background: var(--brand-primary, #7c5bff);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 99999;
+  border-radius: 0 0 var(--radius-md, 8px) 0;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}

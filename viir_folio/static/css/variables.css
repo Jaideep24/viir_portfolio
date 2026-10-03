@@ -1,4 +1,7 @@
 :root {
+  --brand-primary: #7c5bff;
+  --brand-secondary: #b57bff;
+  --brand-tertiary: #e07fff;
   /* Semantic Backgrounds */
   --bg-primary: #f8fafc;
   --bg-secondary: #f8fafc;
@@ -274,3 +277,37 @@ body.dark {
   font-weight: 500;
 }
 
+
+
+/* ============================================================
+   Utility Classes - replaces ad-hoc inline styles across templates
+   ============================================================ */
+
+.icon-mr-sm { margin-right: 5px; }
+
+.about-card-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  color: var(--text-tertiary);
+  padding: 0 6px;
+}
+
+.breadcrumb-item a {
+  color: var(--primary-accent);
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: var(--text-secondary);
+}

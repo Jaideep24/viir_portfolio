@@ -1,3 +1,4 @@
+{% load static %}
 <!-- ============================================================ -->
     <!-- CONTACT SECTION -->
     <!-- ============================================================ -->
@@ -88,72 +89,7 @@
                         <div id="formMessage" class="alert d-none mt-3" role="alert"></div>
                     </form>
                 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm');
-    const msgDiv = document.getElementById('formMessage');
-    const btn = document.getElementById('submitBtn');
-
-    if(form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            btn.querySelector('.text').innerText = 'Sending...';
-            btn.disabled = true;
-
-            const formData = new FormData(form);
-
-            fetch(window.location.href, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(async response => {
-                let data = {};
-                try { data = await response.json(); } catch(e) {}
-                
-                if(response.ok) {
-                    msgDiv.className = 'alert alert-success';
-                    msgDiv.innerHTML = '<b>Message Sent Successfully!</b>';
-                    msgDiv.style.display = 'block';
-                    form.reset();
-                } else {
-                    msgDiv.className = 'alert alert-danger';
-                    let errorMsg = '<b>Something went wrong. Please try again.</b>';
-                    
-                    if (data.errors) {
-                        let errorLines = [];
-                        for (let field in data.errors) {
-                            // Convert field name to title case (e.g., 'number' -> 'Number')
-                            let fieldName = field.charAt(0).toUpperCase() + field.slice(1);
-                            errorLines.push(fieldName + ': ' + data.errors[field].join(', '));
-                        }
-                        if (errorLines.length > 0) {
-                            errorMsg = '<b>Please correct the following:</b><br>' + errorLines.join('<br>');
-                        }
-                    } else if (data.message) {
-                        errorMsg = '<b>' + data.message + '</b>';
-                    }
-                    
-                    msgDiv.innerHTML = errorMsg;
-                    msgDiv.style.display = 'block';
-                }
-            })
-            .catch(err => {
-                msgDiv.className = 'alert alert-danger';
-                msgDiv.innerHTML = '<b>Network error. Please try again.</b>';
-                msgDiv.style.display = 'block';
-            })
-            .finally(() => {
-                btn.querySelector('.text').innerText = 'Send Message';
-                btn.disabled = false;
-                setTimeout(() => { msgDiv.style.display = 'none'; }, 8000); // 8 seconds to read errors
-            });
-        });
-    }
-});
-</script>
+<script src="{% static 'js/contact-form.js' %}" defer></script>
             </div>
         </div>
     </section>

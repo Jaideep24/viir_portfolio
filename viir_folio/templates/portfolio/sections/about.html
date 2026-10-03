@@ -4,13 +4,13 @@
             <div class="row">
                 {% for object in about %}
                 <div class="section-title reveal-up">
-                    <h2><span style="font-weight: 200;">About</span> Me</h2>
+                    <h2><span class="fw-light">About</span> Me</h2>
                     <span class="ligh-title">About</span>
                 </div>
                 <div class="col-lg-6 reveal-right">
                     <div class="br-skill-progress m-b-991">
                         <div class="br-hero-img">
-                            <div class="br-card" data-tilt="" style="position: relative; display: inline-block;">
+                            <div class="br-card about-card-wrapper" data-tilt="">
                                 <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.name }} — profile photo" class="about-img">
                                 {% if object.open_to_work %}
                                 <div class="about-status-badge">
@@ -65,7 +65,7 @@
                                 {% endfor %}
 
                                 <div class="about-social-row">
-                                    <span class="about-location-text"><i class="fa-solid fa-location-dot" style="margin-right: 5px;"></i> {{ object.location }}</span>
+                                    <span class="about-location-text"><i class="fa-solid fa-location-dot icon-mr-sm"></i> {{ object.location }}</span>
                                     <a href="mailto:{{ object.email }}" class="about-social-icon" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
                                     {% if object.github_url %}
                                     <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
