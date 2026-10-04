@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
 from django.contrib import admin
 from django.urls import path, re_path
 from django.views.static import serve
@@ -76,15 +77,16 @@ urlpatterns = [
         redirect_article_numeric_to_slug,
         name="updateview_old",
     ),
-    # Slug-based article URLs (new) - AFTER numeric patterns
-    path("blogspace/<slug:slug>/", DetailArticleView.as_view(), name="detail_blog"),
-    path("blogspace/<slug:slug>/delete", DeleteArticleView.as_view(), name="delete_article"),
-    path("blogspace/<slug:slug>/update", UpdateBlogView.as_view(), name="updateview"),
-    # Other URLs
+    # Static action URLs MUST be defined before the generic slug pattern
     path("blogspace/create/", CreateBlogView.as_view(), name="create_blog"),
     path("blogspace/edit/", login_view, name="login"),
     path("blogspace/logout/", logout_view, name="logout"),
     path("blogspace/upload-image/", upload_image, name="upload_image"),
+    
+    # Slug-based article URLs (new) - AFTER numeric patterns and static paths
+    path("blogspace/<slug:slug>/", DetailArticleView.as_view(), name="detail_blog"),
+    path("blogspace/<slug:slug>/delete", DeleteArticleView.as_view(), name="delete_article"),
+    path("blogspace/<slug:slug>/update", UpdateBlogView.as_view(), name="updateview"),
     path("certificate/", certificate_view, name="certificate"),
     path(
         "robots.txt",

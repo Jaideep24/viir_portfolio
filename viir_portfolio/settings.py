@@ -19,6 +19,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Explicitly point to the .env file in the project root and override system variables
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
+# ==============================================================================
+# SENTRY / OBSERVABILITY
+# ==============================================================================
+SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+if SENTRY_DSN:
+    import sentry_sdk
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+    )
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 

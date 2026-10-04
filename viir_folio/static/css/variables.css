@@ -311,3 +311,14 @@ body.dark {
 .breadcrumb-item.active {
   color: var(--text-secondary);
 }
+
+/* Accessibility: Focus Visible */
+:focus-visible {
+    outline: 3px solid var(--brand-primary);
+    outline-offset: 2px;
+}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--brand-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}

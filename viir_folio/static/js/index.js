@@ -210,24 +210,43 @@ function design(event) {
 
         const filterValue = clickedItem.getAttribute("data-filter");
         const container = document.getElementById("project-items-container");
-        const items = container.querySelectorAll(".project-item");
-
-        if (filterValue === "all") {
-            // Show all items
-            items.forEach(item => {
-                item.style.display = "";
-            });
-        } else {
-            // Filter by class name (remove the leading dot)
-            const className = filterValue.substring(1);
-            items.forEach(item => {
-                if (item.classList.contains(className)) {
+        
+        if (container) {
+            const originals = container.querySelectorAll(".project-item:not(.marquee-clone)");
+            const clones = container.querySelectorAll(".marquee-clone");
+            
+            let visibleOriginals = 0;
+            const filterClass = filterValue === "all" ? "" : filterValue.substring(1);
+            
+            // 1. Filter original items and count how many match the category
+            originals.forEach(item => {
+                if (filterValue === "all" || item.classList.contains(filterClass)) {
                     item.style.display = "";
+                    visibleOriginals++;
                 } else {
                     item.style.display = "none";
                 }
             });
+            
+            // 2. Hide or filter clones based on visible count (rule: loop only if > 2)
+            clones.forEach(clone => {
+                if (visibleOriginals > 2) {
+                    // Loop enabled: filter the clone normally
+                    if (filterValue === "all" || clone.classList.contains(filterClass)) {
+                        clone.style.display = "";
+                    } else {
+                        clone.style.display = "none";
+                    }
+                } else {
+                    // <= 2 items: do NOT loop, hide all clones to prevent duplicate illusion
+                    clone.style.display = "none";
+                }
+            });
+            
+            // Reset scroll position to start of the newly filtered list
+            container.scrollLeft = 0;
         }
+        
     } else if (clickedItem.classList.contains("br-nav")) {
         document.querySelectorAll(".br-nav").forEach(item => {
             item.parentNode.classList.remove("active");

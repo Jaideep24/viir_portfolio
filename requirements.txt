@@ -1,5 +1,5 @@
 # Django Framework
-Django>=4.2,<5.0
+Django>=5.1,<6.0
 django-jazzmin>=2.6.2
 
 # Environment Variables
@@ -41,3 +41,9 @@ argon2-cffi>=23.1.0
 
 # Data-at-Rest Encryption
 django-cryptography>=1.1
+# Production Asset Compression
+django-compressor>=4.4
+django-appconf>=1.0.6
+
+# Application Performance Monitoring
+sentry-sdk>=1.39.0

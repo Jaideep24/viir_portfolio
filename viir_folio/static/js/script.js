@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    /*-------------------- Potfolio for Mixit up --------------------*/
+    /*-------------------- Potfolio for Mixit up (Disabled for infinite marquee) --------------------*/
     const portfolioContent = document.querySelector('.portfolio-content');
-    if (portfolioContent && typeof mixitup !== 'undefined') {
-        mixitup(portfolioContent);
-    }
+    // if (portfolioContent && typeof mixitup !== 'undefined') {
+    //     mixitup(portfolioContent);
+    // }
 
     /*--------------------- Replace all SVG images with inline SVG -------------------------------- */
     document.querySelectorAll('img.svg_img[src$=".svg"]').forEach(function(img) {
@@ -188,3 +188,24 @@ window.addEventListener('load', () => {
         }
     }
 });
+
+    /*--------------------- Scroll Reveal Animations --------------------*/
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => {
+        revealObserver.observe(el);
+    });

@@ -1,76 +1,46 @@
-# Viir Portfolio
+# Viir Phuria | Portfolio & Engineering Blog
 
-<div align="center">
-  <h3>Elite Staff Engineer Portfolio & CMS</h3>
-  <p>A production-ready Django 4.2 application architected for extreme performance, WCAG 2.1 AA accessibility, and enterprise-grade security.</p>
-</div>
+Welcome to the source code for my personal portfolio and blogspace. This repository demonstrates my capability to build, secure, and deploy robust web applications.
 
----
+## ?? Architecture & Tech Stack
 
-## ⚡ Engineering Highlights
+- **Backend**: Python, Django 5.x, SQLite (dev) / PostgreSQL (prod)
+- **Frontend**: Custom HTML5/CSS3 (Grid/Flexbox), Vanilla JS, CSS Variables for seamless Light/Dark mode switching.
+- **Security**: 
+  - Password Hashing: Argon2 (rgon2-cffi)
+  - CSRF & XSS Protection: Built-in Django middleware + 
+h3 HTML sanitizer
+  - Strict Content-Security-Policy (CSP) headers
+- **CI/CD**: GitHub Actions for automated linting (Black, Flake8) and testing.
 
-*   **Zero N+1 Queries**: Complete ORM optimization utilizing `.select_related` and `.prefetch_related`.
-*   **Performance First**: Achieves 97+/100 Lighthouse scores via WhiteNoise static compression, lazy-loaded images, and deferred HTML fields to prevent memory bloat.
-*   **Impenetrable Security**: Hardened with Argon2 hashing, `django-ratelimit` brute-force protection, strict Content Security Policy (CSP), and `django-axes` lockout mechanisms.
-*   **Accessibility Driven**: Full keyboard navigation, dynamic `aria-current` scroll-spying, and high-contrast semantic HTML.
-*   **Enterprise SEO**: Dynamic JSON-LD structured data generation for Articles, Projects, and Person schemas.
+## ??? Local Development Setup
 
-## 🏗️ Architecture
+Ensure you have Python 3.10+ installed.
 
-The application is built on a robust Django backend with a vanilla JavaScript/Bootstrap frontend, specifically designed to bypass the complexity of modern JS frameworks while maintaining SPA-like reactivity through strategic AJAX and Intersection Observers.
+\\\ash
+# 1. Clone the repository
+git clone https://github.com/viirphuria/portfolio.git
+cd portfolio
 
-```mermaid
-graph TD
-    Client[Client / Browser] --> Cloudflare[Cloudflare DNS / CDN]
-    Cloudflare --> Proxy[Nginx / PythonAnywhere]
-    Proxy --> Static[Static Assets: WhiteNoise]
-    Proxy --> Gunicorn[WSGI: Gunicorn]
-    Gunicorn --> Django[Django Application]
-    Django --> SQLite[(SQLite / PostgreSQL)]
-```
+# 2. Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows use env\Scripts\activate
 
-## 🛠️ Tech Stack
+# 3. Install dependencies
+pip install -r requirements.txt
 
-*   **Backend**: Python 3.11+, Django 4.2.x, SQLite (Production optimized for PythonAnywhere)
-*   **Frontend**: HTML5, CSS3 (CSS Variables, Dark/Light theme), Vanilla JS, Bootstrap 5
-*   **DevOps**: GitHub Actions CI/CD (Flake8, Black, Pytest)
+# 4. Apply database migrations
+python manage.py migrate
 
-## 🚀 Quick Start
+# 5. Run the local development server
+python manage.py runserver
+\\\
 
-1. **Clone & Virtualenv**
-   ```bash
-   git clone <repo-url>
-   python -m venv .venv
-   source .venv/bin/activate  # Or .venv\\Scripts\\activate on Windows
-   ```
+## ?? Testing
+This project includes a comprehensive suite of security and unit tests located in 	ests.py.
+\\\ash
+python manage.py test
+\\\
 
-2. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Environment Configuration**
-   ```bash
-   cp .env.example .env
-   # Edit .env and supply SECRET_KEY, EMAIL configurations, etc.
-   ```
-
-4. **Migrate & Run**
-   ```bash
-   python manage.py migrate
-   python manage.py createsuperuser
-   python manage.py runserver
-   ```
-
-## 📚 Documentation
-
-*   [Deployment Guide](DEPLOYMENT.md) - Detailed instructions for production deployment on PythonAnywhere.
-
-## 🛡️ Security
-
-This repository is maintained with strict security practices. Sensitive operations like contact forms and comment submissions are rate-limited. Administrator login paths are protected against brute-force attacks via `django-ratelimit`.
-
----
-<div align="center">
-  <i>Engineered for Excellence.</i>
-</div>
+## ?? License
+This project is proprietary. Please do not clone or redistribute without permission.

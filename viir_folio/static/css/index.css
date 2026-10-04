@@ -2214,3 +2214,73 @@ body.light .terminal-cursor {
     width: 100%;
 }
 
+
+/* Horizontal Marquee for Projects */
+.horizontal-marquee {
+    display: flex;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 30px;
+    
+    /* Add padding top to prevent hover popup from clipping */
+    padding-top: 20px;
+    margin-top: -20px;
+    
+    padding-bottom: 30px;
+    margin-bottom: -30px;
+    
+    /* 100vw hack to break out of container */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
+    
+    cursor: grab;
+    
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Fix purple box/outline on filter tabs */
+.portfolio-tabs ul li.filter:focus,
+.portfolio-tabs ul li.filter:focus-visible {
+    outline: none !important;
+}
+
+.horizontal-marquee.active {
+    cursor: grabbing;
+}
+
+.horizontal-marquee::-webkit-scrollbar {
+    display: none;
+}
+.horizontal-marquee::-webkit-scrollbar-thumb {
+    background: var(--brand-primary);
+    border-radius: 4px;
+}
+.horizontal-marquee::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+}
+body.dark .horizontal-marquee::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+.horizontal-marquee .project-item {
+    flex: 0 0 calc(50% - 15px) !important;
+    max-width: calc(50% - 15px) !important;
+}
+@media (max-width: 991px) {
+    .horizontal-marquee .project-item {
+        flex: 0 0 calc(85% - 15px) !important;
+        max-width: calc(85% - 15px) !important;
+    }
+}
+@media (max-width: 767px) {
+    .horizontal-marquee .project-item {
+        flex: 0 0 90% !important;
+        max-width: 90% !important;
+    }
+}

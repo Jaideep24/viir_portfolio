@@ -26,9 +26,9 @@
 		<a href="{% url 'detail_blog' object.slug %}" class="blogspace-card-link">
 			<div class="card blogspace-card reveal-up">
 				{% if object.image %}
-				<img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" class="card-img-top" alt="{{ object.title }}">
+				<img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" class="card-img-top" alt="{{ object.title }}">
 				{% else %}
-				<img src="{% static 'assets/default-blog-image.png' %}" class="card-img-top" alt="{{ object.title }}">
+				<img loading="lazy" decoding="async" src="{% static 'assets/default-blog-image.png' %}" class="card-img-top" alt="{{ object.title }}">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ object.title }}</h5>

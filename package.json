@@ -1,0 +1,16 @@
+{
+  "name": "viir-portfolio",
+  "version": "1.0.0",
+  "description": "Frontend tooling for Viir Phuria's portfolio",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint 'viir_folio/static/js/**/*.js'",
+    "format": "prettier --write 'viir_folio/static/js/**/*.js'",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0"
+  }
+}

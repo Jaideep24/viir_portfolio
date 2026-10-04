@@ -11,7 +11,7 @@
                     <div class="br-skill-progress m-b-991">
                         <div class="br-hero-img">
                             <div class="br-card about-card-wrapper" data-tilt="">
-                                <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.name }} — profile photo" class="about-img">
+                                <img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" alt="{{ object.name }} — profile photo" class="about-img">
                                 {% if object.open_to_work %}
                                 <div class="about-status-badge">
                                     <div class="about-status-dot"></div>
