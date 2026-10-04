@@ -2,7 +2,7 @@ function initScrollAnim() {
     const observerOptions = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.15 // Trigger when 15% of the element is visible
+        threshold: 0.05 // Trigger when 5% of the element is visible
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
