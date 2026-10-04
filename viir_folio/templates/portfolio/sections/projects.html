@@ -110,6 +110,10 @@
             originalChildren.forEach(child => {
                 const clone = child.cloneNode(true);
                 clone.classList.add('marquee-clone');
+                // Immediately hide clones if the total starting original count is 2 or fewer
+                if (originalChildren.length <= 2) {
+                    clone.style.display = 'none';
+                }
                 container.appendChild(clone);
             });
             
