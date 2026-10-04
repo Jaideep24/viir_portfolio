@@ -130,21 +130,28 @@ JAZZMIN_SETTINGS = {
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-        "viir_folio.About": "fas fa-user-circle",
-        "viir_folio.Education": "fas fa-graduation-cap",
-        "viir_folio.Experience": "fas fa-briefcase",
-        "viir_folio.Skill": "fas fa-code",
-        "viir_folio.Project": "fas fa-project-diagram",
-        "viir_folio.Contact": "fas fa-envelope",
-        "viir_folio.Article": "fas fa-newspaper",
-        "viir_folio.Comment": "fas fa-comments",
-        "viir_folio.CV": "fas fa-file-pdf",
-        "viir_folio.Certificate": "fas fa-award",
-        "viir_folio.MainCertificate": "fas fa-certificate",
-        "viir_folio.Subscriber": "fas fa-bell",
-        "viir_folio.Publication": "fas fa-book",
-        "viir_folio.Visitor": "fas fa-users-viewfinder",
+        "auth.group": "fas fa-users",
+        "axes.accessattempt": "fas fa-shield-alt",
+        "axes.accesslog": "fas fa-clipboard-list",
+        "axes.accessfailure": "fas fa-times-circle",
+        "viir_folio.about": "fas fa-user-circle",
+        "viir_folio.author": "fas fa-user-edit",
+        "viir_folio.education": "fas fa-graduation-cap",
+        "viir_folio.experience": "fas fa-briefcase",
+        "viir_folio.experiencebullet": "fas fa-list-ul",
+        "viir_folio.skill": "fas fa-code",
+        "viir_folio.techskill": "fas fa-laptop-code",
+        "viir_folio.project": "fas fa-project-diagram",
+        "viir_folio.contact": "fas fa-envelope",
+        "viir_folio.article": "fas fa-newspaper",
+        "viir_folio.comment": "fas fa-comments",
+        "viir_folio.cv": "fas fa-file-pdf",
+        "viir_folio.certificate": "fas fa-award",
+        "viir_folio.maincertificate": "fas fa-certificate",
+        "viir_folio.subscriber": "fas fa-bell",
+        "viir_folio.publication": "fas fa-book",
+        "viir_folio.visitor": "fas fa-eye",
+        "viir_folio.pagevisit": "fas fa-chart-line",
     },
 }
 
@@ -381,3 +388,10 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1
 AXES_RESET_ON_SUCCESS = True
 AXES_LOCKOUT_TEMPLATE = "403_lockout.html"
+
+# TinyMCE Dark Mode Config
+TINYMCE_DEFAULT_CONFIG = {
+    'skin': 'oxide-dark',
+    'content_css': 'dark',
+    'menubar': False,
+}

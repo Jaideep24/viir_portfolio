@@ -1,156 +1,293 @@
-/* Hide the user panel only in the sidebar */
-aside.main-sidebar .user-panel {
-    display: none !important;
-}
+/* ==========================================================================
+   ELITE ADMIN DASHBOARD THEME
+   Vercel / Stripe inspired dark mode
+   ========================================================================== */
 
-/* Optional: remove the border that usually sits under the user panel */
-aside.main-sidebar .nav-sidebar {
-    border-top: none !important;
-}
-
-/* Hide the main footer completely */
+/* Hide unwanted elements */
+aside.main-sidebar .user-panel,
 footer.main-footer {
     display: none !important;
 }
 
-/* Proper Dark Theme Overrides */
-body.dark-mode, 
-body.dark-mode .wrapper, 
-body.dark-mode .main-header, 
-body.dark-mode .content-wrapper, 
-body.dark-mode .main-sidebar,
-body.dark-mode .brand-link {
-    background-color: #121212 !important; /* Proper dark mode background */
+aside.main-sidebar .nav-sidebar {
+    border-top: none !important;
 }
 
-body.dark-mode .card,
-body.dark-mode .info-box {
-    background-color: #1e1e1e !important; /* Slightly elevated dark for cards */
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+/* Base Backgrounds */
+body, 
+body .wrapper, 
+body .content-wrapper {
+    background-color: #000000 !important;
+    color: #ededed !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-body.dark-mode .main-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-body.dark-mode .main-sidebar {
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+/* Sidebar */
+body .main-sidebar,
+body .brand-link {
+    background-color: #0a0a0a !important;
+    border-right: 1px solid #222222 !important;
 }
 
-/* Navbar Text and Icons */
-body.dark-mode .main-header .nav-link,
-body.dark-mode .main-header .nav-link i,
-body.dark-mode .main-header .brand-text {
-    color: #e0e0e0 !important;
+/* Header */
+body .main-header {
+    background-color: #0a0a0a !important;
+    border-bottom: 1px solid #222222 !important;
 }
-body.dark-mode .main-header .nav-link:hover,
-body.dark-mode .main-header .nav-link:hover i {
+
+/* Cards & Panels */
+body .card,
+body .info-box {
+    background-color: #0a0a0a !important;
+    border: 1px solid #222222 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+}
+body .card-header {
+    border-bottom: 1px solid #222222 !important;
+}
+
+/* Headings & Text */
+body p, body span, body h1, body h2, body h3, body h4, body h5, body h6, body td, body label, body .card-title {
+    color: #ededed !important;
+}
+
+body .text-muted {
+    color: #a1a1aa !important;
+}
+
+/* Sidebar Links */
+body .main-sidebar .nav-sidebar .nav-link p,
+body .main-sidebar .nav-sidebar .nav-link i,
+body .main-sidebar .brand-text {
+    color: #a1a1aa !important;
+    transition: color 0.2s ease;
+}
+
+body .main-sidebar .nav-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 6px !important;
+}
+
+body .main-sidebar .nav-sidebar .nav-link:hover p,
+body .main-sidebar .nav-sidebar .nav-link:hover i {
     color: #ffffff !important;
 }
 
-/* Sidebar Text and Icons */
-body.dark-mode .main-sidebar .nav-sidebar .nav-link p,
-body.dark-mode .main-sidebar .nav-sidebar .nav-link i,
-body.dark-mode .main-sidebar .brand-text {
-    color: #e0e0e0 !important;
+body .main-sidebar .nav-sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
 }
-body.dark-mode .main-sidebar .nav-sidebar .nav-link:hover p,
-body.dark-mode .main-sidebar .nav-sidebar .nav-link:hover i,
-body.dark-mode .main-sidebar .nav-sidebar .nav-link.active p,
-body.dark-mode .main-sidebar .nav-sidebar .nav-link.active i {
+
+body .main-sidebar .nav-sidebar .nav-link.active p,
+body .main-sidebar .nav-sidebar .nav-link.active i {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+
+/* Top Navbar Links */
+body .main-header .nav-link,
+body .main-header .nav-link i {
+    color: #a1a1aa !important;
+}
+body .main-header .nav-link:hover,
+body .main-header .nav-link:hover i {
     color: #ffffff !important;
 }
 
-/* General Text and Icons */
-body.dark-mode, 
-body.dark-mode p, 
-body.dark-mode span, 
-body.dark-mode h1, 
-body.dark-mode h2, 
-body.dark-mode h3, 
-body.dark-mode h4, 
-body.dark-mode h5, 
-body.dark-mode h6,
-body.dark-mode td,
-body.dark-mode label,
-body.dark-mode div.text-muted {
-    color: #e0e0e0 !important;
+/* General Links */
+body a {
+    color: #a1a1aa !important;
+    text-decoration: none !important;
+    transition: color 0.2s;
 }
-
-/* Links and buttons */
-body.dark-mode a {
-    color: #3b82f6 !important;
-}
-body.dark-mode a:hover {
-    color: #60a5fa !important;
-}
-
-/* Table Headings (Blue) */
-body.dark-mode th,
-body.dark-mode th a {
-    color: #3b82f6 !important;
-}
-
-/* Specific blue accents */
-body.dark-mode .btn-primary,
-body.dark-mode .bg-primary {
-    background-color: #3b82f6 !important;
-    border-color: #3b82f6 !important;
+body a:hover {
     color: #ffffff !important;
 }
 
-/* Dropdowns and Inputs */
-body.dark-mode select,
-body.dark-mode select.form-control,
-body.dark-mode .custom-select,
-body.dark-mode input.form-control,
-body.dark-mode input[type="text"],
-body.dark-mode input[type="search"],
-body.dark-mode input[type="email"],
-body.dark-mode input[type="password"],
-body.dark-mode textarea {
-    background-color: #242424 !important;
-    color: #e0e0e0 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+/* Premium Buttons (Add / Change / Primary) */
+body .btn,
+body .btn-success,
+body .btn-info,
+body .btn-primary,
+body .bg-primary,
+body .addlink,
+body .changelink,
+body input[type="submit"],
+body input[type="button"],
+body .button {
+    background-color: #ededed !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    padding: 6px 14px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    transition: all 0.2s ease !important;
 }
 
-body.dark-mode select option {
-    background-color: #242424 !important;
-    color: #e0e0e0 !important;
+body .addlink {
+    margin-right: 12px !important;
 }
 
-/* Select2 Custom Dropdowns */
-body.dark-mode .select2-container--default .select2-selection--single,
-body.dark-mode .select2-container--default .select2-selection--multiple {
-    background-color: #242424 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+body .btn:hover,
+body .btn-success:hover,
+body .btn-info:hover,
+body .btn-primary:hover,
+body .bg-primary:hover,
+body .addlink:hover,
+body .changelink:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.15) !important;
 }
 
-body.dark-mode .select2-container--default .select2-selection--single .select2-selection__rendered,
-body.dark-mode .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .select2-dropdown {
-    background-color: #242424 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-body.dark-mode .select2-container--default .select2-results__option {
-    background-color: #242424 !important;
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #374151 !important;
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #3b82f6 !important;
+/* Danger buttons */
+body .btn-danger {
+    background-color: #ef4444 !important;
     color: #ffffff !important;
 }
+body .btn-danger:hover {
+    background-color: #dc2626 !important;
+}
 
-body.dark-mode .select2-search__field {
-    background-color: #242424 !important;
-    color: #e0e0e0 !important;
+/* Tables */
+body th, body th a {
+    color: #a1a1aa !important;
+    border-bottom: 1px solid #222222 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+body td {
+    border-top: 1px solid #222222 !important;
+}
+body .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Inputs & Forms (Django Admin Specific) */
+body select,
+body select.form-control,
+body .custom-select,
+body input,
+body textarea,
+body .vTextField,
+body .vLargeTextField,
+body .vURLField,
+body .vTimeField,
+body .vDateField,
+body .vIntegerField,
+body .select2-selection,
+body .selectfilter,
+body .search-button,
+body .changelist-filter select {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #333333 !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+}
+
+body select:focus,
+body input:focus,
+body textarea:focus,
+body .vTextField:focus,
+body .vLargeTextField:focus {
+    border-color: #666666 !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix weird grey strip at the bottom */
+html, body {
+    height: 100% !important;
+    min-height: 100vh !important;
+    background-color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.wrapper, .content-wrapper {
+    min-height: 100vh !important;
+    background-color: #000000 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 2rem !important;
+}
+.control-sidebar-bg {
+    display: none !important;
+}
+
+/* Timeline & Specific Layout Fixes */
+body .timeline>div>.timeline-item {
+    background-color: #0a0a0a !important;
+    border: 1px solid #222222 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+body .timeline>div>.timeline-item>.timeline-header {
+    border-bottom: 1px solid #222222 !important;
+    color: #ededed !important;
+}
+body .timeline::before {
+    background-color: #333333 !important;
+}
+
+/* Timeline Icons */
+body .timeline>div>i {
+    box-shadow: 0 0 0 4px #000 !important;
+}
+
+/* Select2 overrides */
+body .select2-container--default .select2-selection--single,
+body .select2-container--default .select2-selection--multiple,
+body .select2-dropdown {
+    background-color: #000000 !important;
+    border: 1px solid #333333 !important;
+}
+body .select2-container--default .select2-selection--single .select2-selection__rendered,
+body .select2-container--default .select2-selection--multiple .select2-selection__choice,
+body .select2-container--default .select2-results__option {
+    color: #ededed !important;
+}
+body .select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #111111 !important;
+}
+body .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #222222 !important;
+}
+body .select2-search__field {
+    background-color: #000000 !important;
+}
+
+/* Dark Alerts & Notifications */
+body .alert, 
+body .alert-success, 
+body .alert-danger, 
+body .alert-error, 
+body .alert-warning, 
+body .alert-info {
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+body .alert-success {
+    background-color: #064e3b !important; /* Dark Green */
+}
+body .alert-danger, 
+body .alert-error {
+    background-color: #7f1d1d !important; /* Dark Red */
+}
+body .alert-warning {
+    background-color: #78350f !important; /* Dark Orange/Yellow */
+}
+body .alert-info {
+    background-color: #1e3a8a !important; /* Dark Blue */
+}
+body .alert .close, body .alert button.close {
+    color: #ffffff !important;
+    opacity: 0.8 !important;
+    text-shadow: none !important;
+}
+body .alert .close:hover, body .alert button.close:hover {
+    opacity: 1 !important;
 }

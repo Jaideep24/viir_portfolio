@@ -37,7 +37,7 @@ body.dark {
     --login-border: rgba(139, 92, 246, 0.2);
     --login-input-bg: rgba(255, 255, 255, 0.04);
     --login-input-border: rgba(139, 92, 246, 0.3);
-    --login-input-color: var(--bg-primary);
+    --login-input-color: var(--text-color);
     --login-label-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -112,7 +112,7 @@ footer {
 
 .darkmode {
     background-color: var(--bg-inverse);
-    color: var(--bg-primary);
+    color: var(--text-color);
 }
 
 
@@ -325,7 +325,7 @@ section .signin .content .form .inputBox input[type="text"] {
     outline: none;
     padding: 24px 14px 8px;
     border-radius: var(--brand-radius);
-    color: var(--bg-primary);
+    color: var(--text-color);
     font-weight: 500;
     font-size: 15px;
     transition: all 0.3s ease;
@@ -339,7 +339,7 @@ section .signin .content .form .inputBox input[type="password"] {
     outline: none;
     padding: 24px 40px 8px 14px;
     border-radius: var(--brand-radius);
-    color: var(--bg-primary);
+    color: var(--text-color);
     font-weight: 500;
     font-size: 15px;
     transition: all 0.3s ease;
@@ -387,7 +387,7 @@ section .signin .content .form .inputBox .toggle-password {
 }
 
 section .signin .content .form .inputBox .toggle-password:hover {
-    color: var(--bg-primary);
+    color: var(--text-color);
 }
 
 .signin .content .form .links {
@@ -398,7 +398,7 @@ section .signin .content .form .inputBox .toggle-password:hover {
 }
 
 .signin .content .form .links a {
-    color: var(--bg-primary);
+    color: var(--text-color);
     text-decoration: none;
 }
 
@@ -411,7 +411,7 @@ section .signin .content .form .inputBox .toggle-password:hover {
     width: 100%;
     padding: 12px;
     background: var(--brand-accent);
-    color: var(--bg-primary);
+    color: var(--text-color);
     font-weight: 600;
     font-size: 1.1em;
     letter-spacing: 0.05em;
@@ -460,7 +460,7 @@ input[type="submit"].enabled {
 }
 
 .blog-header-title {
-    color: var(--bg-primary);
+    color: var(--text-color);
     font-size: 24px;
     font-family: Arial, sans-serif;
     font-weight: 900;
@@ -472,14 +472,14 @@ input[type="submit"].enabled {
 
 .logo {
     opacity: 0;
-    color: var(--bg-primary);
+    color: var(--text-color);
     font-size: 24px;
     font-family: Arial, sans-serif;
     font-weight: 900;
 }
 
 .logo span {
-    color: var(--bg-primary);
+    color: var(--text-color);
 }
 
 @media (max-width: 500px) {
@@ -564,7 +564,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 .subscribe-btn {
     padding: 10px;
     background: var(--brand-accent);
-    color: var(--bg-primary);
+    color: var(--text-color);
     border: none;
     cursor: pointer;
     width: auto;
@@ -671,7 +671,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 
 /* ── Hover ──────────────────────────────────────────── */
 .blog-nav__link:hover {
-    color: var(--bg-primary);
+    color: var(--text-color);
     background: rgba(159, 120, 255, 0.16);
     transform: translateY(-1px);
     text-decoration: none;
@@ -685,7 +685,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 
 /* ── Active tab — glowing purple gradient ───────────── */
 .blog-nav__link--active {
-    color: var(--bg-primary);
+    color: var(--text-color);
     background: linear-gradient(135deg, var(--secondary-accent) 0%, #a48fff 100%);
     box-shadow:
         0 0 0 2px rgba(159, 120, 255, 0.35),
@@ -771,7 +771,7 @@ section .signin .content .form .inputBox .toggle-password:hover .toggle-password
 }
 
 body.light .darkmode {
-    background-color: var(--bg-primary);
+    background-color: var(--text-color);
     color: #1e293b;
 }
 
@@ -997,7 +997,7 @@ body.dark .custom-prompt-modal {
   color: #1e293b;
 }
 body.dark .custom-prompt-modal h3 {
-  color: var(--bg-primary);
+  color: var(--text-color);
 }
 .custom-prompt-modal input {
   width: 100%;
@@ -1013,7 +1013,7 @@ body.dark .custom-prompt-modal h3 {
   -webkit-user-select: auto !important;
 }
 body.dark .custom-prompt-modal input {
-  color: var(--bg-primary);
+  color: var(--text-color);
 }
 .custom-prompt-modal input::placeholder {
   color: rgba(15, 23, 42, 0.45);
@@ -1043,7 +1043,7 @@ body.dark .custom-prompt-modal input::placeholder {
 }
 body.dark .custom-prompt-btn-cancel {
   background: rgba(255,255,255,0.1);
-  color: var(--bg-primary);
+  color: var(--text-color);
 }
 .custom-prompt-btn-confirm {
   background: var(--secondary-accent);
@@ -1068,7 +1068,7 @@ body.dark .custom-prompt-btn-cancel {
   transition: all 0.2s ease;
 }
 body.dark .custom-prompt-tab {
-  color: var(--bg-primary);
+  color: var(--text-color);
 }
 .custom-prompt-tab.active {
   border-bottom-color: var(--secondary-accent);
