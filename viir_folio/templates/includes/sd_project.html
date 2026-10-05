@@ -19,7 +19,7 @@
   "applicationCategory": "{{ project.get_category_display }}",
   "keywords": "{% for t in project.tech_m2m.all %}{{ t.name|escapejs }}{% if not forloop.last %}, {% endif %}{% endfor %}",
   {% if project.url %}"url": "{{ project.url|escapejs }}",{% endif %}
-  "image": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{% if project.image %}{{ project.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}",
+  "image": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}{% if project.image %}{{ project.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Viir Phuria Portfolio",

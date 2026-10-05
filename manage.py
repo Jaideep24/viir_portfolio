@@ -14,6 +14,11 @@ class DummyCGI:
         return m.get_content_type(), m.get_params() or {}
     def parse_qsl(self, qs, keep_blank_values=0, strict_parsing=0):
         return urllib.parse.parse_qsl(qs, keep_blank_values, strict_parsing)
+    def valid_boundary(self, s):
+        import re
+        if isinstance(s, bytes):
+            s = s.decode('latin-1', errors='ignore')
+        return re.match(r"^[ -~]{1,200}[!-~]$", s) is not None
 
 sys.modules['cgi'] = DummyCGI()
 

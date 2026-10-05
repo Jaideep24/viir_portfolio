@@ -7,7 +7,7 @@ class StaticViewSitemap(Sitemap):
     changefreq = 'weekly'
 
     def items(self):
-        return ['index', 'blogspace', 'cv']
+        return ['index', 'blogspace', 'certificate']
 
     def location(self, item):
         return reverse(item)
@@ -17,7 +17,7 @@ class ArticleSitemap(Sitemap):
     changefreq = 'weekly'
 
     def items(self):
-        return Article.objects.filter(publish=True).order_by('-date')
+        return Article.objects.all().order_by('-date')
 
     def lastmod(self, obj):
         return obj.date

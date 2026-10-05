@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 msgDiv.className = 'alert alert-success';
-                msgDiv.innerHTML = '<b>Message sent successfully! I\'ll get back to you within 24 hours.</b>';
+                msgDiv.innerHTML = '<b>Message sent successfully! I\'ll get back to you soon.</b>';
                 msgDiv.style.display = 'block';
                 form.reset();
             } else {

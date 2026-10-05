@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}?v={% now 'U' %}">
   <link rel="stylesheet" href="{% static 'css/site-footer.css' %}?v={% now 'U' %}">
 
-  <script>
+  <script nonce="{{ csp_nonce }}">
     (function () {
       const isDarkMode = localStorage.getItem('darkMode') !== 'false';
       window.__theme = isDarkMode ? 'dark' : 'light';
@@ -43,7 +43,7 @@
 </head>
 
 <body class="preload {% if request.resolver_match.url_name == 'login' and not user.is_authenticated %}login-page{% endif %}">
-  <script>
+  <script nonce="{{ csp_nonce }}">
     document.body.classList.add(window.__theme || 'dark');
   </script>
 
@@ -70,7 +70,7 @@
   <script src="{% static 'js/scroll-anim.js' %}?v={% now 'U' %}"></script>
   
   {% block extra_scripts %}{% endblock %}
-  <script>
+  <script nonce="{{ csp_nonce }}">
     setTimeout(function() { document.body.classList.remove('preload'); }, 50);
   </script>
 </body>

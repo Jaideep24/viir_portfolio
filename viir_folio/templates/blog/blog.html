@@ -33,7 +33,7 @@
         "@id": "{{ site_url }}/#person",
         "name": "Viir Phuria"
       }{% if article.image %},
-      "image": "{{ site_url }}{% if article.image %}{{ article.image.url }}{% else %}{% static 'img/default-blog-image.png' %}{% endif %}"
+      "image": "{{ site_url }}{% if article.image %}{{ article.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}"
       {% endif %}
     }
     </script>
@@ -47,7 +47,7 @@
                 <h1 class="blog-title" id="blogTitle">{{ article.title }}</h1>
             </div>
             <div class="blog-image">
-                <img loading="lazy" decoding="async" id="blogImage" src="{% if article.image %}{{ article.image.url }}{% else %}{% static 'img/default-blog-image.png' %}{% endif %}" alt="{{ article.title }} &mdash; cover image" fetchpriority="high" decoding="async" width="1200" height="630" style="object-fit: cover;">
+                <img loading="lazy" decoding="async" id="blogImage" src="{% if article.image %}{{ article.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}" alt="{{ article.title }} &mdash; cover image" fetchpriority="high" decoding="async" width="1200" height="630" style="object-fit: cover;">
             </div>
             <div class="blog-content" id="blogContent">
                 {{ article.content|safe }}
@@ -165,7 +165,7 @@
         </div>
     </article>
     {# Using native fetch since jQuery is not loaded in blog-base.html #}
-    <script>
+    <script nonce="{{ csp_nonce }}">
         var blogPostAjaxUrl = "{% url 'detail_blog' article.slug %}";
     </script>
     <script src="{% static 'js/blog-post.js' %}"></script>

@@ -4,7 +4,10 @@
 
         const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
         const smallScreen = window.innerWidth <= 768;
-        if (isTouch || smallScreen) return;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        // Disable custom cursor if on touch devices, small screens, or user requires reduced motion
+        if (isTouch || smallScreen || prefersReducedMotion) return;
 
         document.body.classList.add('custom-cursor-enabled');
 

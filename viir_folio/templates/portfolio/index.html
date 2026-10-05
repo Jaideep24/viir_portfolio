@@ -53,12 +53,12 @@
     <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}">
     {% endcompress %}
 
-    <script>
+    <script nonce="{{ csp_nonce }}">
         window.__indexSidebar = true;
     </script>
 
     <!-- Theme Initialization -->
-    <script>
+    <script nonce="{{ csp_nonce }}">
         (function () {
             const isDarkMode = localStorage.getItem('darkMode') !== 'false';
             window.__theme = isDarkMode ? 'dark' : 'light';
@@ -76,7 +76,7 @@
 
 <body class="preload {% if request.resolver_match.url_name == 'login' or 'login' in request.path %}login-page{% endif %}">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <script>
+  <script nonce="{{ csp_nonce }}">
     document.body.classList.add(window.__theme || 'dark');
     setTimeout(function() { document.body.classList.remove('preload'); }, 50);
   </script>

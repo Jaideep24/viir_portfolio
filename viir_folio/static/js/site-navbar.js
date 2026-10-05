@@ -147,6 +147,8 @@
         const toggleCheckbox = document.getElementById('toggle');
         if (toggleCheckbox) {
             toggleCheckbox.checked = isDarkMode;
+            // Attach listener for all pages using the navbar
+            toggleCheckbox.addEventListener('change', window.toggleStyles);
         }
     }
 

@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{% static 'css/custom-scrollbar.css' %}">
 
     <!-- Theme Initialization -->
-    <script>
+    <script nonce="{{ csp_nonce }}">
         (function () {
             const isDarkMode = localStorage.getItem('darkMode') !== 'false';
             window.__theme = isDarkMode ? 'dark' : 'light';
@@ -190,7 +190,7 @@
 </head>
 
 <body class="preload">
-    <script>
+    <script nonce="{{ csp_nonce }}">
         document.body.classList.add(window.__theme || 'dark');
         setTimeout(function() { document.body.classList.remove('preload'); }, 50);
     </script>
@@ -214,7 +214,7 @@
         </div>
     </div>
 
-    <script>
+    <script nonce="{{ csp_nonce }}">
         // Generate floating particles
         const container = document.getElementById('particles');
         for (let i = 0; i < 20; i++) {

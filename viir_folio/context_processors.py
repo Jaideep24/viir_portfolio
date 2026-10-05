@@ -43,3 +43,10 @@ def site_meta(request):
         context["about_global"] = None
 
     return context
+
+
+def csp_nonce(request):
+    """
+    Makes the CSP nonce available in all templates context.
+    """
+    return {'csp_nonce': getattr(request, 'csp_nonce', '')}

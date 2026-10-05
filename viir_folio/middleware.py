@@ -1,18 +1,25 @@
+import secrets
+
 class ContentSecurityPolicyMiddleware:
-    """Middleware to inject standard Content-Security-Policy HTTP headers."""
+    """Middleware to inject standard Content-Security-Policy HTTP headers with nonce support."""
 
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
+        # Generate a cryptographically secure random nonce for this request
+        nonce = secrets.token_urlsafe(16)
+        request.csp_nonce = nonce
+
         response = self.get_response(request)
-        # Define strict CSP matching the needs of the portfolio (Bootstrap, FontAwesome, Google Fonts, Ajax, local media/static)
+        # Define strict CSP matching the needs of the portfolio. 
+        # Removed 'unsafe-inline' from script-src in favor of the nonce!
         csp_policy = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' https://ajax.googleapis.com https://cdnjs.cloudflare.com; "
+            f"script-src 'self' 'nonce-{nonce}' https://ajax.googleapis.com https://cdnjs.cloudflare.com; "
             "style-src 'self' 'unsafe-inline' https://bootswatch.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; "
             "font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; "
-            "img-src 'self' data: /media/ /static/; "
+            "img-src 'self' data: https:; "
             "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; "
             "connect-src 'self'; "
             "object-src 'none'; "
@@ -22,7 +29,7 @@ class ContentSecurityPolicyMiddleware:
         )
         response["Content-Security-Policy"] = csp_policy
         response["Permissions-Policy"] = (
-            "accelerometer=(), camera=(), geolocation=(), gyroscope=(), "
+            "accelerometer=(self), camera=(), geolocation=(), gyroscope=(self), "
             "magnetometer=(), microphone=(), payment=(), usb=(), "
             "interest-cohort=()"
         )
@@ -62,11 +69,12 @@ class AnalyticsMiddleware:
                 if getattr(settings, "TESTING", False):
                     return response
 
-                # Execute synchronously. DB insert takes ~2ms. 
-                # Spawning daemon threads in WSGI leads to zombie threads and dropped analytics.
+                # Offloaded to a background thread to prevent synchronous DB locking (Resolves PERF-001)
+                import threading
+                from django.db import connection
+
                 def track_visit(session_key, user_agent, path):
                     from .models import Visitor, PageVisit
-
                     try:
                         visitor, _ = Visitor.objects.get_or_create(
                             session_key=session_key,
@@ -75,8 +83,11 @@ class AnalyticsMiddleware:
                         PageVisit.objects.create(visitor=visitor, path=path)
                     except Exception:
                         pass
-                    # No need to manually close connection in synchronous cycle, Django handles it
+                    finally:
+                        # Essential when spawning threads in Django to prevent connection leaks
+                        connection.close()
 
-                track_visit(session_key, user_agent, path)
+                thread = threading.Thread(target=track_visit, args=(session_key, user_agent, path), daemon=True)
+                thread.start()
 
         return response

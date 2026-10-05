@@ -25,12 +25,12 @@
 
 body.dark #contentEditor,
 body.dark .content-editor {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 body.dark #contentEditor *,
 body.dark .content-editor * {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 
@@ -62,7 +62,7 @@ body.dark .content-editor * {
 
 body.dark #contentEditor ul li,
 body.dark #contentEditor ol li {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 #contentEditor p {
@@ -71,7 +71,7 @@ body.dark #contentEditor ol li {
 }
 
 body.dark #contentEditor p {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 #contentEditor strong {
@@ -80,16 +80,17 @@ body.dark #contentEditor p {
 }
 
 body.dark #contentEditor strong {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 #contentEditor em {
+    font-weight: 400;
     font-style: italic;
     color: inherit !important;
 }
 
 body.dark #contentEditor em {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 #contentEditor u {
@@ -98,7 +99,7 @@ body.dark #contentEditor em {
 }
 
 body.dark #contentEditor u {
-    color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 
@@ -513,14 +514,19 @@ body.light .toolbar-btn:hover i {
     border-color: transparent !important;
 }
 
-/* Active state: Solid purple with var(--bg-primary) icon/text in both themes */
+/* Active state */
 .toolbar-btn.active,
 .toolbar-btn.active i,
 body.light .toolbar-btn.active,
 body.light .toolbar-btn.active i {
     background: var(--secondary-accent) !important;
-    color: var(--bg-primary) !important;
+    color: #ffffff !important;
     border-color: var(--secondary-accent) !important;
+}
+
+body.dark .toolbar-btn,
+body.dark .toolbar-btn i {
+    color: var(--text-primary) !important;
 }
 
 body.light .content-editor:empty:before {

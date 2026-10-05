@@ -10,7 +10,7 @@
                 {% for blog in article|slice:":3" %}
                 <a href="{% url 'detail_blog' blog.slug %}" class="blog-card-link">
                     <div class="blog-card reveal-stagger-child blog-card-visible">
-                        <div class="blog-card-image" data-bg="{% if blog.image %}{{ blog.image.url }}{% else %}{% static 'img/default-blog-image.png' %}{% endif %}"></div>
+                        <div class="blog-card-image" data-bg="{% if blog.image %}{{ blog.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}"></div>
                         <div class="blog-card-content">
                             <h3>{{ blog.title }}</h3>
                             <p class="blog-excerpt">{{ blog.content|striptags|truncatechars:120 }}</p>

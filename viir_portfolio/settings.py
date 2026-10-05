@@ -39,6 +39,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable must be set in production")
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
@@ -52,7 +53,7 @@ TESTING = (
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,viir.tech").split(",")
+    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,viir.tech,viirportfolio.pythonanywhere.com").split(",")
     if host.strip()
 ]
 
@@ -104,12 +105,30 @@ MIDDLEWARE = [
     "viir_folio.middleware.AnalyticsMiddleware",
 ]
 
+# Deployment & SSL Security Settings
+# Disable SSL redirect ONLY when running the local dev server (not for check --deploy).
+# This prevents redirect loops in local dev while keeping security settings enforced elsewhere.
+_is_runserver = "runserver" in sys.argv
+_is_check_deploy = "check" in sys.argv and "--deploy" in sys.argv
+IS_LOCAL_DEV = (_is_runserver and not _is_check_deploy) or TESTING
+
+if IS_LOCAL_DEV:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_HSTS_SECONDS = 0
+else:
+    SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "True"
+    SESSION_COOKIE_SECURE = os.getenv("SESSION_COOKIE_SECURE", "True") == "True"
+    CSRF_COOKIE_SECURE = os.getenv("CSRF_COOKIE_SECURE", "True") == "True"
+    SECURE_HSTS_SECONDS = int(os.getenv("SECURE_HSTS_SECONDS", "31536000"))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv("SECURE_HSTS_INCLUDE_SUBDOMAINS", "True") == "True"
+    SECURE_HSTS_PRELOAD = os.getenv("SECURE_HSTS_PRELOAD", "True") == "True"
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "Strict"
-# SESSION_COOKIE_SECURE and CSRF_COOKIE_SECURE are explicitly controlled via .env
-SESSION_COOKIE_SECURE = os.getenv("SESSION_COOKIE_SECURE", "False") == "True"
 CSRF_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_SECURE = os.getenv("CSRF_COOKIE_SECURE", "False") == "True"
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 # Always-on security headers (do not require HTTPS)
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -160,14 +179,6 @@ JAZZMIN_UI_TWEAKS = {
     "dark_mode_theme": "cyborg",
 }
 
-# Production-only HTTPS/HSTS settings
-# NOTE: On PythonAnywhere, SSL is handled by their proxy.
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "False") == "True"
-if SECURE_SSL_REDIRECT:
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
 
 # Trusted origins for CSRF (required for Django 4+ and good practice in 3.2)
 CSRF_TRUSTED_ORIGINS = [
@@ -193,6 +204,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "viir_folio.context_processors.site_meta",
+                "viir_folio.context_processors.csp_nonce",
             ],
         },
     },

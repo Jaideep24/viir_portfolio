@@ -22,6 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".progress-bar-skill[data-width]").forEach(function (el) {
         el.style.width = el.getAttribute("data-width") + "%";
     });
+
+    // CSP-compliant event listeners for Theme Toggle
+    // (Listener is now universally handled by site-navbar.js to prevent double-firing)
+
+    // CSP-compliant event listeners for Project Filter (MixItUp / Marquee)
+    document.querySelectorAll(".filter").forEach(function(btn) {
+        btn.addEventListener("click", function(event) {
+            if (typeof design === "function") design(event);
+        });
+        btn.addEventListener("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                if (typeof design === "function") design(event);
+            }
+        });
+    });
 });
 
 
@@ -159,22 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyDarkModeStyles(isDarkMode);
 });
 
-function toggleStyles(event) {
-    // Prevent the parent <label> from auto-toggling the checkbox a second time
-    if (event) event.preventDefault();
-
-    const isDark = document.body.classList.contains("dark");
-    const newMode = !isDark;
-
-    document.body.classList.toggle("dark", newMode);
-    document.body.classList.toggle("light", !newMode);
-    localStorage.setItem("darkMode", newMode);
-
-    const toggleCheckbox = document.getElementById("toggle");
-    if (toggleCheckbox) toggleCheckbox.checked = newMode;
-
-    applyDarkModeStyles(newMode);
-}
+    // toggleStyles logic is now universally maintained in site-navbar.js
 
 function applyDarkModeStyles(isDarkMode) {
     const body = document.body;
@@ -286,9 +287,5 @@ document.addEventListener('scroll', function () {
         }
     });
 });
-
-/* --------------------------------------------------------------------------
-    10. LEGACY CUSTOM CURSOR REMOVED
-    -------------------------------------------------------------------------- */
 
 

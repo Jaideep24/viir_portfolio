@@ -1258,7 +1258,8 @@ body.light .comment {
 
 .form-group input,
 .form-group select,
-.form-group textarea {
+.form-group textarea,
+.content-editor {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid rgba(159, 120, 255, 0.24);
@@ -1277,7 +1278,8 @@ body.light .comment {
 
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.content-editor:focus {
     border-color: var(--brand-accent);
     background: rgba(255, 255, 255, 0.08); /* slightly lighter dark background on focus */
     color: #f4f1ff;
@@ -1394,17 +1396,17 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .toolbar-btn:hover {
     background: var(--brand-accent);
-    color: var(--bg-primary);
+    color: #ffffff;
 }
 
 .toolbar-btn.active {
     background: var(--brand-accent);
-    color: var(--bg-primary);
+    color: #ffffff;
 }
 
 .toolbar-separator {
@@ -1424,6 +1426,14 @@ body.light input[type="file"]::-webkit-file-upload-button:hover {
     background: rgba(255, 255, 255, 0.04);
     line-height: 1.6;
     font-size: 1rem;
+}
+
+.content-editor img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--brand-radius);
+    margin: 1rem 0;
 }
 
 .content-editor:focus {

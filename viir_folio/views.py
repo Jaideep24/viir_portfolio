@@ -186,37 +186,38 @@ class IndexView(TemplateView):
 
         if form.is_valid():
             form.save()
-            recipient_email = os.getenv("EMAIL_RECIPIENT_EMAIL")
-            if not recipient_email:
-                raise ImproperlyConfigured(
-                    "EMAIL_RECIPIENT_EMAIL must be set in .env — contact form submissions will not be emailed without it."
+            recipient_email = os.getenv("EMAIL_RECIPIENT_EMAIL") or getattr(settings, "EMAIL_HOST_USER", None)
+            if recipient_email:
+                subject = "Portfolio contact"
+                submission_date = (
+                    localtime(form.instance.submitted_date).strftime(
+                        "%d/%m/%Y %I:%M %p IST"
+                    )
+                    if form.instance.submitted_date
+                    else localtime(timezone.now()).strftime("%d/%m/%Y %I:%M %p IST")
                 )
-            subject = "Portfolio contact"
-            submission_date = (
-                localtime(form.instance.submitted_date).strftime(
-                    "%d/%m/%Y %I:%M %p IST"
+                message = (
+                    f"Name: {form.cleaned_data['name']}\n"
+                    f"Email: {form.cleaned_data['email']}\n"
+                    f"Message: {form.cleaned_data['message']}\n"
+                    f"Number: {form.cleaned_data['number']}\n"
+                    f"Date: {submission_date}"
                 )
-                if form.instance.submitted_date
-                else localtime(timezone.now()).strftime("%d/%m/%Y %I:%M %p IST")
-            )
-            message = (
-                f"Name: {form.cleaned_data['name']}\n"
-                f"Email: {form.cleaned_data['email']}\n"
-                f"Message: {form.cleaned_data['message']}\n"
-                f"Number: {form.cleaned_data['number']}\n"
-                f"Date: {submission_date}"
-            )
-            from_email = settings.EMAIL_HOST_USER
-            reply_to_email = form.cleaned_data["email"]
+                from_email = settings.EMAIL_HOST_USER
+                reply_to_email = form.cleaned_data["email"]
 
-            email_msg = EmailMessage(
-                subject,
-                message,
-                from_email,
-                to=[recipient_email],
-                reply_to=[reply_to_email],
-            )
-            send_email_async(email_msg)
+                email_msg = EmailMessage(
+                    subject,
+                    message,
+                    from_email,
+                    to=[recipient_email],
+                    reply_to=[reply_to_email],
+                )
+                send_email_async(email_msg)
+            else:
+                logger.warning(
+                    "EMAIL_RECIPIENT_EMAIL not configured; contact submission saved to DB only."
+                )
 
             if is_ajax:
                 return JsonResponse({"success": True})

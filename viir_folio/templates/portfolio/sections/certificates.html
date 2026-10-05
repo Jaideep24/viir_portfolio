@@ -13,7 +13,7 @@
                             <div class="text-center">
                                 <h3>{{ object.title }}</h3>
                             </div>
-                            <div class="text-center"><img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/image.png' %}{% endif %}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate" loading="lazy"></div>
+                            <div class="text-center"><img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}" class="d-block mx-auto carousel-img" alt="{{ object.title }} certificate" loading="lazy"></div>
                         </div>
                         {% endfor %}
                     </div>

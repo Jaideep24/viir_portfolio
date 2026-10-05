@@ -65,7 +65,7 @@
 <link rel="alternate" hreflang="en-IN" href="{% if site_url %}{{ site_url }}{{ request.path }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endif %}">
 <link rel="alternate" hreflang="en" href="{% if site_url %}{{ site_url }}{{ request.path }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endif %}">
 
-<script type="application/ld+json">
+<script type="application/ld+json" nonce="{{ csp_nonce }}">
 {
   "@context": "https://schema.org",
   "@graph": [
