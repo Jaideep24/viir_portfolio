@@ -4,6 +4,7 @@ from .models import (
     Education,
     Experience,
     Skill,
+    SkillCategory,
     Project,
     Contact,
     Article,
@@ -109,8 +110,13 @@ class ContactAdmin(admin.ModelAdmin):
     readonly_fields = ("submitted_date",)
 
 
+class SkillCategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "order")
+    ordering = ("order",)
+
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ("language", "percentage")
+    list_display = ("language", "category", "icon_url")
+    list_filter = ("category",)
     search_fields = ("language",)
 
 
@@ -137,6 +143,7 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Education, EducationAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Skill, SkillAdmin)
+admin.site.register(SkillCategory, SkillCategoryAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Contact, ContactAdmin)

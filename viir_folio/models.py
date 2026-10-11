@@ -269,9 +269,22 @@ class Contact(models.Model):
         ordering = ["-submitted_date"]
 
 
+class SkillCategory(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True, help_text="e.g. Core programming languages used for robust backend services.")
+    icon_class = models.CharField(max_length=100, blank=True, null=True, help_text="FontAwesome icon class for the front card (e.g. 'fa-solid fa-code')")
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.name
+
 class Skill(models.Model):
+    category = models.ForeignKey(SkillCategory, on_delete=models.SET_NULL, related_name="skills", null=True, blank=True)
     language = models.CharField(max_length=100)
-    percentage = models.PositiveIntegerField()
+    icon_url = models.CharField(max_length=500, blank=True, null=True, help_text="Paste an image URL here (e.g. https://img.icons8.com/.../nmap.png)")
 
     def __str__(self):
         return self.language

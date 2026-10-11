@@ -1949,23 +1949,157 @@ body.light .timeline-content {
 }
 
 /* --------------------------------------------------------------------------
-   Categorized Skills Grid (Glassmorphism Chips)
+   Categorized Skills Grid (3D Flip Cards)
    -------------------------------------------------------------------------- */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 400px; /* Fixed height guarantees all cards are exactly the same size */
+    perspective: 1500px; /* Stronger 3D perspective */
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 1.0s cubic-bezier(0.4, 0, 0.2, 1); /* Slower, smoother flip */
+    transform-style: preserve-3d;
+}
+
+/* Flip on hover or when 'hover' class is toggled (mobile) */
+.flip-card:hover .flip-card-inner,
+.flip-card.hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.flip-card-front {
+    z-index: 2;
+    transform: rotateY(0deg) !important; /* Essential for preventing Safari flicker */
+}
+
+.flip-card-back {
+    transform: rotateY(180deg) !important;
+    /* No z-index here, let transform handle visibility */
+}
+
+/* Prevent the standard card hover scale from breaking the 3D flip */
+.flip-card-front.skill-category-card:hover,
+.flip-card-back.skill-category-card:hover {
+    transform: rotateY(0deg) !important;
+}
+.flip-card-back.skill-category-card:hover {
+    transform: rotateY(180deg) !important;
+}
+
+/* Front Styling */
+.flip-card-front {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.front-icon {
+    font-size: 3rem;
+    color: rgba(140, 111, 255, 0.9);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(140, 111, 255, 0.4));
+}
+
+.skill-desc {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.flip-indicator {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+}
+
+/* Back Styling */
+.flip-card-back {
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+/* Hide scrollbar for clean look */
+.flip-card-back::-webkit-scrollbar {
+    width: 4px;
+}
+.flip-card-back::-webkit-scrollbar-thumb {
+    background-color: rgba(140, 111, 255, 0.3);
+    border-radius: 10px;
+}
+
+.skill-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+}
+
 .skill-category-card {
     background: rgba(16, 18, 35, 0.45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(140, 111, 255, 0.15);
     border-radius: 16px;
-    padding: 25px;
+    padding: 30px 25px;
     height: 100%;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Premium gradient overlay for cards */
+.skill-category-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(140, 111, 255, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.skill-category-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .skill-category-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(140, 111, 255, 0.4);
+    transform: translateY(-8px);
+    border-color: rgba(140, 111, 255, 0.6);
+    box-shadow: 0 15px 40px rgba(140, 111, 255, 0.15), 0 0 20px rgba(140, 111, 255, 0.1);
+}
+
+.skill-category-card:hover::before {
+    opacity: 1;
 }
 
 .skill-category-title {
@@ -1986,26 +2120,40 @@ body.light .timeline-content {
 .skill-chips-wrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
 }
 
 .skill-chip {
-    display: inline-block;
-    padding: 8px 16px;
-    background: rgba(140, 111, 255, 0.08);
-    border: 1px solid rgba(140, 111, 255, 0.18);
-    border-radius: 50px;
-    color: #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    background: rgba(140, 111, 255, 0.05);
+    border: 1px solid rgba(140, 111, 255, 0.2);
+    border-radius: 8px; /* Slightly squared off looks more modern than pills */
+    color: #e2e8f0;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skill-chip i {
+    margin-right: 8px;
+    font-size: 1.1em;
+    color: #a48fff;
 }
 
 .skill-chip:hover {
-    background: rgba(140, 111, 255, 0.22);
-    border-color: var(--brand-primary);
-    color: var(--text-light);
-    transform: scale(1.03);
+    background: rgba(140, 111, 255, 0.25);
+    border-color: rgba(140, 111, 255, 0.8);
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(140, 111, 255, 0.2), 0 0 10px rgba(140, 111, 255, 0.1);
+}
+
+.skill-chip:hover i {
+    color: #ffffff;
 }
 
 /* Light Mode support */
@@ -2284,3 +2432,4 @@ body.dark .horizontal-marquee::-webkit-scrollbar-track {
         max-width: 90% !important;
     }
 }
+

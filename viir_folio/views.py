@@ -41,6 +41,7 @@ from .models import (
     Project,
     Publication,
     Skill,
+    SkillCategory,
     Subscriber,
 )
 from .utils import send_email_async
@@ -62,72 +63,7 @@ class IndexView(TemplateView):
             "bullets", "tech_stack_m2m"
         ).order_by("-start_date")
         education = Education.objects.all().order_by("-start_date")
-        skills = Skill.objects.all()
-
-        languages = []
-        frameworks = []
-        tools_dbs = []
-        security_tools = []
-
-        SECURITY_TOOL_NAMES = [
-            "burp suite",
-            "burpsuite",
-            "wireshark",
-            "nmap",
-            "kali",
-            "kali linux",
-            "metasploit",
-            "owasp",
-            "owasp zap",
-            "nessus",
-            "sqlmap",
-            "aircrack",
-            "hashcat",
-            "john the ripper",
-            "hydra",
-            "nikto",
-            "maltego",
-            "shodan",
-        ]
-
-        for s in skills:
-            lang_lower = s.language.lower()
-            if any(sec in lang_lower for sec in SECURITY_TOOL_NAMES):
-                security_tools.append(s)
-            elif lang_lower in [
-                "python",
-                "javascript",
-                "js",
-                "dart",
-                "html",
-                "html5",
-                "css",
-                "css3",
-                "c++",
-                "c",
-                "java",
-                "sql",
-                "typescript",
-                "go",
-                "golang",
-            ]:
-                languages.append(s)
-            elif lang_lower in [
-                "django",
-                "flutter",
-                "react",
-                "bootstrap",
-                "tailwind",
-                "express",
-                "node",
-                "nodejs",
-                "nextjs",
-                "vue",
-                "fastapi",
-            ]:
-                frameworks.append(s)
-            else:
-                tools_dbs.append(s)
+        categories = SkillCategory.objects.prefetch_related('skills').all().order_by('order')
 
         context.update(
             {
@@ -136,11 +72,7 @@ class IndexView(TemplateView):
                 "projects": Project.objects.prefetch_related("tech_m2m").all(),
                 "about": About.objects.all(),
                 "about_global": About.objects.first(),
-                "skill": skills,
-                "languages": languages,
-                "frameworks": frameworks,
-                "tools_dbs": tools_dbs,
-                "security_tools": security_tools,
+                "skill_categories": categories,
                 "article": Article.objects.defer("content").order_by("-date")[:3],
                 "cv": CV.objects.all(),
                 "certificate": Certificate.objects.all(),
