@@ -1,118 +1,130 @@
 {% load static %}
 {% load custom_filters %}
 
-    <section id="projects" class="br-portfolio padding-tb-80 ">
-        <div class="container reveal-up">
-            <div class="section-title ">
-                <h2>Featured <span>Projects</span></h2>
-                <span class="ligh-title">Projects</span>
-            </div>
-            <div class="row m-b-minus-24px">
-                <div class="portfolio-content" id="MixItUp11665E">
-                    <div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="portfolio-tabs">
-                                    <ul>
-                                        <li class="filter mixitup-control-active" data-filter="all"
-                                            role="button" tabindex="0"
-                                            
-                                            >ALL</li>
-                                        <li class="filter" data-filter=".webdev"
-                                            role="button" tabindex="0"
-                                            
-                                            >WEB DEV</li>
-                                        <li class="filter" data-filter=".appdev"
-                                            role="button" tabindex="0"
-                                            
-                                            >APP DEV</li>
+    <section id="projects" class="sticky-projects-section">
+        <div class="sticky-projects-container" id="sticky-projects-container">
+            <div class="sticky-projects-viewport" id="sticky-projects-viewport">
+                <!-- Section Header (Sticky inside viewport) -->
+                <div class="container sticky-projects-header">
+                    <div class="section-title">
+                        <h2>Featured <span>Projects</span></h2>
+                        <span class="ligh-title">Projects</span>
+                    </div>
 
-                                        <li class="filter" data-filter=".mlai"
-                                            role="button" tabindex="0"
-                                            
-                                            >ML/AI</li>
-                                        <li class="filter" data-filter=".iot"
-                                            role="button" tabindex="0"
-                                            
-                                            >IoT</li>
-                                        <li class="filter" data-filter=".cybersec"
-                                            role="button" tabindex="0"
-                                            
-                                            >CYBER SECURITY</li>
-                                    </ul>
+                    <!-- Category Filter Tabs -->
+                    <div class="portfolio-tabs-wrapper">
+                        <div class="portfolio-tabs">
+                            <ul role="tablist" aria-label="Project Categories">
+                                <li class="filter mixitup-control-active" data-filter="all" role="button" tabindex="0">ALL</li>
+                                <li class="filter" data-filter=".webdev" role="button" tabindex="0">WEB DEV</li>
+                                <li class="filter" data-filter=".appdev" role="button" tabindex="0">APP DEV</li>
+                                <li class="filter" data-filter=".mlai" role="button" tabindex="0">ML/AI</li>
+                                <li class="filter" data-filter=".iot" role="button" tabindex="0">IoT</li>
+                                <li class="filter" data-filter=".cybersec" role="button" tabindex="0">CYBER SECURITY</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Horizontal Sliding Track Window -->
+                <div class="sticky-track-wrapper" id="sticky-track-wrapper">
+                    <div class="sticky-track" id="sticky-projects-track">
+                        {% for object in projects %}
+                        <script type="application/ld+json" nonce="{{ csp_nonce }}">
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "CreativeWork",
+                          "name": "{{ object.title|escapejs }}",
+                          "description": "{{ object.description|striptags|escapejs|default:object.title }}",
+                          "genre": "{{ object.get_category_display|escapejs }}",
+                          {% if object.client %}"sourceOrganization": "{{ object.client|escapejs }}",{% endif %}
+                          {% if object.date %}"datePublished": "{{ object.date|date:'Y-m-d' }}",{% endif %}
+                          "author": {
+                            "@type": "Person",
+                            "name": "Viir Phuria"
+                          }
+                        }
+                        </script>
+                        <article class="sticky-project-card project-item mix {{ object.category|join:' ' }}" data-category="{{ object.category|join:' ' }}">
+                            <div class="project-card-inner">
+                                <!-- Card Header: Badges, Title, Description -->
+                                <div class="project-card-top">
+                                    <div class="project-card-meta-bar">
+                                        <span class="project-category-badge">{{ object.get_category_display|replace_commas:" • " }}</span>
+                                        {% if object.date %}
+                                        <span class="project-date-badge">{{ object.date|date:"M Y" }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <h3 class="project-card-title">{{ object.title }}</h3>
+                                    {% if object.description %}
+                                    <div class="project-card-desc">
+                                        <p>{{ object.description|striptags }}</p>
+                                    </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                                <div class="portfolio-content-items">
-                                    <div class="horizontal-marquee reveal-stagger" id="project-items-container">
-                                        {% for object in projects %}
-                                        <script type="application/ld+json" nonce="{{ csp_nonce }}">
-                                        {
-                                          "@context": "https://schema.org",
-                                          "@type": "CreativeWork",
-                                          "name": "{{ object.title|escapejs }}",
-                                          "description": "{{ object.description|striptags|escapejs|default:object.title }}",
-                                          "genre": "{{ object.get_category_display|escapejs }}",
-                                          {% if object.client %}"sourceOrganization": "{{ object.client|escapejs }}",{% endif %}
-                                          {% if object.date %}"datePublished": "{{ object.date|date:'Y-m-d' }}",{% endif %}
-                                          "author": {
-                                            "@type": "Person",
-                                            "name": "Viir Phuria"
-                                          }
-                                        }
-                                        </script>
-                                        <div class="col-lg-6 col-md-6 col-12 mix project-item {{ object.category|join:' ' }} reveal-stagger-child">
-                                            <div class="br-project-box">
-                                                <h3>{{ object.title }}</h3>
-                                                <div class="links">
-                                                    {{ object.get_category_display|replace_commas:" | " }}
-                                                </div>
 
-                                                {% if object.description %}
-                                                <p class="project-desc-p">{{ object.description|safe }}</p>
-                                                {% endif %}
-                                                <div class="br-info">
-                                                     <div class="portfolio-img">
-                                                         <img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}" alt="{{ object.title }} — project by Viir Phuria">
-                                                     </div>
-                                                     <div class="br-detail">
-                                                         <ul>
-                                                             <li>Date : {{ object.date }}</li>
-                                                             {% if object.client %}
-                                                             <li>Client : {{ object.client }}</li>
-                                                             {% endif %}
-                                                             <li>Tech : {% for t in object.tech_m2m.all %}{{ t.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
-                                                         </ul>
-                                                         <div class="project-actions project-actions-flex">
-                                                             {% if object.github_url %}
-                                                             <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style"><span
-                                                                         class="text margin-auto">GitHub</span></a>
-                                                             {% endif %}
-                                                             {% if object.url %}
-                                                             <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style"><span
-                                                                         class="text margin-auto">Visit Project</span></a>
-                                                             {% endif %}
-                                                             {% if object.demo_video %}
-                                                             <a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer"
-                                                                     class="capsule-btn view-project-btn project-btn-style"><span
-                                                                         class="text margin-auto">Demo Video</span></a>
-                                                             {% endif %}
-                                                         </div>
-                                                    </div>
+                                <!-- Card Bottom: 1:1 Square Image + Details & Capsule Actions -->
+                                <div class="project-card-split">
+                                    <div class="project-sq-img-wrap">
+                                        <img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}" alt="{{ object.title }} — project by Viir Phuria" class="project-sq-img">
+                                    </div>
+                                    <div class="project-card-details">
+                                        <div class="project-meta-list">
+                                            {% if object.client %}
+                                            <div class="project-meta-row">
+                                                <span class="meta-label">Client :</span>
+                                                <span class="meta-val">{{ object.client }}</span>
+                                            </div>
+                                            {% endif %}
+                                            <div class="project-meta-row tech-row">
+                                                <span class="meta-label">Tech :</span>
+                                                <div class="project-tech-chips">
+                                                    {% for t in object.tech_m2m.all %}
+                                                    <span class="tech-chip">{{ t.name }}</span>
+                                                    {% empty %}
+                                                    {% if 'cybersec' in object.category %}
+                                                    <span class="tech-chip">Security</span>
+                                                    <span class="tech-chip">CLI</span>
+                                                    {% elif 'mlai' in object.category %}
+                                                    <span class="tech-chip">Python</span>
+                                                    <span class="tech-chip">ML</span>
+                                                    {% elif 'webdev' in object.category %}
+                                                    <span class="tech-chip">Django</span>
+                                                    <span class="tech-chip">Full Stack</span>
+                                                    {% endif %}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endfor %}
+
+                                        <div class="project-card-actions project-actions-flex">
+                                            {% if object.github_url %}
+                                            <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn project-btn-style" aria-label="GitHub Repository for {{ object.title }}">
+                                                <span class="text margin-auto">GitHub</span>
+                                            </a>
+                                            {% endif %}
+                                            {% if object.url %}
+                                            <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn project-btn-style" aria-label="Visit Live Project: {{ object.title }}">
+                                                <span class="text margin-auto">Visit Project</span>
+                                            </a>
+                                            {% endif %}
+                                            {% if object.demo_video %}
+                                            <a href="{{ object.demo_video }}" target="_blank" rel="noopener noreferrer" class="capsule-btn view-project-btn project-btn-style" aria-label="Watch Demo Video for {{ object.title }}">
+                                                <span class="text margin-auto">Demo Video</span>
+                                            </a>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </article>
+                        {% endfor %}
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
-    <script src="{% static 'js/marquee.js' %}"></script>
+    <script src="{% static 'js/sticky-projects.js' %}"></script>
     <!-- Projects Section End -->

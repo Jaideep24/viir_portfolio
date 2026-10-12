@@ -202,53 +202,7 @@ function applyDarkModeStyles(isDarkMode) {
 function design(event) {
     const clickedItem = event.target;
 
-    if (clickedItem.classList.contains('filter')) {
-        // Update active state on filter buttons
-        document.querySelectorAll(".filter").forEach(item => {
-            item.classList.remove("mixitup-control-active");
-        });
-        clickedItem.classList.add("mixitup-control-active");
-
-        const filterValue = clickedItem.getAttribute("data-filter");
-        const container = document.getElementById("project-items-container");
-        
-        if (container) {
-            const originals = container.querySelectorAll(".project-item:not(.marquee-clone)");
-            const clones = container.querySelectorAll(".marquee-clone");
-            
-            let visibleOriginals = 0;
-            const filterClass = filterValue === "all" ? "" : filterValue.substring(1);
-            
-            // 1. Filter original items and count how many match the category
-            originals.forEach(item => {
-                if (filterValue === "all" || item.classList.contains(filterClass)) {
-                    item.style.display = "";
-                    visibleOriginals++;
-                } else {
-                    item.style.display = "none";
-                }
-            });
-            
-            // 2. Hide or filter clones based on visible count (rule: loop only if > 2)
-            clones.forEach(clone => {
-                if (visibleOriginals > 2) {
-                    // Loop enabled: filter the clone normally
-                    if (filterValue === "all" || clone.classList.contains(filterClass)) {
-                        clone.style.display = "";
-                    } else {
-                        clone.style.display = "none";
-                    }
-                } else {
-                    // <= 2 items: do NOT loop, hide all clones to prevent duplicate illusion
-                    clone.style.display = "none";
-                }
-            });
-            
-            // Reset scroll position to start of the newly filtered list
-            container.scrollLeft = 0;
-        }
-        
-    } else if (clickedItem.classList.contains("br-nav")) {
+    if (clickedItem.classList.contains("br-nav")) {
         document.querySelectorAll(".br-nav").forEach(item => {
             item.parentNode.classList.remove("active");
             clickedItem.parentNode.classList.add("active");
