@@ -78,7 +78,7 @@ body.dark {
   outline: none;
 }
 
-:focus-visible {
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   outline: 3px solid var(--primary-accent);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
@@ -2418,11 +2418,7 @@ body.dark .br-card:hover {
 }
 
 /* Accessibility Final Pass */
-:focus-visible {
-    outline: 2px solid var(--primary-accent);
-    outline-offset: 4px;
-}
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
     outline: 2px solid var(--primary-accent);
     outline-offset: 2px;
 }

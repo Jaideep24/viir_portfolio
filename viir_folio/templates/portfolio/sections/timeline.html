@@ -1,67 +1,67 @@
-    <section id="background" class="br-experience padding-tb-80 ">
-        <div class="container reveal-up">
-            <div class="row">
-                <div class="section-title ">
-                    <h2><span>Background</span></h2>
-                    <span class="ligh-title">Background</span>
-                </div>
+    <section id="background" class="faang-section faang-timeline">
+        <div class="container">
+            <h2 class="section-heading">Career <span class="section-heading-accent">Background</span></h2>
 
-                <!-- Education -->
-                <div class="col-lg-6 col-md-12 col-sm-12 reveal-right">
-                    <div class="education br-ex-box m-b-991">
-                        <div class="timeline">
-                            <h3 class="timeline-section-title">Education</h3>
-                            {% for object in education %}
-                            <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
-                                <div class="timeline-component timeline-date-container">
-                                    <time class="timeline-date" datetime="{{ object.start_date }}">{{ object.start_date }} &ndash; {% if object.is_ongoing or not object.end_date %}Pursuing{% else %}{{ object.end_date }}{% endif %}</time>
-                                </div>
-                                <div class="timeline-middle">
-                                    <div class="timeline-circle"></div>
-                                </div>
-                                <div class="timeline-component timeline-content">
-                                    <h4>{{ object.title }}</h4>
-                                    <span class="sub">{{ object.institute_name }}</span>
-                                    <p class="timeline-subject">{{ object.subject }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
+            <!-- Dual Track Timeline -->
+            <div class="timeline-dual-track">
+
+                <!-- Education Track -->
+                <div class="timeline-col reveal-right">
+                    <div class="timeline-track-header">
+                        <div class="timeline-track-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </div>
+                        <span class="timeline-track-title">Education</span>
+                    </div>
+                    <div class="timeline-track-list">
+                        {% for object in education %}
+                        <div class="timeline-entry">
+                            <div class="timeline-entry-date">
+                                {{ object.start_date }} &ndash; {% if object.is_ongoing or not object.end_date %}Pursuing{% else %}{{ object.end_date }}{% endif %}
+                            </div>
+                            <h4 class="timeline-entry-title">{{ object.title }}</h4>
+                            <div class="timeline-entry-sub">{{ object.institute_name }}</div>
+                            {% if object.subject %}
+                            <p class="timeline-entry-body">{{ object.subject }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
 
-                <!-- Experience -->
-                <div class="col-lg-6 col-md-12 col-sm-12 reveal-left">
-                    <div class="experiense br-ex-box">
-                        <div class="timeline">
-                            <h3 class="timeline-section-title">Experience</h3>
-                            {% for object in experience %}
-                            <div class="timeline-item {% if forloop.first %}first-timeline-item{% endif %}">
-                                <div class="timeline-component timeline-date-container-career">
-                                    <time class="timeline-date-career" datetime="{{ object.start_date|date:'Y-m-d' }}">{{ object.start_date|date:"F Y" }} &ndash; {% if object.is_ongoing or not object.end_date %}Present{% else %}{{ object.end_date|date:"F Y" }}{% endif %}</time>
-                                </div>
-                                <div class="timeline-middle">
-                                    <div class="timeline-circle"></div>
-                                </div>
-                                <div class="timeline-component timeline-content">
-                                    <h4>{{ object.role }}</h4>
-                                    <span class="sub">{{ object.company_name }}</span>
-                                    {% if object.bullets.all %}
-                                    <ul class="timeline-bullets">
-                                        {% for point in object.bullets.all %}<li>{{ point.text }}</li>{% endfor %}
-                                    </ul>
-                                    {% endif %}
-                                    {% if object.tech_stack_m2m.all %}
-                                    <div class="timeline-tech-tags">
-                                        {% for tech in object.tech_stack_m2m.all %}<span class="timeline-tech-badge">{{ tech.name }}</span>{% endfor %}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endfor %}
+                <!-- Experience Track -->
+                <div class="timeline-col reveal-left">
+                    <div class="timeline-track-header">
+                        <div class="timeline-track-icon">
+                            <i class="fa-solid fa-briefcase"></i>
                         </div>
+                        <span class="timeline-track-title">Experience</span>
+                    </div>
+                    <div class="timeline-track-list">
+                        {% for object in experience %}
+                        <div class="timeline-entry">
+                            <div class="timeline-entry-date">
+                                <time datetime="{{ object.start_date|date:'Y-m-d' }}">{{ object.start_date|date:"M Y" }}</time>
+                                &ndash;
+                                {% if object.is_ongoing or not object.end_date %}Present{% else %}{{ object.end_date|date:"M Y" }}{% endif %}
+                            </div>
+                            <h4 class="timeline-entry-title">{{ object.role }}</h4>
+                            <div class="timeline-entry-sub">{{ object.company_name }}</div>
+                            {% if object.bullets.all %}
+                            <ul class="timeline-entry-bullets">
+                                {% for point in object.bullets.all %}<li>{{ point.text }}</li>{% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% if object.tech_stack_m2m.all %}
+                            <div class="timeline-entry-tags">
+                                {% for tech in object.tech_stack_m2m.all %}<span class="timeline-tech-tag">{{ tech.name }}</span>{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

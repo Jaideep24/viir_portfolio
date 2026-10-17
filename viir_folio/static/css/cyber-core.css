@@ -1,0 +1,707 @@
+/* ==========================================================================
+   VIIR PHURIA PORTFOLIO — 3D TELEMETRY MATRIX & CYBER CORE HERO
+   Inspired by Miten Parvatia, Mohit Nippanikar & Prem Rathod
+   Editorial Typography + Interactive 3D Point-Cloud Matrix & Gyro Centerpiece
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO CONTAINER & CANVAS STAGE
+   -------------------------------------------------------------------------- */
+
+.holo-hero-section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 84px 28px 36px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #030611;
+    transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+}
+
+body.light .holo-hero-section {
+    background: #f8fafc;
+}
+
+/* Background 3D Telemetry Canvas */
+.holo-hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    z-index: 1;
+    cursor: grab;
+}
+
+.holo-hero-canvas:active {
+    cursor: grabbing;
+}
+
+/* --------------------------------------------------------------------------
+   2. PRECISION ARCHITECTURAL HUD CORNERS (Miten Parvatia inspired)
+   -------------------------------------------------------------------------- */
+
+.hud-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.hud-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: rgba(255, 111, 111, 0.55);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.hud-tl {
+    top: 24px;
+    left: 24px;
+    border-top: 1.5px solid;
+    border-left: 1.5px solid;
+}
+
+.hud-tr {
+    top: 24px;
+    right: 24px;
+    border-top: 1.5px solid;
+    border-right: 1.5px solid;
+}
+
+.hud-bl {
+    bottom: 24px;
+    left: 24px;
+    border-bottom: 1.5px solid;
+    border-left: 1.5px solid;
+}
+
+.hud-br {
+    bottom: 24px;
+    right: 24px;
+    border-bottom: 1.5px solid;
+    border-right: 1.5px solid;
+}
+
+body.light .hud-corner {
+    border-color: rgba(255, 111, 111, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   3. HERO CONTENT WRAPPER
+   -------------------------------------------------------------------------- */
+
+.holo-hero-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    pointer-events: none;
+    text-align: center;
+}
+
+.holo-hero-container > * {
+    pointer-events: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. TOP TELEMETRY BAR
+   -------------------------------------------------------------------------- */
+
+.holo-telemetry-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding: 0 4px;
+}
+
+.telemetry-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.telemetry-badge {
+    color: #ff6f6f;
+    background: rgba(255, 111, 111, 0.12);
+    border: 1px solid rgba(255, 111, 111, 0.35);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 10px;
+}
+
+.telemetry-text {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.telemetry-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 11px;
+    font-weight: 600;
+    color: #34d399;
+}
+
+.telemetry-pulse-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.telemetry-pulse-dot::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.5px solid #10b981;
+    animation: holoPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes holoPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+.telemetry-sep {
+    color: rgba(148, 163, 184, 0.4);
+}
+
+.telemetry-loc {
+    color: #cbd5e1;
+}
+
+.telemetry-clock {
+    color: #38bdf8;
+    font-variant-numeric: tabular-nums;
+}
+
+body.light .telemetry-text {
+    color: #64748b;
+}
+
+body.light .telemetry-status-pill {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #059669;
+}
+
+body.light .telemetry-loc {
+    color: #475569;
+}
+
+body.light .telemetry-clock {
+    color: #0284c7;
+}
+
+/* --------------------------------------------------------------------------
+   5. CENTRAL MONUMENTAL EDITORIAL TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+
+.holo-hero-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin: auto 0;
+    padding: 18px 0;
+}
+
+.holo-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.kicker-index {
+    color: #ff6f6f;
+    font-weight: 700;
+}
+
+body.light .holo-kicker {
+    color: #64748b;
+}
+
+/* Monumental Name (Plus Jakarta Sans + Instrument Serif Italic) */
+.holo-hero-title {
+    font-size: clamp(3.4rem, 8.5vw, 6.8rem);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.22em;
+    user-select: none;
+}
+
+.title-primary {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 4px 30px rgba(255, 255, 255, 0.18), 0 0 60px rgba(56, 189, 248, 0.15);
+}
+
+.title-accent {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #f8fafc;
+    text-shadow: 0 4px 40px rgba(255, 111, 111, 0.35);
+    position: relative;
+}
+
+body.light .title-primary {
+    color: #0f172a;
+    text-shadow: none;
+}
+
+body.light .title-accent {
+    color: #1e293b;
+    text-shadow: none;
+}
+
+/* Value Proposition Statement */
+.holo-hero-statement {
+    font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
+    font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+    font-weight: 400;
+    color: #cbd5e1;
+    max-width: 680px;
+    margin: 0 auto 18px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+}
+
+.accent-sec {
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+.accent-ai {
+    color: #f43f5e;
+    font-weight: 600;
+}
+
+body.light .holo-hero-statement {
+    color: #334155;
+}
+
+/* Clean Monospace Terminal Line */
+.holo-typewriter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 22px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: #f8fafc;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.term-sym {
+    color: #ff6f6f;
+    font-weight: 700;
+}
+
+.term-tag {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.typed-text-output {
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.term-cursor {
+    color: #38bdf8;
+    font-weight: 700;
+    animation: holoCursorBlink 0.9s step-end infinite;
+}
+
+@keyframes holoCursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+body.light .holo-typewriter-pill {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #0f172a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+body.light .typed-text-output {
+    color: #0f172a;
+}
+
+/* 3D Stage Hint */
+.holo-stage-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: rgba(148, 163, 184, 0.65);
+    text-transform: uppercase;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.holo-stage-hint i {
+    color: #ff6f6f;
+    font-size: 11px;
+}
+
+body.light .holo-stage-hint {
+    color: rgba(100, 116, 139, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   6. TACTILE FLOATING DOCK & PROOF STRIP (Prem Rathod & Mohit inspired)
+   -------------------------------------------------------------------------- */
+
+.holo-hero-dock-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+/* Proof Metrics Strip */
+.holo-proof-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(10, 15, 29, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.proof-chip {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.proof-val {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.proof-lbl {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.proof-sep {
+    color: rgba(255, 111, 111, 0.45);
+    font-size: 11px;
+    user-select: none;
+}
+
+body.light .holo-proof-strip {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light .proof-val {
+    color: #0f172a;
+}
+
+body.light .proof-lbl {
+    color: #64748b;
+}
+
+/* Tactile Frosted Dock */
+.holo-floating-dock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(10, 16, 32, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.holo-floating-dock:hover {
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Dock Buttons */
+.dock-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.dock-btn-primary {
+    background: #ffffff;
+    color: #0a1020;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+}
+
+.dock-btn-primary i {
+    font-size: 11px;
+    transition: transform 0.2s ease;
+}
+
+.dock-btn-primary:hover {
+    background: #f1f5f9;
+    color: #0a1020;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.dock-btn-primary:hover i {
+    transform: translateX(3px);
+}
+
+.dock-btn-ghost {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dock-btn-ghost i {
+    color: #ff6f6f;
+    font-size: 13px;
+}
+
+.dock-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Dock Divider */
+.dock-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 0 4px;
+}
+
+/* Socials in Dock */
+.dock-socials {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dock-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.dock-social-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Light Theme Dock */
+body.light .holo-floating-dock {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+body.light .dock-btn-primary {
+    background: #0f172a;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+}
+
+body.light .dock-btn-primary:hover {
+    background: #1e293b;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+}
+
+body.light .dock-btn-ghost {
+    background: rgba(0, 0, 0, 0.04);
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light .dock-btn-ghost:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #000000;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+body.light .dock-divider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.light .dock-social-link {
+    color: #64748b;
+}
+
+body.light .dock-social-link:hover {
+    color: #0f172a;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVENESS & MOBILE ADAPTATION
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .holo-telemetry-bar {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .telemetry-left {
+        display: none;
+    }
+
+    .holo-hero-dock-wrap {
+        margin-top: 10px;
+    }
+
+    .holo-floating-dock {
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 24px;
+        padding: 8px 12px;
+    }
+
+    .dock-divider {
+        display: none;
+    }
+
+    .hud-corner {
+        width: 16px;
+        height: 16px;
+    }
+
+    .hud-tl, .hud-bl { left: 12px; }
+    .hud-tr, .hud-br { right: 12px; }
+    .hud-tl, .hud-tr { top: 12px; }
+    .hud-bl, .hud-br { bottom: 12px; }
+}
+
+@media (max-width: 600px) {
+    .holo-hero-section {
+        padding: 72px 16px 24px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .holo-hero-title {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 12px;
+    }
+
+    .holo-hero-statement {
+        font-size: 1rem;
+        margin-bottom: 14px;
+    }
+
+    .holo-proof-strip {
+        gap: 8px;
+        padding: 4px 10px;
+    }
+
+    .proof-lbl {
+        font-size: 9.5px;
+    }
+
+    .holo-stage-hint {
+        display: none;
+    }
+
+    .dock-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}

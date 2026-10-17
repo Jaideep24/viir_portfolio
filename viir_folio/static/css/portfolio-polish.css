@@ -1,0 +1,1342 @@
+/* ==========================================================================
+   PORTFOLIO POLISH — FAANG-Grade Visual Unification Layer
+   Viir Phuria Portfolio | v3.0
+   
+   Overrides and harmonizes ALL section styles for elite visual quality.
+   Load LAST in <head> after all other CSS files.
+   ========================================================================== */
+
+/* ============================================================
+   0. GLOBAL DESIGN TOKENS (Override / Extend)
+   ============================================================ */
+
+:root {
+    --font-display: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --accent-crimson: #ff6f6f;
+    --accent-crimson-glow: rgba(255, 111, 111, 0.35);
+    --accent-violet: #7c5bff;
+    --accent-violet-glow: rgba(124, 91, 255, 0.3);
+    --accent-teal: #22d3ee;
+    --accent-green: #22c55e;
+}
+
+/* ============================================================
+   1. ABOUT SECTION — Architect Identity Panel
+   ============================================================ */
+
+.about-role-title {
+    font-family: var(--font-display) !important;
+    font-size: clamp(1.3rem, 2.2vw, 1.85rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.25 !important;
+    margin-bottom: 4px !important;
+}
+
+body.dark .about-role-title {
+    color: #f1f5f9 !important;
+    -webkit-text-fill-color: #f1f5f9;
+}
+
+body.light .about-role-title {
+    color: var(--accent-crimson) !important;
+    -webkit-text-fill-color: var(--accent-crimson);
+}
+
+body.dark .about-photo-frame {
+    box-shadow: 
+        0 0 0 1px rgba(124, 91, 255, 0.25),
+        0 0 60px rgba(124, 91, 255, 0.12),
+        0 24px 64px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.light .about-photo-frame {
+    box-shadow: 
+        0 0 0 1px rgba(124, 91, 255, 0.12),
+        0 0 40px rgba(124, 91, 255, 0.08),
+        0 16px 48px rgba(0, 0, 0, 0.1) !important;
+}
+
+.about-stat-val {
+    display: block !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: var(--accent-crimson) !important;
+    -webkit-text-fill-color: var(--accent-crimson);
+    background: none !important;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+/* ============================================================
+   2. TIMELINE — Career Background Polish
+   ============================================================ */
+
+.timeline-item-card {
+    border-radius: 14px !important;
+    padding: 20px 22px !important;
+}
+
+body.dark .timeline-item-card {
+    background: rgba(15, 23, 42, 0.72) !important;
+    border: 1px solid rgba(124, 91, 255, 0.12) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light .timeline-item-card {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(124, 91, 255, 0.06) !important;
+}
+
+.timeline-item-card:hover {
+    transform: translateX(4px) !important;
+    border-color: rgba(255, 111, 111, 0.25) !important;
+}
+
+.timeline-date {
+    font-family: var(--font-mono) !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    color: var(--accent-crimson) !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+}
+
+.timeline-institution {
+    font-family: var(--font-mono) !important;
+    font-size: 0.75rem !important;
+    color: var(--accent-violet) !important;
+    font-weight: 500 !important;
+}
+
+/* ============================================================
+   3. SKILLS — Technical Arsenal
+   ============================================================ */
+
+.skill-category-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease !important;
+    border-radius: 20px !important;
+}
+
+body.dark .skill-category-card {
+    background: rgba(15, 23, 42, 0.68) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.light .skill-category-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(124, 91, 255, 0.06) !important;
+}
+
+.skill-category-card:hover {
+    transform: translateY(-6px) !important;
+    border-color: rgba(255, 111, 111, 0.3) !important;
+}
+
+body.dark .skill-category-card:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 111, 111, 0.2) !important;
+}
+
+body.light .skill-category-card:hover {
+    box-shadow: 0 20px 60px rgba(124, 91, 255, 0.12),
+                0 0 0 1px rgba(255, 111, 111, 0.12) !important;
+}
+
+.skill-chip {
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    transition: all 0.2s ease !important;
+}
+
+body.dark .skill-chip {
+    background: rgba(124, 91, 255, 0.1) !important;
+    border: 1px solid rgba(124, 91, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+body.light .skill-chip {
+    background: rgba(124, 91, 255, 0.06) !important;
+    border: 1px solid rgba(124, 91, 255, 0.15) !important;
+    color: #3b2fa8 !important;
+}
+
+/* Logos & Icons — 100% Original Authentic Brand Colors */
+.skill-chip img,
+.skill-chip-logo {
+    filter: none !important;
+    vertical-align: middle !important;
+    object-fit: contain !important;
+}
+
+.skill-chip:hover img,
+.skill-chip:hover .skill-chip-logo {
+    filter: none !important;
+    transform: scale(1.15) !important;
+}
+
+.skill-chip i {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    filter: none !important;
+    margin-right: 7px !important;
+    font-size: 0.85rem !important;
+    vertical-align: middle !important;
+}
+
+.skill-chip:hover i {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    filter: none !important;
+    transform: scale(1.15) !important;
+}
+
+/* Authentic Tech Brand Colors */
+.skill-chip i.fa-python { color: #387EB8 !important; }
+.skill-chip i.fa-golang { color: #00ADD8 !important; }
+.skill-chip i.fa-js { color: #F7DF1E !important; }
+.skill-chip i.fa-html5 { color: #E34F26 !important; }
+.skill-chip i.fa-react { color: #61DAFB !important; }
+.skill-chip i.fa-docker { color: #2496ED !important; }
+.skill-chip i.fa-linux { color: #FCC624 !important; }
+.skill-chip i.fa-database { color: #336791 !important; }
+body.dark .skill-chip i.fa-github { color: #f0f6fc !important; }
+body.light .skill-chip i.fa-github { color: #24292f !important; }
+
+/* ============================================================
+   4. PROJECTS — Production Builds
+   ============================================================ */
+
+.project-filter-bar {
+    display: flex !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 48px !important;
+}
+
+.filter {
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    padding: 8px 20px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    background: none !important;
+    border: 1px solid !important;
+}
+
+body.dark .filter {
+    color: rgba(255, 255, 255, 0.45) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light .filter {
+    color: rgba(0, 0, 0, 0.45) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.filter:hover,
+.filter.mixitup-control-active {
+    color: #fff !important;
+    background: var(--accent-violet) !important;
+    border-color: var(--accent-violet) !important;
+    box-shadow: 0 4px 16px rgba(124, 91, 255, 0.25) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   5. BLOG SECTION — Override White Cards for Dark Mode (CRITICAL)
+   ============================================================ */
+
+.blog-card,
+#insights .blog-card {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease !important;
+}
+
+body.dark .blog-card,
+body.dark #insights .blog-card {
+    background: rgba(13, 20, 38, 0.85) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.light .blog-card,
+body.light #insights .blog-card {
+    background: rgba(255, 255, 255, 0.97) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(124, 91, 255, 0.06) !important;
+}
+
+.blog-card-link:hover .blog-card,
+.blog-card:hover {
+    transform: translateY(-6px) !important;
+    border-color: rgba(255, 111, 111, 0.3) !important;
+}
+
+body.dark .blog-card-link:hover .blog-card,
+body.dark .blog-card:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55),
+                0 0 0 1px rgba(255, 111, 111, 0.15) !important;
+}
+
+body.light .blog-card-link:hover .blog-card,
+body.light .blog-card:hover {
+    box-shadow: 0 20px 60px rgba(124, 91, 255, 0.12),
+                0 0 0 1px rgba(255, 111, 111, 0.12) !important;
+}
+
+.blog-card-image {
+    aspect-ratio: 16/9 !important;
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: 160px !important;
+}
+
+.blog-card-content {
+    padding: 20px 22px !important;
+}
+
+.blog-card h3,
+#insights .blog-card h3 {
+    font-family: var(--font-display) !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    line-height: 1.45 !important;
+    letter-spacing: -0.01em !important;
+}
+
+body.dark .blog-card h3,
+body.dark #insights .blog-card h3 {
+    color: #f1f5f9 !important;
+}
+
+body.light .blog-card h3,
+body.light #insights .blog-card h3 {
+    color: #0f172a !important;
+}
+
+.blog-excerpt {
+    font-size: 0.87rem !important;
+    line-height: 1.65 !important;
+}
+
+body.dark .blog-excerpt {
+    color: rgba(203, 213, 225, 0.72) !important;
+}
+
+body.light .blog-excerpt {
+    color: #475569 !important;
+}
+
+.blog-meta {
+    font-family: var(--font-mono) !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.04em !important;
+}
+
+body.dark .blog-meta {
+    color: rgba(148, 163, 184, 0.65) !important;
+}
+
+body.light .blog-meta {
+    color: rgba(71, 85, 105, 0.7) !important;
+}
+
+/* ============================================================
+   6. CERTIFICATIONS — Dark Mode Carousel
+   ============================================================ */
+
+#carouselExampleAutoplaying {
+    max-width: 800px !important;
+    margin: 40px auto !important;
+}
+
+.carousel-img {
+    border-radius: 14px !important;
+    max-height: 460px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+body.dark .carousel-img {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(124, 91, 255, 0.12) !important;
+}
+
+body.light .carousel-img {
+    box-shadow: 0 12px 48px rgba(124, 91, 255, 0.08),
+                0 0 0 1px rgba(124, 91, 255, 0.08) !important;
+}
+
+.carousel-item h3 {
+    font-family: var(--font-display) !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 18px !important;
+}
+
+body.dark .carousel-item h3 {
+    color: #f1f5f9 !important;
+}
+
+body.light .carousel-item h3 {
+    color: #0f172a !important;
+}
+
+
+
+/* ============================================================
+   8. SECTION DIVIDERS — Gradient lines
+   ============================================================ */
+
+.section-divider {
+    display: none !important;
+}
+
+body.light .section-divider {
+    display: none !important;
+}
+
+/* ============================================================
+   9. GLOBAL BUTTONS
+   ============================================================ */
+
+.capsule-btn {
+    font-family: var(--font-display) !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    padding: 11px 26px !important;
+    border-radius: 999px !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+body.dark .capsule-btn {
+    background: rgba(124, 91, 255, 0.12) !important;
+    border: 1px solid rgba(124, 91, 255, 0.28) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.light .capsule-btn {
+    background: rgba(124, 91, 255, 0.07) !important;
+    border: 1px solid rgba(124, 91, 255, 0.18) !important;
+    color: var(--accent-violet) !important;
+}
+
+.capsule-btn:hover,
+.capsule-btn:focus {
+    background: var(--accent-violet) !important;
+    border-color: var(--accent-violet) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(124, 91, 255, 0.25) !important;
+    text-decoration: none !important;
+}
+
+/* ============================================================
+   10. EDITORIAL SECTION HEADINGS — Center Aligned & Unified
+   ============================================================ */
+
+.section-kicker,
+.holo-kicker {
+    display: none !important;
+}
+
+.section-heading {
+    font-family: var(--font-display) !important;
+    font-size: clamp(2rem, 4vw, 3.2rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.08 !important;
+    margin-bottom: 32px !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.sticky-projects-header {
+    text-align: center !important;
+}
+
+.pub-search-wrap {
+    margin: 0 auto 36px auto !important;
+    max-width: 540px !important;
+}
+
+.project-filter-bar {
+    justify-content: center !important;
+}
+
+body.dark .section-heading {
+    color: #f8fafc !important;
+}
+
+body.light .section-heading {
+    color: #0f172a !important;
+}
+
+.section-heading-accent {
+    font-family: var(--font-serif) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    color: var(--accent-crimson) !important;
+}
+
+.section-lead {
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+    max-width: 560px !important;
+    margin-bottom: 52px !important;
+}
+
+body.dark .section-lead {
+    color: rgba(148, 163, 184, 0.85) !important;
+}
+
+body.light .section-lead {
+    color: #475569 !important;
+}
+
+/* ============================================================
+   11. PULSE ANIMATION
+   ============================================================ */
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+}
+
+.about-photo-badge-dot {
+    animation: pulse-green 2.5s ease-in-out infinite !important;
+}
+
+/* ============================================================
+   12. PUBLICATIONS — Academic Output
+   ============================================================ */
+
+.pub-card {
+    border-radius: 16px !important;
+    padding: 26px 30px !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease !important;
+}
+
+body.dark .pub-card {
+    background: rgba(15, 23, 42, 0.72) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+}
+
+body.light .pub-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(124, 91, 255, 0.06) !important;
+}
+
+.pub-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 111, 111, 0.3) !important;
+}
+
+.pub-year-badge {
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    padding: 4px 12px !important;
+    border-radius: 6px !important;
+    background: rgba(255, 111, 111, 0.1) !important;
+    color: var(--accent-crimson) !important;
+    border: 1px solid rgba(255, 111, 111, 0.2) !important;
+    letter-spacing: 0.06em !important;
+}
+
+.pub-venue-tag {
+    font-family: var(--font-mono) !important;
+    font-size: 0.65rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    background: rgba(124, 91, 255, 0.1) !important;
+    color: var(--accent-violet) !important;
+    border: 1px solid rgba(124, 91, 255, 0.2) !important;
+}
+
+.pub-author-you,
+.pub-authors strong {
+    color: inherit !important;
+    font-weight: 700 !important;
+}
+
+body.dark .pub-title {
+    color: #f1f5f9 !important;
+}
+
+body.light .pub-title {
+    color: #0f172a !important;
+}
+
+/* ============================================================
+   13. FOCUS ACCESSIBILITY & INPUT SHAPE INTEGRITY
+   ============================================================ */
+
+/* General interactive elements focus ring (exclude text inputs so they never morph or draw rectangular outlines) */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+.filter:focus-visible,
+.dock-btn-primary:focus-visible,
+.dock-btn-ghost:focus-visible,
+.dock-social-link:focus-visible {
+    outline: 2px solid var(--accent-violet) !important;
+    outline-offset: 3px !important;
+}
+
+/* Strict input shape & size preservation: NO rectangular outlines or morphing on focus/active */
+input,
+textarea,
+select,
+#searchInput,
+.modern-input,
+.form-control {
+    outline: none !important;
+    outline-offset: 0 !important;
+    -webkit-appearance: none !important;
+}
+
+input:focus,
+input:focus-visible,
+input:active,
+textarea:focus,
+textarea:focus-visible,
+textarea:active,
+select:focus,
+select:focus-visible,
+select:active,
+#searchInput:focus,
+#searchInput:focus-visible,
+#searchInput:active,
+.modern-input:focus,
+.modern-input:focus-visible,
+.modern-input:active,
+.form-control:focus,
+.form-control:focus-visible,
+.form-control:active {
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Search input & icon in Publications section */
+.pub-search-icon {
+    z-index: 5 !important;
+    font-size: 0.95rem !important;
+}
+
+body.light .pub-search-icon {
+    color: #334155 !important;
+    opacity: 1 !important;
+}
+
+body.dark .pub-search-icon,
+body:not(.light) .pub-search-icon {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+#searchInput,
+#searchInput:focus,
+#searchInput:focus-visible,
+#searchInput:active {
+    border-radius: 999px !important;
+    outline: none !important;
+    outline-offset: 0 !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+/* Theme Color Scheme for Browser Form Controls & Popups */
+:root,
+body.dark,
+body:not(.light) {
+    color-scheme: dark;
+}
+body.light {
+    color-scheme: light;
+}
+
+/* ============================================================
+   TEXT INPUTS: UNIVERSAL THEME COLORS & AUTOFILL RESILIENCE
+   ============================================================ */
+
+/* DARK THEME: Base input styling */
+body.dark input,
+body.dark textarea,
+body.dark select,
+body:not(.light) input,
+body:not(.light) textarea,
+body:not(.light) select {
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder,
+body:not(.light) input::placeholder,
+body:not(.light) textarea::placeholder {
+    color: #94a3b8 !important;
+    opacity: 0.8;
+}
+
+/* DARK THEME: Search Input in Publications */
+body.dark #searchInput,
+body:not(.light) #searchInput {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
+
+body.dark #searchInput:focus,
+body.dark #searchInput:focus-visible,
+body.dark #searchInput:active,
+body:not(.light) #searchInput:focus,
+body:not(.light) #searchInput:focus-visible,
+body:not(.light) #searchInput:active {
+    border-radius: 999px !important;
+    border-color: rgba(124, 91, 255, 0.45) !important;
+    box-shadow: 0 0 0 3px rgba(124, 91, 255, 0.15) !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
+
+body.dark #searchInput:-webkit-autofill,
+body.dark #searchInput:autofill,
+body:not(.light) #searchInput:-webkit-autofill,
+body:not(.light) #searchInput:autofill {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #0f172a inset !important;
+    box-shadow: 0 0 0 1000px #0f172a inset !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.dark #searchInput:-webkit-autofill:focus,
+body.dark #searchInput:autofill:focus,
+body:not(.light) #searchInput:-webkit-autofill:focus,
+body:not(.light) #searchInput:autofill:focus {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #0f172a inset, 0 0 0 3px rgba(124, 91, 255, 0.15) !important;
+    box-shadow: 0 0 0 1000px #0f172a inset, 0 0 0 3px rgba(124, 91, 255, 0.15) !important;
+    border-color: rgba(124, 91, 255, 0.45) !important;
+}
+
+/* DARK THEME: Connect Form Inputs */
+body.dark .modern-input,
+body:not(.light) .modern-input {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark .modern-input:focus,
+body.dark .modern-input:focus-visible,
+body.dark .modern-input:active,
+body:not(.light) .modern-input:focus,
+body:not(.light) .modern-input:focus-visible,
+body:not(.light) .modern-input:active {
+    border-radius: 15px !important;
+    background-color: #27364d !important;
+    border-color: rgba(124, 91, 255, 0.45) !important;
+    box-shadow: 0 0 0 3px rgba(124, 91, 255, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
+
+/* DARK THEME: Universal Autofill Protection */
+body.dark input:-webkit-autofill,
+body.dark input:autofill,
+body.dark textarea:-webkit-autofill,
+body.dark textarea:autofill,
+body.dark select:-webkit-autofill,
+body.dark select:autofill,
+body:not(.light) input:-webkit-autofill,
+body:not(.light) input:autofill,
+body:not(.light) textarea:-webkit-autofill,
+body:not(.light) textarea:autofill {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+    box-shadow: 0 0 0 1000px #1e293b inset !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.dark input:-webkit-autofill:focus,
+body.dark input:autofill:focus,
+body.dark textarea:-webkit-autofill:focus,
+body.dark textarea:autofill:focus,
+body:not(.light) input:-webkit-autofill:focus,
+body:not(.light) input:autofill:focus,
+body:not(.light) textarea:-webkit-autofill:focus,
+body:not(.light) textarea:autofill:focus {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #27364d inset, 0 0 0 3px rgba(124, 91, 255, 0.25) !important;
+    box-shadow: 0 0 0 1000px #27364d inset, 0 0 0 3px rgba(124, 91, 255, 0.25) !important;
+    border-color: rgba(124, 91, 255, 0.45) !important;
+}
+
+/* ============================================================
+   LIGHT THEME: UNIVERSAL THEME COLORS & AUTOFILL RESILIENCE
+   ============================================================ */
+
+body.light input,
+body.light textarea,
+body.light select {
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+body.light input::placeholder,
+body.light textarea::placeholder {
+    color: #64748b !important;
+    opacity: 0.8;
+}
+
+/* LIGHT THEME: Search Input in Publications */
+body.light #searchInput {
+    background: #ffffff !important;
+    border-color: rgba(124, 91, 255, 0.2) !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+body.light #searchInput:focus,
+body.light #searchInput:focus-visible,
+body.light #searchInput:active {
+    border-radius: 999px !important;
+    background: #ffffff !important;
+    border-color: rgba(124, 91, 255, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(124, 91, 255, 0.1) !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+body.light #searchInput:-webkit-autofill,
+body.light #searchInput:autofill {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.light #searchInput:-webkit-autofill:focus,
+body.light #searchInput:autofill:focus {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.1) !important;
+    box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.1) !important;
+    border-color: rgba(124, 91, 255, 0.4) !important;
+}
+
+/* LIGHT THEME: Connect Form Inputs */
+body.light .modern-input {
+    background-color: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+body.light .modern-input:focus,
+body.light .modern-input:focus-visible,
+body.light .modern-input:active {
+    border-radius: 15px !important;
+    background-color: #ffffff !important;
+    border-color: rgba(124, 91, 255, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(124, 91, 255, 0.1) !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+/* LIGHT THEME: Universal Autofill Protection */
+body.light input:-webkit-autofill,
+body.light input:autofill,
+body.light textarea:-webkit-autofill,
+body.light textarea:autofill,
+body.light select:-webkit-autofill,
+body.light select:autofill {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    border-color: rgba(15, 23, 42, 0.2) !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.light input:-webkit-autofill:focus,
+body.light input:autofill:focus,
+body.light textarea:-webkit-autofill:focus,
+body.light textarea:autofill:focus {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.2) !important;
+    box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.2) !important;
+    border-color: rgba(124, 91, 255, 0.4) !important;
+}
+
+/* Light Theme — Comprehensive Element Refinements */
+body.light .section-heading-accent {
+    color: var(--accent-crimson) !important;
+}
+
+body.light .about-stat-row {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.light .about-stat-cell {
+    border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light .about-stat-lbl {
+    color: #64748b !important;
+}
+
+body.light .about-identity-chip {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light .about-code-block {
+    background: rgba(248, 250, 252, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: #334155 !important;
+}
+
+/* ============================================================
+   ABOUT TERMINAL — Crystal Clear Light & Dark Contrast
+   ============================================================ */
+body.light .terminal-container {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.light .terminal-header {
+    background: #f8fafc !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light .terminal-title {
+    color: #64748b !important;
+    font-weight: 600 !important;
+}
+
+body.light .terminal-body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+
+body.light .terminal-prompt {
+    color: #16a34a !important;
+    font-weight: 700 !important;
+}
+
+body.light .terminal-command {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+}
+
+body.light .terminal-output {
+    color: #0f172a !important;
+    font-weight: 500 !important;
+    line-height: 1.75 !important;
+    font-size: 0.88rem !important;
+    opacity: 1 !important;
+}
+
+body.light .terminal-cursor {
+    background: #16a34a !important;
+}
+
+/* Dark mode terminal clarity */
+body.dark .terminal-container {
+    background: #0d1117 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark .terminal-header {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark .terminal-title {
+    color: #94a3b8 !important;
+}
+
+body.dark .terminal-prompt {
+    color: #22c55e !important;
+}
+
+body.dark .terminal-command {
+    color: #60a5fa !important;
+}
+
+body.dark .terminal-output {
+    color: #f1f5f9 !important;
+    line-height: 1.75 !important;
+    font-size: 0.88rem !important;
+    opacity: 0.95 !important;
+}
+
+/* ============================================================
+   TIMELINE — Mathematical Line & Dot Centering
+   ============================================================ */
+.timeline-track-list {
+    position: relative !important;
+    padding-left: 32px !important;
+}
+
+.timeline-track-list::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 14px !important;
+    bottom: 14px !important;
+    left: 8px !important;
+    width: 2px !important;
+    transform: translateX(-50%) !important; /* Center line exactly at x = 8px */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 111, 111, 0.7) 0%,
+        rgba(124, 91, 255, 0.45) 60%,
+        rgba(124, 91, 255, 0.05) 100%
+    ) !important;
+}
+
+.timeline-entry::before {
+    content: '' !important;
+    position: absolute !important;
+    left: -24px !important; /* 32px padding - 24px = 8px! Exactly matches the line! */
+    top: 22px !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+    transform: translateX(-50%) !important; /* Center dot exactly at x = 8px */
+    background: var(--accent-crimson) !important;
+    box-shadow: 0 0 0 3px rgba(255, 111, 111, 0.22) !important;
+    border: 2px solid #0f172a !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+body.light .timeline-entry::before {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(255, 111, 111, 0.2) !important;
+}
+
+.timeline-entry:hover::before {
+    transform: translateX(-50%) scale(1.25) !important;
+    box-shadow: 0 0 0 5px rgba(255, 111, 111, 0.3) !important;
+}
+
+/* Light Theme — Timeline */
+body.light .timeline-entry {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.07) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light .timeline-entry-title {
+    color: #0f172a !important;
+}
+
+body.light .timeline-entry-sub {
+    color: #5b3dd0 !important;
+}
+
+body.light .timeline-entry-desc,
+body.light .timeline-entry ul li {
+    color: #475569 !important;
+}
+
+body.light .timeline-tech-tag {
+    background: #f1f5f9 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: #334155 !important;
+}
+
+/* Light Theme — Skills */
+body.light .skill-cat-card {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(0, 0, 0, 0.07) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light .skill-cat-name {
+    color: #0f172a !important;
+}
+
+body.light .skill-chip {
+    background: #f8fafc !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: #1e293b !important;
+}
+
+body.light .skill-chip:hover {
+    background: #ffffff !important;
+    border-color: rgba(124, 91, 255, 0.3) !important;
+    box-shadow: 0 4px 14px rgba(124, 91, 255, 0.1) !important;
+}
+
+/* Light Theme — Projects & Filter */
+body.light .project-filter-btn {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #475569 !important;
+}
+
+body.light .project-filter-btn.active,
+body.light .project-filter-btn:hover {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    border-color: #0f172a !important;
+}
+
+/* Light Theme — Publications */
+body.light .pub-meta {
+    color: #64748b !important;
+}
+
+body.light .pub-authors {
+    color: #475569 !important;
+}
+
+body.light .pub-authors strong,
+body.light .pub-author-you {
+    color: #0f172a !important;
+}
+
+body.light #searchInput {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light #searchInput::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* Light Theme — Connect / Contact */
+body.light .br-box {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light .br-box .title {
+    color: #0f172a !important;
+}
+
+body.light .contact-link {
+    color: #475569 !important;
+}
+
+body.light .contact-link:hover {
+    color: var(--accent-crimson) !important;
+}
+
+/* ============================================================
+   14. RESPONSIVE DESIGN (MOBILE & TABLET EXCELLENCE)
+   ============================================================ */
+
+/* Global horizontal overflow prevention without breaking position:sticky */
+html {
+    overflow-x: clip !important;
+}
+
+body {
+    overflow-x: clip !important;
+    max-width: 100vw;
+}
+
+/* Ensure Sticky Projects Container & Viewport have unhindered sticky context */
+.sticky-projects-section {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.sticky-projects-container {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.sticky-projects-viewport {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 60px !important;
+    height: calc(100vh - 60px) !important;
+    max-height: calc(100vh - 60px) !important;
+    overflow: hidden !important;
+    z-index: 10 !important;
+}
+
+/* Tablet & Mobile (<= 767px) */
+@media (max-width: 767px) {
+    .section-heading {
+        font-size: clamp(1.75rem, 6.5vw, 2.3rem) !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .section-lead {
+        margin-bottom: 36px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .about-architect-wrap {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+    }
+    
+    .about-photo-frame {
+        max-width: 200px !important;
+        margin: 0 auto !important;
+    }
+    
+    .timeline-dual-track {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+    
+    .blogs-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .project-filter-bar {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        justify-content: center !important;
+    }
+    
+    .project-filter-btn {
+        padding: 6px 14px !important;
+        font-size: 0.72rem !important;
+    }
+    
+    /* Publications responsive card */
+    .pub-card {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 20px 22px !important;
+    }
+    
+    .pub-year-col {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        min-width: unset !important;
+    }
+    
+    .pub-divider-line {
+        display: none !important;
+    }
+    
+    .pub-action-col {
+        padding-top: 4px !important;
+    }
+}
+
+/* Small Mobile (<= 575px) */
+@media (max-width: 575px) {
+    .about-stat-row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .about-stat-cell {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 14px 12px !important;
+    }
+    
+    body.light .about-stat-cell {
+        border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+    }
+    
+    .about-stat-cell:last-child {
+        border-bottom: none !important;
+    }
+    
+    .about-action-row {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+    
+    .about-cta-btn,
+    .about-btn-ghost {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    .about-stat-val {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Floating dock fits screen smoothly */
+    .holo-floating-dock {
+        max-width: 95vw !important;
+        padding: 8px 12px !important;
+        gap: 6px !important;
+    }
+    
+    .dock-btn-primary,
+    .dock-btn-ghost {
+        padding: 7px 14px !important;
+        font-size: 0.78rem !important;
+    }
+    
+    /* Connect form full width buttons */
+    .br-contact .capsule-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}

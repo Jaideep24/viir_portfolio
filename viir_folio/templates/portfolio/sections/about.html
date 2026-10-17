@@ -1,106 +1,115 @@
 {% load static %}
-    <section id="about" class="br-about padding-tb-80 sec-bg ">
-        <div class="container reveal-up">
-            <div class="row">
-                {% for object in about %}
-                <div class="section-title ">
-                    <h2><span class="fw-light">About</span></h2>
-                    <span class="ligh-title">About</span>
+    <section id="about" class="faang-section faang-about">
+        <div class="container">
+            {% for object in about %}
+            <h2 class="section-heading">About <span class="section-heading-accent">Me</span></h2>
+
+            <!-- Two-column Architect Layout -->
+            <div class="about-architect-wrap">
+                <!-- Photo Column -->
+                <div class="about-photo-col">
+                    <div class="about-photo-frame glass-card">
+                        <img loading="lazy" decoding="async"
+                             src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}"
+                             alt="Viir Phuria — profile photo">
+                        <div class="about-photo-overlay"></div>
+                        {% if object.open_to_work %}
+                        <div class="about-photo-badge">
+                            <div class="about-photo-badge-dot"></div>
+                            <span class="about-photo-badge-text">{{ object.status_text }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Identity Chips -->
+                    <div class="about-identity-chips">
+                        {% for focus in object.get_focus_list %}
+                        <span class="about-identity-chip">
+                            <i class="fa-solid fa-chevron-right" style="font-size:0.55rem;opacity:0.7;"></i>
+                            {{ focus }}
+                        </span>
+                        {% empty %}
+                        <span class="about-identity-chip"><i class="fa-solid fa-shield-halved" style="font-size:0.75rem;"></i> Cybersecurity</span>
+                        <span class="about-identity-chip"><i class="fa-solid fa-code" style="font-size:0.75rem;"></i> Full-Stack</span>
+                        <span class="about-identity-chip"><i class="fa-solid fa-brain" style="font-size:0.75rem;"></i> ML/AI</span>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="col-lg-6 reveal-right">
-                    <div class="br-skill-progress m-b-991">
-                        <div class="br-hero-img">
-                            <div class="br-card about-card-wrapper" data-tilt="">
-                                <img loading="lazy" decoding="async" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'assets/placeholder.png' %}{% endif %}" alt="Viir Phuria — profile photo" class="about-img">
-                                {% if object.open_to_work %}
-                                <div class="about-status-badge">
-                                    <div class="about-status-dot"></div>
-                                    <span class="about-status-text">{{ object.status_text }}</span>
-                                </div>
-                                {% endif %}
+
+                <!-- Info Column -->
+                <div class="about-info-col">
+                    <h3 class="about-role-title">{{ object.current_role }}</h3>
+
+                    <!-- Terminal Card -->
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="terminal-btn close"></span>
+                                <span class="terminal-btn minimize"></span>
+                                <span class="terminal-btn maximize"></span>
+                            </div>
+                            <div class="terminal-title">viir_phuria ~ bash</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">viir:~$</span>
+                                <span class="terminal-command">cat whoami.txt</span>
+                            </div>
+                            <div class="terminal-output">{{ object.content }}</div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">viir:~$</span>
+                                <span class="terminal-cursor"></span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 reveal-left">
-                    <div class="br-about-detail">
-                        <div class="about-modern-info">
-                            <h3 class="about-current-role">{{ object.current_role }}</h3>
 
-                            {% if object.current_focus %}
-                            <div class="about-focus-row">
-                                <span class="about-focus-label">Focus:</span>
-                                <div class="about-focus-items">
-                                    {% for focus in object.get_focus_list %}
-                                        <span class="about-focus-text">{{ focus }}</span>
-                                        {% if not forloop.last %}<span class="about-focus-bullet">&bull;</span>{% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
+                    <!-- Stats Row -->
+                    <div class="about-stat-row">
+                        <div class="about-stat-cell">
+                            <span class="about-stat-val">{{ object.projects_count }}</span>
+                            <span class="about-stat-lbl">Projects Built</span>
+                        </div>
+                        <div class="about-stat-cell">
+                            <span class="about-stat-val">{{ object.research_count }}</span>
+                            <span class="about-stat-lbl">IEEE Publications</span>
+                        </div>
+                        <div class="about-stat-cell">
+                            <span class="about-stat-val">{{ object.certifications_count }}</span>
+                            <span class="about-stat-lbl">Certifications</span>
+                        </div>
+                    </div>
+
+                    <!-- Actions Row -->
+                    <div class="about-action-row">
+                        {% for cv_item in cv %}
+                        <a class="about-cta-btn" href="{{ cv_item.pdf.url }}" download>
+                            <i class="fa-solid fa-download"></i>
+                            <span>Download Resume</span>
+                        </a>
+                        {% endfor %}
+
+                        <div class="about-social-links">
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-tertiary);opacity:0.7;letter-spacing:0.08em;">
+                                <i class="fa-solid fa-location-dot" style="margin-right:5px;color:var(--primary-accent);opacity:0.7;"></i>{{ object.location }}
+                            </span>
+                            <a href="mailto:{{ object.email }}" class="about-social-icon" title="Email Me" aria-label="Email">
+                                <i class="fa-solid fa-envelope"></i>
+                            </a>
+                            {% if object.github_url %}
+                            <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="GitHub" aria-label="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
                             {% endif %}
-
-                            <!-- Terminal UI for About Text -->
-                            <div class="terminal-container">
-                                <div class="terminal-header">
-                                    <div class="terminal-buttons">
-                                        <span class="terminal-btn close"></span>
-                                        <span class="terminal-btn minimize"></span>
-                                        <span class="terminal-btn maximize"></span>
-                                    </div>
-                                    <div class="terminal-title">viir_phuria ~ bash</div>
-                                </div>
-                                <div class="terminal-body">
-                                    <div class="terminal-line">
-                                        <span class="terminal-prompt">viir:~$</span>
-                                        <span class="terminal-command">cat whoami.txt</span>
-                                    </div>
-                                    <div class="terminal-output typing-animation" style="text-align: left;">{{ object.content }}</div>
-                                    <div class="terminal-line" style="margin-top: 8px;">
-                                        <span class="terminal-prompt">viir:~$</span>
-                                        <span class="terminal-cursor"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Quick Stats Row (Manual Text Fields) -->
-                            <div class="quick-stats about-stats-grid">
-                                <div class="about-stat-item">
-                                    <h4 class="about-stat-number">{{ object.projects_count }}</h4>
-                                    <span class="about-stat-label">Projects Built</span>
-                                </div>
-                                <div class="about-stat-item">
-                                    <h4 class="about-stat-number">{{ object.research_count }}</h4>
-                                    <span class="about-stat-label">Research Papers</span>
-                                </div>
-                                <div class="about-stat-item">
-                                    <h4 class="about-stat-number">{{ object.certifications_count }}</h4>
-                                    <span class="about-stat-label">Certifications</span>
-                                </div>
-                            </div>
-
-                            <div class="professional-actions about-actions-flex">
-                                {% for cv_item in cv %}
-                                <a class="capsule-btn hero-btn download-cv-btn about-resume-btn" href="{{ cv_item.pdf.url }}" download>
-                                     <span class="text"><i class="fa-solid fa-download m-r-10"></i> Download Resume</span>
-                                </a>
-                                {% endfor %}
-
-                                <div class="about-social-row">
-                                    <span class="about-location-text"><i class="fa-solid fa-location-dot icon-mr-sm"></i> {{ object.location }}</span>
-                                    <a href="mailto:{{ object.email }}" class="about-social-icon" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
-                                    {% if object.github_url %}
-                                    <a href="{{ object.github_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                                    {% endif %}
-                                    {% if object.linkedin_url %}
-                                    <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                                    {% endif %}
-                                </div>
-                            </div>
+                            {% if object.linkedin_url %}
+                            <a href="{{ object.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="about-social-icon" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </section>
     <!-- About Section End -->

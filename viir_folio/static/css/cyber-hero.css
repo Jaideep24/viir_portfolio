@@ -1,0 +1,838 @@
+/* ==========================================================================
+   VIIR PORTFOLIO — CyberSec Command Deck & Identity Matrix (Hero Section)
+   ========================================================================== */
+
+.cyber-hero-section {
+    position: relative;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 0 60px;
+    box-sizing: border-box;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.cyber-hero-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT COLUMN: Narrative & Identity Architecture
+   -------------------------------------------------------------------------- */
+
+.cyber-hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 24px;
+    z-index: 3;
+}
+
+/* Live Operational Status Pill */
+.cyber-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.32);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
+    margin-bottom: 18px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #34d399;
+    text-transform: uppercase;
+}
+
+.cyber-status-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.cyber-status-dot::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid #10b981;
+    animation: beaconPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes beaconPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.cyber-status-sep {
+    color: rgba(52, 211, 153, 0.4);
+}
+
+.cyber-status-loc {
+    color: #a7f3d0;
+    font-weight: 500;
+}
+
+/* Kicker tag */
+.cyber-kicker {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #8c6fff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Hero Title */
+.cyber-hero-title {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(2.4rem, 4.2vw, 3.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.025em !important;
+    color: #ffffff !important;
+    margin: 0 0 14px 0 !important;
+}
+
+body.light .cyber-hero-title {
+    color: #0f172a !important;
+}
+
+.cyber-hero-gradient {
+    background: linear-gradient(135deg, #a48fff 0%, #ff6f6f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+}
+
+/* Role Terminal Bar (Typewriter integration) */
+.cyber-role-bar {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(140, 111, 255, 0.08);
+    border: 1px solid rgba(140, 111, 255, 0.2);
+    align-self: flex-start;
+}
+
+body.light .cyber-role-bar {
+    background: rgba(124, 91, 255, 0.06);
+    border-color: rgba(124, 91, 255, 0.16);
+    color: #1e293b;
+}
+
+.cyber-role-bar .prompt-sym {
+    color: #7c5bff;
+    font-weight: 700;
+}
+
+.cyber-role-bar .typed-text-output {
+    color: #ff6f6f;
+    font-weight: 700;
+}
+
+.cursor-blink {
+    color: #8c6fff;
+    animation: cursorFlash 1s step-end infinite;
+}
+
+@keyframes cursorFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Short Bio / Value Prop */
+.cyber-hero-bio {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #94a3b8;
+    max-width: 530px;
+    margin-bottom: 22px;
+}
+
+body.light .cyber-hero-bio {
+    color: #475569;
+}
+
+/* Stat Proof Strip */
+.cyber-proof-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.cyber-proof-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+}
+
+.cyber-proof-item:hover {
+    border-color: rgba(140, 111, 255, 0.4);
+    background: rgba(140, 111, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+body.light .cyber-proof-item {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.proof-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #a48fff;
+}
+
+.proof-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #cbd5e1;
+    line-height: 1.2;
+}
+
+body.light .proof-label {
+    color: #334155;
+}
+
+/* Action Buttons Dock */
+.cyber-actions-dock {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.cyber-actions-dock .capsule-btn {
+    margin: 0;
+}
+
+.cyber-primary-cta {
+    background: linear-gradient(135deg, #7c5bff 0%, #9065ff 100%) !important;
+    color: #ffffff !important;
+    border-color: #8c6fff !important;
+    box-shadow: 0 4px 20px rgba(124, 91, 255, 0.4), 0 0 0 1px rgba(140, 111, 255, 0.3) !important;
+}
+
+.cyber-primary-cta:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 28px rgba(124, 91, 255, 0.55), 0 0 0 1px rgba(140, 111, 255, 0.5) !important;
+}
+
+/* Quick Social & Verified Badges */
+.cyber-social-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cyber-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(140, 111, 255, 0.08);
+    border: 1px solid rgba(140, 111, 255, 0.22);
+    color: #c4b5fd;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.cyber-social-link:hover {
+    background: rgba(140, 111, 255, 0.25);
+    border-color: #8c6fff;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(140, 111, 255, 0.3);
+}
+
+body.light .cyber-social-link {
+    background: rgba(124, 91, 255, 0.06);
+    border-color: rgba(124, 91, 255, 0.18);
+    color: #6343e6;
+}
+
+body.light .cyber-social-link:hover {
+    background: #7c5bff;
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT COLUMN: The CyberSec Command Deck & Interactive Console
+   -------------------------------------------------------------------------- */
+
+.cyber-hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.cyber-deck-wrapper {
+    width: 100%;
+    max-width: 580px;
+    perspective: 1200px;
+}
+
+.cyber-deck-window {
+    position: relative;
+    width: 100%;
+    border-radius: 18px;
+    background: rgba(11, 15, 30, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(140, 111, 255, 0.28);
+    box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 
+                0 0 35px rgba(124, 91, 255, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cyber-deck-window:hover {
+    border-color: rgba(140, 111, 255, 0.5);
+    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 
+                0 0 45px rgba(124, 91, 255, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+body.light .cyber-deck-window {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(124, 91, 255, 0.25);
+    box-shadow: 0 20px 50px -12px rgba(124, 91, 255, 0.2), 
+                0 0 0 1px rgba(124, 91, 255, 0.08);
+}
+
+/* Window Header Bar */
+.deck-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(140, 111, 255, 0.16);
+}
+
+body.light .deck-header-bar {
+    background: rgba(124, 91, 255, 0.05);
+    border-bottom-color: rgba(124, 91, 255, 0.12);
+}
+
+.deck-window-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.deck-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.deck-dot.red { background: #ff5f56; box-shadow: 0 0 6px rgba(255, 95, 86, 0.5); }
+.deck-dot.yellow { background: #ffbd2e; box-shadow: 0 0 6px rgba(255, 189, 46, 0.5); }
+.deck-dot.green { background: #27c93f; box-shadow: 0 0 6px rgba(39, 201, 63, 0.5); }
+
+.deck-title-tag {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+body.light .deck-title-tag {
+    color: #475569;
+}
+
+.deck-telemetry-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #34d399;
+}
+
+.deck-signal-ping {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+/* Mode Navigation Tabs */
+.deck-tabs-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.light .deck-tabs-nav {
+    background: rgba(124, 91, 255, 0.03);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+.deck-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.deck-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(140, 111, 255, 0.12);
+}
+
+body.light .deck-tab-btn {
+    color: #64748b;
+}
+
+body.light .deck-tab-btn:hover {
+    color: #1e293b;
+    background: rgba(124, 91, 255, 0.08);
+}
+
+.deck-tab-btn.active {
+    color: #ffffff;
+    background: rgba(124, 91, 255, 0.22);
+    border: 1px solid rgba(140, 111, 255, 0.35);
+    box-shadow: 0 2px 8px rgba(124, 91, 255, 0.2);
+}
+
+body.light .deck-tab-btn.active {
+    color: #6343e6;
+    background: rgba(124, 91, 255, 0.12);
+    border-color: rgba(124, 91, 255, 0.25);
+}
+
+/* Deck Content Body */
+.deck-panel-body {
+    padding: 16px 20px;
+    min-height: 330px;
+    max-height: 390px;
+    overflow-y: auto;
+    font-family: 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+/* Custom scrollbar for terminal */
+.deck-panel-body::-webkit-scrollbar {
+    width: 5px;
+}
+.deck-panel-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.deck-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(140, 111, 255, 0.2);
+    border-radius: 99px;
+}
+
+/* --------------------------------------------------------------------------
+   TAB 1: Interactive Terminal
+   -------------------------------------------------------------------------- */
+.terminal-output {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.term-line {
+    word-break: break-word;
+}
+
+.term-comment { color: #64748b; }
+.term-success { color: #34d399; font-weight: 600; }
+.term-accent { color: #a48fff; font-weight: 600; }
+.term-warn { color: #fbbf24; }
+.term-red { color: #ff6f6f; font-weight: 600; }
+.term-bold { color: #ffffff; font-weight: 700; }
+
+body.light .term-comment { color: #64748b; }
+body.light .term-bold { color: #0f172a; }
+
+/* Interactive Command Chips */
+.term-chips-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 12px 0 10px;
+    padding: 8px 10px;
+    background: rgba(140, 111, 255, 0.06);
+    border: 1px dashed rgba(140, 111, 255, 0.24);
+    border-radius: 10px;
+}
+
+.term-chip-label {
+    font-size: 10.5px;
+    color: #94a3b8;
+    margin-right: 4px;
+}
+
+.term-chip {
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(124, 91, 255, 0.16);
+    border: 1px solid rgba(124, 91, 255, 0.3);
+    color: #c4b5fd;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.term-chip:hover {
+    background: #7c5bff;
+    color: #ffffff;
+    border-color: #8c6fff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(124, 91, 255, 0.35);
+}
+
+/* Terminal Input Line */
+.term-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.term-input-prompt {
+    color: #7c5bff;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.term-input-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 12.5px;
+    color: #34d399;
+    padding: 0;
+    caret-color: #34d399;
+}
+
+.term-input-field::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   TAB 2: Threat Telemetry & Live Radar
+   -------------------------------------------------------------------------- */
+.telemetry-tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.radar-telemetry-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.telemetry-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+body.light .telemetry-title {
+    color: #1e293b;
+}
+
+.radar-display-box {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 12px;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(11, 15, 30, 0.95) 70%);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radar-sweep-beam {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    background: conic-gradient(from 0deg, rgba(16, 185, 129, 0.3) 0deg, transparent 60deg, transparent 360deg);
+    animation: radarSpin 4s linear infinite;
+}
+
+@keyframes radarSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.radar-target-node {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 10px #34d399;
+    animation: nodePulse 2s infinite;
+}
+
+@keyframes nodePulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+.radar-hud-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    font-family: 'Fira Code', monospace;
+    color: #34d399;
+    text-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.telemetry-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.telem-metric-card {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+body.light .telem-metric-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.telem-key {
+    font-size: 10.5px;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.telem-val {
+    font-size: 13px;
+    font-weight: 700;
+    color: #34d399;
+    margin-top: 2px;
+}
+
+/* Run Audit Action Button */
+.btn-trigger-audit {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(124, 91, 255, 0.15) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-trigger-audit:hover {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: #34d399;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   TAB 3: Tech Matrix & Capabilities
+   -------------------------------------------------------------------------- */
+.matrix-tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.matrix-group-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #a48fff;
+    margin-bottom: 6px;
+}
+
+.matrix-badges-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.matrix-badge {
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(140, 111, 255, 0.1);
+    border: 1px solid rgba(140, 111, 255, 0.24);
+    color: #cbd5e1;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.matrix-badge:hover {
+    background: rgba(140, 111, 255, 0.25);
+    border-color: #8c6fff;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+body.light .matrix-badge {
+    color: #334155;
+    background: rgba(124, 91, 255, 0.08);
+    border-color: rgba(124, 91, 255, 0.18);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+    .cyber-hero-section {
+        padding: 90px 0 40px;
+        min-height: auto;
+    }
+
+    .cyber-hero-left {
+        padding-right: 0;
+        margin-bottom: 40px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .cyber-status-pill,
+    .cyber-role-bar {
+        align-self: center;
+    }
+
+    .cyber-proof-strip {
+        justify-content: center;
+    }
+
+    .cyber-actions-dock {
+        justify-content: center;
+    }
+
+    .cyber-hero-bio {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cyber-deck-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .cyber-hero-title {
+        font-size: 2.2rem !important;
+    }
+
+    .cyber-proof-strip {
+        gap: 8px;
+    }
+
+    .cyber-proof-item {
+        padding: 6px 10px;
+    }
+
+    .proof-num {
+        font-size: 15px;
+    }
+
+    .proof-label {
+        font-size: 11px;
+    }
+
+    .deck-panel-body {
+        padding: 12px 14px;
+        font-size: 11.5px;
+    }
+}

@@ -24,13 +24,3 @@ class ArticleSitemap(Sitemap):
 
     def location(self, obj):
         return reverse('detail_blog', kwargs={'slug': obj.slug})
-
-class CertificateSitemap(Sitemap):
-    priority = 0.5
-    changefreq = 'monthly'
-
-    def items(self):
-        return Certificate.objects.all()
-
-    def location(self, obj):
-        return reverse('certificate')

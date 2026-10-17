@@ -1,147 +1,86 @@
-    <section id="expertise" class="br-portfolio padding-tb-80 ">
-        <!-- SVG Filter Definitions for Brand Purple (#7c5bff / #8c6fff / #b57bff) Skill Logos -->
-        <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true" focusable="false">
-            <defs>
-                <filter id="purple-logo-filter" color-interpolation-filters="sRGB">
-                    <feColorMatrix type="matrix" values="
-                        0.150 0.294 0.057 0 0.280
-                        0.126 0.247 0.048 0 0.180
-                        0.075 0.147 0.029 0 0.750
-                        0     0     0     1 0" />
-                </filter>
-                <filter id="purple-logo-filter-hover" color-interpolation-filters="sRGB">
-                    <feColorMatrix type="matrix" values="
-                        0.164 0.323 0.063 0 0.350
-                        0.135 0.264 0.051 0 0.250
-                        0.060 0.117 0.023 0 0.800
-                        0     0     0     1 0" />
-                </filter>
-            </defs>
-        </svg>
+    <section id="expertise" class="faang-section faang-skills">
         <div class="container reveal-up">
-            <div class="section-title ">
-                <h2>Technical <span>Expertise</span></h2>
-                <span class="ligh-title">Expertise</span>
-            </div>
-            <div class="row">
+            <h2 class="section-heading">Technical <span class="section-heading-accent">Expertise</span></h2>
+
+            <div class="skills-grid">
                 {% if skill_categories %}
                 <!-- Render Categorized Skills Dynamically from DB -->
                 {% for category in skill_categories %}
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="flip-card" onclick="this.classList.toggle('hover');" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front skill-category-card">
-                                <div class="icon-wrapper front-icon"><i class="{% if category.icon_class %}{{ category.icon_class }}{% else %}fa-solid fa-code{% endif %}"></i></div>
-                                <h3 class="skill-category-title">{{ category.name }}</h3>
-                                <p class="skill-desc">{{ category.description|default:"" }}</p>
-                            </div>
-                            <div class="flip-card-back skill-category-card">
-                                <h3 class="skill-category-title">{{ category.name }}</h3>
-                                <div class="skill-chips-wrap">
-                                    {% for s in category.skills.all %}
-                                    <span class="skill-chip">{% if s.icon_url %}<img class="skill-chip-logo" src="{{ s.icon_url }}" width="20" height="20" alt="{{ s.language }}"> {% endif %}{{ s.language }}</span>
-                                    {% empty %}
-                                    <span class="skill-chip">No skills added yet</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
+                <div class="skill-cat-card glass-card">
+                    <div class="skill-cat-icon-wrap">
+                        <i class="{% if category.icon_class %}{{ category.icon_class }}{% else %}fa-solid fa-code{% endif %}"></i>
+                    </div>
+                    <h3 class="skill-cat-name">{{ category.name }}</h3>
+                    <p class="skill-cat-desc">{{ category.description|default:"" }}</p>
+                    <div class="skill-chips-wrap">
+                        {% for s in category.skills.all %}
+                        <span class="skill-chip">
+                            {% if s.icon_url %}<img src="{{ s.icon_url }}" width="14" height="14" alt="{{ s.language }}" style="vertical-align:middle;">{% endif %}
+                            {{ s.language }}
+                        </span>
+                        {% empty %}
+                        <span class="skill-chip">No skills added yet</span>
+                        {% endfor %}
                     </div>
                 </div>
                 {% endfor %}
 
                 {% else %}
-                <!-- Recruiter-Vetted Hardcoded Fallbacks (Safe Mode) -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="flip-card" onclick="this.classList.toggle('hover');" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front skill-category-card">
-                                <div class="icon-wrapper front-icon"><i class="fa-solid fa-code"></i></div>
-                                <h3 class="skill-category-title">Languages</h3>
-                                <p class="skill-desc">Core programming languages used for robust backend services, scripts, and front-end logic.</p>
-                            </div>
-                            <div class="flip-card-back skill-category-card">
-                                <h3 class="skill-category-title">Languages Stack</h3>
-                                <div class="skill-chips-wrap">
-                                    <span class="skill-chip"><i class="fa-brands fa-python"></i> Python</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-golang"></i> Go</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-js"></i> JavaScript</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-dart"></i> Dart</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-html5"></i> HTML5 / CSS3</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-database"></i> SQL</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-c"></i> C / C++</span>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Hardcoded Fallbacks (Safe Mode) -->
+                <div class="skill-cat-card glass-card">
+                    <div class="skill-cat-icon-wrap"><i class="fa-solid fa-code"></i></div>
+                    <h3 class="skill-cat-name">Languages</h3>
+                    <p class="skill-cat-desc">Core programming languages for robust backend services, scripts, and front-end logic.</p>
+                    <div class="skill-chips-wrap">
+                        <span class="skill-chip"><i class="fa-brands fa-python" style="font-size:0.8rem;"></i> Python</span>
+                        <span class="skill-chip"><i class="fa-brands fa-golang" style="font-size:0.8rem;"></i> Go</span>
+                        <span class="skill-chip"><i class="fa-brands fa-js" style="font-size:0.8rem;"></i> JavaScript</span>
+                        <span class="skill-chip">Dart</span>
+                        <span class="skill-chip"><i class="fa-brands fa-html5" style="font-size:0.8rem;"></i> HTML5</span>
+                        <span class="skill-chip"><i class="fa-solid fa-database" style="font-size:0.8rem;"></i> SQL</span>
+                        <span class="skill-chip">C / C++</span>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="flip-card" onclick="this.classList.toggle('hover');" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front skill-category-card">
-                                <div class="icon-wrapper front-icon"><i class="fa-solid fa-layer-group"></i></div>
-                                <h3 class="skill-category-title">Frameworks</h3>
-                                <p class="skill-desc">Modern frameworks and libraries for building scalable web and mobile applications.</p>
-                            </div>
-                            <div class="flip-card-back skill-category-card">
-                                <h3 class="skill-category-title">Frameworks Stack</h3>
-                                <div class="skill-chips-wrap">
-                                    <span class="skill-chip"><i class="fa-brands fa-python"></i> Django</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-google"></i> Flutter</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-react"></i> React</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-wind"></i> Tailwind CSS</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-bolt"></i> FastAPI</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="skill-cat-card glass-card">
+                    <div class="skill-cat-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="skill-cat-name">Frameworks</h3>
+                    <p class="skill-cat-desc">Modern frameworks and libraries for building scalable web and mobile applications.</p>
+                    <div class="skill-chips-wrap">
+                        <span class="skill-chip"><i class="fa-brands fa-python" style="font-size:0.8rem;"></i> Django</span>
+                        <span class="skill-chip">Flutter</span>
+                        <span class="skill-chip"><i class="fa-brands fa-react" style="font-size:0.8rem;"></i> React</span>
+                        <span class="skill-chip">FastAPI</span>
+                        <span class="skill-chip">Tailwind CSS</span>
+                        <span class="skill-chip">Bootstrap</span>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="flip-card" onclick="this.classList.toggle('hover');" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front skill-category-card">
-                                <div class="icon-wrapper front-icon"><i class="fa-solid fa-toolbox"></i></div>
-                                <h3 class="skill-category-title">Tools & Cloud</h3>
-                                <p class="skill-desc">Industry-standard tools, databases, and cloud platforms for deployment and CI/CD.</p>
-                            </div>
-                            <div class="flip-card-back skill-category-card">
-                                <h3 class="skill-category-title">Tools Stack</h3>
-                                <div class="skill-chips-wrap">
-                                    <span class="skill-chip"><i class="fa-brands fa-github"></i> Git / GitHub</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-database"></i> PostgreSQL / MySQL</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-fire"></i> Firebase</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-linux"></i> Linux / Bash</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-docker"></i> Docker</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-server"></i> Gunicorn / Nginx</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="skill-cat-card glass-card">
+                    <div class="skill-cat-icon-wrap"><i class="fa-solid fa-toolbox"></i></div>
+                    <h3 class="skill-cat-name">Tools & Cloud</h3>
+                    <p class="skill-cat-desc">Industry-standard tools, databases, and cloud platforms for deployment and CI/CD.</p>
+                    <div class="skill-chips-wrap">
+                        <span class="skill-chip"><i class="fa-brands fa-github" style="font-size:0.8rem;"></i> Git / GitHub</span>
+                        <span class="skill-chip"><i class="fa-brands fa-docker" style="font-size:0.8rem;"></i> Docker</span>
+                        <span class="skill-chip">PostgreSQL</span>
+                        <span class="skill-chip">Firebase</span>
+                        <span class="skill-chip"><i class="fa-brands fa-linux" style="font-size:0.8rem;"></i> Linux</span>
+                        <span class="skill-chip">Nginx</span>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="flip-card" onclick="this.classList.toggle('hover');" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front skill-category-card">
-                                <div class="icon-wrapper front-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                                <h3 class="skill-category-title">Security Tools</h3>
-                                <p class="skill-desc">Vulnerability assessment, network monitoring, and penetration testing utilities.</p>
-                            </div>
-                            <div class="flip-card-back skill-category-card">
-                                <h3 class="skill-category-title">Security Stack</h3>
-                                <div class="skill-chips-wrap">
-                                    <span class="skill-chip"><i class="fa-solid fa-bug"></i> Burp Suite</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-network-wired"></i> Wireshark</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-radar"></i> Nmap</span>
-                                    <span class="skill-chip"><i class="fa-brands fa-linux"></i> Kali Linux</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-shield-cat"></i> OWASP ZAP</span>
-                                    <span class="skill-chip"><i class="fa-solid fa-skull-crossbones"></i> Metasploit</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="skill-cat-card glass-card">
+                    <div class="skill-cat-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="skill-cat-name">Security Tools</h3>
+                    <p class="skill-cat-desc">Vulnerability assessment, network monitoring, and penetration testing utilities.</p>
+                    <div class="skill-chips-wrap">
+                        <span class="skill-chip">Burp Suite</span>
+                        <span class="skill-chip">Wireshark</span>
+                        <span class="skill-chip">Nmap</span>
+                        <span class="skill-chip">Kali Linux</span>
+                        <span class="skill-chip">OWASP ZAP</span>
+                        <span class="skill-chip">Metasploit</span>
                     </div>
                 </div>
                 {% endif %}
@@ -149,4 +88,3 @@
         </div>
     </section>
     <!-- Skills Section End -->
-

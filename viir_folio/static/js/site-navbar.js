@@ -51,10 +51,6 @@
     };
 
     window.toggleStyles = function (event) {
-        if (event) {
-            event.preventDefault();
-        }
-
         const isDark = document.body.classList.contains('dark');
         const newMode = !isDark;
 
@@ -74,6 +70,8 @@
         if (typeof window.updateGridTheme === 'function') {
             window.updateGridTheme(newMode);
         }
+
+        window.dispatchEvent(new Event('themeChanged'));
     };
 
     document.addEventListener('click', event => {
@@ -145,10 +143,20 @@
         // Initialize Theme Toggle Checkbox State
         const isDarkMode = localStorage.getItem('darkMode') !== 'false';
         const toggleCheckbox = document.getElementById('toggle');
+        const toggleButton = document.getElementById('theme-toggle-button');
+
         if (toggleCheckbox) {
             toggleCheckbox.checked = isDarkMode;
-            // Attach listener for all pages using the navbar
             toggleCheckbox.addEventListener('change', window.toggleStyles);
+        }
+
+        if (toggleButton) {
+            toggleButton.addEventListener('click', function (e) {
+                if (e.target !== toggleCheckbox) {
+                    e.preventDefault();
+                    window.toggleStyles();
+                }
+            });
         }
     }
 

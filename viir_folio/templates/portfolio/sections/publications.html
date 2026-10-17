@@ -1,38 +1,72 @@
-    <section id="research" class="br-portfolio padding-tb-80 ">
+    <section id="research" class="faang-section faang-publications">
         <div class="container reveal-up">
-            <div class="section-title ">
-                <h2>Published <span>Research</span></h2>
-                <span class="ligh-title">Research</span>
+            <h2 class="section-heading">Published <span class="section-heading-accent">Research</span></h2>
+
+            <div class="pub-search-wrap">
+                <i class="fa-solid fa-magnifying-glass pub-search-icon"></i>
+                <label for="searchInput" class="visually-hidden">Search Publications</label>
+                <input type="text" id="searchInput" placeholder="Search by title or author">
             </div>
-            <div class="search-bar">
-                <label for="searchInput" class="visually-hidden">Search</label>
-                <input type="text" id="searchInput" placeholder="Search by title, author, or publication...">
-            </div>
+
             <div class="pub-list reveal-stagger" id="pubList">
                 {% for object in publications %}
-                {# Skip dummy/test entries — only show if title is meaningful (>5 chars, not all lowercase gibberish) #}
+                {# Skip dummy/test entries — only show if title is meaningful #}
                 {% if object.title|length > 10 %}
                 <div class="pub-card reveal-stagger-child">
-                    <div class="pub-date">{{ object.date }}</div>
-                    <div class="pub-title">{{ object.title }}</div>
-                    <div class="pub-authors">
-                        {% for author in object.authors_m2m.all %}
-                            {% if author.name == "Viir Phuria" %}
-                                <strong>{{ author.name }}</strong>
-                            {% else %}
-                                {{ author.name }}
-                            {% endif %}{% if not forloop.last %}, {% endif %}
-                        {% empty %}
-                            {{ object.authors }}
-                        {% endfor %}
+                    <!-- Year Column -->
+                    <div class="pub-year-col">
+                        <span class="pub-year-badge">{{ object.date }}</span>
+                        <div class="pub-divider-line"></div>
                     </div>
-                    <div class="pub-meta">Published in: {{ object.place }}</div>
-                    <a href="{{ object.url }}" class="capsule-btn" target="_blank" rel="noopener noreferrer"><span class="text">View
-                            Publication</span></a>
+
+                    <!-- Content Column -->
+                    <div class="pub-content-col">
+                        <div class="pub-venue-pill">
+                            <i class="fa-solid fa-award" style="font-size:0.6rem;"></i>
+                            IEEE
+                        </div>
+                        <div class="pub-title">{{ object.title }}</div>
+                        <div class="pub-authors">
+                            {% for author in object.authors_m2m.all %}
+                                {% if "viir phuria" in author.name|lower %}
+                                    <strong>{{ author.name }}</strong>
+                                {% else %}
+                                    {{ author.name }}
+                                {% endif %}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                {{ object.authors }}
+                            {% endfor %}
+                        </div>
+                        <div class="pub-meta">Published in: {{ object.place }}</div>
+                    </div>
+
+                    <!-- Action Column -->
+                    <div class="pub-action-col">
+                        <a href="{{ object.url }}" class="pub-view-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i>
+                            View Paper
+                        </a>
+                    </div>
                 </div>
                 {% endif %}
                 {% endfor %}
             </div>
         </div>
+        <script>
+        (function() {
+            function highlightViir() {
+                document.querySelectorAll('.pub-authors').forEach(function(el) {
+                    if (!el.querySelector('strong')) {
+                        el.innerHTML = el.innerHTML.replace(/\b(Viir\s+Phuria)(,?)/gi, '<strong>$1</strong>$2');
+                    }
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', highlightViir);
+            } else {
+                highlightViir();
+            }
+        })();
+        </script>
     </section>
     <!-- Publications Section End -->

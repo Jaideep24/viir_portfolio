@@ -30,7 +30,8 @@
         if (!container || !track) return;
 
         cards = Array.from(track.querySelectorAll(".sticky-project-card"));
-        filterButtons = Array.from(document.querySelectorAll("#projects .portfolio-tabs .filter"));
+        filterButtons = Array.from(document.querySelectorAll("#projects .filter"));
+
 
         setupFilters();
         updateDimensions();
@@ -132,8 +133,12 @@
             return;
         }
 
-        // Compute total track scroll width
+        // Compute total track scroll width cleanly
+        const savedTransform = track.style.transform;
+        track.style.transform = "none";
         const trackScrollWidth = track.scrollWidth;
+        track.style.transform = savedTransform;
+
         const viewportWidth = window.innerWidth;
         // Padding at end so last card has comfortable breathing room
         const endBuffer = window.innerWidth > 1200 ? 120 : 60;

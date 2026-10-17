@@ -43,13 +43,11 @@ from django.contrib.sitemaps.views import sitemap
 from viir_folio.sitemaps import (
     StaticViewSitemap,
     ArticleSitemap,
-    CertificateSitemap,
 )
 
 sitemaps = {
     "static": StaticViewSitemap(),
     "articles": ArticleSitemap(),
-    "certificates": CertificateSitemap(),
 }
 
 admin.site.site_header = "Viir Portfolio Administration"

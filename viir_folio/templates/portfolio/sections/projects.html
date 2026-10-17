@@ -1,31 +1,24 @@
 {% load static %}
 {% load custom_filters %}
 
-    <section id="projects" class="sticky-projects-section">
+    <section id="projects" class="sticky-projects-section faang-projects">
         <div class="sticky-projects-container" id="sticky-projects-container">
             <div class="sticky-projects-viewport" id="sticky-projects-viewport">
                 <!-- Section Header (Sticky inside viewport) -->
                 <div class="container sticky-projects-header">
-                    <div class="section-title">
-                        <h2>Featured <span>Projects</span></h2>
-                        <span class="ligh-title">Projects</span>
-                    </div>
+                    <h2 class="section-heading">Featured <span class="section-heading-accent">Projects</span></h2>
 
-                    <!-- Category Filter Tabs -->
-                    <div class="portfolio-tabs-wrapper">
-                        <div class="portfolio-tabs">
-                            <ul role="tablist" aria-label="Project Categories">
-                                <li class="filter mixitup-control-active" data-filter="all" role="button" tabindex="0">ALL</li>
-                                <li class="filter" data-filter=".webdev" role="button" tabindex="0">WEB DEV</li>
-                                <li class="filter" data-filter=".appdev" role="button" tabindex="0">APP DEV</li>
-                                <li class="filter" data-filter=".mlai" role="button" tabindex="0">ML/AI</li>
-                                <li class="filter" data-filter=".iot" role="button" tabindex="0">IoT</li>
-                                <li class="filter" data-filter=".cybersec" role="button" tabindex="0">CYBER SECURITY</li>
-                            </ul>
-                        </div>
+                    <!-- Category Filter — Telemetry Style -->
+                    <div class="project-filter-bar">
+                        <button class="project-filter-btn filter mixitup-control-active" data-filter="all" role="button" tabindex="0">ALL</button>
+                        <button class="project-filter-btn filter" data-filter=".webdev" role="button" tabindex="0">WEB DEV</button>
+                        <button class="project-filter-btn filter" data-filter=".appdev" role="button" tabindex="0">APP DEV</button>
+                        <button class="project-filter-btn filter" data-filter=".mlai" role="button" tabindex="0">ML / AI</button>
+                        <button class="project-filter-btn filter" data-filter=".iot" role="button" tabindex="0">IoT</button>
+                        <button class="project-filter-btn filter" data-filter=".cybersec" role="button" tabindex="0">CYBER SEC</button>
                     </div>
-
                 </div>
+
 
                 <!-- Horizontal Sliding Track Window -->
                 <div class="sticky-track-wrapper" id="sticky-track-wrapper">

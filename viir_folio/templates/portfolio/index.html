@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 
     <!-- CSS: Vendor Stylesheets -->
@@ -52,6 +52,197 @@
     <link rel="stylesheet" href="{% static 'css/site-footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/scroll-anim.css' %}">
     {% endcompress %}
+    <link rel="stylesheet" href="{% static 'css/cyber-core.css' %}?v=20261018h">
+    <link rel="stylesheet" href="{% static 'css/sections-faang.css' %}?v=20261018h">
+    <link rel="stylesheet" href="{% static 'css/portfolio-polish.css' %}?v=20261018h">
+
+    <style>
+        /* Theme Color Scheme for Browser Form Controls & Autofill Popups */
+        :root,
+        body.dark,
+        body:not(.light) {
+            color-scheme: dark;
+        }
+        body.light {
+            color-scheme: light;
+        }
+
+        /* Strict Shape & Size Integrity: Inputs never morph into rectangles on active/focus */
+        input, textarea, select,
+        input:focus, input:focus-visible, input:active,
+        textarea:focus, textarea:focus-visible, textarea:active,
+        select:focus, select:focus-visible, select:active {
+            outline: none !important;
+            outline-offset: 0 !important;
+            -webkit-appearance: none !important;
+        }
+
+        .pub-search-icon {
+            z-index: 5 !important;
+            font-size: 0.95rem !important;
+        }
+        body.light .pub-search-icon {
+            color: #334155 !important;
+            opacity: 1 !important;
+        }
+        body.dark .pub-search-icon,
+        body:not(.light) .pub-search-icon {
+            color: #94a3b8 !important;
+            opacity: 1 !important;
+        }
+        body.light #searchInput::placeholder {
+            color: #64748b !important;
+            opacity: 0.9 !important;
+        }
+
+        #searchInput,
+        #searchInput:focus,
+        #searchInput:focus-visible,
+        #searchInput:active {
+            border-radius: 999px !important;
+            outline: none !important;
+            outline-offset: 0 !important;
+            -webkit-appearance: none !important;
+        }
+
+        .modern-input,
+        .modern-input:focus,
+        .modern-input:focus-visible,
+        .modern-input:active,
+        .form-control.modern-input,
+        .form-control.modern-input:focus,
+        .form-control.modern-input:focus-visible,
+        .form-control.modern-input:active {
+            border-radius: 15px !important;
+            outline: none !important;
+            outline-offset: 0 !important;
+            -webkit-appearance: none !important;
+        }
+
+        /* DARK THEME: Text & Autofill Styling */
+        body.dark input,
+        body.dark textarea,
+        body.dark select,
+        body:not(.light) input,
+        body:not(.light) textarea,
+        body:not(.light) select {
+            color: #f8fafc !important;
+            caret-color: #f8fafc !important;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder,
+        body:not(.light) input::placeholder,
+        body:not(.light) textarea::placeholder {
+            color: #94a3b8 !important;
+            opacity: 0.85;
+        }
+
+        body.dark .modern-input,
+        body:not(.light) .modern-input {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            caret-color: #f8fafc !important;
+        }
+
+        body.dark .modern-input:focus,
+        body:not(.light) .modern-input:focus {
+            background-color: #27364d !important;
+            color: #f8fafc !important;
+            caret-color: #f8fafc !important;
+        }
+
+        body.dark input:-webkit-autofill,
+        body.dark input:autofill,
+        body.dark textarea:-webkit-autofill,
+        body.dark textarea:autofill,
+        body.dark select:-webkit-autofill,
+        body.dark select:autofill,
+        body:not(.light) input:-webkit-autofill,
+        body:not(.light) input:autofill,
+        body:not(.light) textarea:-webkit-autofill,
+        body:not(.light) textarea:autofill {
+            -webkit-text-fill-color: #f8fafc !important;
+            color: #f8fafc !important;
+            caret-color: #f8fafc !important;
+            -webkit-box-shadow: 0 0 0 1000px #1e293b inset !important;
+            box-shadow: 0 0 0 1000px #1e293b inset !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+        }
+
+        body.dark input:-webkit-autofill:focus,
+        body.dark input:autofill:focus,
+        body.dark textarea:-webkit-autofill:focus,
+        body.dark textarea:autofill:focus,
+        body:not(.light) input:-webkit-autofill:focus,
+        body:not(.light) input:autofill:focus,
+        body:not(.light) textarea:-webkit-autofill:focus,
+        body:not(.light) textarea:autofill:focus {
+            -webkit-text-fill-color: #f8fafc !important;
+            color: #f8fafc !important;
+            caret-color: #f8fafc !important;
+            -webkit-box-shadow: 0 0 0 1000px #27364d inset, 0 0 0 3px rgba(124, 91, 255, 0.25) !important;
+            box-shadow: 0 0 0 1000px #27364d inset, 0 0 0 3px rgba(124, 91, 255, 0.25) !important;
+            border-color: rgba(124, 91, 255, 0.45) !important;
+        }
+
+        /* LIGHT THEME: Text & Autofill Styling */
+        body.light input,
+        body.light textarea,
+        body.light select {
+            color: #0f172a !important;
+            caret-color: #0f172a !important;
+        }
+
+        body.light input::placeholder,
+        body.light textarea::placeholder {
+            color: #64748b !important;
+            opacity: 0.85;
+        }
+
+        body.light .modern-input {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            caret-color: #0f172a !important;
+            border-color: rgba(15, 23, 42, 0.15) !important;
+        }
+
+        body.light .modern-input:focus {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            caret-color: #0f172a !important;
+            border-color: rgba(124, 91, 255, 0.4) !important;
+            box-shadow: 0 0 0 3px rgba(124, 91, 255, 0.1) !important;
+        }
+
+        body.light input:-webkit-autofill,
+        body.light input:autofill,
+        body.light textarea:-webkit-autofill,
+        body.light textarea:autofill,
+        body.light select:-webkit-autofill,
+        body.light select:autofill {
+            -webkit-text-fill-color: #0f172a !important;
+            color: #0f172a !important;
+            caret-color: #0f172a !important;
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+            box-shadow: 0 0 0 1000px #ffffff inset !important;
+            border-color: rgba(15, 23, 42, 0.2) !important;
+            transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+        }
+
+        body.light input:-webkit-autofill:focus,
+        body.light input:autofill:focus,
+        body.light textarea:-webkit-autofill:focus,
+        body.light textarea:autofill:focus {
+            -webkit-text-fill-color: #0f172a !important;
+            color: #0f172a !important;
+            caret-color: #0f172a !important;
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.2) !important;
+            box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(124, 91, 255, 0.2) !important;
+            border-color: rgba(124, 91, 255, 0.4) !important;
+        }
+    </style>
 
     <script nonce="{{ csp_nonce }}">
         window.__indexSidebar = true;
@@ -109,52 +300,148 @@
     <main id="main-content">
 
     <!-- ============================================================ -->
-    <!-- HERO SECTION -->
+    <!-- 3D INTERACTIVE NEURAL CORE & PARTICLE ORB (HERO SECTION) -->
     <!-- ============================================================ -->
-    <section id="home" class="hero-section ">
-        <div class="body-part-2">
-            <div class="hoodie-guy-animation-class">
-                <div class="background-circle"></div>
-                <div class="circle">
-                    <span class="circle-icon circle-icon-1"><img src="{% static 'assets/icons/flutter.svg' %}" alt="Flutter" height="75px"></span>
-                    <span class="circle-icon circle-icon-2"><img src="{% static 'assets/icons/python.svg' %}" alt="Python" height="75px"></span>
-                    <span class="circle-icon circle-icon-3"><img src="{% static 'assets/icons/adobe-photoshop.svg' %}" alt="Adobe Photoshop" height="75px"></span>
-                    <span class="circle-icon circle-icon-4"><img src="{% static 'assets/icons/django.svg' %}" alt="Django" height="75px"></span>
-                    <span class="circle-icon circle-icon-5"><img src="{% static 'assets/icons/adobe-premiere-pro.svg' %}" alt="Adobe Premiere Pro" height="75px"></span>
-                    <span class="circle-icon circle-icon-6"><img src="{% static 'assets/icons/html-5.svg' %}" alt="HTML5" height="70px"></span>
-                    <span class="circle-icon circle-icon-7"><img src="{% static 'assets/icons/figma.svg' %}" alt="Figma" height="75px"></span>
-                    <span class="circle-icon circle-icon-8"><img src="{% static 'assets/icons/css3.svg' %}" alt="CSS3" height="70px"></span>
-                    <span class="circle-icon circle-icon-9"><img src="{% static 'assets/icons/javascript.svg' %}" alt="JavaScript" height="75px"></span>
-                    <span class="circle-icon circle-icon-10"><img src="{% static 'assets/icons/adobe-illustrator.svg' %}" alt="Adobe Illustrator" height="75px"></span>
-                    <span class="circle-icon circle-icon-11"><img src="{% static 'assets/icons/dart.svg' %}" alt="Dart" height="75px"></span>
-                    <span class="circle-icon circle-icon-12"><img src="{% static 'assets/icons/PostgreSQL-Dark.svg' %}" alt="PostgreSQL" height="75px"></span>
-                    <span class="circle-icon circle-icon-13"><img src="{% static 'assets/icons/MySQL-Dark.svg' %}" alt="MySQL" height="75px"></span>
-                    <span class="circle-icon circle-icon-14"><img src="{% static 'assets/icons/Firebase-Dark.svg' %}" alt="Firebase" height="75px"></span>
-                    <span class="circle-icon circle-icon-15"><img src="{% static 'assets/icons/Github-Dark.svg' %}" alt="GitHub" height="75px"></span>
+    <!-- ============================================================ -->
+    <!-- 3D TELEMETRY MATRIX & CYBER CORE HERO (Framer / Miten Standard) -->
+    <!-- ============================================================ -->
+    <section id="home" class="holo-hero-section">
+        <!-- Background 3D Telemetry Canvas -->
+        <canvas id="cyberCoreCanvas" class="holo-hero-canvas"></canvas>
+
+        <!-- Precision Architectural HUD Framing (Miten Parvatia inspired) -->
+        <div class="hud-corners" aria-hidden="true">
+            <span class="hud-corner hud-tl"></span>
+            <span class="hud-corner hud-tr"></span>
+            <span class="hud-corner hud-bl"></span>
+            <span class="hud-corner hud-br"></span>
+        </div>
+
+        <div class="holo-hero-container">
+            <!-- 1. Top Telemetry Bar -->
+            <div class="holo-telemetry-bar">
+                <div class="telemetry-item telemetry-left">
+                    <span class="telemetry-badge">SYS.01</span>
+                    <span class="telemetry-text">CYBERSECURITY ARCHITECT &amp; DEEP LEARNING RESEARCHER</span>
                 </div>
-                <div class="hoodie-guy" data-bg="{% static 'assets/hoodie-guy.webp' %}"></div>
+                <div class="telemetry-item telemetry-right">
+                    <div class="telemetry-status-pill">
+                        <span class="telemetry-pulse-dot"></span>
+                        <span class="telemetry-status-label">{{ about_global.status_text|default:'AVAILABLE FOR HIGH-IMPACT ROLES' }}</span>
+                        <span class="telemetry-sep">•</span>
+                        <span class="telemetry-loc">{{ about_global.location|default:'MUMBAI, IN' }}</span>
+                        <span class="telemetry-sep">•</span>
+                        <span class="telemetry-clock" id="liveMumbaiClock">--:--:-- IST</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Central Monumental Editorial Typography -->
+            <div class="holo-hero-center">
+                <!-- Showstopper Monumental Name (Plus Jakarta Sans + Instrument Serif Italic) -->
+                <h1 class="holo-hero-title">
+                    <span class="title-primary">Viir</span>
+                    <span class="title-accent">Phuria</span>
+                </h1>
+
+                <!-- Value Proposition & Statement -->
+                <p class="holo-hero-statement">
+                    Architecting <span class="accent-sec">zero-trust defenses</span>. 
+                    Engineering <span class="accent-ai">neural threat intelligence</span>.
+                </p>
+
+                <!-- Clean Monospace Telemetry Terminal Line -->
+                <div class="holo-typewriter-pill">
+                    <span class="term-sym">&gt;</span>
+                    <span class="term-tag">focus //</span>
+                    <span id="typed-text" class="typed-text-output" data-texts="{{ about_global.hero_typed_text|default:'Cybersecurity Engineer, Full-Stack Architect, IEEE Researcher, Deep Learning Specialist' }}"></span>
+                    <span class="term-cursor">_</span>
+                </div>
+
+                <!-- 3D Stage Hint -->
+                <div class="holo-stage-hint">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>Interactive 3D Telemetry Matrix • Drag to Orbit • Click for Shockwave</span>
+                </div>
+            </div>
+
+            <!-- 3. Tactile Floating Dock & Proof Strip (Prem Rathod & Mohit inspired) -->
+            <div class="holo-hero-dock-wrap">
+                <!-- Proof Metrics Strip -->
+                <div class="holo-proof-strip">
+                    <div class="proof-chip">
+                        <span class="proof-val">{{ about_global.projects_count|default:'10+' }}</span>
+                        <span class="proof-lbl">Production Builds</span>
+                    </div>
+                    <div class="proof-sep">/</div>
+                    <div class="proof-chip">
+                        <span class="proof-val">{{ about_global.research_count|default:'2+' }}</span>
+                        <span class="proof-lbl">IEEE Publications</span>
+                    </div>
+                    <div class="proof-sep">/</div>
+                    <div class="proof-chip">
+                        <span class="proof-val">{{ about_global.certifications_count|default:'5+' }}</span>
+                        <span class="proof-lbl">Verified Credentials</span>
+                    </div>
+                </div>
+
+                <!-- Tactile Frosted Dock -->
+                <div class="holo-floating-dock">
+                    <a href="#projects" class="dock-btn dock-btn-primary">
+                        <span>Explore Selected Work</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    {% for object in cv %}
+                    <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="dock-btn dock-btn-ghost">
+                        <i class="fa-regular fa-file-pdf"></i>
+                        <span>Research &amp; CV</span>
+                    </a>
+                    {% empty %}
+                    <a href="#contact" class="dock-btn dock-btn-ghost">
+                        <span>Start Conversation</span>
+                    </a>
+                    {% endfor %}
+
+                    <div class="dock-divider"></div>
+
+                    <!-- Social Fast Links -->
+                    <div class="dock-socials">
+                        {% if about_global.github_url %}
+                        <a href="{{ about_global.github_url }}" target="_blank" rel="noopener noreferrer" class="dock-social-link" title="GitHub Profile" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        {% endif %}
+                        {% if about_global.linkedin_url %}
+                        <a href="{{ about_global.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="dock-social-link" title="LinkedIn Profile" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        {% endif %}
+                        {% if about_global.tryhackme_url %}
+                        <a href="{{ about_global.tryhackme_url }}" target="_blank" rel="noopener noreferrer" class="dock-social-link" title="TryHackMe Profile" aria-label="TryHackMe">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </a>
+                        {% endif %}
+                        {% if about_global.hackthebox_url %}
+                        <a href="{{ about_global.hackthebox_url }}" target="_blank" rel="noopener noreferrer" class="dock-social-link" title="HackTheBox Profile" aria-label="HackTheBox">
+                            <i class="fa-solid fa-cube"></i>
+                        </a>
+                        {% endif %}
+                        {% if about_global.leetcode_url %}
+                        <a href="{{ about_global.leetcode_url }}" target="_blank" rel="noopener noreferrer" class="dock-social-link" title="LeetCode Profile" aria-label="LeetCode">
+                            <i class="fa-solid fa-code"></i>
+                        </a>
+                        {% endif %}
+                        {% if about_global.email %}
+                        <a href="mailto:{{ about_global.email }}" class="dock-social-link" title="Send Encrypted Email" aria-label="Email">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Intro Text -->
-    <div class="text-center text-center-wrapper">
-        <div class="footer-text">
-            <h1 class="hero-title">Hello I'm Viir Phuria</h1>
-            <h2 id="typed-text" class="typed-text-output d-inline-block hero-subtitle" data-texts="{{ about_global.hero_typed_text|default:'Full-Stack Developer, Cyber Security, ML/AI, IoT' }}"></h2>
-        </div>
-        <div class="hero-cta-buttons hero-cta-buttons-wrapper">
-            {% for object in cv %}
-            <a href="{{ object.pdf.url }}" target="_blank" rel="noopener noreferrer" class="capsule-btn hero-btn download-cv-btn hero-btn-min-width">
-                <span class="text">View CV</span>
-            </a>
-            {% empty %}
-            <a href="#connect" class="capsule-btn hero-btn hero-btn-min-width">
-                <span class="text">Contact Me</span>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
     <!-- Hero End -->
 
     <!-- ============================================================ -->
@@ -227,6 +514,7 @@
     <script src="{% static 'js/scroll-anim.js' %}" defer></script>
     <script src="{% static 'js/contact-form.js' %}" defer></script>
     {% endcompress %}
+    <script src="{% static 'js/cyber-core.js' %}" defer></script>
 
     <!-- Structured Data: Projects List -->
     {% include 'includes/sd_projects_list.html' with projects=projects %}

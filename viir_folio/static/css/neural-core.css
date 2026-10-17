@@ -1,0 +1,715 @@
+/* ==========================================================================
+   VIIR PORTFOLIO — 3D Interactive Neural Core & Particle Orb Hero Styles
+   Ultra-Modern 2-Column Responsive Layout with Holographic Orbiting Badges
+   ========================================================================== */
+
+.neural-hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 85px 0 35px;
+    box-sizing: border-box;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.neural-hero-container {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    gap: 44px;
+    box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT COLUMN: Narrative, Identity, Proof & Actions
+   -------------------------------------------------------------------------- */
+
+.neural-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    z-index: 3;
+}
+
+/* Status Beacon Pill */
+.neural-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.32);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.12);
+    margin-bottom: 12px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #34d399;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.neural-status-pill:hover {
+    border-color: #34d399;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.neural-pulse-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.neural-pulse-dot::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.5px solid #10b981;
+    animation: beaconPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes beaconPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.neural-dot-sep {
+    color: rgba(52, 211, 153, 0.4);
+}
+
+.neural-status-loc {
+    color: #a7f3d0;
+}
+
+body.light .neural-status-pill {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #059669;
+}
+
+body.light .neural-status-loc {
+    color: #047857;
+}
+
+/* Eyebrow Kicker */
+.neural-kicker {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #8c6fff;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+body.light .neural-kicker {
+    color: #6d44f5;
+}
+
+/* Salutation & Name */
+.neural-hero-title {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(2.2rem, 3.6vw, 3.4rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.03em !important;
+    color: #ffffff !important;
+    margin: 0 0 8px 0 !important;
+}
+
+.neural-name-highlight {
+    background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+body.light .neural-hero-title {
+    color: #0f172a !important;
+}
+
+body.light .neural-name-highlight {
+    background: linear-gradient(135deg, #0f172a 40%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Tagline */
+.neural-hero-tagline {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: clamp(1.2rem, 1.9vw, 1.6rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    margin: 0 0 12px 0 !important;
+    color: #cbd5e1;
+}
+
+body.light .neural-hero-tagline {
+    color: #334155;
+}
+
+.neural-gradient-sec {
+    background: linear-gradient(135deg, #a48fff 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.neural-gradient-ai {
+    background: linear-gradient(135deg, #38bdf8 0%, #ff6f6f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Dynamic Typewriter Role Bar */
+.neural-typewriter-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 12px;
+    min-height: 28px;
+}
+
+body.light .neural-typewriter-bar {
+    color: #475569;
+}
+
+.neural-typewriter-bar .prompt-sym {
+    color: #8c6fff;
+    font-weight: 700;
+}
+
+.neural-typewriter-bar .typed-text-output {
+    color: #ff6f6f;
+    font-weight: 700;
+}
+
+body.light .neural-typewriter-bar .typed-text-output {
+    color: #e11d48;
+}
+
+.neural-cursor-blink {
+    color: #38bdf8;
+    animation: cursorFlash 1s step-end infinite;
+}
+
+@keyframes cursorFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Crisp Narrative Bio */
+.neural-hero-bio {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 540px;
+    margin: 0 0 18px 0;
+}
+
+body.light .neural-hero-bio {
+    color: #475569;
+}
+
+/* Proof Metrics Strip */
+.neural-proof-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(140, 111, 255, 0.05);
+    border: 1px solid rgba(140, 111, 255, 0.16);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 22px;
+}
+
+body.light .neural-proof-strip {
+    background: rgba(109, 68, 245, 0.04);
+    border-color: rgba(109, 68, 245, 0.18);
+}
+
+.neural-proof-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.neural-proof-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+}
+
+body.light .neural-proof-num {
+    color: #0f172a;
+}
+
+.neural-proof-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #94a3b8;
+}
+
+body.light .neural-proof-label {
+    color: #64748b;
+}
+
+.neural-proof-sep {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+body.light .neural-proof-sep {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Action Row (Buttons + Socials) */
+.neural-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+.neural-cta-dock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.neural-primary-btn {
+    background: linear-gradient(135deg, #7c5bff 0%, #ff4d6d 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 6px 24px -4px rgba(124, 91, 255, 0.45) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 22px !important;
+    border-radius: 999px !important;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.neural-primary-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 30px -4px rgba(255, 77, 109, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.neural-primary-btn i {
+    transition: transform 0.25s ease;
+}
+
+.neural-primary-btn:hover i {
+    transform: translateX(4px);
+}
+
+.download-cv-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 20px !important;
+    border-radius: 999px !important;
+    background: rgba(140, 111, 255, 0.08) !important;
+    border: 1px solid rgba(140, 111, 255, 0.25) !important;
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.download-cv-btn:hover {
+    background: rgba(140, 111, 255, 0.18) !important;
+    border-color: #8c6fff !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+}
+
+body.light .download-cv-btn {
+    background: rgba(109, 68, 245, 0.06) !important;
+    border-color: rgba(109, 68, 245, 0.25) !important;
+    color: #334155 !important;
+}
+
+body.light .download-cv-btn:hover {
+    background: rgba(109, 68, 245, 0.12) !important;
+    color: #0f172a !important;
+}
+
+/* Social Strip */
+.neural-social-dock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.neural-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.neural-social-link:hover {
+    color: #ffffff;
+    background: rgba(140, 111, 255, 0.2);
+    border-color: #8c6fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(140, 111, 255, 0.3);
+}
+
+body.light .neural-social-link {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #475569;
+}
+
+body.light .neural-social-link:hover {
+    color: #6d44f5;
+    background: rgba(109, 68, 245, 0.1);
+    border-color: #6d44f5;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT COLUMN: 3D Interactive Neural Core Stage & Floating Badges
+   -------------------------------------------------------------------------- */
+
+.neural-hero-stage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.neural-stage-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D Canvas */
+.neural-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    z-index: 2;
+}
+
+.neural-canvas:active {
+    cursor: grabbing;
+}
+
+/* Interactive Hint Pill below Stage */
+.neural-drag-hint {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(140, 111, 255, 0.08);
+    border: 1px solid rgba(140, 111, 255, 0.22);
+    font-family: 'Fira Code', monospace;
+    font-size: 10.5px;
+    color: #a48fff;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    z-index: 4;
+    white-space: nowrap;
+}
+
+body.light .neural-drag-hint {
+    background: rgba(109, 68, 245, 0.08);
+    border-color: rgba(109, 68, 245, 0.22);
+    color: #6d44f5;
+}
+
+/* Floating Holographic Cyber Badges */
+.hologram-cyber-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: rgba(11, 15, 30, 0.84);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(140, 111, 255, 0.3);
+    box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.6), 
+                0 0 20px rgba(124, 91, 255, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    z-index: 5;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hologram-cyber-badge:hover {
+    transform: translateY(-5px) scale(1.04) !important;
+    border-color: #38bdf8;
+    box-shadow: 0 18px 40px -8px rgba(56, 189, 248, 0.35), 
+                0 0 26px rgba(140, 111, 255, 0.38),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+body.light .hologram-cyber-badge {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(124, 91, 255, 0.25);
+    box-shadow: 0 12px 28px -6px rgba(124, 91, 255, 0.16),
+                0 0 14px rgba(124, 91, 255, 0.08);
+}
+
+.badge-icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.badge-purple { background: rgba(140, 111, 255, 0.18); color: #a48fff; border: 1px solid rgba(140, 111, 255, 0.35); }
+.badge-cyan { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+.badge-coral { background: rgba(255, 111, 111, 0.18); color: #ff6f6f; border: 1px solid rgba(255, 111, 111, 0.35); }
+.badge-emerald { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+
+.badge-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-headline {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+}
+
+body.light .badge-headline {
+    color: #0f172a;
+}
+
+.badge-sub {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-top: 1px;
+}
+
+body.light .badge-sub {
+    color: #64748b;
+}
+
+/* 4 Spatial Positions around the 580x500 Stage */
+.badge-pos-1 {
+    top: 18px;
+    left: 4px;
+    animation: floatDrift1 6s ease-in-out infinite;
+}
+
+.badge-pos-2 {
+    top: 36px;
+    right: 4px;
+    animation: floatDrift2 7s ease-in-out infinite 0.5s;
+}
+
+.badge-pos-3 {
+    bottom: 52px;
+    left: 4px;
+    animation: floatDrift3 6.5s ease-in-out infinite 1s;
+}
+
+.badge-pos-4 {
+    bottom: 38px;
+    right: 4px;
+    animation: floatDrift4 7.2s ease-in-out infinite 1.5s;
+}
+
+/* Micro-drift floating keyframes */
+@keyframes floatDrift1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(4px, -8px); }
+}
+
+@keyframes floatDrift2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-5px, 8px); }
+}
+
+@keyframes floatDrift3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(6px, 6px); }
+}
+
+@keyframes floatDrift4 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-4px, -7px); }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1199px) {
+    .neural-hero-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .neural-stage-wrapper {
+        max-width: 480px;
+        height: 440px;
+    }
+
+    .badge-pos-1 { top: 12px; left: 0; }
+    .badge-pos-2 { top: 24px; right: 0; }
+    .badge-pos-3 { bottom: 42px; left: 0; }
+    .badge-pos-4 { bottom: 30px; right: 0; }
+}
+
+@media (max-width: 991px) {
+    .neural-hero-section {
+        min-height: auto;
+        padding: 95px 0 45px;
+    }
+
+    .neural-hero-container {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .neural-hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .neural-hero-bio {
+        max-width: 600px;
+    }
+
+    .neural-proof-strip {
+        justify-content: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .neural-action-row {
+        justify-content: center;
+    }
+
+    .neural-stage-wrapper {
+        max-width: 420px;
+        height: 380px;
+    }
+
+    .hologram-cyber-badge {
+        padding: 7px 11px;
+    }
+
+    .badge-headline { font-size: 11.5px; }
+    .badge-sub { font-size: 9px; }
+}
+
+@media (max-width: 576px) {
+    .neural-hero-container {
+        padding: 0 16px;
+    }
+
+    .neural-hero-title {
+        font-size: 2rem !important;
+    }
+
+    .neural-hero-tagline {
+        font-size: 1.15rem !important;
+    }
+
+    .neural-stage-wrapper {
+        max-width: 320px;
+        height: 320px;
+    }
+
+    .badge-pos-1, .badge-pos-2, .badge-pos-3, .badge-pos-4 {
+        position: static;
+        animation: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .neural-stage-wrapper {
+        height: 280px;
+    }
+
+    /* Wrap badges in a neat 2x2 grid on small screens */
+    .neural-hero-stage {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .neural-mobile-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+    }
+}

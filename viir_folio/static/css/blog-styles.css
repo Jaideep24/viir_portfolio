@@ -1961,32 +1961,90 @@ body.light .subscribe-input-group:focus-within .subscribe-icon {
 body.dark .subscribe-input {
     background: rgba(10, 10, 25, 0.5);
     border: 1px solid rgba(140, 111, 255, 0.25);
-    color: var(--bg-primary);
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
 }
 
 body.dark .subscribe-input::placeholder {
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.45);
 }
 
 body.dark .subscribe-input:focus {
     background: rgba(10, 10, 25, 0.75);
     border-color: var(--secondary-accent);
     box-shadow: 0 0 0 3px rgba(140, 111, 255, 0.25);
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
+
+/* Dark mode autofill for subscribe inputs */
+body.dark .subscribe-input:-webkit-autofill,
+body.dark .subscribe-input:autofill,
+body.dark .bi2-subscribe-input:-webkit-autofill,
+body.dark .bi2-subscribe-input:autofill {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #0a0a19 inset !important;
+    box-shadow: 0 0 0 1000px #0a0a19 inset !important;
+    border-color: rgba(140, 111, 255, 0.3) !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.dark .subscribe-input:-webkit-autofill:focus,
+body.dark .subscribe-input:autofill:focus,
+body.dark .bi2-subscribe-input:-webkit-autofill:focus,
+body.dark .bi2-subscribe-input:autofill:focus {
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    -webkit-box-shadow: 0 0 0 1000px #0a0a19 inset, 0 0 0 3px rgba(140, 111, 255, 0.25) !important;
+    box-shadow: 0 0 0 1000px #0a0a19 inset, 0 0 0 3px rgba(140, 111, 255, 0.25) !important;
+    border-color: var(--secondary-accent) !important;
 }
 
 body.light .subscribe-input {
-    background: var(--bg-primary);
+    background: #ffffff;
     border: 1px solid rgba(15, 23, 42, 0.15);
-    color: #1e293b;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
 }
 
 body.light .subscribe-input::placeholder {
-    color: rgba(17, 24, 39, 0.45);
+    color: rgba(17, 24, 39, 0.5);
 }
 
 body.light .subscribe-input:focus {
     border-color: #4f46e5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+/* Light mode autofill for subscribe inputs */
+body.light .subscribe-input:-webkit-autofill,
+body.light .subscribe-input:autofill,
+body.light .bi2-subscribe-input:-webkit-autofill,
+body.light .bi2-subscribe-input:autofill {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    border-color: rgba(15, 23, 42, 0.2) !important;
+    transition: background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s !important;
+}
+
+body.light .subscribe-input:-webkit-autofill:focus,
+body.light .subscribe-input:autofill:focus,
+body.light .bi2-subscribe-input:-webkit-autofill:focus,
+body.light .bi2-subscribe-input:autofill:focus {
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+    box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+    border-color: #4f46e5 !important;
 }
 
 /* Button Custom Overrides */
