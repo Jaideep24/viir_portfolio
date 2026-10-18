@@ -10,8 +10,6 @@
 
             <div class="pub-list reveal-stagger" id="pubList">
                 {% for object in publications %}
-                {# Skip dummy/test entries — only show if title is meaningful #}
-                {% if object.title|length > 10 %}
                 <div class="pub-card reveal-stagger-child">
                     <!-- Year Column -->
                     <div class="pub-year-col">
@@ -48,7 +46,10 @@
                         </a>
                     </div>
                 </div>
-                {% endif %}
+                {% empty %}
+                <div class="pub-empty-state" style="text-align:center; padding: 40px; color: var(--text-secondary);">
+                    <p>No publications found.</p>
+                </div>
                 {% endfor %}
             </div>
         </div>

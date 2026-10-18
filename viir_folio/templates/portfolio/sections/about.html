@@ -40,25 +40,112 @@
                 <div class="about-info-col">
                     <h3 class="about-role-title">{{ object.current_role }}</h3>
 
+                    <!-- Dynamic Terminal Database Context -->
+                    <script id="terminalDbData" type="application/json">
+                    {
+                        "skills": [
+                            {% for cat in skill_categories %}
+                            {
+                                "category": "{{ cat.title|escapejs }}",
+                                "items": [{% for s in cat.skills.all %}"{{ s.name|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}]
+                            }{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        ],
+                        "projects": [
+                            {% for p in projects %}
+                            {
+                                "title": "{{ p.title|escapejs }}",
+                                "date": "{{ p.date|date:'Y' }}",
+                                "client": "{{ p.client|default:''|escapejs }}",
+                                "description": "{{ p.description|default:''|escapejs }}",
+                                "url": "{{ p.url|default:''|escapejs }}",
+                                "github": "{{ p.github_url|default:''|escapejs }}"
+                            }{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        ],
+                        "certs": [
+                            {% for c in certificate %}
+                            {
+                                "title": "{{ c.title|escapejs }}",
+                                "platform": "{{ c.platform|escapejs }}",
+                                "date": "{{ c.date|date:'Y' }}",
+                                "url": "{{ c.url|escapejs }}"
+                            }{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        ],
+                        "publications": [
+                            {% for pub in publications %}
+                            {
+                                "title": "{{ pub.title|escapejs }}",
+                                "place": "{{ pub.place|escapejs }}",
+                                "date": "{{ pub.date|date:'Y' }}",
+                                "url": "{{ pub.url|escapejs }}"
+                            }{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        ],
+                        "experience": [
+                            {% for exp in experience %}
+                            {
+                                "title": "{{ exp.title|escapejs }}",
+                                "company": "{{ exp.company|escapejs }}",
+                                "period": "{{ exp.start_date|date:'M Y' }} - {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:'M Y' }}{% endif %}",
+                                "location": "{{ exp.location|default:''|escapejs }}"
+                            }{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        ],
+                        "cv_url": "{% for c in cv %}{% if forloop.first %}{{ c.pdf.url }}{% endif %}{% endfor %}"
+                    }
+                    </script>
+
                     <!-- Terminal Card -->
-                    <div class="terminal-container">
+                    <div class="terminal-container" id="aboutTerminalCard"
+                         data-whoami="{{ object.content|escape }}"
+                         data-role="{{ object.current_role|escape }}"
+                         data-email="{{ object.email|escape }}"
+                         data-location="{{ object.location|escape }}"
+                         data-github="{{ object.github_url|default:''|escape }}"
+                         data-linkedin="{{ object.linkedin_url|default:''|escape }}">
                         <div class="terminal-header">
                             <div class="terminal-buttons">
-                                <span class="terminal-btn close"></span>
-                                <span class="terminal-btn minimize"></span>
-                                <span class="terminal-btn maximize"></span>
+                                <span class="terminal-btn close" title="Clear terminal screen"></span>
+                                <span class="terminal-btn minimize" title="Minimize"></span>
+                                <span class="terminal-btn maximize" title="Reset to whoami"></span>
                             </div>
-                            <div class="terminal-title">viir_phuria ~ bash</div>
+                            <div class="terminal-title">viir_phuria ~ bash (interactive)</div>
                         </div>
-                        <div class="terminal-body">
-                            <div class="terminal-line">
-                                <span class="terminal-prompt">viir:~$</span>
-                                <span class="terminal-command">cat whoami.txt</span>
+                        <div class="terminal-body" id="aboutTerminalBody" role="region" aria-label="Interactive Terminal">
+                            <div id="terminalOutputHistory">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">viir:~$</span>
+                                    <span class="terminal-command">cat whoami.txt</span>
+                                </div>
+                                <div class="terminal-output">{{ object.content }}</div>
+                                <div class="terminal-motd">
+                                    <div class="terminal-motd-header">
+                                        <span class="terminal-motd-hint"><i class="fa-solid fa-terminal" style="font-size:0.68rem;margin-right:5px;opacity:0.75;"></i>Interactive terminal ready. Type <span class="term-suggest-cmd" data-cmd="help">help</span> or click to run:</span>
+                                    </div>
+                                    <div class="terminal-quick-actions">
+                                        <span class="term-suggest-cmd" data-cmd="ls -la">ls -la</span>
+                                        <span class="term-suggest-cmd" data-cmd="skills">skills</span>
+                                        <span class="term-suggest-cmd" data-cmd="projects">projects</span>
+                                        <span class="term-suggest-cmd" data-cmd="research">research</span>
+                                        <span class="term-suggest-cmd" data-cmd="nmap viir.tech">nmap</span>
+                                        <span class="term-suggest-cmd" data-cmd="theme matrix">matrix</span>
+                                        <span class="term-suggest-cmd" data-cmd="clear">clear</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="terminal-output">{{ object.content }}</div>
-                            <div class="terminal-line">
+                            <div class="terminal-line terminal-active-line">
                                 <span class="terminal-prompt">viir:~$</span>
-                                <span class="terminal-cursor"></span>
+                                <input type="text"
+                                       id="aboutTerminalInput"
+                                       class="terminal-real-input"
+                                       spellcheck="false"
+                                       autocomplete="off"
+                                       autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder=""
+                                       aria-label="Interactive terminal command input" />
                             </div>
                         </div>
                     </div>

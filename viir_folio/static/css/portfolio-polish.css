@@ -536,57 +536,92 @@ body.light .section-lead {
    12. PUBLICATIONS — Academic Output
    ============================================================ */
 
+.pub-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    max-width: 1050px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+}
+
 .pub-card {
+    display: grid !important;
+    grid-template-columns: 120px 1fr auto !important;
+    align-items: center !important;
+    gap: 28px !important;
     border-radius: 16px !important;
-    padding: 26px 30px !important;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.35s ease !important;
+    padding: 24px 30px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease !important;
 }
 
 body.dark .pub-card {
     background: rgba(15, 23, 42, 0.72) !important;
-    border: 1px solid rgba(124, 91, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 body.light .pub-card {
     background: rgba(255, 255, 255, 0.95) !important;
     border: 1px solid rgba(124, 91, 255, 0.1) !important;
-    box-shadow: 0 4px 24px rgba(124, 91, 255, 0.06) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 
 .pub-card:hover {
-    transform: translateY(-4px) !important;
-    border-color: rgba(255, 111, 111, 0.3) !important;
+    transform: translateY(-3px) !important;
+    border-color: rgba(255, 111, 111, 0.35) !important;
+}
+
+body.dark .pub-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 111, 111, 0.12) !important;
+}
+
+body.light .pub-card:hover {
+    box-shadow: 0 12px 28px rgba(124, 91, 255, 0.12), 0 0 14px rgba(255, 111, 111, 0.08) !important;
+}
+
+.pub-year-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
 }
 
 .pub-year-badge {
     font-family: var(--font-mono) !important;
-    font-size: 0.72rem !important;
+    font-size: 0.74rem !important;
     font-weight: 700 !important;
-    padding: 4px 12px !important;
+    padding: 5px 12px !important;
     border-radius: 6px !important;
     background: rgba(255, 111, 111, 0.1) !important;
     color: var(--accent-crimson) !important;
-    border: 1px solid rgba(255, 111, 111, 0.2) !important;
-    letter-spacing: 0.06em !important;
+    border: 1px solid rgba(255, 111, 111, 0.22) !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
 }
 
-.pub-venue-tag {
-    font-family: var(--font-mono) !important;
-    font-size: 0.65rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.1em !important;
-    padding: 4px 10px !important;
-    border-radius: 4px !important;
-    background: rgba(124, 91, 255, 0.1) !important;
-    color: var(--accent-violet) !important;
-    border: 1px solid rgba(124, 91, 255, 0.2) !important;
+.pub-divider-line {
+    display: none !important;
 }
 
-.pub-author-you,
-.pub-authors strong {
-    color: inherit !important;
+.pub-content-col {
+    min-width: 0 !important;
+    flex: 1 !important;
+}
+
+.pub-venue-pill {
+    margin-bottom: 8px !important;
+}
+
+.pub-title {
+    font-size: 1.08rem !important;
     font-weight: 700 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
 }
 
 body.dark .pub-title {
@@ -595,6 +630,52 @@ body.dark .pub-title {
 
 body.light .pub-title {
     color: #0f172a !important;
+}
+
+.pub-authors {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 4px !important;
+}
+
+.pub-author-you,
+.pub-authors strong {
+    color: var(--accent-crimson) !important;
+    font-weight: 700 !important;
+}
+
+.pub-meta {
+    font-size: 0.8rem !important;
+    opacity: 0.85 !important;
+}
+
+.pub-action-col {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.pub-view-btn {
+    white-space: nowrap !important;
+    padding: 9px 18px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+}
+
+@media (max-width: 768px) {
+    .pub-card {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 20px !important;
+    }
+    .pub-year-col {
+        align-items: flex-start !important;
+    }
+    .pub-view-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
 }
 
 /* ============================================================
@@ -1026,6 +1107,269 @@ body.dark .terminal-output {
 }
 
 /* ============================================================
+   INTERACTIVE TERMINAL — Fixed Size & Ergonomics
+   ============================================================ */
+.terminal-container {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.terminal-body {
+    padding: 16px 20px !important;
+    height: 315px !important;
+    max-height: 315px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    cursor: text !important;
+    display: flex !important;
+    flex-direction: column !important;
+    scrollbar-width: thin !important;
+}
+
+.terminal-body::-webkit-scrollbar {
+    width: 6px !important;
+}
+.terminal-body::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+body.dark .terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-radius: 4px !important;
+}
+body.light .terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18) !important;
+    border-radius: 4px !important;
+}
+
+.terminal-active-line {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 6px !important;
+    flex-shrink: 0 !important;
+}
+
+.terminal-real-input {
+    flex: 1 !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    line-height: 1.5 !important;
+}
+
+body.dark .terminal-real-input {
+    color: #60a5fa !important;
+    caret-color: #22c55e !important;
+}
+
+body.light .terminal-real-input {
+    color: #2563eb !important;
+    caret-color: #16a34a !important;
+}
+
+.terminal-hint-line {
+    margin: 8px 0 10px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.74rem !important;
+}
+
+body.dark .terminal-hint-line {
+    color: #94a3b8 !important;
+}
+
+body.light .terminal-hint-line {
+    color: #475569 !important;
+}
+
+/* Modern Terminal MOTD & Quick Action Bar */
+.terminal-motd {
+    margin: 8px 0 10px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+}
+
+.terminal-motd-header {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    font-size: 0.74rem !important;
+}
+
+body.dark .terminal-motd-hint { color: #94a3b8 !important; }
+body.light .terminal-motd-hint { color: #475569 !important; }
+
+.terminal-pulse-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #22c55e !important;
+    box-shadow: 0 0 6px #22c55e !important;
+    display: inline-block !important;
+    animation: termDotPulse 2s infinite ease-in-out !important;
+}
+
+@keyframes termDotPulse {
+    0%, 100% { opacity: 0.5; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.terminal-motd-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 2px 7px !important;
+    border-radius: 4px !important;
+    font-size: 0.66rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    user-select: none !important;
+}
+
+body.dark .terminal-motd-badge {
+    background: rgba(34, 197, 94, 0.12) !important;
+    color: #4ade80 !important;
+    border: 1px solid rgba(34, 197, 94, 0.28) !important;
+}
+
+body.light .terminal-motd-badge {
+    background: rgba(22, 163, 74, 0.08) !important;
+    color: #15803d !important;
+    border: 1px solid rgba(22, 163, 74, 0.25) !important;
+}
+
+.terminal-quick-actions {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+}
+
+.terminal-quick-actions .term-suggest-cmd {
+    font-size: 0.71rem !important;
+    padding: 2px 7px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.term-suggest-cmd {
+    display: inline-block !important;
+    padding: 1px 6px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    user-select: none !important;
+}
+
+body.dark .term-suggest-cmd {
+    background: rgba(96, 165, 250, 0.14) !important;
+    color: #93c5fd !important;
+    border: 1px solid rgba(96, 165, 250, 0.25) !important;
+}
+
+body.dark .term-suggest-cmd:hover {
+    background: rgba(96, 165, 250, 0.28) !important;
+    color: #dbeafe !important;
+}
+
+body.light .term-suggest-cmd {
+    background: rgba(37, 99, 235, 0.08) !important;
+    color: #1d4ed8 !important;
+    border: 1px solid rgba(37, 99, 235, 0.2) !important;
+}
+
+body.light .term-suggest-cmd:hover {
+    background: rgba(37, 99, 235, 0.18) !important;
+    color: #1e40af !important;
+}
+
+.term-res-file {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    margin-right: 14px !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+    transition: opacity 0.2s ease !important;
+    user-select: none !important;
+}
+
+.term-res-file:hover {
+    opacity: 0.8 !important;
+    text-decoration: underline !important;
+}
+
+.term-file-txt { color: #38bdf8 !important; }
+.term-file-sh { color: #4ade80 !important; }
+.term-file-secret { color: #f43f5e !important; }
+.term-dir { color: #a78bfa !important; font-weight: 700 !important; }
+
+body.light .term-file-txt { color: #0284c7 !important; }
+body.light .term-file-sh { color: #16a34a !important; }
+body.light .term-file-secret { color: #e11d48 !important; }
+body.light .term-dir { color: #6d28d9 !important; font-weight: 700 !important; }
+
+.term-cmd-res {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.82rem !important;
+    line-height: 1.65 !important;
+    margin: 6px 0 10px !important;
+    white-space: pre-wrap !important;
+}
+
+body.dark .term-cmd-res { color: #cbd5e1 !important; }
+body.light .term-cmd-res { color: #1e293b !important; font-weight: 500 !important; }
+
+.terminal-btn.close { cursor: pointer !important; }
+.terminal-btn.maximize { cursor: pointer !important; }
+
+/* Matrix Hacker Mode for Terminal */
+.terminal-container.term-matrix-mode {
+    background: #020d06 !important;
+    border-color: #22c55e !important;
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.28) !important;
+}
+.terminal-container.term-matrix-mode .terminal-header {
+    background: #041a0d !important;
+    border-bottom-color: rgba(34, 197, 94, 0.3) !important;
+}
+.terminal-container.term-matrix-mode .terminal-title {
+    color: #4ade80 !important;
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.5) !important;
+}
+.terminal-container.term-matrix-mode .terminal-output,
+.terminal-container.term-matrix-mode .term-cmd-res,
+.terminal-container.term-matrix-mode .terminal-command,
+.terminal-container.term-matrix-mode .terminal-prompt,
+.terminal-container.term-matrix-mode .terminal-real-input {
+    color: #4ade80 !important;
+    text-shadow: 0 0 5px rgba(74, 222, 128, 0.45) !important;
+}
+.terminal-container.term-matrix-mode .term-suggest-cmd {
+    background: rgba(34, 197, 94, 0.15) !important;
+    color: #86efac !important;
+    border-color: rgba(34, 197, 94, 0.35) !important;
+}
+.terminal-container.term-matrix-mode .term-file-txt { color: #86efac !important; }
+.terminal-container.term-matrix-mode .term-file-sh { color: #22c55e !important; font-weight: bold; }
+.terminal-container.term-matrix-mode .term-file-secret { color: #f43f5e !important; }
+.terminal-container.term-matrix-mode .term-dir { color: #a7f3d0 !important; }
+
+
+
+/* ============================================================
    TIMELINE — Mathematical Line & Dot Centering
    ============================================================ */
 .timeline-track-list {
@@ -1049,6 +1393,16 @@ body.dark .terminal-output {
     ) !important;
 }
 
+.timeline-entry {
+    transform-origin: left center !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease !important;
+}
+
+.timeline-entry:hover {
+    transform: scale(1.02) !important;
+    z-index: 5 !important;
+}
+
 .timeline-entry::before {
     content: '' !important;
     position: absolute !important;
@@ -1062,7 +1416,7 @@ body.dark .terminal-output {
     background: var(--accent-crimson) !important;
     box-shadow: 0 0 0 3px rgba(255, 111, 111, 0.22) !important;
     border: 2px solid #0f172a !important;
-    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
 }
 
 body.light .timeline-entry::before {
@@ -1071,8 +1425,8 @@ body.light .timeline-entry::before {
 }
 
 .timeline-entry:hover::before {
-    transform: translateX(-50%) scale(1.25) !important;
-    box-shadow: 0 0 0 5px rgba(255, 111, 111, 0.3) !important;
+    transform: translateX(-50%) scale(1.5) !important;
+    box-shadow: 0 0 0 6px rgba(255, 111, 111, 0.35), 0 0 14px rgba(255, 111, 111, 0.6) !important;
 }
 
 /* Light Theme — Timeline */

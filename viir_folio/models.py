@@ -271,7 +271,7 @@ class Contact(models.Model):
 
 class SkillCategory(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True, help_text="e.g. Core programming languages used for robust backend services.")
+    description = models.TextField(blank=True, null=True)
     icon_class = models.CharField(max_length=100, blank=True, null=True, help_text="FontAwesome icon class for the front card (e.g. 'fa-solid fa-code')")
     order = models.PositiveIntegerField(default=0)
 

@@ -11,7 +11,6 @@
                         <i class="{% if category.icon_class %}{{ category.icon_class }}{% else %}fa-solid fa-code{% endif %}"></i>
                     </div>
                     <h3 class="skill-cat-name">{{ category.name }}</h3>
-                    <p class="skill-cat-desc">{{ category.description|default:"" }}</p>
                     <div class="skill-chips-wrap">
                         {% for s in category.skills.all %}
                         <span class="skill-chip">
@@ -30,7 +29,6 @@
                 <div class="skill-cat-card glass-card">
                     <div class="skill-cat-icon-wrap"><i class="fa-solid fa-code"></i></div>
                     <h3 class="skill-cat-name">Languages</h3>
-                    <p class="skill-cat-desc">Core programming languages for robust backend services, scripts, and front-end logic.</p>
                     <div class="skill-chips-wrap">
                         <span class="skill-chip"><i class="fa-brands fa-python" style="font-size:0.8rem;"></i> Python</span>
                         <span class="skill-chip"><i class="fa-brands fa-golang" style="font-size:0.8rem;"></i> Go</span>
@@ -45,7 +43,6 @@
                 <div class="skill-cat-card glass-card">
                     <div class="skill-cat-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
                     <h3 class="skill-cat-name">Frameworks</h3>
-                    <p class="skill-cat-desc">Modern frameworks and libraries for building scalable web and mobile applications.</p>
                     <div class="skill-chips-wrap">
                         <span class="skill-chip"><i class="fa-brands fa-python" style="font-size:0.8rem;"></i> Django</span>
                         <span class="skill-chip">Flutter</span>
@@ -59,7 +56,6 @@
                 <div class="skill-cat-card glass-card">
                     <div class="skill-cat-icon-wrap"><i class="fa-solid fa-toolbox"></i></div>
                     <h3 class="skill-cat-name">Tools & Cloud</h3>
-                    <p class="skill-cat-desc">Industry-standard tools, databases, and cloud platforms for deployment and CI/CD.</p>
                     <div class="skill-chips-wrap">
                         <span class="skill-chip"><i class="fa-brands fa-github" style="font-size:0.8rem;"></i> Git / GitHub</span>
                         <span class="skill-chip"><i class="fa-brands fa-docker" style="font-size:0.8rem;"></i> Docker</span>
@@ -73,7 +69,6 @@
                 <div class="skill-cat-card glass-card">
                     <div class="skill-cat-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
                     <h3 class="skill-cat-name">Security Tools</h3>
-                    <p class="skill-cat-desc">Vulnerability assessment, network monitoring, and penetration testing utilities.</p>
                     <div class="skill-chips-wrap">
                         <span class="skill-chip">Burp Suite</span>
                         <span class="skill-chip">Wireshark</span>
